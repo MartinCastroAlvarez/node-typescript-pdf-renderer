@@ -14,3 +14,8 @@ pip install -r requirements.txt
 ```bash
 python3 suipacha505.py
 ```
+
+### Architecture
+
+- [/app/renderer.py](./app/renderer.py): Video renderer.
+- [/app/compiler.py](./app/compiler.py): Book compiler.
