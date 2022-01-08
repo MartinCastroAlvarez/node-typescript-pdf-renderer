@@ -12,7 +12,7 @@ pip install -r requirements.txt
 
 ### Deployment
 ```bash
-python3 suipacha505.py
+python3 val.py
 ```
 
 ### Architecture
