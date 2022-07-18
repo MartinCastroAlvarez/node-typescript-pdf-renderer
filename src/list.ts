@@ -6,9 +6,10 @@
 // - https://stackoverflow.com/questions/23096260/
 // ----------------------------------------------------------------
 
-class List<T> {
+export class List<T> {
     private items: Array<T>
 
+    // Lazy constructor.
     constructor() {
         this.items = []
     }

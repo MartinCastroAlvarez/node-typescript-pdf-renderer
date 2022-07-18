@@ -5,8 +5,8 @@
 
 // This enum defines the supported languages.
 export enum Language {
-    en,
-    es,
+    EN,
+    ES,
 }
 
 // This exception is raised when the User attempts to
