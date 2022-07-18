@@ -33,7 +33,6 @@ export class Command {
     run() : void {
         // Main hook.
         let book : Book = new Book()
-        book.setLanguage(this.language)
         console.log('Success!')
     }
 }

@@ -1,7 +1,6 @@
 // ----------------------------------------------------------------
 // Purpose:
-// This library implements the Content class.
+// This library implements the Content interface.
 // ----------------------------------------------------------------
 
-export abstract class Content {
-}
+export interface Content {}
