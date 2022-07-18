@@ -1,16 +1,19 @@
 // ----------------------------------------------------------------
 // Purpose:
-// This library implements the List class.
+// This library implements the Qupte class.
 // ----------------------------------------------------------------
 
+import { Author } from './author'
 import { Content } from './content'
 import { Text } from './text'
 
-export class List implements Content {
-    public items: Array<Text>
+export class Quote implements Content {
+    public text: Text
+    public author: Author
 
     // Lazy constructor.
     constructor() {
-        this.items = new Array<Text>()
+        this.text = new Text()
+        this.author = new Author()
     }
 }
