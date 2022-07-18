@@ -1,5 +1,5 @@
 // ----------------------------------------------------------------
-// Purpouse:
+// Purpose:
 // This library implements the Enum for supported languages.
 // ----------------------------------------------------------------
 
@@ -27,6 +27,6 @@ export abstract class WithLanguage {
     setLanguage(language: Language) {
         if (language === null)
             throw new LanguageError('Invalid language')
-        this. language = language
+        this.language = language
     }
 }

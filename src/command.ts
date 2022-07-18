@@ -8,8 +8,8 @@ const PDFDocument = require('pdfkit')
 const path = require('path')
 const fs = require('fs')
 
-import { Language } from './language'
-import { Book } from './book'
+import { Language } from './attributes/language'
+import { Book } from './entities/book'
 
 // This interface is responsible for transforming the User input
 // into a Typescript object, suitable for the Command class.
@@ -33,7 +33,7 @@ export class Command {
     run() : void {
         // Main hook.
         let book : Book = new Book()
-        book.setId(book)
+        book.setUri(book)
         book.setLanguage(this.language)
         console.log('Success!')
     }

@@ -1,5 +1,5 @@
 // ----------------------------------------------------------------
-// Purpouse:
+// Purpose:
 // This class is the interface with the User to render the PDF.
 //
 // Reference:
