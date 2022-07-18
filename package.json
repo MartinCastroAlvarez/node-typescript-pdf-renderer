@@ -1,0 +1,24 @@
+{
+  "name": "val",
+  "version": "1.0.0",
+  "description": "Book rending with Node & Typescript",
+  "main": "index.js",
+  "scripts": {
+    "render": "npx ts-node run.ts",
+    "build": "npx tsc run.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://bitbucket.org/sunphi/victor-elena.git"
+  },
+  "author": "martincastro.10.5@gmail.com",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/sunphi/victor-elena#readme",
+  "dependencies": {
+    "@types/node": "^18.0.6",
+    "pdfkit": "^0.13.0",
+    "read-yaml-file": "^2.1.0",
+    "typescript": "^4.7.4"
+  }
+}

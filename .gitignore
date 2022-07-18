@@ -49,4 +49,11 @@ Thumbs.db
 *.wmv
 
 # Swap
-.swp
+*.swp
+
+# Node files
+yarn.lock
+
+# Builds
+builds/*.pdf
+*.js

@@ -1,21 +1,32 @@
-# Victor & Elena
-The Book of Memories
+# Vel Rendering
+Book rendering with Node & Typescript
 
 ![wallpaper](./muelle.jpeg)
 
+### References
+
+- [http://pdfkit.org/](http://pdfkit.org/)
+
+## Architecture
+
+### Overview
+
+TBD
+
+### Struecture
+
+<!-- - [/app/renderer.py](./app/renderer.py): Video renderer. -->
+<!-- - [/app/compiler.py](./app/compiler.py): Book compiler. -->
+
+## Instructions
+
 ### Installation
+
 ```bash
-virtualenv -p python3 .env
-source .env/bin/activate
-pip install -r requirements.txt
+yarn install
 ```
 
 ### Deployment
 ```bash
-python3 val.py
+yarn run build && yarn run render --book "crypto" --language "en"
 ```
-
-### Architecture
-
-- [/app/renderer.py](./app/renderer.py): Video renderer.
-- [/app/compiler.py](./app/compiler.py): Book compiler.
