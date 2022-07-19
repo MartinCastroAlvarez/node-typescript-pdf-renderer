@@ -4,10 +4,12 @@
 // ----------------------------------------------------------------
 
 import { Author } from './author'
-import { Content } from './content'
+import { Model } from './base'
+import { Block } from './block'
+import { Model } from './base'
 import { Text } from './text'
 
-export class Quote implements Content {
+export class Quote implements Block, Content {
     public text: Text
     public author: Author
 

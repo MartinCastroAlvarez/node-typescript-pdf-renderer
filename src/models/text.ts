@@ -3,22 +3,19 @@
 // This library implements the Text class.
 // ----------------------------------------------------------------
 
-import { Content } from './content'
-import { Language } from './language'
+import { Model } from './base'
+import { Block } from './block'
+import { Language } from '../utils/language'
 
-export class Text implements Content {
-    private content: Map<Language, string>
+export class Text implements Block, Model {
+    private text: Map<Language, string>
 
     // Lazy constructor.
     constructor() {
-        this.content = new Map<Language, string>()
+        this.text= new Map<Language, string>()
     }
 
-    get(language: Language) : string {
-        return this.content[language]
-    }
-
-    set(language: Language, text: string) {
-        this.content[language] = text 
-    }
+    // Text getter and setter.
+    get(language: Language) : string { return this.text[language] }
+    set(language: Language, text: string) { this.text[language] = text }
 }

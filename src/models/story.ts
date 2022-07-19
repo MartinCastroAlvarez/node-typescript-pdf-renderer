@@ -3,16 +3,17 @@
 // This library implements the Story class.
 // ----------------------------------------------------------------
 
-import { Content } from './content'
+import { Model } from './base'
+import { Block } from './block'
 import { Text } from './text'
 
-export class Story {
+export class Story implements Model {
     public title: Text
-    public content: Array<Content>
+    public blocks: Array<Block>
 
     // Lazy constructor.
     constructor() {
-        this.content = new Array<Content>()
+        this.blocks = new Array<Block>()
         this.title = new Text()
     }
 }

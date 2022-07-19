@@ -56,30 +56,31 @@
 // launch the story.
 // ----------------------------------------------------------------
 
-import { Chapter } from './chapter'
-import { Content } from './content'
-import { Text } from './text'
 import { Author } from './author'
+import { Model } from './base'
+import { Block } from './block'
+import { Chapter } from './chapter'
+import { Text } from './text'
 
-export class Book {
+export class Book implements Model {
     public title: Text
     public chapters: Array<Chapter>
     public authors: Array<Author>
-    public foreword : Array<Content>
-    public afterword: Array<Content>
-    public acknowledgments: Array<Content>
-    public legal: Array<Content>
-    public prologue: Array<Content>
+    public foreword : Array<Block>
+    public afterword: Array<Block>
+    public acknowledgments: Array<Block>
+    public legal: Array<Block>
+    public prologue: Array<Block>
 
     // Lazy constructor.
     constructor() {
         this.chapters = new Array<Chapter>()
         this.authors = new Array<Author>()
-        this.foreword = new Array<Content>()
-        this.afterword = new Array<Content>()
-        this.acknowledgments = new Array<Content>()
-        this.prologue = new Array<Content>()
-        this.legal = new Array<Content>()
+        this.foreword = new Array<Block>()
+        this.afterword = new Array<Block>()
+        this.acknowledgments = new Array<Block>()
+        this.prologue = new Array<Block>()
+        this.legal = new Array<Block>()
         this.title = new Text()
     }
 }

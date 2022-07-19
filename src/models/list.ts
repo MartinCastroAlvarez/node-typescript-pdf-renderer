@@ -3,10 +3,10 @@
 // This library implements the List class.
 // ----------------------------------------------------------------
 
-import { Content } from './content'
+import { Block } from './block'
 import { Text } from './text'
 
-export class List implements Content {
+export class List implements Block, Model {
     public items: Array<Text>
 
     // Lazy constructor.
