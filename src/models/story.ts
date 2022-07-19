@@ -20,23 +20,23 @@ export class Story implements Model {
     }
 
     // String serializers.
-    toString() : string {
-        return `<{(this as any).constructor.name}: {this.title.get()}>`
+    toString(): string {
+        return `<${(this as any).constructor.name}: ${this.title.get()}>`
     }
 
     // JSON serializers.
-    toJson() : SerializedStory {
+    toJson(): SerializedStory {
         return {
             "Type": (this as any).constructor.name,
             "Title": this.title.toJson(),
             "Blocks": this.blocks.map(block => block.toJson()),
         }
     }
-    fromJson(data: SerializedStory) : void {
+    fromJson(data: SerializedStory): void {
         this.title.fromJson(data['Title']) 
         this.blocks = data['Blocks'].map(block => {
             let yaml: Yaml = new Yaml()
-            return yaml.unserialize(block)
+            return yaml.load(block)
         })
     }
 }

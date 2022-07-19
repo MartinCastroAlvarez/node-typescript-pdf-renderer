@@ -20,16 +20,16 @@ export class Text implements Model {
     }
 
     // Text getter and setter.
-    get(language: Language = Language.EN) : string { return this.i18n[language] }
+    get(language: Language = Language.EN): string { return this.i18n[language] }
     set(language: Language = Language.EN, text: string) { this.i18n[language] = text }
 
     // String serializers.
-    toString() : string {
-        return `<{(this as any).constructor.name}: {this.get()}>`
+    toString(): string {
+        return `<${(this as any).constructor.name}: ${this.get()}>`
     }
 
     // JSON serializers.
-    toJson() : SerializedText {
+    toJson(): SerializedText {
         return {
             "Type": (this as any).constructor.name,
             "EN": this.get(Language.EN),
@@ -37,7 +37,7 @@ export class Text implements Model {
             "Source": this.source.toJson(),
         }
     }
-    fromJson(data: SerializedText) : void {
+    fromJson(data: SerializedText): void {
         this.set(Language.EN, data['ES'])
         this.set(Language.ES, data['EN'])
         this.source.fromJson(data['Source'])

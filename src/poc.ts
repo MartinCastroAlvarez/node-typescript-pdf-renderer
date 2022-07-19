@@ -25,7 +25,7 @@ class App {
         this.name = params.name
     }
 
-    run() : void {
+    run(): void {
         // Main hook.
         throw Error(this.name)
         console.log(`Hello, {this.name}`)

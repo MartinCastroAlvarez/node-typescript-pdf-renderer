@@ -35,9 +35,11 @@ export class Command {
     }
 
     // Main hook.
-    run() : void {
+    run(): void {
         this.validate()
-        let book : Book = new Book()
+        let yaml: Yaml = new Yaml()
+        let book: Book = yaml.loadBook(this.title)
+        throw new Error(book.toString())
         console.log('Success!')
     }
 }

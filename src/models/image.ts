@@ -28,7 +28,7 @@ export class Image extends File implements Model {
     }
 
     // Width getter and setter.
-    getWidth() : number { return this.width }
+    getWidth(): number { return this.width }
     setWidth(width: number) {
         if (width < 0 || width > 100)
             throw Error(`Invalid width: {width}`)
@@ -36,7 +36,7 @@ export class Image extends File implements Model {
     }
 
     // Height getter and setter.
-    getHeight() : number { return this.height }
+    getHeight(): number { return this.height }
     setHeight(height: number) {
         if (height < 0 || height > 100)
             throw Error(`Invalid height: {height}`)
@@ -44,7 +44,7 @@ export class Image extends File implements Model {
     }
 
     // Top getter and setter.
-    getTop() : number { return this.top }
+    getTop(): number { return this.top }
     setTop(top: number) {
         if (top < 0 || top > 100)
             throw Error(`Invalid top: {top}`)
@@ -52,7 +52,7 @@ export class Image extends File implements Model {
     }
 
     // Bottom getter and setter.
-    getBottom() : number { return this.bottom }
+    getBottom(): number { return this.bottom }
     setBottom(bottom: number) {
         if (bottom < 0 || bottom > 100)
             throw Error(`Invalid bottom: {bottom}`)
@@ -60,7 +60,7 @@ export class Image extends File implements Model {
     }
 
     // Left getter and setter.
-    getLeft() : number { return this.left }
+    getLeft(): number { return this.left }
     setLeft(left: number) {
         if (left < 0 || left > 100)
             throw Error(`Invalid left: {left}`)
@@ -68,7 +68,7 @@ export class Image extends File implements Model {
     }
 
     // Right getter and setter.
-    getRight() : number { return this.right }
+    getRight(): number { return this.right }
     setRight(right: number) {
         if (right < 0 || right > 100)
             throw Error(`Invalid right: {right}`)
@@ -76,12 +76,12 @@ export class Image extends File implements Model {
     }
 
     // String serializers.
-    toString() : string {
-        return `<{(this as any).constructor.name}: {this.getPath()}>`
+    toString(): string {
+        return `<${(this as any).constructor.name}: ${this.getPath()}>`
     }
 
     // JSON serializers.
-    toJson() : SerializedImage {
+    toJson(): SerializedImage {
         return {
             "Type": (this as any).constructor.name,
             "Path": this.getPath(),
@@ -93,7 +93,7 @@ export class Image extends File implements Model {
             "Right": this.getRight(),
         }
     }
-    fromJson(data: SerializedImage) : void {
+    fromJson(data: SerializedImage): void {
         this.setPath(data['Path'])
         this.setWidth(data['Width'])
         this.setHeight(data['Height'])

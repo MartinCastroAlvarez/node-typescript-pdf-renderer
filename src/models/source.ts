@@ -23,7 +23,7 @@ export class Source implements Model {
     }
 
     // Title getter and setter.
-    getTitle() : string { return this.title }
+    getTitle(): string { return this.title }
     setTitle(title: string) {
         if (!title || title.length > 30)
             throw new Error(`Invalid title name: {title}`)
@@ -31,12 +31,12 @@ export class Source implements Model {
     }
 
     // String serializers.
-    toString() : string {
-        return `<{(this as any).constructor.name}: {this.getTitle()}>`
+    toString(): string {
+        return `<${(this as any).constructor.name}: ${this.getTitle()}>`
     }
 
     // JSON serializers.
-    toJson() : SerializedSource {
+    toJson(): SerializedSource {
         return {
             "Type": (this as any).constructor.name,
             "Title": this.getTitle(),
@@ -44,7 +44,7 @@ export class Source implements Model {
             "Logo": this.logo.toJson(),
         }
     }
-    fromJson(data: SerializedSource) : void {
+    fromJson(data: SerializedSource): void {
         this.setTitle(data['Title'])
         this.authors = data['Authors'].map(data => {
             let author: Author = new Author()

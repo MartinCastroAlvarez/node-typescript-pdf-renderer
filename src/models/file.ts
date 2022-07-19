@@ -18,7 +18,7 @@ export class File implements Model {
     }
 
     // Path getter and setter.
-    getPath() : string { return this.path }
+    getPath(): string { return this.path }
     setPath(path: string) {
         if (!fs.existsSync(path))
             throw Error(`Path not exists: {path}`)
@@ -26,18 +26,18 @@ export class File implements Model {
     }
 
     // String serializers.
-    toString() : string {
-        return `<{(this as any).constructor.name}: {this.getPath()}>`
+    toString(): string {
+        return `<${(this as any).constructor.name}: ${this.getPath()}>`
     }
 
     // JSON serializers.
-    toJson() : SerializedFile {
+    toJson(): SerializedFile {
         return {
             "Type": (this as any).constructor.name,
             "Path": this.getPath(),
         }
     }
-    fromJson(data: SerializedFile) : void {
+    fromJson(data: SerializedFile): void {
         this.setPath(data['Path'])
     }
 }

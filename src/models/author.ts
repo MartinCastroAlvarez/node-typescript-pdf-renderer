@@ -24,7 +24,7 @@ export class Author implements Model {
     }
 
     // Name getter and setter.
-    getName() : string { return this.name }
+    getName(): string { return this.name }
     setName(name: string) {
         if (!name || name.length > 30)
             throw new Error(`Invalid author name: {name}`)
@@ -32,20 +32,20 @@ export class Author implements Model {
     }
 
     // Website getter and setter.
-    getWebsite() : string { return this.website }
+    getWebsite(): string { return this.website }
     setWebsite(website: string) { this.website = website }
 
     // Email getter and setter.
-    getEmail() : string { return this.email }
+    getEmail(): string { return this.email }
     setEmail(email: string) { this.email = email }
 
     // String serializers.
-    toString() : string {
-        return `<{(this as any).constructor.name}: {this.getName()}>`
+    toString(): string {
+        return `<${(this as any).constructor.name}: ${this.getName()}>`
     }
 
     // JSON serializers.
-    toJson() : SerializedAuthor {
+    toJson(): SerializedAuthor {
         return {
             "Type": (this as any).constructor.name,
             "Name": this.getName(),
@@ -54,7 +54,7 @@ export class Author implements Model {
             "Logo": this.logo.toJson(),
         }
     }
-    fromJson(data: SerializedAuthor) : void {
+    fromJson(data: SerializedAuthor): void {
         this.setName(data['Name'])
         this.setWebsite(data['Website'])
         this.setEmail(data['Email'])

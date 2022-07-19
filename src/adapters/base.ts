@@ -7,5 +7,5 @@
 import PDFDocument from 'pdfkit'
 
 export interface YamlAdapter {
-    render(doc: PDFDocument) : doc
+    render(doc: PDFDocument): doc
 }

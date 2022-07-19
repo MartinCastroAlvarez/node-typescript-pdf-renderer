@@ -25,12 +25,12 @@ export class Chapter {
     }
 
     // String serializers.
-    toString() : string {
-        return `<{(this as any).constructor.name}: {this.title.get()}>`
+    toString(): string {
+        return `<${(this as any).constructor.name}: ${this.title.get()}>`
     }
 
     // JSON serializers.
-    toJson() : SerializedChapter {
+    toJson(): SerializedChapter {
         return {
             "Type": (this as any).constructor.name,
             "Title": this.title.toJson(),
@@ -39,15 +39,15 @@ export class Chapter {
             "Conclusion": this.conclusion.map(block => block.toJson()),
         }
     }
-    fromJson(data: SerializedChapter) : void {
+    fromJson(data: SerializedChapter): void {
         this.title.fromJson(data['Title']) 
         this.introduction = data['Introduction'].map(block => {
             let yaml: Yaml = new Yaml()
-            return yaml.unserialize(block)
+            return yaml.load(block)
         })
         this.conclusion = data['Conclusion'].map(block => {
             let yaml: Yaml = new Yaml()
-            return yaml.unserialize(block)
+            return yaml.load(block)
         })
         this.stories = data['Stories'].map(data => {
             let story: Story = new Story()

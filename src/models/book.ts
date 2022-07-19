@@ -70,7 +70,7 @@ export class Book implements Model {
 
     public chapters: Array<Chapter>
     public authors: Array<Author>
-    public foreword : Array<Model>
+    public foreword: Array<Model>
     public afterword: Array<Model>
     public acknowledgements: Array<Model>
     public legal: Array<Model>
@@ -90,12 +90,12 @@ export class Book implements Model {
     }
 
     // String serializers.
-    toString() : string {
-        return `<{(this as any).constructor.name}: {this.title.get()}>`
+    toString(): string {
+        return `<${(this as any).constructor.name}: ${this.title.get()}>`
     }
 
     // JSON serializers.
-    toJson() : SerializedBook {
+    toJson(): SerializedBook {
         return {
             "Type": (this as any).constructor.name,
             "Title": this.title.toJson(),
@@ -109,28 +109,28 @@ export class Book implements Model {
             "Prologue": this.prologue.map(block => block.toJson()),
         }
     }
-    fromJson(data: SerializedBook) : void {
+    fromJson(data: SerializedBook): void {
         this.title.fromJson(data['Title'])
         this.subtitle.fromJson(data['Subtitle'])
         this.foreword = data['Foreword'].map(block => {
             let yaml: Yaml = new Yaml()
-            return yaml.unserialize(block)
+            return yaml.load(block)
         })
         this.afterword = data['Afterword'].map(block => {
             let yaml: Yaml = new Yaml()
-            return yaml.unserialize(block)
+            return yaml.load(block)
         })
         this.legal = data['Legal'].map(block => {
             let yaml: Yaml = new Yaml()
-            return yaml.unserialize(block)
+            return yaml.load(block)
         })
         this.acknowledgements = data['Acknowledgements'].map(block => {
             let yaml: Yaml = new Yaml()
-            return yaml.unserialize(block)
+            return yaml.load(block)
         })
         this.prologue = data['Prologue'].map(block => {
             let yaml: Yaml = new Yaml()
-            return yaml.unserialize(block)
+            return yaml.load(block)
         })
         this.chapters = data['Chapters'].map(data => {
             let chapter: Chapter = new Chapter()
