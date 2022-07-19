@@ -3,17 +3,12 @@
 // This library implements the Chapter class.
 // ----------------------------------------------------------------
 
-import { Model, Serializable } from './base'
-import { Text, SerializedText } from './text'
-import { Reader } from '../reader'
-import { Story, SerializedStory } from './story'
+import { SerializedChapter } from '../serializers/chapter'
 
-export interface SerializedChapter extends Serializable {
-    title: SerializedText
-    introduction: Array<Serializable>
-    stories: Array<SerializedStory>
-    conclusion: Array<Serializable>
-}
+import { Model } from './base'
+import { Text } from './text'
+import { Reader } from '../reader'
+import { Story } from './story'
 
 export class Chapter {
     public readonly title: Text 

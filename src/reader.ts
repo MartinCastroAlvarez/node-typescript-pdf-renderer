@@ -5,9 +5,8 @@
 
 import readYamlFile from 'read-yaml-file'
 
-import { Model, Serializable } from './models/base'
-
 import { Author } from './models/author'
+import { Model } from './models/base'
 import { Brand } from './models/brand'
 import { Book } from './models/book'
 import { Chapter } from './models/chapter'
@@ -20,16 +19,17 @@ import { Story } from './models/story'
 import { Text } from './models/text'
 
 import { SerializedAuthor } from './serializers/author'
-import { SerializedBrand } from './erializers/brand'
-import { SerializedBook } from './erializers/book'
-import { SerializedChapter } from './erializers/chapter'
-import { SerializedDefinition } from './erializers/definition'
-import { SerializedExample } from './erializers/example'
-import { SerializedList } from './erializers/list'
-import { SerializedProverb } from './erializers/proverb'
-import { SerializedQuote } from './erializers/quote'
-import { SerializedStory } from './erializers/story'
-import { SerializedText } from './erializers/text'
+import { Serializable } from './serializers/base'
+import { SerializedBrand } from './serializers/brand'
+import { SerializedBook } from './serializers/book'
+import { SerializedChapter } from './serializers/chapter'
+import { SerializedDefinition } from './serializers/definition'
+import { SerializedExample } from './serializers/example'
+import { SerializedList } from './serializers/list'
+import { SerializedProverb } from './serializers/proverb'
+import { SerializedQuote } from './serializers/quote'
+import { SerializedStory } from './serializers/story'
+import { SerializedText } from './serializers/text'
 
 export class Reader {
 
@@ -38,57 +38,57 @@ export class Reader {
             case Author.name: {
                 let model: Author = new Author()
                 model.fromJson(<SerializedAuthor>data)
-                return model
+                return <Model>model
             }
             case Brand.name: {
                 let model: Brand = new Brand()
                 model.fromJson(<SerializedBrand>data)
-                return model
+                return <Model>model
             }
             case Book.name: {
                 let model: Book = new Book()
                 model.fromJson(<SerializedBook>data)
-                return model
+                return <Model>model
             }
             case Chapter.name: {
                 let model: Chapter = new Chapter()
                 model.fromJson(<SerializedChapter>data)
-                return model
+                return <Model>model
             }
             case Definition.name: {
                 let model: Definition = new Definition()
                 model.fromJson(<SerializedDefinition>data)
-                return model
+                return <Model>model
             }
             case Example.name: {
                 let model: Example = new Example()
                 model.fromJson(<SerializedExample>data)
-                return model
+                return <Model>model
             }
             case List.name: {
                 let model: List = new List()
                 model.fromJson(<SerializedList>data)
-                return model
+                return <Model>model
             }
             case Proverb.name: {
                 let model: Proverb = new Proverb()
                 model.fromJson(<SerializedQuote>data)
-                return model
+                return <Model>model
             }
             case Quote.name: {
                 let model: Quote = new Quote()
                 model.fromJson(<SerializedQuote>data)
-                return model
+                return <Model>model
             }
             case Story.name: {
                 let model: Story = new Story()
                 model.fromJson(<SerializedStory>data)
-                return model
+                return <Model>model
             }
             case Text.name: {
                 let model: Text = new Text()
                 model.fromJson(<SerializedText>data)
-                return model
+                return <Model>model
             }
             default: {
                 throw new Error(`Not implemented: {data}`)
