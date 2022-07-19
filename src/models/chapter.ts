@@ -16,8 +16,6 @@ export interface SerializedChapter extends Serializable {
 }
 
 export class Chapter {
-    public readonly TYPE: string = 'Chapter'
-
     public readonly title: Text 
     public introduction: Array<Model>
     public stories: Array<Story>
@@ -33,13 +31,13 @@ export class Chapter {
 
     // String serializers.
     toString() : string {
-        return `<{this.TYPE}: {this.title.get()}>`
+        return `<{(this as any).constructor.name}: {this.title.get()}>`
     }
 
     // JSON serializers.
     toJson() : SerializedChapter {
         return {
-            "type": this.TYPE,
+            "type": (this as any).constructor.name,
             "title": this.title.toJson(),
             "introduction": this.introduction.map(block => block.toJson()),
             "stories": this.stories.map(story => story.toJson()),
@@ -47,8 +45,6 @@ export class Chapter {
         }
     }
     fromJson(data: SerializedChapter) : void {
-        if (data.type != this.TYPE)
-            throw new Error(`Serialization type missmatch: {data}`)
         this.title.fromJson(data.title) 
         this.introduction = data.introduction.map(block => {
             let reader: Reader = new Reader()

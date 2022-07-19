@@ -13,8 +13,6 @@ export interface SerializedStory extends Serializable {
 }
 
 export class Story implements Model {
-    public readonly TYPE: string = 'Story'
-
     public readonly title: Text
     public blocks: Array<Model>
 
@@ -26,20 +24,18 @@ export class Story implements Model {
 
     // String serializers.
     toString() : string {
-        return `<{this.TYPE}: {this.title.get()}>`
+        return `<{(this as any).constructor.name}: {this.title.get()}>`
     }
 
     // JSON serializers.
     toJson() : SerializedStory {
         return {
-            "type": this.TYPE,
+            "type": (this as any).constructor.name,
             "title": this.title.toJson(),
             "blocks": this.blocks.map(block => block.toJson()),
         }
     }
     fromJson(data: SerializedStory) : void {
-        if (data.type != this.TYPE)
-            throw new Error(`Serialization type missmatch: {data}`)
         this.title.fromJson(data.title) 
         this.blocks = data.blocks.map(block => {
             let reader: Reader = new Reader()

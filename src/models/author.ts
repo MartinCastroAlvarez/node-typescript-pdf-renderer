@@ -13,8 +13,6 @@ export interface SerializedAuthor extends Serializable {
 }
 
 export class Author implements Model {
-    public readonly TYPE: string = 'Author'
-
     private name: string
     private website: string
     private email: string
@@ -40,21 +38,19 @@ export class Author implements Model {
 
     // String serializers.
     toString() : string {
-        return `<{this.TYPE}: {this.getName()}>`
+        return `<{(this as any).constructor.name}: {this.getName()}>`
     }
 
     // JSON serializers.
     toJson() : SerializedAuthor {
         return {
-            "type": this.TYPE,
+            "type": (this as any).constructor.name,
             "name": this.getName(),
             "website": this.getWebsite(),
             "email": this.getEmail(),
         }
     }
     fromJson(data: SerializedAuthor) : void {
-        if (data.type != this.TYPE)
-            throw new Error(`Serialization type missmatch: {data}`)
         this.setName(data.name)
         this.setWebsite(data.website)
         this.setEmail(data.email)

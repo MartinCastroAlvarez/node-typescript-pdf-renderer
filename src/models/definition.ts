@@ -7,5 +7,4 @@ import { Model } from './base'
 import { Text } from './text'
 
 export class Definition extends Text implements Model {
-    public readonly TYPE: string = 'Definition'
 }

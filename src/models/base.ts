@@ -9,8 +9,6 @@ export interface Serializable {
 }
 
 export interface Model {
-    TYPE: string
-
     toJson() : Serializable
     toString() : string
     fromJson(data: Serializable) : void

@@ -12,7 +12,6 @@ export interface SerializedQuote extends SerializedText {
 }
 
 export class Quote extends Text implements Model {
-    public readonly TYPE: string = 'Quote'
     public readonly author: Author
 
     // Lazy constructor.
@@ -29,8 +28,6 @@ export class Quote extends Text implements Model {
     }
     fromJson(data: SerializedQuote) : void {
         super.fromJson(data)
-        if (data.type != this.TYPE)
-            throw new Error(`Serialization type missmatch: {data}`)
         this.author.fromJson(data.author)
     }
 }

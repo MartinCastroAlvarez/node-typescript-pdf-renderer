@@ -74,18 +74,17 @@ export interface SerializedBook extends Serializable {
     prologue: Array<Serializable>
 }
 
-export class Book {
-    static readonly TYPE: string = "Book"
-
+export class Book implements Model {
     public readonly title: Text
     public readonly subtitle: Text
-    public readonly chapters: Array<Chapter>
-    public readonly authors: Array<Author>
-    public readonly foreword : Array<Model>
-    public readonly afterword: Array<Model>
-    public readonly acknowledgments: Array<Model>
-    public readonly legal: Array<Model>
-    public readonly prologue: Array<Model>
+
+    public chapters: Array<Chapter>
+    public authors: Array<Author>
+    public foreword : Array<Model>
+    public afterword: Array<Model>
+    public acknowledgements: Array<Model>
+    public legal: Array<Model>
+    public prologue: Array<Model>
 
     // Lazy constructor.
     constructor() {
@@ -93,7 +92,7 @@ export class Book {
         this.authors = new Array<Author>()
         this.foreword = new Array<Model>()
         this.afterword = new Array<Model>()
-        this.acknowledgments = new Array<Model>()
+        this.acknowledgements = new Array<Model>()
         this.prologue = new Array<Model>()
         this.legal = new Array<Model>()
         this.title = new Text()
@@ -102,13 +101,13 @@ export class Book {
 
     // String serializers.
     toString() : string {
-        return `<{this.TYPE}: {this.title.get()}>`
+        return `<{(this as any).constructor.name}: {this.title.get()}>`
     }
 
     // JSON serializers.
     toJson() : SerializedBook {
         return {
-            "type": this.TYPE,
+            "type": (this as any).constructor.name,
             "title": this.title.toJson(),
             "subtitle": this.title.toJson(),
             "chapters": this.chapters.map(chapter => chapter.toJson()),
@@ -121,8 +120,6 @@ export class Book {
         }
     }
     fromJson(data: SerializedBook) : void {
-        if (data.type != this.TYPE)
-            throw new Error(`Serialization type missmatch: {data}`)
         this.title.fromJson(data.title)
         this.subtitle.fromJson(data.subtitle)
         this.foreword = data.foreword.map(block => {

@@ -12,8 +12,6 @@ export interface SerializedText extends Serializable {
 }
 
 export class Text implements Model {
-    public readonly TYPE: string = 'Text'
-
     private readonly i18n: Map<Language, string>
 
     // Lazy constructor.
@@ -27,20 +25,18 @@ export class Text implements Model {
 
     // String serializers.
     toString() : string {
-        return `<{this.TYPE}: {this.get()}>`
+        return `<{(this as any).constructor.name}: {this.get()}>`
     }
 
     // JSON serializers.
     toJson() : SerializedText {
         return {
-            "type": this.TYPE,
+            "type": (this as any).constructor.name,
             "en": this.get(Language.EN),
             "es": this.get(Language.ES),
         }
     }
     fromJson(data: SerializedText) : void {
-        if (data.type != this.TYPE)
-            throw new Error(`Serialization type missmatch: {data}`)
         this.set(Language.EN, data[Language.EN])
         this.set(Language.ES, data[Language.ES])
     }
