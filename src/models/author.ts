@@ -3,14 +3,10 @@
 // This library implements the Author class.
 // ----------------------------------------------------------------
 
-import { Model, Serializable } from './base'
-import { Text } from './text'
+import { SerializedAuthor } from '../serializers/author'
 
-export interface SerializedAuthor extends Serializable {
-    name?: string
-    website?: string
-    email?: string
-}
+import { Model } from './base'
+import { Text } from './text'
 
 export class Author implements Model {
     private name: string

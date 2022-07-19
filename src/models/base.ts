@@ -4,9 +4,7 @@
 // implemented by other classes in this directory.
 // ----------------------------------------------------------------
 
-export interface Serializable {
-    type: string
-}
+import { Serializable } from '../serializers/base'
 
 export interface Model {
     toJson() : Serializable

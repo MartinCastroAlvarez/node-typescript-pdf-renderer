@@ -3,12 +3,10 @@
 // This library implements the List class.
 // ----------------------------------------------------------------
 
-import { Model, Serializable } from './base'
-import { Text, SerializedText } from './text'
+import { SerializedList } from '../serializers/list'
 
-export interface SerializedList extends Serializable {
-    items: Array<SerializedText>
-}
+import { Model } from './base'
+import { Text } from './text'
 
 export class List implements Model {
     public items: Array<Text>

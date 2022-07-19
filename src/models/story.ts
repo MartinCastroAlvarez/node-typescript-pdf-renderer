@@ -3,14 +3,11 @@
 // This library implements the Story class.
 // ----------------------------------------------------------------
 
-import { Model, Serializable } from './base'
-import { Text, SerializedText } from './text'
-import { Reader } from '../reader'
+import { SerializedStory } from '../serializers/story'
 
-export interface SerializedStory extends Serializable {
-    title: SerializedText
-    blocks: Array<Serializable>
-}
+import { Model } from './base'
+import { Text } from './text'
+import { Reader } from '../reader'
 
 export class Story implements Model {
     public readonly title: Text

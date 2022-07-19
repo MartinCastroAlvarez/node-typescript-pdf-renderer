@@ -3,13 +3,10 @@
 // This library implements the Text class.
 // ----------------------------------------------------------------
 
-import { Model, Serializable } from './base'
-import { Language } from '../utils/language'
+import { SerializedText } from '../serializers/text'
 
-export interface SerializedText extends Serializable {
-    en?: string
-    es?: string
-}
+import { Model } from './base'
+import { Language } from '../utils/language'
 
 export class Text implements Model {
     private readonly i18n: Map<Language, string>

@@ -56,23 +56,13 @@
 // launch the story.
 // ----------------------------------------------------------------
 
-import { Author, SerializedAuthor } from './author'
-import { Model, Serializable } from './base'
-import { Chapter, SerializedChapter } from './chapter'
-import { Text, SerializedText } from './text'
-import { Reader } from '../reader'
+import { SerializedBook } from '../serializers/book'
 
-export interface SerializedBook extends Serializable {
-    title: SerializedText
-    subtitle: SerializedText
-    chapters: Array<SerializedChapter>
-    authors: Array<SerializedAuthor>
-    foreword: Array<Serializable>
-    afterword: Array<Serializable>
-    acknowledgements: Array<Serializable>
-    legal: Array<Serializable>
-    prologue: Array<Serializable>
-}
+import { Author } from './author'
+import { Model } from './base'
+import { Chapter } from './chapter'
+import { Text } from './text'
+import { Reader } from '../reader'
 
 export class Book implements Model {
     public readonly title: Text

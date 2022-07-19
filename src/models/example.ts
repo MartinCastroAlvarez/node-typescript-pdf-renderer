@@ -1,11 +1,11 @@
 // ----------------------------------------------------------------
 // Purpose:
-// This library implements the Definition class.
+// This library implements the Example class.
 // ----------------------------------------------------------------
 
-import { SerializedDefinition } from '../serializers/definition'
+import { SerializedExample } from '../serializers/example'
 
 import { Model } from './base'
 import { Text } from './text'
 
-export class Definition extends Text implements Model {}
+export class Example extends Text implements Model {}

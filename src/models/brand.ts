@@ -3,11 +3,9 @@
 // This library implements the Brand class.
 // ----------------------------------------------------------------
 
-import { Model, Serializable } from './base'
+import { SerializedBrand} from '../serializers/brand'
 
-interface SerializedBrand extends Serializable {
-    title: string
-}
+import { Model } from './base'
 
 export class Brand implements Model {
     private title: string

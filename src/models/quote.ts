@@ -3,13 +3,11 @@
 // This library implements the Quote class.
 // ----------------------------------------------------------------
 
-import { Author, SerializedAuthor } from './author'
-import { Model } from './base'
-import { Text, SerializedText } from './text'
+import { SerializedQuote } from '../serializers/quote'
 
-export interface SerializedQuote extends SerializedText {
-    author: SerializedAuthor
-}
+import { Author } from './author'
+import { Model } from './base'
+import { Text } from './text'
 
 export class Quote extends Text implements Model {
     public readonly author: Author
