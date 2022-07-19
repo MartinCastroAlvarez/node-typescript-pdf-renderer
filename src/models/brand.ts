@@ -3,9 +3,13 @@
 // This library implements the Brand class.
 // ----------------------------------------------------------------
 
-import { Model } from './base'
+import { Model, Serializable } from './base'
 
-export class Brand {
+interface SerializedBrand extends Serializable {
+    title: string
+}
+
+export class Brand implements Model {
     private title: string
 
     // Lazy constructor.
@@ -16,4 +20,23 @@ export class Brand {
     // Titlegetter and setter.
     getTitle() : string { return this.title }
     setTitle(title: string) { this.title = title }
+
+    // String serializers.
+    toString() : string {
+        return `<{this.TYPE}: {this.getTitle()}>`
+    }
+
+    // JSON serializers.
+    toJson() : SerializedAuthor {
+        return {
+            "type": this.TYPE,
+            "title": this.getTitle(),
+        }
+    }
+    fromJson(data: SerializedAuthor) : void {
+        if (data.type != this.TYPE)
+            throw new Error(`Serialization type missmatch: {data}`)
+        this.setTitle(data.title)
+    }
+}
 }
