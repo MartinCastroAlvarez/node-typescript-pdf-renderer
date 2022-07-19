@@ -7,7 +7,7 @@ import { Model } from './base'
 import { Block } from './block'
 import { Text } from './text'
 
-export class Story implements Model {
+export class Story {
     public title: Text
     public blocks: Array<Block>
 

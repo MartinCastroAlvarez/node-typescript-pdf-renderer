@@ -7,7 +7,16 @@ import { Model } from './base'
 import { Block } from './block'
 import { Text } from './text'
 
+type SerializedAuthor = {
+    type?: string
+    name?: string
+    website?: string
+    email?: string
+}
+
 export class Author implements Model {
+    public readonly TYPE: string = 'Author'
+
     private name: string
     private website: string
     private email: string
@@ -30,4 +39,28 @@ export class Author implements Model {
     // Email getter and setter.
     getEmail() : string { return this.email }
     setEmail(email: string) { this.email = email }
+
+    // String serializers.
+    toString() : string {
+        return `<{this.TYPE}: {this.getName()}>`
+    }
+
+    // JSON serializers.
+    toJson() : Map<string, string> {
+        let serialized: SerializedAuthor = {
+            "type": this.TYPE,
+            "name": this.getName(),
+            "website": this.getWebsite(),
+            "email": this.getEmail(),
+        }
+        return <Map<string, string>>serialized
+    }
+    fromJson(data: Map<string, string>) : void {
+        let serialized: SerializedAuthor = <SerializedAuthor>data
+        if (serialized.type !== this.TYPE)
+            throw new Error(`Type missmatch: {serialized}`)
+        this.setName(serialized.name)
+        this.setWebsite(serialized.website)
+        this.setEmail(serialized.email)
+    }
 }

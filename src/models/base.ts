@@ -4,9 +4,10 @@
 // implemented by other classes in this directory.
 // ----------------------------------------------------------------
 
-import PDFDocument from 'pdfkit'
-
 export interface Model {
-    toJson() : Map<str, str>
-    toString() : Map<str, str>
+    TYPE: string
+
+    toJson() : Map<string, string>
+    toString() : string
+    fromJson(data: Map<string, any>) : void
 }

@@ -5,7 +5,7 @@
 
 import { Model } from './base'
 
-export class Brand implements Model {
+export class Brand {
     private title: string
 
     // Lazy constructor.

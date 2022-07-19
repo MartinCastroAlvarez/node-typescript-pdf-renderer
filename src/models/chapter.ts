@@ -8,7 +8,7 @@ import { Block } from './block'
 import { Text } from './text'
 import { Story } from './story'
 
-export class Chapter implements Model {
+export class Chapter {
     public title: Text 
     public introduction: Array<Block>
     public stories: Array<Story>

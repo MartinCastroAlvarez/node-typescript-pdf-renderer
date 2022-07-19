@@ -62,15 +62,16 @@ import { Block } from './block'
 import { Chapter } from './chapter'
 import { Text } from './text'
 
-export class Book implements Model {
-    public title: Text
-    public chapters: Array<Chapter>
-    public authors: Array<Author>
-    public foreword : Array<Block>
-    public afterword: Array<Block>
-    public acknowledgments: Array<Block>
-    public legal: Array<Block>
-    public prologue: Array<Block>
+export class Book {
+    static readonly TYPE: string = "Book"
+    public readonly title: Text
+    public readonly chapters: Array<Chapter>
+    public readonly authors: Array<Author>
+    public readonly foreword : Array<Block>
+    public readonly afterword: Array<Block>
+    public readonly acknowledgments: Array<Block>
+    public readonly legal: Array<Block>
+    public readonly prologue: Array<Block>
 
     // Lazy constructor.
     constructor() {

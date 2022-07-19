@@ -6,4 +6,4 @@
 
 import { Model } from './base'
 
-export interface Block implements Model {}
+export interface Block {}
