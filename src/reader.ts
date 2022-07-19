@@ -7,15 +7,15 @@ import readYamlFile from 'read-yaml-file'
 
 import { Model, Serializable } from './models/base'
 
-import { Book } from './models/book'
 import { Author } from './models/author'
-// import { Brand } from './models/brand'
-// import { Chapter } from './models/chapter'
-import { Story } from './models/story'
+import { Brand } from './models/brand'
+import { Book } from './models/book'
+import { Chapter } from './models/chapter'
+import { Definition } from './models/definition'
 import { List } from './models/list'
 import { Proverb } from './models/proverb'
-import { Definition } from './models/definition'
 import { Quote } from './models/quote'
+import { Story } from './models/story'
 import { Text } from './models/text'
 
 export class Reader {

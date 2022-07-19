@@ -6,16 +6,6 @@
 import { Language } from './utils/language'
 import { Book } from './models/book'
 
-import { Author } from './models/author'
-import { Brand } from './models/brand'
-import { Chapter } from './models/chapter'
-import { Story } from './models/story'
-import { List } from './models/list'
-import { Proverb } from './models/proverb'
-import { Definition } from './models/definition'
-import { Quote } from './models/quote'
-import { Text } from './models/text'
-
 // This interface is responsible for transforming the User input
 // into a Typescript object, suitable for the Command class.
 interface Parameters {

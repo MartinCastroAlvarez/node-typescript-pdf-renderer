@@ -56,14 +56,29 @@
 // launch the story.
 // ----------------------------------------------------------------
 
-import { Author } from './author'
-import { Model } from './base'
-import { Chapter } from './chapter'
-import { Text } from './text'
+import { Author, SerializedAuthor } from './author'
+import { Model, Serializable } from './base'
+import { Chapter, SerializedChapter } from './chapter'
+import { Text, SerializedText } from './text'
+import { Reader } from '../reader'
+
+export interface SerializedBook extends Serializable {
+    title: SerializedText
+    subtitle: SerializedText
+    chapters: Array<SerializedChapter>
+    authors: Array<SerializedAuthor>
+    foreword: Array<Serializable>
+    afterword: Array<Serializable>
+    acknowledgements: Array<Serializable>
+    legal: Array<Serializable>
+    prologue: Array<Serializable>
+}
 
 export class Book {
     static readonly TYPE: string = "Book"
+
     public readonly title: Text
+    public readonly subtitle: Text
     public readonly chapters: Array<Chapter>
     public readonly authors: Array<Author>
     public readonly foreword : Array<Model>
@@ -82,5 +97,63 @@ export class Book {
         this.prologue = new Array<Model>()
         this.legal = new Array<Model>()
         this.title = new Text()
+        this.subtitle = new Text()
+    }
+
+    // String serializers.
+    toString() : string {
+        return `<{this.TYPE}: {this.title.get()}>`
+    }
+
+    // JSON serializers.
+    toJson() : SerializedBook {
+        return {
+            "type": this.TYPE,
+            "title": this.title.toJson(),
+            "subtitle": this.title.toJson(),
+            "chapters": this.chapters.map(chapter => chapter.toJson()),
+            "authors": this.authors.map(author => author.toJson()),
+            "legal": this.legal.map(block => block.toJson()),
+            "foreword": this.foreword.map(block => block.toJson()),
+            "afterword": this.afterword.map(block => block.toJson()),
+            "acknowledgements": this.acknowledgements.map(block => block.toJson()),
+            "prologue": this.prologue.map(block => block.toJson()),
+        }
+    }
+    fromJson(data: SerializedBook) : void {
+        if (data.type != this.TYPE)
+            throw new Error(`Serialization type missmatch: {data}`)
+        this.title.fromJson(data.title)
+        this.subtitle.fromJson(data.subtitle)
+        this.foreword = data.foreword.map(block => {
+            let reader: Reader = new Reader()
+            return reader.match(block)
+        })
+        this.afterword = data.afterword.map(block => {
+            let reader: Reader = new Reader()
+            return reader.match(block)
+        })
+        this.legal = data.legal.map(block => {
+            let reader: Reader = new Reader()
+            return reader.match(block)
+        })
+        this.acknowledgements = data.acknowledgements.map(block => {
+            let reader: Reader = new Reader()
+            return reader.match(block)
+        })
+        this.prologue = data.prologue.map(block => {
+            let reader: Reader = new Reader()
+            return reader.match(block)
+        })
+        this.chapters = data.chapters.map(data => {
+            let chapter: Chapter = new Chapter()
+            chapter.fromJson(data)
+            return chapter
+        })
+        this.authors = data.authors.map(data => {
+            let author: Author = new Author()
+            author.fromJson(data)
+            return author
+        })
     }
 }

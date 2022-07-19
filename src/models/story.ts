@@ -26,7 +26,7 @@ export class Story implements Model {
 
     // String serializers.
     toString() : string {
-        return `<{this.TYPE}: {this.Title()}>`
+        return `<{this.TYPE}: {this.title.get()}>`
     }
 
     // JSON serializers.
