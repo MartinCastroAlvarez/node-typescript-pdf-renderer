@@ -5,6 +5,7 @@
 
 import { Language } from './utils/language'
 import { Book } from './models/book'
+import { Yaml } from './yaml'
 
 // This interface is responsible for transforming the User input
 // into a Typescript object, suitable for the Command class.

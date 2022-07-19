@@ -29,7 +29,7 @@ import PDFDocument from 'pdfkit'
 
 import { Book } from '../models/book'
 
-export class BookAdapter {
+export class BookYamlAdapter {
     public book: Book
 
     // Lazy constructor.

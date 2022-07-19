@@ -7,7 +7,7 @@ import { SerializedStory } from '../serializers/story'
 
 import { Model } from './base'
 import { Text } from './text'
-import { Reader } from '../reader'
+import { Yaml } from '../yaml'
 
 export class Story implements Model {
     public readonly title: Text
@@ -35,8 +35,8 @@ export class Story implements Model {
     fromJson(data: SerializedStory) : void {
         this.title.fromJson(data['Title']) 
         this.blocks = data['Blocks'].map(block => {
-            let reader: Reader = new Reader()
-            return reader.match(block)
+            let yaml: Yaml = new Yaml()
+            return yaml.unserialize(block)
         })
     }
 }

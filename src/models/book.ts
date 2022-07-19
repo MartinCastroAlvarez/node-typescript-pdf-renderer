@@ -43,7 +43,7 @@
 // Preface or Introduction:
 // The author explains the purpose behind writing the book, personal experiences
 // that are pertinent to the book, and describes the scope of the book. An
-// introduction can be deeply personal, seeking to draw the reader into the
+// introduction can be deeply personal, seeking to draw the yaml into the
 // book on an emotional level, and usually explains why the book was written.
 // For scholarly works, the preface or introduction helps erect a framework
 // for the content that follows, as well as to explain the author’s point of
@@ -62,7 +62,7 @@ import { Author } from './author'
 import { Model } from './base'
 import { Chapter } from './chapter'
 import { Text } from './text'
-import { Reader } from '../reader'
+import { Yaml } from '../yaml'
 
 export class Book implements Model {
     public readonly title: Text
@@ -113,24 +113,24 @@ export class Book implements Model {
         this.title.fromJson(data['Title'])
         this.subtitle.fromJson(data['Subtitle'])
         this.foreword = data['Foreword'].map(block => {
-            let reader: Reader = new Reader()
-            return reader.match(block)
+            let yaml: Yaml = new Yaml()
+            return yaml.unserialize(block)
         })
         this.afterword = data['Afterword'].map(block => {
-            let reader: Reader = new Reader()
-            return reader.match(block)
+            let yaml: Yaml = new Yaml()
+            return yaml.unserialize(block)
         })
         this.legal = data['Legal'].map(block => {
-            let reader: Reader = new Reader()
-            return reader.match(block)
+            let yaml: Yaml = new Yaml()
+            return yaml.unserialize(block)
         })
         this.acknowledgements = data['Acknowledgements'].map(block => {
-            let reader: Reader = new Reader()
-            return reader.match(block)
+            let yaml: Yaml = new Yaml()
+            return yaml.unserialize(block)
         })
         this.prologue = data['Prologue'].map(block => {
-            let reader: Reader = new Reader()
-            return reader.match(block)
+            let yaml: Yaml = new Yaml()
+            return yaml.unserialize(block)
         })
         this.chapters = data['Chapters'].map(data => {
             let chapter: Chapter = new Chapter()

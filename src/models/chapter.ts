@@ -7,7 +7,7 @@ import { SerializedChapter } from '../serializers/chapter'
 
 import { Model } from './base'
 import { Text } from './text'
-import { Reader } from '../reader'
+import { Yaml } from '../yaml'
 import { Story } from './story'
 
 export class Chapter {
@@ -42,12 +42,12 @@ export class Chapter {
     fromJson(data: SerializedChapter) : void {
         this.title.fromJson(data['Title']) 
         this.introduction = data['Introduction'].map(block => {
-            let reader: Reader = new Reader()
-            return reader.match(block)
+            let yaml: Yaml = new Yaml()
+            return yaml.unserialize(block)
         })
         this.conclusion = data['Conclusion'].map(block => {
-            let reader: Reader = new Reader()
-            return reader.match(block)
+            let yaml: Yaml = new Yaml()
+            return yaml.unserialize(block)
         })
         this.stories = data['Stories'].map(data => {
             let story: Story = new Story()
