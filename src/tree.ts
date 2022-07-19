@@ -13,7 +13,7 @@ export class Tree {
     public readonly books: string
 
     constructor() {
-        this.root = path.basename(__dirname)
+        this.root = path.dirname(__dirname)
         this.fonts = path.join(this.root, 'fonts')
         this.images = path.join(this.root, 'images')
         this.books = path.join(this.root, 'books')
@@ -34,7 +34,7 @@ export class Tree {
     }
 
     getBookPath(name: string): string {
-        let fullPath: string = path.join(this.books, name)
+        let fullPath: string = path.join(this.books, name, 'Book.yaml')
         if (!fs.existsSync(fullPath))
             throw Error(`File does not exist: ${fullPath}`)
         return fullPath

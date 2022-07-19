@@ -38,6 +38,9 @@ export class File implements Model {
         }
     }
     fromJson(data: SerializedFile): void {
-        this.setPath(data['Path'])
+        console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
+        if (data) {
+            this.setPath(data['Path'])
+        }
     }
 }

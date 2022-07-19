@@ -110,37 +110,40 @@ export class Book implements Model {
         }
     }
     fromJson(data: SerializedBook): void {
-        this.title.fromJson(data['Title'])
-        this.subtitle.fromJson(data['Subtitle'])
-        this.foreword = data['Foreword'].map(block => {
-            let yaml: Yaml = new Yaml()
-            return yaml.load(block)
-        })
-        this.afterword = data['Afterword'].map(block => {
-            let yaml: Yaml = new Yaml()
-            return yaml.load(block)
-        })
-        this.legal = data['Legal'].map(block => {
-            let yaml: Yaml = new Yaml()
-            return yaml.load(block)
-        })
-        this.acknowledgements = data['Acknowledgements'].map(block => {
-            let yaml: Yaml = new Yaml()
-            return yaml.load(block)
-        })
-        this.prologue = data['Prologue'].map(block => {
-            let yaml: Yaml = new Yaml()
-            return yaml.load(block)
-        })
-        this.chapters = data['Chapters'].map(data => {
-            let chapter: Chapter = new Chapter()
-            chapter.fromJson(data)
-            return chapter
-        })
-        this.authors = data['Authors'].map(data => {
-            let author: Author = new Author()
-            author.fromJson(data)
-            return author
-        })
+        console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
+        if (data) {
+            this.title.fromJson(data['Title'])
+            this.subtitle.fromJson(data['Subtitle'])
+            this.foreword = data['Foreword'].map(block => {
+                let yaml: Yaml = new Yaml()
+                return yaml.load(block)
+            })
+            this.afterword = data['Afterword'].map(block => {
+                let yaml: Yaml = new Yaml()
+                return yaml.load(block)
+            })
+            this.legal = data['Legal'].map(block => {
+                let yaml: Yaml = new Yaml()
+                return yaml.load(block)
+            })
+            this.acknowledgements = data['Acknowledgements'].map(block => {
+                let yaml: Yaml = new Yaml()
+                return yaml.load(block)
+            })
+            this.prologue = data['Prologue'].map(block => {
+                let yaml: Yaml = new Yaml()
+                return yaml.load(block)
+            })
+            this.chapters = data['Chapters'].map(data => {
+                let chapter: Chapter = new Chapter()
+                chapter.fromJson(data)
+                return chapter
+            })
+            this.authors = data['Authors'].map(data => {
+                let author: Author = new Author()
+                author.fromJson(data)
+                return author
+            })
+        }
     }
 }

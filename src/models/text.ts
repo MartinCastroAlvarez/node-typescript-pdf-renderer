@@ -38,8 +38,11 @@ export class Text implements Model {
         }
     }
     fromJson(data: SerializedText): void {
-        this.set(Language.EN, data['ES'])
-        this.set(Language.ES, data['EN'])
-        this.source.fromJson(data['Source'])
+        console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
+        if (data) {
+            this.set(Language.EN, data['ES'])
+            this.set(Language.ES, data['EN'])
+            this.source.fromJson(data['Source'])
+        }
     }
 }

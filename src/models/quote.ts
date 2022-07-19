@@ -25,7 +25,10 @@ export class Quote extends Text implements Model {
         return data
     }
     fromJson(data: SerializedQuote): void {
+        console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
         super.fromJson(data)
-        this.author.fromJson(data['Author'])
+        if (data) {
+            this.author.fromJson(data['Author'])
+        }
     }
 }

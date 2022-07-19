@@ -3,8 +3,8 @@
 // This class implements the YAML reader adapter.
 // ----------------------------------------------------------------
 
+const yaml = require('js-yaml')
 import * as fs from 'fs'
-import yaml from 'js-yaml'
 
 import { Tree } from './tree'
 
@@ -70,15 +70,17 @@ export class Yaml {
 
     // Method responsible for reading a book from the file system.
     loadBook(name: string): Book {
+        console.log('Loading book: ${name}')
         let tree: Tree = new Tree()
         let path: string = tree.getBookPath(name)
-        let content: string = fs.readFileSync(tree.getBookPath(path), 'utf8')
-        return <Book>this.load(<Serialized>yaml.safeLoad(content))
+        let content: string = fs.readFileSync(path, 'utf8')
+        return <Book>this.load(<Serialized>yaml.load(content))
     }
 
     // Method responsible for parsing a YAML string and generating
     // the instances of the classes in the models directory.
     load(data: Serialized): Model {
+        console.log(`Unserializing '${data.Type}': ${JSON.stringify(data)}`)
         switch(data.Type) {
             case Analogy.name: {
                 let model: Analogy = new Analogy()

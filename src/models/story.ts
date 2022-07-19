@@ -33,10 +33,13 @@ export class Story implements Model {
         }
     }
     fromJson(data: SerializedStory): void {
-        this.title.fromJson(data['Title']) 
-        this.blocks = data['Blocks'].map(block => {
-            let yaml: Yaml = new Yaml()
-            return yaml.load(block)
-        })
+        console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
+        if (data) {
+            this.title.fromJson(data['Title']) 
+            this.blocks = data['Blocks'].map(block => {
+                let yaml: Yaml = new Yaml()
+                return yaml.load(block)
+            })
+        }
     }
 }

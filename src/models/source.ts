@@ -45,6 +45,7 @@ export class Source implements Model {
         }
     }
     fromJson(data: SerializedSource): void {
+        console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
         this.setTitle(data['Title'])
         this.authors = data['Authors'].map(data => {
             let author: Author = new Author()

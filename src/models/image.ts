@@ -94,12 +94,15 @@ export class Image extends File implements Model {
         }
     }
     fromJson(data: SerializedImage): void {
-        this.setPath(data['Path'])
-        this.setWidth(data['Width'])
-        this.setHeight(data['Height'])
-        this.setTop(data['Top'])
-        this.setBottom(data['Bottom'])
-        this.setLeft(data['Left'])
-        this.setRight(data['Right'])
+        console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
+        if (data) {
+            this.setPath(data['Path'])
+            this.setWidth(data['Width'])
+            this.setHeight(data['Height'])
+            this.setTop(data['Top'])
+            this.setBottom(data['Bottom'])
+            this.setLeft(data['Left'])
+            this.setRight(data['Right'])
+        }
     }
 }

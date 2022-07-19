@@ -55,9 +55,12 @@ export class Author implements Model {
         }
     }
     fromJson(data: SerializedAuthor): void {
-        this.setName(data['Name'])
-        this.setWebsite(data['Website'])
-        this.setEmail(data['Email'])
-        this.logo.fromJson(data['Logo'])
+        console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
+        if (data) {
+            this.setName(data['Name'])
+            this.setWebsite(data['Website'])
+            this.setEmail(data['Email'])
+            this.logo.fromJson(data['Logo'])
+        }
     }
 }

@@ -39,7 +39,7 @@ export class Command {
         this.validate()
         let yaml: Yaml = new Yaml()
         let book: Book = yaml.loadBook(this.title)
-        throw new Error(book.toString())
+        throw new Error(book.toString()) // FIXME
         console.log('Success!')
     }
 }

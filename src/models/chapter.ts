@@ -40,19 +40,22 @@ export class Chapter {
         }
     }
     fromJson(data: SerializedChapter): void {
-        this.title.fromJson(data['Title']) 
-        this.introduction = data['Introduction'].map(block => {
-            let yaml: Yaml = new Yaml()
-            return yaml.load(block)
-        })
-        this.conclusion = data['Conclusion'].map(block => {
-            let yaml: Yaml = new Yaml()
-            return yaml.load(block)
-        })
-        this.stories = data['Stories'].map(data => {
-            let story: Story = new Story()
-            story.fromJson(data)
-            return story
-        })
+        console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
+        if (data) {
+            this.title.fromJson(data['Title']) 
+            this.introduction = data['Introduction'].map(block => {
+                let yaml: Yaml = new Yaml()
+                return yaml.load(block)
+            })
+            this.conclusion = data['Conclusion'].map(block => {
+                let yaml: Yaml = new Yaml()
+                return yaml.load(block)
+            })
+            this.stories = data['Stories'].map(data => {
+                let story: Story = new Story()
+                story.fromJson(data)
+                return story
+            })
+        }
     }
 }

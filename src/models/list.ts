@@ -34,10 +34,13 @@ export class List implements Model {
         }
     }
     fromJson(data: SerializedList): void {
-        this.items = data['Items'].map(item => {
-            let text: Text = new Text()
-            text.fromJson(item)
-            return text
-        })
+        console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
+        if (data) {
+            this.items = data['Items'].map(item => {
+                let text: Text = new Text()
+                text.fromJson(item)
+                return text
+            })
+        }
     }
 }
