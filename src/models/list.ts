@@ -16,9 +16,14 @@ export class List implements Model {
         this.items = new Array<Text>()
     }
 
+    // List size getter.
+    getSize(): number {
+        return this.items.length
+    }
+
     // String serializers.
     toString(): string {
-        return `<${(this as any).constructor.name}: ${this.getTitle()}>`
+        return `<${(this as any).constructor.name}: ${this.getSize()}>`
     }
 
     // JSON serializers.
