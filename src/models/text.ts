@@ -4,15 +4,14 @@
 // ----------------------------------------------------------------
 
 import { Model, Serializable } from './base'
-import { Block } from './block'
 import { Language } from '../utils/language'
 
-interface SerializedText extends Serializable {
+export interface SerializedText extends Serializable {
     en?: string
     es?: string
 }
 
-export class Text implements Block, Model {
+export class Text implements Model {
     public readonly TYPE: string = 'Text'
 
     private readonly i18n: Map<Language, string>

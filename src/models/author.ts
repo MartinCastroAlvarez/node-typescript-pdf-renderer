@@ -4,10 +4,9 @@
 // ----------------------------------------------------------------
 
 import { Model, Serializable } from './base'
-import { Block } from './block'
 import { Text } from './text'
 
-interface SerializedAuthor extends Serializable {
+export interface SerializedAuthor extends Serializable {
     name?: string
     website?: string
     email?: string

@@ -58,7 +58,6 @@
 
 import { Author } from './author'
 import { Model } from './base'
-import { Block } from './block'
 import { Chapter } from './chapter'
 import { Text } from './text'
 
@@ -67,21 +66,21 @@ export class Book {
     public readonly title: Text
     public readonly chapters: Array<Chapter>
     public readonly authors: Array<Author>
-    public readonly foreword : Array<Block>
-    public readonly afterword: Array<Block>
-    public readonly acknowledgments: Array<Block>
-    public readonly legal: Array<Block>
-    public readonly prologue: Array<Block>
+    public readonly foreword : Array<Model>
+    public readonly afterword: Array<Model>
+    public readonly acknowledgments: Array<Model>
+    public readonly legal: Array<Model>
+    public readonly prologue: Array<Model>
 
     // Lazy constructor.
     constructor() {
         this.chapters = new Array<Chapter>()
         this.authors = new Array<Author>()
-        this.foreword = new Array<Block>()
-        this.afterword = new Array<Block>()
-        this.acknowledgments = new Array<Block>()
-        this.prologue = new Array<Block>()
-        this.legal = new Array<Block>()
+        this.foreword = new Array<Model>()
+        this.afterword = new Array<Model>()
+        this.acknowledgments = new Array<Model>()
+        this.prologue = new Array<Model>()
+        this.legal = new Array<Model>()
         this.title = new Text()
     }
 }

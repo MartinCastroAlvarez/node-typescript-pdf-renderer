@@ -10,6 +10,8 @@ interface SerializedBrand extends Serializable {
 }
 
 export class Brand implements Model {
+    public readonly TYPE: string = 'Brand'
+
     private title: string
 
     // Lazy constructor.
@@ -27,16 +29,15 @@ export class Brand implements Model {
     }
 
     // JSON serializers.
-    toJson() : SerializedAuthor {
+    toJson() : SerializedBrand {
         return {
             "type": this.TYPE,
             "title": this.getTitle(),
         }
     }
-    fromJson(data: SerializedAuthor) : void {
+    fromJson(data: SerializedBrand) : void {
         if (data.type != this.TYPE)
             throw new Error(`Serialization type missmatch: {data}`)
         this.setTitle(data.title)
     }
-}
 }
