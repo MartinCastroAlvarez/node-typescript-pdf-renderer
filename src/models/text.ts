@@ -3,12 +3,11 @@
 // This library implements the Text class.
 // ----------------------------------------------------------------
 
-import { Model } from './base'
+import { Model, Serializable } from './base'
 import { Block } from './block'
 import { Language } from '../utils/language'
 
-type SerializedText = {
-    type?: string
+interface SerializedText extends Serializable {
     en?: string
     es?: string
 }
@@ -33,24 +32,17 @@ export class Text implements Block, Model {
     }
 
     // JSON serializers.
-    toJson() : Map<string, string> {
-        let data: SerializedText = {
+    toJson() : SerializedText {
+        return {
             "type": this.TYPE,
+            "en": this.get(Language.EN),
+            "es": this.get(Language.ES),
         }
-        let key: string
-        for (key in Object.keys(Language)) {
-            data[key] = this.get(Language[key])
-        }
-        return <Map<string, string>>data
     }
-    fromJson(data: Map<string, any>) : void {
-        let serialized: SerializedText = <SerializedText>data
-        if (serialized.type !== this.TYPE)
-            throw new Error(`Type missmatch: {serialized}`)
-        let key: string
-        for (key in Object.keys(Language)) {
-            let language: Language = Language[key]
-            this.set(language, serialized[key])
-        }
+    fromJson(data: SerializedText) : void {
+        if (data.type !== this.TYPE)
+            throw new Error(`Type missmatch: {data}`)
+        this.set(Language.EN, data[Language.EN])
+        this.set(Language.ES, data[Language.ES])
     }
 }

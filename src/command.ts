@@ -13,7 +13,7 @@ import { Book } from './models/book'
 
 // This interface is responsible for transforming the User input
 // into a Typescript object, suitable for the Command class.
-type Parameters = {
+interface Parameters {
     title: string
     language: string
 }
@@ -27,7 +27,7 @@ export class Command {
     // Parsing parameters from CLI arguments.
     constructor(params: Parameters) {
         this.title = params.title
-        this.language = Language[params.language]
+        this.language = Language[params.language.toUpperCase()]
     }
 
     // Validating input parameter.

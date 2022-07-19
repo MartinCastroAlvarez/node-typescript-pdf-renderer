@@ -3,12 +3,11 @@
 // This library implements the Author class.
 // ----------------------------------------------------------------
 
-import { Model } from './base'
+import { Model, Serializable } from './base'
 import { Block } from './block'
 import { Text } from './text'
 
-type SerializedAuthor = {
-    type?: string
+interface SerializedAuthor extends Serializable {
     name?: string
     website?: string
     email?: string
@@ -46,21 +45,19 @@ export class Author implements Model {
     }
 
     // JSON serializers.
-    toJson() : Map<string, string> {
-        let serialized: SerializedAuthor = {
+    toJson() : SerializedAuthor {
+        return {
             "type": this.TYPE,
             "name": this.getName(),
             "website": this.getWebsite(),
             "email": this.getEmail(),
         }
-        return <Map<string, string>>serialized
     }
-    fromJson(data: Map<string, string>) : void {
-        let serialized: SerializedAuthor = <SerializedAuthor>data
-        if (serialized.type !== this.TYPE)
-            throw new Error(`Type missmatch: {serialized}`)
-        this.setName(serialized.name)
-        this.setWebsite(serialized.website)
-        this.setEmail(serialized.email)
+    fromJson(data: SerializedAuthor) : void {
+        if (data.type !== this.TYPE)
+            throw new Error(`Type missmatch: {data}`)
+        this.setName(data.name)
+        this.setWebsite(data.website)
+        this.setEmail(data.email)
     }
 }

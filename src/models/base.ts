@@ -4,10 +4,14 @@
 // implemented by other classes in this directory.
 // ----------------------------------------------------------------
 
+export interface Serializable {
+    type: string
+}
+
 export interface Model {
     TYPE: string
 
-    toJson() : Map<string, string>
+    toJson() : Serializable
     toString() : string
-    fromJson(data: Map<string, any>) : void
+    fromJson(data: Serializable) : void
 }
