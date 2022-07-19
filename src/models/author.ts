@@ -54,8 +54,8 @@ export class Author implements Model {
         }
     }
     fromJson(data: SerializedAuthor) : void {
-        if (data.type !== this.TYPE)
-            throw new Error(`Type missmatch: {data}`)
+        if (data.type != this.TYPE)
+            throw new Error(`Serialization type missmatch: {data}`)
         this.setName(data.name)
         this.setWebsite(data.website)
         this.setEmail(data.email)

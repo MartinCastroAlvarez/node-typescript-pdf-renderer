@@ -40,8 +40,8 @@ export class Text implements Block, Model {
         }
     }
     fromJson(data: SerializedText) : void {
-        if (data.type !== this.TYPE)
-            throw new Error(`Type missmatch: {data}`)
+        if (data.type != this.TYPE)
+            throw new Error(`Serialization type missmatch: {data}`)
         this.set(Language.EN, data[Language.EN])
         this.set(Language.ES, data[Language.ES])
     }
