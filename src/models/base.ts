@@ -4,10 +4,10 @@
 // implemented by other classes in this directory.
 // ----------------------------------------------------------------
 
-import { Serializable } from '../serializers/base'
+import { Serialized } from '../serializers/base'
 
 export interface Model {
-    toJson() : Serializable
+    toJson() : Serialized
     toString() : string
-    fromJson(data: Serializable) : void
+    fromJson(data: Serialized) : void
 }

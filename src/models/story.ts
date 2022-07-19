@@ -27,14 +27,14 @@ export class Story implements Model {
     // JSON serializers.
     toJson() : SerializedStory {
         return {
-            "type": (this as any).constructor.name,
-            "title": this.title.toJson(),
-            "blocks": this.blocks.map(block => block.toJson()),
+            "Type": (this as any).constructor.name,
+            "Title": this.title.toJson(),
+            "Blocks": this.blocks.map(block => block.toJson()),
         }
     }
     fromJson(data: SerializedStory) : void {
-        this.title.fromJson(data.title) 
-        this.blocks = data.blocks.map(block => {
+        this.title.fromJson(data['Title']) 
+        this.blocks = data['Blocks'].map(block => {
             let reader: Reader = new Reader()
             return reader.match(block)
         })

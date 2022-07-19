@@ -6,23 +6,30 @@
 import { SerializedAuthor } from '../serializers/author'
 
 import { Model } from './base'
+import { Image } from './image'
 import { Text } from './text'
 
 export class Author implements Model {
     private name: string
     private website: string
     private email: string
+    public readonly logo: Image
 
     // Lazy constructor.
     constructor() {
         this.name = ''
         this.website = ''
         this.email = ''
+        this.logo = new Image()
     }
 
     // Name getter and setter.
     getName() : string { return this.name }
-    setName(name: string) { this.name = name }
+    setName(name: string) {
+        if (!name || name.length > 30)
+            throw new Error(`Invalid author name: {name}`)
+        this.name = name
+    }
 
     // Website getter and setter.
     getWebsite() : string { return this.website }
@@ -40,15 +47,17 @@ export class Author implements Model {
     // JSON serializers.
     toJson() : SerializedAuthor {
         return {
-            "type": (this as any).constructor.name,
-            "name": this.getName(),
-            "website": this.getWebsite(),
-            "email": this.getEmail(),
+            "Type": (this as any).constructor.name,
+            "Name": this.getName(),
+            "Website": this.getWebsite(),
+            "Email": this.getEmail(),
+            "Logo": this.logo.toJson(),
         }
     }
     fromJson(data: SerializedAuthor) : void {
-        this.setName(data.name)
-        this.setWebsite(data.website)
-        this.setEmail(data.email)
+        this.setName(data['Name'])
+        this.setWebsite(data['Website'])
+        this.setEmail(data['Email'])
+        this.logo.fromJson(data['Logo'])
     }
 }

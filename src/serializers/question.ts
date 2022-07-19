@@ -1,11 +1,8 @@
 // ----------------------------------------------------------------
 // Purpose:
-// This library implements the Quote interface.
+// This library implements the Question interface.
 // ----------------------------------------------------------------
 
-import { SerializedAuthor } from './author'
 import { SerializedText } from './text'
 
-export interface SerializedQuote extends SerializedText {
-    Author: SerializedAuthor
-}
+export interface SerializedQuestion extends SerializedText {}

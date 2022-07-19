@@ -3,13 +3,13 @@
 // This library implements the Chapter interface.
 // ----------------------------------------------------------------
 
-import { Serializable } from './base'
+import { Serialized } from './base'
 import { SerializedText } from './text'
 import { SerializedStory } from './story'
 
-export interface SerializedChapter extends Serializable {
-    title: SerializedText
-    introduction: Array<Serializable>
-    stories: Array<SerializedStory>
-    conclusion: Array<Serializable>
+export interface SerializedChapter extends Serialized {
+    Title: SerializedText
+    Introduction: Array<Serialized>
+    Stories: Array<SerializedStory>
+    Conclusion: Array<Serialized>
 }

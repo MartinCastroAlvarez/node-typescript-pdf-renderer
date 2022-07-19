@@ -1,9 +1,9 @@
 // ----------------------------------------------------------------
 // Purpose:
-// This library defines the Serializable interface that must be
+// This library defines the Serialized interface that must be
 // implemented by other interfaces in this directory.
 // ----------------------------------------------------------------
 
-export interface Serializable {
-    type: string
+export interface Serialized {
+    Type: string
 }

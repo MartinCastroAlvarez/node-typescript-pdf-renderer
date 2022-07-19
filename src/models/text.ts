@@ -6,14 +6,17 @@
 import { SerializedText } from '../serializers/text'
 
 import { Model } from './base'
+import { Source } from './source'
 import { Language } from '../utils/language'
 
 export class Text implements Model {
     private readonly i18n: Map<Language, string>
+    public readonly source: Source
 
     // Lazy constructor.
     constructor() {
         this.i18n = new Map<Language, string>()
+        this.source = new Source()
     }
 
     // Text getter and setter.
@@ -28,13 +31,15 @@ export class Text implements Model {
     // JSON serializers.
     toJson() : SerializedText {
         return {
-            "type": (this as any).constructor.name,
-            "en": this.get(Language.EN),
-            "es": this.get(Language.ES),
+            "Type": (this as any).constructor.name,
+            "EN": this.get(Language.EN),
+            "ES": this.get(Language.ES),
+            "Source": this.source.toJson(),
         }
     }
     fromJson(data: SerializedText) : void {
-        this.set(Language.EN, data[Language.EN])
-        this.set(Language.ES, data[Language.ES])
+        this.set(Language.EN, data['ES'])
+        this.set(Language.ES, data['EN'])
+        this.source.fromJson(data['Source'])
     }
 }

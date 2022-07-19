@@ -21,11 +21,11 @@ export class Quote extends Text implements Model {
     // JSON serializers.
     toJson() : SerializedQuote {
         let data: SerializedQuote = <SerializedQuote>super.toJson()
-        data.author = this.author.toJson()
+        data['Author'] = this.author.toJson()
         return data
     }
     fromJson(data: SerializedQuote) : void {
         super.fromJson(data)
-        this.author.fromJson(data.author)
+        this.author.fromJson(data['Author'])
     }
 }

@@ -32,24 +32,24 @@ export class Chapter {
     // JSON serializers.
     toJson() : SerializedChapter {
         return {
-            "type": (this as any).constructor.name,
-            "title": this.title.toJson(),
-            "introduction": this.introduction.map(block => block.toJson()),
-            "stories": this.stories.map(story => story.toJson()),
-            "conclusion": this.conclusion.map(block => block.toJson()),
+            "Type": (this as any).constructor.name,
+            "Title": this.title.toJson(),
+            "Introduction": this.introduction.map(block => block.toJson()),
+            "Stories": this.stories.map(story => story.toJson()),
+            "Conclusion": this.conclusion.map(block => block.toJson()),
         }
     }
     fromJson(data: SerializedChapter) : void {
-        this.title.fromJson(data.title) 
-        this.introduction = data.introduction.map(block => {
+        this.title.fromJson(data['Title']) 
+        this.introduction = data['Introduction'].map(block => {
             let reader: Reader = new Reader()
             return reader.match(block)
         })
-        this.conclusion = data.introduction.map(block => {
+        this.conclusion = data['Conclusion'].map(block => {
             let reader: Reader = new Reader()
             return reader.match(block)
         })
-        this.stories = data.stories.map(data => {
+        this.stories = data['Stories'].map(data => {
             let story: Story = new Story()
             story.fromJson(data)
             return story

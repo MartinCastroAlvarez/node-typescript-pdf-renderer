@@ -24,12 +24,12 @@ export class List implements Model {
     // JSON serializers.
     toJson() : SerializedList {
         return {
-            "type": (this as any).constructor.name,
-            "items": this.items.map(item => item.toJson()),
+            "Type": (this as any).constructor.name,
+            "Items": this.items.map(item => item.toJson()),
         }
     }
     fromJson(data: SerializedList) : void {
-        this.items = data.items.map(item => {
+        this.items = data['Items'].map(item => {
             let text: Text = new Text()
             text.fromJson(item)
             return text

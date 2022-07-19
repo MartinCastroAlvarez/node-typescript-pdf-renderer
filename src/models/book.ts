@@ -97,47 +97,47 @@ export class Book implements Model {
     // JSON serializers.
     toJson() : SerializedBook {
         return {
-            "type": (this as any).constructor.name,
-            "title": this.title.toJson(),
-            "subtitle": this.title.toJson(),
-            "chapters": this.chapters.map(chapter => chapter.toJson()),
-            "authors": this.authors.map(author => author.toJson()),
-            "legal": this.legal.map(block => block.toJson()),
-            "foreword": this.foreword.map(block => block.toJson()),
-            "afterword": this.afterword.map(block => block.toJson()),
-            "acknowledgements": this.acknowledgements.map(block => block.toJson()),
-            "prologue": this.prologue.map(block => block.toJson()),
+            "Type": (this as any).constructor.name,
+            "Title": this.title.toJson(),
+            "Subtitle": this.title.toJson(),
+            "Chapters": this.chapters.map(chapter => chapter.toJson()),
+            "Authors": this.authors.map(author => author.toJson()),
+            "Legal": this.legal.map(block => block.toJson()),
+            "Foreword": this.foreword.map(block => block.toJson()),
+            "Afterword": this.afterword.map(block => block.toJson()),
+            "Acknowledgements": this.acknowledgements.map(block => block.toJson()),
+            "Prologue": this.prologue.map(block => block.toJson()),
         }
     }
     fromJson(data: SerializedBook) : void {
-        this.title.fromJson(data.title)
-        this.subtitle.fromJson(data.subtitle)
-        this.foreword = data.foreword.map(block => {
+        this.title.fromJson(data['Title'])
+        this.subtitle.fromJson(data['Subtitle'])
+        this.foreword = data['Foreword'].map(block => {
             let reader: Reader = new Reader()
             return reader.match(block)
         })
-        this.afterword = data.afterword.map(block => {
+        this.afterword = data['Afterword'].map(block => {
             let reader: Reader = new Reader()
             return reader.match(block)
         })
-        this.legal = data.legal.map(block => {
+        this.legal = data['Legal'].map(block => {
             let reader: Reader = new Reader()
             return reader.match(block)
         })
-        this.acknowledgements = data.acknowledgements.map(block => {
+        this.acknowledgements = data['Acknowledgements'].map(block => {
             let reader: Reader = new Reader()
             return reader.match(block)
         })
-        this.prologue = data.prologue.map(block => {
+        this.prologue = data['Prologue'].map(block => {
             let reader: Reader = new Reader()
             return reader.match(block)
         })
-        this.chapters = data.chapters.map(data => {
+        this.chapters = data['Chapters'].map(data => {
             let chapter: Chapter = new Chapter()
             chapter.fromJson(data)
             return chapter
         })
-        this.authors = data.authors.map(data => {
+        this.authors = data['Authors'].map(data => {
             let author: Author = new Author()
             author.fromJson(data)
             return author

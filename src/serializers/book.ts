@@ -4,18 +4,18 @@
 // ----------------------------------------------------------------
 
 import { SerializedAuthor } from './author'
-import { Serializable } from './base'
+import { Serialized } from './base'
 import { SerializedChapter } from './chapter'
 import { SerializedText } from './text'
 
-export interface SerializedBook extends Serializable {
-    title: SerializedText
-    subtitle: SerializedText
-    chapters: Array<SerializedChapter>
-    authors: Array<SerializedAuthor>
-    foreword: Array<Serializable>
-    afterword: Array<Serializable>
-    acknowledgements: Array<Serializable>
-    legal: Array<Serializable>
-    prologue: Array<Serializable>
+export interface SerializedBook extends Serialized {
+    Title: SerializedText
+    Subtitle: SerializedText
+    Chapters: Array<SerializedChapter>
+    Authors: Array<SerializedAuthor>
+    Foreword: Array<Serialized>
+    Afterword: Array<Serialized>
+    Acknowledgements: Array<Serialized>
+    Legal: Array<Serialized>
+    Prologue: Array<Serialized>
 }

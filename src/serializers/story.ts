@@ -3,10 +3,10 @@
 // This library implements the Story interface.
 // ----------------------------------------------------------------
 
-import { Serializable } from './base'
+import { Serialized } from './base'
 import { SerializedText } from './text'
 
-export interface SerializedStory extends Serializable {
-    title: SerializedText
-    blocks: Array<Serializable>
+export interface SerializedStory extends Serialized {
+    Title: SerializedText
+    Blocks: Array<Serialized>
 }
