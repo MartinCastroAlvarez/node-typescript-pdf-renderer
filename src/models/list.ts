@@ -30,13 +30,13 @@ export class List implements Model {
     serialize(): SerializedList {
         return {
             "Type": (this as any).constructor.name,
-            "Items": this.items.map(item => item.serialize()),
+            "Items": this.items?.map(item => item.serialize()),
         }
     }
     unserialize(data: SerializedList): void {
         if (data) {
             console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
-            this.items = data['Items'].map(item => {
+            this.items = data['Items']?.map(item => {
                 let text: Text = new Text()
                 text.unserialize(item)
                 return text

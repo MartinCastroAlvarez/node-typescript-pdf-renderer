@@ -35,7 +35,7 @@ export class Brand implements Model {
         return {
             "Type": (this as any).constructor.name,
             "Title": this.getTitle(),
-            "Authors": this.authors.map(author => author.serialize()),
+            "Authors": this.authors?.map(author => author.serialize()),
             "Logo": this.logo.serialize(),
         }
     }
@@ -44,7 +44,7 @@ export class Brand implements Model {
             console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
             this.setTitle(data['Title'])
             this.logo.unserialize(data['Logo'])
-            this.authors = data['Authors'].map(data => {
+            this.authors = data['Authors']?.map(data => {
                 let author = new Author()
                 author.unserialize(data)
                 return author

@@ -125,6 +125,8 @@ export class Yaml {
     // the instances of the classes in the models directory.
     unserialize(data: Serialized): Model {
         console.log(`Unserializing '${data.Type}'`)
+        if (!data || !data.Type)
+            throw new Error(`Missing type in ${typeof data}: ${JSON.stringify(data)}`)
         switch(data.Type) {
             case Analogy.name: {
                 let model: Analogy = new Analogy()

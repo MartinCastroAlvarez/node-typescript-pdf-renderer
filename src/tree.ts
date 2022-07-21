@@ -35,6 +35,7 @@ export class Tree {
 
     // Read file from path.
     read(path: string) {
+        console.log(`Reading file: ${path}`)
         if (!this.exists(path))
             throw Error(`File does not exist: ${path}`)
         return fs.readFileSync(path, 'utf8')
@@ -42,6 +43,7 @@ export class Tree {
 
     // List files in directory.
     list(path: string) {
+        console.log(`Listing files in: ${path}`)
         if (!this.exists(path))
             throw Error(`File does not exist: ${path}`)
         return fs.readdirSync(path)

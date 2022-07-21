@@ -5,6 +5,7 @@
 # References:
 # - https://fonts.google.com/specimen/Montserrat+Alternates?query=montserrat
 # ----------------------------------------------------------------
+Type: 'Typeface'
 Normal: '@fonts/MontserratAlternates-Regular.ttf'
 Bold: '@fonts/MontserratAlternates-Bold.ttf'
 Italic: '@fonts/MontserratAlternates-Italic.ttf'

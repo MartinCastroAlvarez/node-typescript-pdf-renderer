@@ -29,14 +29,14 @@ export class Story implements Model {
         return {
             "Type": (this as any).constructor.name,
             "Title": this.title.serialize(),
-            "Blocks": this.blocks.map(block => block.serialize()),
+            "Blocks": this.blocks?.map(block => block.serialize()),
         }
     }
     unserialize(data: SerializedStory): void {
         if (data) {
             console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
             this.title.unserialize(data['Title']) 
-            this.blocks = data['Blocks'].map(block => {
+            this.blocks = data['Blocks']?.map(block => {
                 console.log(`Loading story blocks.`)
                 let yaml: Yaml = new Yaml()
                 return yaml.unserialize(block)

@@ -100,13 +100,13 @@ export class Book implements Model {
             "Type": (this as any).constructor.name,
             "Title": this.title.serialize(),
             "Subtitle": this.title.serialize(),
-            "Chapters": this.chapters.map(chapter => chapter.serialize()),
-            "Authors": this.authors.map(author => author.serialize()),
-            "Legal": this.legal.map(block => block.serialize()),
-            "Foreword": this.foreword.map(block => block.serialize()),
-            "Afterword": this.afterword.map(block => block.serialize()),
-            "Acknowledgements": this.acknowledgements.map(block => block.serialize()),
-            "Prologue": this.prologue.map(block => block.serialize()),
+            "Chapters": this.chapters?.map(chapter => chapter.serialize()),
+            "Authors": this.authors?.map(author => author.serialize()),
+            "Legal": this.legal?.map(block => block.serialize()),
+            "Foreword": this.foreword?.map(block => block.serialize()),
+            "Afterword": this.afterword?.map(block => block.serialize()),
+            "Acknowledgements": this.acknowledgements?.map(block => block.serialize()),
+            "Prologue": this.prologue?.map(block => block.serialize()),
         }
     }
     unserialize(data: SerializedBook): void {
@@ -114,38 +114,38 @@ export class Book implements Model {
             console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
             this.title.unserialize(data['Title'])
             this.subtitle.unserialize(data['Subtitle'])
-            this.foreword = data['Foreword'].map(block => {
+            this.foreword = data['Foreword']?.map(block => {
                 console.log(`Loading book foreword.`)
                 let yaml: Yaml = new Yaml()
                 return yaml.unserialize(block)
             })
-            this.afterword = data['Afterword'].map(block => {
+            this.afterword = data['Afterword']?.map(block => {
                 console.log(`Loading book afterword.`)
                 let yaml: Yaml = new Yaml()
                 return yaml.unserialize(block)
             })
-            this.legal = data['Legal'].map(block => {
+            this.legal = data['Legal']?.map(block => {
                 console.log(`Loading book legal text.`)
                 let yaml: Yaml = new Yaml()
                 return yaml.unserialize(block)
             })
-            this.acknowledgements = data['Acknowledgements'].map(block => {
+            this.acknowledgements = data['Acknowledgements']?.map(block => {
                 console.log(`Loading book legal acknowledgements.`)
                 let yaml: Yaml = new Yaml()
                 return yaml.unserialize(block)
             })
-            this.prologue = data['Prologue'].map(block => {
+            this.prologue = data['Prologue']?.map(block => {
                 console.log(`Loading book legal prologue.`)
                 let yaml: Yaml = new Yaml()
                 return yaml.unserialize(block)
             })
-            this.chapters = data['Chapters'].map(data => {
+            this.chapters = data['Chapters']?.map(data => {
                 console.log(`Loading book chapters.`)
                 let chapter: Chapter = new Chapter()
                 chapter.unserialize(data)
                 return chapter
             })
-            this.authors = data['Authors'].map(data => {
+            this.authors = data['Authors']?.map(data => {
                 console.log(`Loading book authors.`)
                 let author: Author = new Author()
                 author.unserialize(data)
