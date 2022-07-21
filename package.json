@@ -8,13 +8,8 @@
     "build": "npx tsc render.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://bitbucket.org/sunphi/victor-elena.git"
-  },
   "author": "martincastro.10.5@gmail.com",
   "license": "ISC",
-  "homepage": "https://bitbucket.org/sunphi/victor-elena#readme",
   "dependencies": {
     "@types/node": "^18.0.6",
     "js-yaml": "^4.1.0",

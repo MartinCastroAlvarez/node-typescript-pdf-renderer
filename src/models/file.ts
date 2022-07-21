@@ -22,7 +22,7 @@ export class File implements Model {
     setPath(path: string) {
         let tree: Tree = new Tree()
         if (!tree.exists(path))
-            throw Error(`Path not exists: {path}`)
+            throw Error(`Path not exists: ${path}`)
         this.path = path
     }
 
@@ -39,8 +39,8 @@ export class File implements Model {
         }
     }
     unserialize(data: SerializedFile): void {
-        console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
         if (data) {
+            console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
             this.setPath(data['Path'])
         }
     }

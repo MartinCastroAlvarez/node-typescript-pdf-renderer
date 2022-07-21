@@ -1,4 +1,4 @@
-# Vel Rendering
+# VEL
 Book rendering with Node & Typescript
 
 ![wallpaper](./muelle.jpeg)
@@ -15,8 +15,29 @@ TBD
 
 ### Struecture
 
-<!-- - [/app/renderer.py](./app/renderer.py): Video renderer. -->
-<!-- - [/app/compiler.py](./app/compiler.py): Book compiler. -->
+#### Configuration
+
+|Link|Description|
+|--|--|
+|[persons](./persons)|Directory with YAML files with personal details that can be referenced.|
+|[config](./config)|Directory with YAML files with general configuration.|
+|[books](./books)|Directory with YAML files defining books.|
+
+#### Content
+
+|Link|Description|
+|--|--|
+|[fonts](./fonts)|This directory contains the files defining fonts.|
+|[images](./images)|This directory contains the images files that can be referenced.|
+
+#### Application
+
+|Link|Description|
+|--|--|
+|[render.js](./render.js)|The Node command line interface for rendering content.|
+|[src](./src)|This directory contains the Node code that implements this application.|
+|[builds](./builds)|This directory containes the results of rendering the books.|
+|[package.json](./package.json)|The JSON file with all the dependencies required by this application.|
 
 ## Instructions
 
@@ -26,7 +47,12 @@ TBD
 yarn install
 ```
 
-### Deployment
+### Rendering a PDF in English
 ```bash
 yarn run build && yarn run render --book "Crypto" --language "en"
+```
+
+### Rendering a PDF in Spanish
+```bash
+yarn run build && yarn run render --book "Crypto" --language "es"
 ```

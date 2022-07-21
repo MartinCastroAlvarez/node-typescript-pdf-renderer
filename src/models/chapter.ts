@@ -40,8 +40,8 @@ export class Chapter {
         }
     }
     unserialize(data: SerializedChapter): void {
-        console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
         if (data) {
+            console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
             this.title.unserialize(data['Title']) 
             this.introduction = data['Introduction'].map(block => {
                 let yaml: Yaml = new Yaml()

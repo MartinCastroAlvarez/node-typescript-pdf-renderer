@@ -46,8 +46,8 @@ export class Typeface implements Model {
         }
     }
     unserialize(data: SerializedTypeface): void {
-        console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
         if (data) {
+            console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
             this.setNormal(data['Normal'])
             this.setBold(data['Bold'])
             this.setItalic(data['Italic'])

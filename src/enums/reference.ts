@@ -8,4 +8,5 @@ export enum Reference {
     IMAGES = '@images',
     BOOKS = '@books',
     CONFIG = '@config',
+    PERSONS = '@person',
 }

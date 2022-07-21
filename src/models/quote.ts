@@ -25,9 +25,9 @@ export class Quote extends Text implements Model {
         return data
     }
     unserialize(data: SerializedQuote): void {
-        console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
         super.unserialize(data)
         if (data) {
+            console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
             this.author.unserialize(data['Author'])
         }
     }

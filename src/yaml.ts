@@ -77,7 +77,9 @@ export class Yaml {
         console.log(`Reading YAML: ${path}`)
         let tree: Tree = new Tree()
         let rawContent: string = tree.read(this.dereference(path))
+        console.log(`Raw content: ${rawContent}`)
         let parsedContent: object = yaml.load(rawContent)
+        console.log(`Parsed Content: ${JSON.stringify(rawContent)}`)
         let curatedContent: object = this.assemble(parsedContent)
         return <Serialized>curatedContent
     }
@@ -86,6 +88,8 @@ export class Yaml {
     assemble(content: object): object {
         console.log(`Assembling: ${content}`)
         for (let key in Object.keys(content)) {
+            console.error(key) // FIXME
+            console.error(typeof content[key]) // FIXME
             if (Array.isArray(content[key])) {
                 content[key] = content[key].map(item => this.assemble(item))
             } else if (typeof content[key] == "object" && content[key] != null) {
@@ -111,6 +115,8 @@ export class Yaml {
             text = text.replace(Reference.IMAGES, tree.images)
         if (text.startsWith(`${Reference.BOOKS}/`))
             text = text.replace(Reference.BOOKS, tree.books)
+        if (text.startsWith(`${Reference.PERSONS}/`))
+            text = text.replace(Reference.PERSONS, tree.persons)
         console.log(`Dereferenced: ${text}`)
         return text
     }

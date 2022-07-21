@@ -38,8 +38,8 @@ export class Text implements Model {
         }
     }
     unserialize(data: SerializedText): void {
-        console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
         if (data) {
+            console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
             this.set(Language.EN, data['ES'])
             this.set(Language.ES, data['EN'])
             this.source.unserialize(data['Source'])

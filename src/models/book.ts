@@ -110,8 +110,8 @@ export class Book implements Model {
         }
     }
     unserialize(data: SerializedBook): void {
-        console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
         if (data) {
+            console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
             this.title.unserialize(data['Title'])
             this.subtitle.unserialize(data['Subtitle'])
             this.foreword = data['Foreword'].map(block => {

@@ -1,0 +1,11 @@
+# ----------------------------------------------------------------
+# Purpose:
+# Defines a person that can be referenced using `@person/<name>.yaml`
+# ----------------------------------------------------------------
+Type: 'Author'
+Name: 'Martin Alejandro Castro Alvarez'
+Website: 'https://github.com/MartinCastroAlvarez'
+Email: 'martincastro.10.5@gmail.com'
+Logo:
+  Type: 'Image'
+  Path: '@images/persons/martincastro.jpeg'

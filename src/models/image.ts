@@ -94,8 +94,8 @@ export class Image extends File implements Model {
         }
     }
     unserialize(data: SerializedImage): void {
-        console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
         if (data) {
+            console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
             this.setPath(data['Path'])
             this.setWidth(data['Width'])
             this.setHeight(data['Height'])

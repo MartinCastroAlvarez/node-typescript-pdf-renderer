@@ -40,8 +40,8 @@ export class Brand implements Model {
         }
     }
     unserialize(data: SerializedBrand): void {
-        console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
         if (data) {
+            console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
             this.setTitle(data['Title'])
             this.logo.unserialize(data['Logo'])
             this.authors = data['Authors'].map(data => {

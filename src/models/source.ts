@@ -45,13 +45,15 @@ export class Source implements Model {
         }
     }
     unserialize(data: SerializedSource): void {
-        console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
-        this.setTitle(data['Title'])
-        this.authors = data['Authors'].map(data => {
-            let author: Author = new Author()
-            author.unserialize(data)
-            return author
-        })
-        this.logo.unserialize(data['Logo'])
+        if (data) {
+            console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
+            this.setTitle(data['Title'])
+            this.authors = data['Authors'].map(data => {
+                let author: Author = new Author()
+                author.unserialize(data)
+                return author
+            })
+            this.logo.unserialize(data['Logo'])
+        }
     }
 }

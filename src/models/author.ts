@@ -26,8 +26,8 @@ export class Author implements Model {
     // Name getter and setter.
     getName(): string { return this.name }
     setName(name: string) {
-        if (!name || name.length > 30)
-            throw new Error(`Invalid author name: {name}`)
+        if (!name || name.length > 50)
+            throw new Error(`Invalid author name: ${name}`)
         this.name = name
     }
 
@@ -55,8 +55,8 @@ export class Author implements Model {
         }
     }
     unserialize(data: SerializedAuthor): void {
-        console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
         if (data) {
+            console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
             this.setName(data['Name'])
             this.setWebsite(data['Website'])
             this.setEmail(data['Email'])

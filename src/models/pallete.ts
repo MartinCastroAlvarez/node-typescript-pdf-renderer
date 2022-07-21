@@ -60,8 +60,8 @@ export class Pallete implements Model {
         }
     }
     unserialize(data: SerializedPallete): void {
-        console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
         if (data) {
+            console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
             this.setPrimary(data['Primary'])
             this.setSecondary(data['Secondary'])
             this.setWhite(data['White'])

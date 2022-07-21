@@ -12,6 +12,7 @@ export class Tree {
     public readonly images: string
     public readonly config: string
     public readonly books: string
+    public readonly persons: string
 
     constructor() {
         this.root = path.dirname(__dirname)
@@ -19,6 +20,7 @@ export class Tree {
         this.config = path.join(this.root, 'config')
         this.images = path.join(this.root, 'images')
         this.books = path.join(this.root, 'books')
+        this.persons = path.join(this.root, 'persons')
     }
 
     // Join path strings.
