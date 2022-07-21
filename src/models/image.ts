@@ -8,6 +8,13 @@ import { SerializedImage } from '../serializers/image'
 import { Model } from './base'
 import { File } from './file'
 
+class InvalidImageHeightError extends Error {}
+class InvalidImageWidthError extends Error {}
+class InvalidImageLeftError extends Error {}
+class InvalidImageRightError extends Error {}
+class InvalidImageTopError extends Error {}
+class InvalidImageBottomError extends Error {}
+
 export class Image extends File implements Model {
     private width: number
     private height: number
@@ -31,7 +38,7 @@ export class Image extends File implements Model {
     getWidth(): number { return this.width }
     setWidth(width: number) {
         if (width < 0 || width > 100)
-            throw Error(`Invalid width: {width}`)
+            throw new InvalidImageWidthError(`Invalid width: {width}`)
         this.width = width
     }
 
@@ -39,7 +46,7 @@ export class Image extends File implements Model {
     getHeight(): number { return this.height }
     setHeight(height: number) {
         if (height < 0 || height > 100)
-            throw Error(`Invalid height: {height}`)
+            throw new InvalidImageHeightError(`Invalid height: {height}`)
         this.height = height
     }
 
@@ -47,7 +54,7 @@ export class Image extends File implements Model {
     getTop(): number { return this.top }
     setTop(top: number) {
         if (top < 0 || top > 100)
-            throw Error(`Invalid top: {top}`)
+            throw new InvalidImageTopError(`Invalid top: {top}`)
         this.top = top
     }
 
@@ -55,7 +62,7 @@ export class Image extends File implements Model {
     getBottom(): number { return this.bottom }
     setBottom(bottom: number) {
         if (bottom < 0 || bottom > 100)
-            throw Error(`Invalid bottom: {bottom}`)
+            throw new InvalidImageBottomError(`Invalid bottom: {bottom}`)
         this.bottom = bottom
     }
 
@@ -63,7 +70,7 @@ export class Image extends File implements Model {
     getLeft(): number { return this.left }
     setLeft(left: number) {
         if (left < 0 || left > 100)
-            throw Error(`Invalid left: {left}`)
+            throw new InvalidImageLeftError(`Invalid left: {left}`)
         this.left = left
     }
 
@@ -71,7 +78,7 @@ export class Image extends File implements Model {
     getRight(): number { return this.right }
     setRight(right: number) {
         if (right < 0 || right > 100)
-            throw Error(`Invalid right: {right}`)
+            throw new InvalidImageRightError(`Invalid right: {right}`)
         this.right = right
     }
 

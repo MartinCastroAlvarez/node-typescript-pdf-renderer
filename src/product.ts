@@ -11,6 +11,8 @@ import { Book } from './models/book'
 import { Config } from './config'
 import { Yaml } from './yaml'
 
+class InvalidLanguageError extends Error {}
+
 interface Render {
     title: string
     language: string
@@ -40,7 +42,7 @@ export class Product {
     // Rendering PDF.
     toPdf(): string {
         if (!this.language)
-            throw new Error('Invalid language!')
+            throw new InvalidLanguageError('Invalid language!')
         return "TODO"
     }
 

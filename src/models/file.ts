@@ -9,6 +9,8 @@ import { Tree } from '../tree'
 
 import { Model } from './base'
 
+class FileNotFoundError extends Error {}
+
 export class File implements Model {
     private path: string
 
@@ -22,7 +24,7 @@ export class File implements Model {
     setPath(path: string) {
         let tree: Tree = new Tree()
         if (!tree.exists(path))
-            throw Error(`Path not exists: ${path}`)
+            throw new FileNotFoundError(`Path not exists: ${path}`)
         this.path = path
     }
 

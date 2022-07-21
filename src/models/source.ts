@@ -10,6 +10,8 @@ import { Model } from './base'
 import { Image } from './image'
 import { Text } from './text'
 
+class InvalidTitleError extends Error {}
+
 export class Source implements Model {
     private title: string
     public authors: Array<Author>
@@ -26,7 +28,7 @@ export class Source implements Model {
     getTitle(): string { return this.title }
     setTitle(title: string) {
         if (!title || title.length > 30)
-            throw new Error(`Invalid title name: {title}`)
+            throw new InvalidTitleError(`Invalid title name: {title}`)
         this.title = title
     }
 

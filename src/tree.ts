@@ -6,6 +6,9 @@
 import * as fs from 'fs'
 const path = require('path')
 
+class FileNotFoundError extends Error {}
+class DirectoryNotFoundError extends Error {}
+
 export class Tree {
     public readonly root: string
     public readonly fonts: string
@@ -37,7 +40,7 @@ export class Tree {
     read(path: string) {
         console.log(`Reading file: ${path}`)
         if (!this.exists(path))
-            throw Error(`File does not exist: ${path}`)
+            throw new FileNotFoundError(`File does not exist: ${path}`)
         return fs.readFileSync(path, 'utf8')
     }
 
@@ -45,7 +48,7 @@ export class Tree {
     list(path: string) {
         console.log(`Listing files in: ${path}`)
         if (!this.exists(path))
-            throw Error(`File does not exist: ${path}`)
+            throw new DirectoryNotFoundError(`File does not exist: ${path}`)
         return fs.readdirSync(path)
     }
 }

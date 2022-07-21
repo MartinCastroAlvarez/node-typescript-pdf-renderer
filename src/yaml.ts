@@ -70,6 +70,9 @@ import { SerializedText } from './serializers/text'
 import { SerializedTypeface } from './serializers/typeface'
 import { SerializedQuestion } from './serializers/question'
 
+class MissingTypeError extends Error {}
+class InvalidObjectError extends Error {}
+
 export class Yaml {
 
     // Method responsible for reading the content of a file.
@@ -126,7 +129,7 @@ export class Yaml {
     unserialize(data: Serialized): Model {
         console.log(`Unserializing '${data.Type}'`)
         if (!data || !data.Type)
-            throw new Error(`Missing type in ${typeof data}: ${JSON.stringify(data)}`)
+            throw new MissingTypeError(`Missing type in ${typeof data}: ${JSON.stringify(data)}`)
         switch(data.Type) {
             case Analogy.name: {
                 let model: Analogy = new Analogy()
@@ -224,7 +227,7 @@ export class Yaml {
                 return <Model>model
             }
             default: {
-                throw new Error(`Not implemented ${typeof data}: ${JSON.stringify(data)}`)
+                throw new InvalidObjectError(`Not implemented ${typeof data}: ${JSON.stringify(data)}`)
             }
         }
     }

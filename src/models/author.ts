@@ -9,6 +9,8 @@ import { Model } from './base'
 import { Image } from './image'
 import { Text } from './text'
 
+class InvalidAuthorTitleError extends Error {}
+
 export class Author implements Model {
     private name: string
     private website: string
@@ -27,7 +29,7 @@ export class Author implements Model {
     getName(): string { return this.name }
     setName(name: string) {
         if (!name || name.length > 50)
-            throw new Error(`Invalid author name: ${name}`)
+            throw new InvalidAuthorTitleError(`Invalid author name: ${name}`)
         this.name = name
     }
 
