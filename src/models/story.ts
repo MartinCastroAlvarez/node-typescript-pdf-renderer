@@ -38,7 +38,7 @@ export class Story implements Model {
             this.title.fromJson(data['Title']) 
             this.blocks = data['Blocks'].map(block => {
                 let yaml: Yaml = new Yaml()
-                return yaml.load(block)
+                return yaml.unserialize(block)
             })
         }
     }

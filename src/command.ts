@@ -4,42 +4,38 @@
 // ----------------------------------------------------------------
 
 import { Language } from './utils/language'
-import { Book } from './models/book'
-import { Yaml } from './yaml'
+import { Product } from './models/product'
 
-// This interface is responsible for transforming the User input
-// into a Typescript object, suitable for the Command class.
 interface Parameters {
     title: string
     language: string
 }
 
-// The purpose of the Command class is to centralize the execution
-// of the business classes defined in subdirectories here.
 export class Command {
-    private title: string
-    private language: Language
-
-    // Parsing parameters from CLI arguments.
-    constructor(params: Parameters) {
-        this.title = params.title
-        this.language = Language[params.language.toUpperCase()]
+    // Method responsible for rendering a PDF.
+    renderPdf(params: Parameters): void {
+        let product: Product = new Product()
+        product.setLanguage(Language[params.language.toUpperCase()])
+        product.setTitle(params.title)
+        let path: string = product.toPdf()
+        console.log(`PDF rendered into: ${path}`)
     }
 
-    // Validating input parameter.
-    validate(): void {
-        if (!this.language)
-            throw new Error('Invalid language!')
-        if (!this.title.length || this.title.length > 30)
-            throw new Error('Invalid title!')
+    // Method responsible for rendering a course.
+    renderCourse(params: Parameters): void {
+        let product: Product = new Product()
+        product.setLanguage(Language[params.language.toUpperCase()])
+        product.setTitle(params.title)
+        let path: string = product.toCourse()
+        console.log(`Course rendered into: ${path}`)
     }
 
-    // Main hook.
-    run(): void {
-        this.validate()
-        let yaml: Yaml = new Yaml()
-        let book: Book = yaml.loadBook(this.title)
-        throw new Error(book.toString()) // FIXME
-        console.log('Success!')
+    // Method responsible for rendering a video.
+    renderVideo(params: Parameters): void {
+        let product: Product = new Product()
+        product.setLanguage(Language[params.language.toUpperCase()])
+        product.setTitle(params.title)
+        let path: string = product.toVideo()
+        console.log(`Video rendered into: ${path}`)
     }
 }

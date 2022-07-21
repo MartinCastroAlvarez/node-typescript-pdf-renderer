@@ -116,23 +116,23 @@ export class Book implements Model {
             this.subtitle.fromJson(data['Subtitle'])
             this.foreword = data['Foreword'].map(block => {
                 let yaml: Yaml = new Yaml()
-                return yaml.load(block)
+                return yaml.unserialize(block)
             })
             this.afterword = data['Afterword'].map(block => {
                 let yaml: Yaml = new Yaml()
-                return yaml.load(block)
+                return yaml.unserialize(block)
             })
             this.legal = data['Legal'].map(block => {
                 let yaml: Yaml = new Yaml()
-                return yaml.load(block)
+                return yaml.unserialize(block)
             })
             this.acknowledgements = data['Acknowledgements'].map(block => {
                 let yaml: Yaml = new Yaml()
-                return yaml.load(block)
+                return yaml.unserialize(block)
             })
             this.prologue = data['Prologue'].map(block => {
                 let yaml: Yaml = new Yaml()
-                return yaml.load(block)
+                return yaml.unserialize(block)
             })
             this.chapters = data['Chapters'].map(data => {
                 let chapter: Chapter = new Chapter()

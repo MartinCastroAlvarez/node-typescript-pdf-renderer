@@ -15,6 +15,7 @@ export class Tree {
     constructor() {
         this.root = path.dirname(__dirname)
         this.fonts = path.join(this.root, 'fonts')
+        this.config = path.join(this.root, 'config')
         this.images = path.join(this.root, 'images')
         this.books = path.join(this.root, 'books')
     }
@@ -40,7 +41,22 @@ export class Tree {
         return fullPath
     }
 
-    getFiles(path: string) {
+    // Join path strings.
+    join(root: string, path: string) {
+        this.books = path.join(root, 'books')
+    }
+
+    // Read file from path.
+    read(path: string) {
+        if (!fs.existsSync(fullPath))
+            throw Error(`File does not exist: ${fullPath}`)
+        return fs.readFileSync(path, 'utf8')
+    }
+
+    // List files in directory.
+    list(path: string) {
+        if (!fs.existsSync(fullPath))
+            throw Error(`File does not exist: ${fullPath}`)
         return fs.readdirSync(path)
     }
 }

@@ -59,6 +59,7 @@ import { SerializedImage } from './serializers/image'
 import { SerializedFile } from './serializers/file'
 import { SerializedJoke } from './serializers/joke'
 import { SerializedList } from './serializers/list'
+import { SerializedPallete } from './serializers/pallete'
 import { SerializedProverb } from './serializers/proverb'
 import { SerializedQuote } from './serializers/quote'
 import { SerializedSource } from './serializers/source'
@@ -79,7 +80,7 @@ export class Yaml {
 
     // Method responsible for parsing a YAML string and generating
     // the instances of the classes in the models directory.
-    load(data: Serialized): Model {
+    unserialize(data: Serialized): Model {
         console.log(`Unserializing '${data.Type}': ${JSON.stringify(data)}`)
         switch(data.Type) {
             case Analogy.name: {
@@ -135,6 +136,11 @@ export class Yaml {
             case List.name: {
                 let model: List = new List()
                 model.fromJson(<SerializedList>data)
+                return <Model>model
+            }
+            case Pallete.name: {
+                let model: Pallete = new Pallete()
+                model.fromJson(<SerializedQuote>data)
                 return <Model>model
             }
             case Proverb.name: {

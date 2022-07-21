@@ -45,11 +45,11 @@ export class Chapter {
             this.title.fromJson(data['Title']) 
             this.introduction = data['Introduction'].map(block => {
                 let yaml: Yaml = new Yaml()
-                return yaml.load(block)
+                return yaml.unserialize(block)
             })
             this.conclusion = data['Conclusion'].map(block => {
                 let yaml: Yaml = new Yaml()
-                return yaml.load(block)
+                return yaml.unserialize(block)
             })
             this.stories = data['Stories'].map(data => {
                 let story: Story = new Story()
