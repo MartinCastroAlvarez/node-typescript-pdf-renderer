@@ -7,3 +7,5 @@ Subtitle:
   Type: 'Text'
   EN: 'The complete guide to Web3.0 software development'
   ES: 'La guía completa de desarrollo de software en Web3.0'
+Authors:
+  - '@person/MartinCastro.yaml'

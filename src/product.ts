@@ -37,12 +37,15 @@ export class Product {
 
     // Language getter and setter.
     getLanguage(): Language { return this.language }
-    setLanguage(language: Language) { this.language = language }
+    setLanguage(language: Language) {
+        if (!language)
+            throw new InvalidLanguageError('Invalid language!')
+        this.language = language
+    }
 
     // Rendering PDF.
     toPdf(): string {
-        if (!this.language)
-            throw new InvalidLanguageError('Invalid language!')
+        console.log(`Book: ${JSON.stringify(this.book.serialize())}`)
         return "TODO"
     }
 
