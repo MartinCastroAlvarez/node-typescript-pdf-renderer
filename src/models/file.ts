@@ -3,9 +3,9 @@
 // This library implements the File class.
 // ----------------------------------------------------------------
 
-import * as fs from 'fs'
-
 import { SerializedFile } from '../serializers/file'
+
+import { Tree } from '../tree'
 
 import { Model } from './base'
 
@@ -20,7 +20,8 @@ export class File implements Model {
     // Path getter and setter.
     getPath(): string { return this.path }
     setPath(path: string) {
-        if (!fs.existsSync(path))
+        let tree: Tree = new Tree()
+        if (!tree.exists(path))
             throw Error(`Path not exists: {path}`)
         this.path = path
     }

@@ -42,21 +42,26 @@ export class Tree {
     }
 
     // Join path strings.
-    join(root: string, path: string) {
-        this.books = path.join(root, 'books')
+    join(root: string, path: string): string {
+        return path.join(root, path)
+    }
+
+    // Evaluates if a file exists.
+    exists(path: string): boolean {
+        return fs.existsSync(path))
     }
 
     // Read file from path.
     read(path: string) {
-        if (!fs.existsSync(fullPath))
-            throw Error(`File does not exist: ${fullPath}`)
+        if (!this.exists(path))
+            throw Error(`File does not exist: ${path}`)
         return fs.readFileSync(path, 'utf8')
     }
 
     // List files in directory.
     list(path: string) {
-        if (!fs.existsSync(fullPath))
-            throw Error(`File does not exist: ${fullPath}`)
+        if (!this.exists(path))
+            throw Error(`File does not exist: ${path}`)
         return fs.readdirSync(path)
     }
 }

@@ -4,9 +4,9 @@
 // ----------------------------------------------------------------
 
 const yaml = require('js-yaml')
-import * as fs from 'fs'
 
 import { Tree } from './tree'
+import { Reference } from './ref'
 
 import { Analogy } from './models/analogy'
 import { Author } from './models/author'
@@ -69,13 +69,31 @@ import { SerializedQuestion } from './serializers/question'
 
 export class Yaml {
 
-    // Method responsible for reading a book from the file system.
-    loadBook(name: string): Book {
-        console.log('Loading book: ${name}')
+    // Method responsible for reading the content of a file.
+    read(path: string): Serialized {
         let tree: Tree = new Tree()
-        let path: string = tree.getBookPath(name)
-        let content: string = fs.readFileSync(path, 'utf8')
-        return <Book>this.load(<Serialized>yaml.load(content))
+        let rawContent: string = tree.read(path)
+        let parsedContent: object = yaml.load(rawContent)
+        let curatedContent: object = this.assemble(parsedContent)
+        return <Serialized>object
+    }
+
+    // Method responsible for resolving references inside YAML files.
+    assemble(content: object): object {
+        for (let key in Object.keys(content)) {
+            if (Array.isArray(content[key])) {
+                content[key] = content[key].map(item => this.curate(item))
+            } else if (typeof content[key] == "object" && content[key] != null) {
+                content[key] = this.curate(content[key])
+            } else if (typeof content[key] === 'string' || content[key] instanceof String) {
+                let reference: Reference = new Reference()
+                reference.setText(content[key])
+                if (reference.isReference() {
+                    content[key] = this.assemble(reference.getContent())
+                }
+            }
+        }
+        return content
     }
 
     // Method responsible for parsing a YAML string and generating
