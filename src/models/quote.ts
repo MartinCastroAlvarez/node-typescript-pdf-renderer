@@ -5,17 +5,17 @@
 
 import { SerializedQuote } from '../serializers/quote'
 
-import { Author } from './author'
+import { Person } from './person'
 import { Model } from './base'
 import { Text } from './text'
 
 export class Quote extends Text implements Model {
-    public readonly author: Author
+    public readonly author: Person
 
     // Lazy constructor.
     constructor() {
         super()
-        this.author = new Author()
+        this.author = new Person()
     }
 
     // JSON serializers.

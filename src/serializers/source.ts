@@ -4,11 +4,11 @@
 // ----------------------------------------------------------------
 
 import { Serialized } from './base'
-import { SerializedAuthor } from './author'
+import { SerializedPerson } from './person'
 import { SerializedImage } from './image'
 
 export interface SerializedSource extends Serialized {
     Title?: string
-    Authors?: Array<SerializedAuthor>
+    Authors?: Array<SerializedPerson>
     Logo?: SerializedImage
 }

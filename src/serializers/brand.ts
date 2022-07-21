@@ -5,10 +5,10 @@
 
 import { Serialized } from './base'
 import { SerializedImage } from './image'
-import { SerializedAuthor } from './author'
+import { SerializedPerson } from './person'
 
 export interface SerializedBrand extends Serialized {
     Title: string
     Logo: SerializedImage
-    Authors: Array<SerializedAuthor>
+    Authors: Array<SerializedPerson>
 }

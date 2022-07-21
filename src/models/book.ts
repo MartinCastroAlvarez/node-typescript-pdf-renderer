@@ -7,7 +7,7 @@
 //
 // Title:
 // The title page contains the title of the book, the subtitle,
-// the author or authors, and the publisher.
+// the person or persons, and the publisher.
 //
 // Copyright page:
 // The copyright page, or edition notice, contains the copyright notice,
@@ -18,7 +18,7 @@
 // work to request permission.
 //
 // Dedication:
-// The dedication page allows the author to honor an individual or individuals.
+// The dedication page allows the person to honor an individual or individuals.
 // The dedication is usually a short sentence or two.
 //
 // Table of contents
@@ -29,24 +29,24 @@
 // to discern the scope and basic theme of the book.
 //
 // Foreword:
-// The foreword is a short section written by someone other than the author
+// The foreword is a short section written by someone other than the person
 // that summarizes or sets up the theme of the book. The person who writes
 // the foreword is often an eminent colleague or associate, a professional
-// who has had personal interaction with the author.
+// who has had personal interaction with the person.
 //
 // Acknowledgments:
-// This page allows the author to express thanks to individuals who may have
+// This page allows the person to express thanks to individuals who may have
 // inspired them, contributed research or data, or helped them during the
 // writing process. Acknowledgments are a public thank you for the support
 // and contributions of individuals who were involved in the project.
 //
 // Preface or Introduction:
-// The author explains the purpose behind writing the book, personal experiences
+// The person explains the purpose behind writing the book, personal experiences
 // that are pertinent to the book, and describes the scope of the book. An
 // introduction can be deeply personal, seeking to draw the yaml into the
 // book on an emotional level, and usually explains why the book was written.
 // For scholarly works, the preface or introduction helps erect a framework
-// for the content that follows, as well as to explain the author’s point of
+// for the content that follows, as well as to explain the person’s point of
 // view or thesis.
 //
 // Afterword or Epilogue
@@ -58,7 +58,7 @@
 
 import { SerializedBook } from '../serializers/book'
 
-import { Author } from './author'
+import { Person } from './person'
 import { Model } from './base'
 import { Chapter } from './chapter'
 import { Text } from './text'
@@ -69,7 +69,7 @@ export class Book implements Model {
     public readonly subtitle: Text
 
     public chapters: Array<Chapter>
-    public authors: Array<Author>
+    public authors: Array<Person>
     public foreword: Array<Model>
     public afterword: Array<Model>
     public acknowledgements: Array<Model>
@@ -79,7 +79,7 @@ export class Book implements Model {
     // Lazy constructor.
     constructor() {
         this.chapters = new Array<Chapter>()
-        this.authors = new Array<Author>()
+        this.authors = new Array<Person>()
         this.foreword = new Array<Model>()
         this.afterword = new Array<Model>()
         this.acknowledgements = new Array<Model>()
@@ -101,7 +101,7 @@ export class Book implements Model {
             "Title": this.title.serialize(),
             "Subtitle": this.title.serialize(),
             "Chapters": this.chapters?.map(chapter => chapter.serialize()),
-            "Authors": this.authors?.map(author => author.serialize()),
+            "Authors": this.authors?.map(person => person.serialize()),
             "Legal": this.legal?.map(block => block.serialize()),
             "Foreword": this.foreword?.map(block => block.serialize()),
             "Afterword": this.afterword?.map(block => block.serialize()),
@@ -146,10 +146,10 @@ export class Book implements Model {
                 return chapter
             })
             this.authors = data['Authors']?.map(data => {
-                console.log(`Loading book authors.`)
-                let author: Author = new Author()
-                author.unserialize(data)
-                return author
+                console.log(`Loading book persons.`)
+                let person: Person = new Person()
+                person.unserialize(data)
+                return person
             })
         }
     }

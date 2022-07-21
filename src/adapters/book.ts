@@ -20,7 +20,7 @@
 // - Second slap
 // - Climax
 // - Acknowledgements
-// - Author bio
+// - Person bio
 // - Coming soon / Read more
 // - Synopsis
 // ----------------------------------------------------------------

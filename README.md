@@ -29,6 +29,7 @@ TBD
 |--|--|
 |[fonts](./fonts)|This directory contains the files defining fonts.|
 |[images](./images)|This directory contains the images files that can be referenced.|
+|[files](./files)|This directory contains the files that can be referenced.|
 
 #### Application
 

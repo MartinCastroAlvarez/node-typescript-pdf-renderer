@@ -3,9 +3,9 @@
 // This library implements the Quote interface.
 // ----------------------------------------------------------------
 
-import { SerializedAuthor } from './author'
+import { SerializedPerson } from './person'
 import { SerializedText } from './text'
 
 export interface SerializedQuote extends SerializedText {
-    Author: SerializedAuthor
+    Author: SerializedPerson
 }

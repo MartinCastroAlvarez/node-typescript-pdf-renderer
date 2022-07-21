@@ -5,20 +5,20 @@
 
 import { SerializedBrand } from '../serializers/brand'
 
-import { Author } from './author'
+import { Person } from './person'
 import { Model } from './base'
 import { Image } from './image'
 
 export class Brand implements Model {
     private title: string
     public readonly logo: Image
-    public authors: Array<Author>
+    public authors: Array<Person>
 
     // Lazy constructor.
     constructor() {
         this.title = ''
         this.logo = new Image()
-        this.authors = new Array<Author>()
+        this.authors = new Array<Person>()
     }
 
     // Title getter and setter.
@@ -35,7 +35,7 @@ export class Brand implements Model {
         return {
             "Type": (this as any).constructor.name,
             "Title": this.getTitle(),
-            "Authors": this.authors?.map(author => author.serialize()),
+            "Authors": this.authors?.map(person => person.serialize()),
             "Logo": this.logo.serialize(),
         }
     }
@@ -45,9 +45,9 @@ export class Brand implements Model {
             this.setTitle(data['Title'])
             this.logo.unserialize(data['Logo'])
             this.authors = data['Authors']?.map(data => {
-                let author = new Author()
-                author.unserialize(data)
-                return author
+                let person = new Person()
+                person.unserialize(data)
+                return person
             })
         }
     }

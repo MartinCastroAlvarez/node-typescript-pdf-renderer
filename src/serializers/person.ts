@@ -1,12 +1,12 @@
 // ----------------------------------------------------------------
 // Purpose:
-// This library implements the Author serializer.
+// This library implements the Person serializer.
 // ----------------------------------------------------------------
 
 import { Serialized } from './base'
 import { SerializedImage } from './image'
 
-export interface SerializedAuthor extends Serialized {
+export interface SerializedPerson extends Serialized {
     Name?: string
     Website?: string
     Email?: string

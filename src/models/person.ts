@@ -1,17 +1,17 @@
 // ----------------------------------------------------------------
 // Purpose:
-// This library implements the Author class.
+// This library implements the Person class.
 // ----------------------------------------------------------------
 
-import { SerializedAuthor } from '../serializers/author'
+import { SerializedPerson } from '../serializers/person'
 
 import { Model } from './base'
 import { Image } from './image'
 import { Text } from './text'
 
-class InvalidAuthorTitleError extends Error {}
+class InvalidPersonTitleError extends Error {}
 
-export class Author implements Model {
+export class Person implements Model {
     private name: string
     private website: string
     private email: string
@@ -29,7 +29,7 @@ export class Author implements Model {
     getName(): string { return this.name }
     setName(name: string) {
         if (!name || name.length > 50)
-            throw new InvalidAuthorTitleError(`Invalid author name: ${name}`)
+            throw new InvalidPersonTitleError(`Invalid person name: ${name}`)
         this.name = name
     }
 
@@ -47,7 +47,7 @@ export class Author implements Model {
     }
 
     // JSON serializers.
-    serialize(): SerializedAuthor {
+    serialize(): SerializedPerson {
         return {
             "Type": (this as any).constructor.name,
             "Name": this.getName(),
@@ -56,7 +56,7 @@ export class Author implements Model {
             "Logo": this.logo.serialize(),
         }
     }
-    unserialize(data: SerializedAuthor): void {
+    unserialize(data: SerializedPerson): void {
         if (data) {
             console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
             this.setName(data['Name'])

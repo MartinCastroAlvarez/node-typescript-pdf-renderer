@@ -9,4 +9,5 @@ export enum Reference {
     BOOKS = '@books',
     CONFIG = '@config',
     PERSONS = '@person',
+    FILES = '@files',
 }

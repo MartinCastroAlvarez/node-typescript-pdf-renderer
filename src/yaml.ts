@@ -9,7 +9,7 @@ import { Tree } from './tree'
 import { Reference } from './enums/reference'
 
 import { Analogy } from './models/analogy'
-import { Author } from './models/author'
+import { Person } from './models/person'
 import { Model } from './models/base'
 import { Brand } from './models/brand'
 import { Book } from './models/book'
@@ -50,7 +50,7 @@ import { Question } from './models/question'
 // import { Code } from './models/code'
 
 import { SerializedAnalogy } from './serializers/analogy'
-import { SerializedAuthor } from './serializers/author'
+import { SerializedPerson } from './serializers/person'
 import { Serialized } from './serializers/base'
 import { SerializedBrand } from './serializers/brand'
 import { SerializedBook } from './serializers/book'
@@ -114,6 +114,9 @@ export class Yaml {
         } else if (text.startsWith(`${Reference.IMAGES}/`))  {
             console.log(`Dereferencing image: ${text}`)
             text = text.replace(Reference.IMAGES, tree.images)
+        } else if (text.startsWith(`${Reference.FILES}/`))  {
+            console.log(`Dereferencing file: ${text}`)
+            text = text.replace(Reference.FILES, tree.files)
         } else if (text.startsWith(`${Reference.BOOKS}/`)) {
             console.log(`Dereferencing book: ${text}`)
             text = text.replace(Reference.BOOKS, tree.books)
@@ -136,9 +139,9 @@ export class Yaml {
                 model.unserialize(<SerializedAnalogy>data)
                 return <Model>model
             }
-            case Author.name: {
-                let model: Author = new Author()
-                model.unserialize(<SerializedAuthor>data)
+            case Person.name: {
+                let model: Person = new Person()
+                model.unserialize(<SerializedPerson>data)
                 return <Model>model
             }
             case Brand.name: {

@@ -5,7 +5,7 @@
 
 import { SerializedSource } from '../serializers/source'
 
-import { Author } from './author'
+import { Person } from './person'
 import { Model } from './base'
 import { Image } from './image'
 import { Text } from './text'
@@ -14,13 +14,13 @@ class InvalidTitleError extends Error {}
 
 export class Source implements Model {
     private title: string
-    public authors: Array<Author>
+    public authors: Array<Person>
     public readonly logo: Image
 
     // Lazy constructor.
     constructor() {
         this.title = ''
-        this.authors = new Array<Author>()
+        this.authors = new Array<Person>()
         this.logo = new Image()
     }
 
@@ -42,7 +42,7 @@ export class Source implements Model {
         return {
             "Type": (this as any).constructor.name,
             "Title": this.getTitle(),
-            "Authors": this.authors?.map(author => author.serialize()),
+            "Authors": this.authors?.map(person => person.serialize()),
             "Logo": this.logo.serialize(),
         }
     }
@@ -51,9 +51,9 @@ export class Source implements Model {
             console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
             this.setTitle(data['Title'])
             this.authors = data['Authors']?.map(data => {
-                let author: Author = new Author()
-                author.unserialize(data)
-                return author
+                let person: Person = new Person()
+                person.unserialize(data)
+                return person
             })
             this.logo.unserialize(data['Logo'])
         }
