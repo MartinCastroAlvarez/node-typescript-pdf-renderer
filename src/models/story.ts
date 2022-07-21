@@ -37,6 +37,7 @@ export class Story implements Model {
             console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
             this.title.unserialize(data['Title']) 
             this.blocks = data['Blocks'].map(block => {
+                console.log(`Loading story blocks.`)
                 let yaml: Yaml = new Yaml()
                 return yaml.unserialize(block)
             })

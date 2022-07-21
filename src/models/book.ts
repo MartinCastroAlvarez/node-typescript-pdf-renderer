@@ -115,31 +115,38 @@ export class Book implements Model {
             this.title.unserialize(data['Title'])
             this.subtitle.unserialize(data['Subtitle'])
             this.foreword = data['Foreword'].map(block => {
+                console.log(`Loading book foreword.`)
                 let yaml: Yaml = new Yaml()
                 return yaml.unserialize(block)
             })
             this.afterword = data['Afterword'].map(block => {
+                console.log(`Loading book afterword.`)
                 let yaml: Yaml = new Yaml()
                 return yaml.unserialize(block)
             })
             this.legal = data['Legal'].map(block => {
+                console.log(`Loading book legal text.`)
                 let yaml: Yaml = new Yaml()
                 return yaml.unserialize(block)
             })
             this.acknowledgements = data['Acknowledgements'].map(block => {
+                console.log(`Loading book legal acknowledgements.`)
                 let yaml: Yaml = new Yaml()
                 return yaml.unserialize(block)
             })
             this.prologue = data['Prologue'].map(block => {
+                console.log(`Loading book legal prologue.`)
                 let yaml: Yaml = new Yaml()
                 return yaml.unserialize(block)
             })
             this.chapters = data['Chapters'].map(data => {
+                console.log(`Loading book chapters.`)
                 let chapter: Chapter = new Chapter()
                 chapter.unserialize(data)
                 return chapter
             })
             this.authors = data['Authors'].map(data => {
+                console.log(`Loading book authors.`)
                 let author: Author = new Author()
                 author.unserialize(data)
                 return author

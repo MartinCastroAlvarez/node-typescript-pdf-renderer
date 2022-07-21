@@ -44,14 +44,17 @@ export class Chapter {
             console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
             this.title.unserialize(data['Title']) 
             this.introduction = data['Introduction'].map(block => {
+                console.log(`Loading chapter introduction.`)
                 let yaml: Yaml = new Yaml()
                 return yaml.unserialize(block)
             })
             this.conclusion = data['Conclusion'].map(block => {
+                console.log(`Loading chapter conclusion.`)
                 let yaml: Yaml = new Yaml()
                 return yaml.unserialize(block)
             })
             this.stories = data['Stories'].map(data => {
+                console.log(`Loading chapter stories.`)
                 let story: Story = new Story()
                 story.unserialize(data)
                 return story

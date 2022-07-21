@@ -77,47 +77,47 @@ export class Yaml {
         console.log(`Reading YAML: ${path}`)
         let tree: Tree = new Tree()
         let rawContent: string = tree.read(this.dereference(path))
-        console.log(`Raw content: ${rawContent}`)
-        let parsedContent: object = yaml.load(rawContent)
-        console.log(`Parsed Content: ${JSON.stringify(rawContent)}`)
-        let curatedContent: object = this.assemble(parsedContent)
+        let parsedContent: any = yaml.load(rawContent)
+        let curatedContent: any = this.assemble(parsedContent)
         return <Serialized>curatedContent
     }
 
     // Method responsible for resolving references inside YAML files.
-    assemble(content: object): object {
-        console.log(`Assembling: ${content}`)
-        for (let key in Object.keys(content)) {
-            console.error(key) // FIXME
-            console.error(typeof content[key]) // FIXME
-            if (Array.isArray(content[key])) {
-                content[key] = content[key].map(item => this.assemble(item))
-            } else if (typeof content[key] == "object" && content[key] != null) {
+    assemble(content: any): any {
+        console.log(`Assembling ${typeof content}: ${JSON.stringify(content)}`)
+        if (Array.isArray(content) || content instanceof Array) {
+            content = content.map(item => this.assemble(item))
+        } else if (typeof content == "object" && content != null) {
+            for (let key in content) {
                 content[key] = this.assemble(content[key])
-            } else if (typeof content[key] === 'string' || content[key] instanceof String) {
-                content[key] = this.dereference(content[key])
-                if (content[key].endsWith('.yaml'))
-                    content[key] = this.read(content[key])
             }
+        } else if (typeof content === 'string' || content instanceof String) {
+            content = this.dereference(<string>content)
+            if (content.endsWith('.yaml'))
+                content = this.read(<string>content)
         }
         return content
     }
 
     // Generates the full path of a reference.
     dereference(text: string): string {
-        console.log(`Dereferencing: ${text}`)
         let tree: Tree = new Tree()
-        if (text.startsWith(`${Reference.FONTS}/`))
+        if (text.startsWith(`${Reference.FONTS}/`)) {
+            console.log(`Dereferencing font: ${text}`)
             text = text.replace(Reference.FONTS, tree.fonts)
-        if (text.startsWith(`${Reference.CONFIG}/`))
+        } else if (text.startsWith(`${Reference.CONFIG}/`)) {
+            console.log(`Dereferencing config: ${text}`)
             text = text.replace(Reference.CONFIG, tree.config)
-        if (text.startsWith(`${Reference.IMAGES}/`))
+        } else if (text.startsWith(`${Reference.IMAGES}/`))  {
+            console.log(`Dereferencing image: ${text}`)
             text = text.replace(Reference.IMAGES, tree.images)
-        if (text.startsWith(`${Reference.BOOKS}/`))
+        } else if (text.startsWith(`${Reference.BOOKS}/`)) {
+            console.log(`Dereferencing book: ${text}`)
             text = text.replace(Reference.BOOKS, tree.books)
-        if (text.startsWith(`${Reference.PERSONS}/`))
+        } else if (text.startsWith(`${Reference.PERSONS}/`)) {
+            console.log(`Dereferencing person: ${text}`)
             text = text.replace(Reference.PERSONS, tree.persons)
-        console.log(`Dereferenced: ${text}`)
+        }
         return text
     }
 
@@ -222,7 +222,7 @@ export class Yaml {
                 return <Model>model
             }
             default: {
-                throw new Error(`Not implemented: {data}`)
+                throw new Error(`Not implemented ${typeof data}: ${JSON.stringify(data)}`)
             }
         }
     }
