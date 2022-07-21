@@ -1,0 +1,10 @@
+# ----------------------------------------------------------------
+# Purpose:
+# This file defines the fonts used in the renders.
+#
+# References:
+# - https://fonts.google.com/specimen/Montserrat+Alternates?query=montserrat
+# ----------------------------------------------------------------
+Normal: '@fonts/MontserratAlternates-Regular.ttf'
+Bold: '@fonts/MontserratAlternates-Bold.ttf'
+Italic: '@fonts/MontserratAlternates-Italic.ttf'

@@ -8,5 +8,5 @@ import { Serialized } from './base'
 export interface SerializedTypeface extends Serialized {
     Normal: string
     Bold: string
-    Italics: string
+    Italic: string
 }

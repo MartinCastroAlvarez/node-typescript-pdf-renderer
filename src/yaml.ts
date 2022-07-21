@@ -6,7 +6,7 @@
 const yaml = require('js-yaml')
 
 import { Tree } from './tree'
-import { Reference } from './reference'
+import { Reference } from './enums/reference'
 
 import { Analogy } from './models/analogy'
 import { Author } from './models/author'
@@ -74,11 +74,12 @@ export class Yaml {
 
     // Method responsible for reading the content of a file.
     read(path: string): Serialized {
+        console.log(`Reading YAML: ${path}`)
         let tree: Tree = new Tree()
-        let rawContent: string = tree.read(path)
+        let rawContent: string = tree.read(this.dereference(path))
         let parsedContent: object = yaml.load(rawContent)
         let curatedContent: object = this.assemble(parsedContent)
-        return <Serialized>object
+        return <Serialized>curatedContent
     }
 
     // Method responsible for resolving references inside YAML files.
@@ -86,32 +87,31 @@ export class Yaml {
         console.log(`Assembling: ${content}`)
         for (let key in Object.keys(content)) {
             if (Array.isArray(content[key])) {
-                content[key] = content[key].map(item => this.curate(item))
+                content[key] = content[key].map(item => this.assemble(item))
             } else if (typeof content[key] == "object" && content[key] != null) {
-                content[key] = this.curate(content[key])
+                content[key] = this.assemble(content[key])
             } else if (typeof content[key] === 'string' || content[key] instanceof String) {
-                let reference: Reference = new Reference()
-                reference.setText(content[key])
-                if (reference.isValid()) {
-                    content[key] = this.assemble(reference.getPath())
-                    if (content[key].endsWith('.yaml'))
-                        content[key] = this.read(content[key])
-                }
+                content[key] = this.dereference(content[key])
+                if (content[key].endsWith('.yaml'))
+                    content[key] = this.read(content[key])
             }
         }
         return content
     }
 
     // Generates the full path of a reference.
-    dereference(): string {
-        console.log(`Dereferencing: ${this.getText()}`)
+    dereference(text: string): string {
+        console.log(`Dereferencing: ${text}`)
         let tree: Tree = new Tree()
-        let path: string = this.getText()
-        path.replace(Reference.FONTS, tree.fonts)
-        path.replace(Reference.CONFIG, tree.config)
-        path.replace(Reference.IMAGES, tree.images)
-        path.replace(Reference.BOOKS, tree.books)
-        return path
+        if (text.startsWith(`${Reference.FONTS}/`))
+            text.replace(Reference.FONTS, tree.fonts)
+        if (text.startsWith(`${Reference.CONFIG}/`))
+            text.replace(Reference.CONFIG, tree.config)
+        if (text.startsWith(`${Reference.IMAGES}/`))
+            text.replace(Reference.IMAGES, tree.images)
+        if (text.startsWith(`${Reference.BOOKS}/`))
+            text.replace(Reference.BOOKS, tree.books)
+        return text
     }
 
     // Method responsible for parsing a YAML string and generating
@@ -205,7 +205,7 @@ export class Yaml {
                 return <Model>model
             }
             case Typeface.name: {
-                let model: Text = new Typeface()
+                let model: Typeface = new Typeface()
                 model.unserialize(<SerializedTypeface>data)
                 return <Model>model
             }

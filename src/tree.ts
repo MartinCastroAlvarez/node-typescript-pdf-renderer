@@ -10,6 +10,7 @@ export class Tree {
     public readonly root: string
     public readonly fonts: string
     public readonly images: string
+    public readonly config: string
     public readonly books: string
 
     constructor() {
@@ -21,8 +22,8 @@ export class Tree {
     }
 
     // Join path strings.
-    join(root: string, path: string): string {
-        return path.join(root, path)
+    join(directory: string, name: string): string {
+        return this.join(directory, name)
     }
 
     // Evaluates if a file exists.

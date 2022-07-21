@@ -1,2 +1,12 @@
+# ----------------------------------------------------------------
+# Purpose:
+# Defines the brand details that are rendered in all PDFs.
+# ----------------------------------------------------------------
 Type: 'Brand'
 Title: 'VEL'
+Authors:
+  - Type: 'Author'
+    Name: 'Martin Alejandro Castro Alvarez'
+    Website: 'https://github.com/MartinCastroAlvarez'
+    Email: 'martincastro.10.5@gmail.com'
+    Logo: '@images/phi.png'

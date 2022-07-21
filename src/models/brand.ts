@@ -18,7 +18,6 @@ export class Brand implements Model {
     constructor() {
         this.title = ''
         this.logo = new Image()
-        this.author = new Author()
         this.authors = new Array<Author>()
     }
 

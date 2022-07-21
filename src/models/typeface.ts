@@ -9,14 +9,14 @@ import { Model } from './base'
 
 export class Typeface implements Model {
     private normal: string
-    private italics: string
+    private italic: string
     private bold: string
 
     // Lazy constructor.
     constructor() {
         this.normal = ''
         this.bold = ''
-        this.italics = ''
+        this.italic = ''
     }
 
     // Normal font getter and setter.
@@ -28,8 +28,8 @@ export class Typeface implements Model {
     setBold(font: string) { this.bold = font }
 
     // Italic font getter and setter.
-    getItalics(): string { return this.italics }
-    setItalics(font: string) { this.italics = font }
+    getItalic(): string { return this.italic }
+    setItalic(font: string) { this.italic = font }
 
     // String serializers.
     toString(): string {
@@ -37,20 +37,20 @@ export class Typeface implements Model {
     }
 
     // JSON serializers.
-    serialize(): SerializedPallete {
+    serialize(): SerializedTypeface {
         return {
             "Type": (this as any).constructor.name,
             "Normal": this.getNormal(),
             "Bold": this.getBold(),
-            "Italics": this.getItalics(),
+            "Italic": this.getItalic(),
         }
     }
-    unserialize(data: SerializedPallete): void {
+    unserialize(data: SerializedTypeface): void {
         console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
         if (data) {
-            this.getNormal(data['Normal'])
-            this.getBold(data['Bold'])
-            this.getItalics(data['Italics'])
+            this.setNormal(data['Normal'])
+            this.setBold(data['Bold'])
+            this.setItalic(data['Italic'])
         }
     }
 }

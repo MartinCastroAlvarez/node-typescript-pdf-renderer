@@ -62,11 +62,11 @@ export class Pallete implements Model {
     unserialize(data: SerializedPallete): void {
         console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
         if (data) {
-            this.getPrimary(data['Primary'])
-            this.getSecondary(data['Secondary'])
-            this.getWhite(data['White'])
-            this.getBlack(data['Black'])
-            this.getGrey(data['Grey'])
+            this.setPrimary(data['Primary'])
+            this.setSecondary(data['Secondary'])
+            this.setWhite(data['White'])
+            this.setBlack(data['Black'])
+            this.setGrey(data['Grey'])
         }
     }
 }

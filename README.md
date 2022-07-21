@@ -28,5 +28,5 @@ yarn install
 
 ### Deployment
 ```bash
-yarn run build && yarn run render --book "crypto" --language "en"
+yarn run build && yarn run render --book "Crypto" --language "en"
 ```
