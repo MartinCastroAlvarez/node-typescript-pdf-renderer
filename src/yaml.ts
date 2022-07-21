@@ -104,13 +104,14 @@ export class Yaml {
         console.log(`Dereferencing: ${text}`)
         let tree: Tree = new Tree()
         if (text.startsWith(`${Reference.FONTS}/`))
-            text.replace(Reference.FONTS, tree.fonts)
+            text = text.replace(Reference.FONTS, tree.fonts)
         if (text.startsWith(`${Reference.CONFIG}/`))
-            text.replace(Reference.CONFIG, tree.config)
+            text = text.replace(Reference.CONFIG, tree.config)
         if (text.startsWith(`${Reference.IMAGES}/`))
-            text.replace(Reference.IMAGES, tree.images)
+            text = text.replace(Reference.IMAGES, tree.images)
         if (text.startsWith(`${Reference.BOOKS}/`))
-            text.replace(Reference.BOOKS, tree.books)
+            text = text.replace(Reference.BOOKS, tree.books)
+        console.log(`Dereferenced: ${text}`)
         return text
     }
 
