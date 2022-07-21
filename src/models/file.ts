@@ -32,13 +32,13 @@ export class File implements Model {
     }
 
     // JSON serializers.
-    toJson(): SerializedFile {
+    serialize(): SerializedFile {
         return {
             "Type": (this as any).constructor.name,
             "Path": this.getPath(),
         }
     }
-    fromJson(data: SerializedFile): void {
+    unserialize(data: SerializedFile): void {
         console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
         if (data) {
             this.setPath(data['Path'])

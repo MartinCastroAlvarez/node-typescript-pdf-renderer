@@ -49,7 +49,7 @@ export class Pallete implements Model {
     }
 
     // JSON serializers.
-    toJson(): SerializedPallete {
+    serialize(): SerializedPallete {
         return {
             "Type": (this as any).constructor.name,
             "Primary": this.getPrimary(),
@@ -59,7 +59,7 @@ export class Pallete implements Model {
             "Grey": this.getGrey(),
         }
     }
-    fromJson(data: SerializedPallete): void {
+    unserialize(data: SerializedPallete): void {
         console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
         if (data) {
             this.getPrimary(data['Primary'])

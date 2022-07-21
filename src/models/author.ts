@@ -45,22 +45,22 @@ export class Author implements Model {
     }
 
     // JSON serializers.
-    toJson(): SerializedAuthor {
+    serialize(): SerializedAuthor {
         return {
             "Type": (this as any).constructor.name,
             "Name": this.getName(),
             "Website": this.getWebsite(),
             "Email": this.getEmail(),
-            "Logo": this.logo.toJson(),
+            "Logo": this.logo.serialize(),
         }
     }
-    fromJson(data: SerializedAuthor): void {
+    unserialize(data: SerializedAuthor): void {
         console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
         if (data) {
             this.setName(data['Name'])
             this.setWebsite(data['Website'])
             this.setEmail(data['Email'])
-            this.logo.fromJson(data['Logo'])
+            this.logo.unserialize(data['Logo'])
         }
     }
 }

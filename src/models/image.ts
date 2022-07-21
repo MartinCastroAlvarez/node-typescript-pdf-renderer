@@ -81,7 +81,7 @@ export class Image extends File implements Model {
     }
 
     // JSON serializers.
-    toJson(): SerializedImage {
+    serialize(): SerializedImage {
         return {
             "Type": (this as any).constructor.name,
             "Path": this.getPath(),
@@ -93,7 +93,7 @@ export class Image extends File implements Model {
             "Right": this.getRight(),
         }
     }
-    fromJson(data: SerializedImage): void {
+    unserialize(data: SerializedImage): void {
         console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
         if (data) {
             this.setPath(data['Path'])

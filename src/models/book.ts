@@ -95,25 +95,25 @@ export class Book implements Model {
     }
 
     // JSON serializers.
-    toJson(): SerializedBook {
+    serialize(): SerializedBook {
         return {
             "Type": (this as any).constructor.name,
-            "Title": this.title.toJson(),
-            "Subtitle": this.title.toJson(),
-            "Chapters": this.chapters.map(chapter => chapter.toJson()),
-            "Authors": this.authors.map(author => author.toJson()),
-            "Legal": this.legal.map(block => block.toJson()),
-            "Foreword": this.foreword.map(block => block.toJson()),
-            "Afterword": this.afterword.map(block => block.toJson()),
-            "Acknowledgements": this.acknowledgements.map(block => block.toJson()),
-            "Prologue": this.prologue.map(block => block.toJson()),
+            "Title": this.title.serialize(),
+            "Subtitle": this.title.serialize(),
+            "Chapters": this.chapters.map(chapter => chapter.serialize()),
+            "Authors": this.authors.map(author => author.serialize()),
+            "Legal": this.legal.map(block => block.serialize()),
+            "Foreword": this.foreword.map(block => block.serialize()),
+            "Afterword": this.afterword.map(block => block.serialize()),
+            "Acknowledgements": this.acknowledgements.map(block => block.serialize()),
+            "Prologue": this.prologue.map(block => block.serialize()),
         }
     }
-    fromJson(data: SerializedBook): void {
+    unserialize(data: SerializedBook): void {
         console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
         if (data) {
-            this.title.fromJson(data['Title'])
-            this.subtitle.fromJson(data['Subtitle'])
+            this.title.unserialize(data['Title'])
+            this.subtitle.unserialize(data['Subtitle'])
             this.foreword = data['Foreword'].map(block => {
                 let yaml: Yaml = new Yaml()
                 return yaml.unserialize(block)
@@ -136,12 +136,12 @@ export class Book implements Model {
             })
             this.chapters = data['Chapters'].map(data => {
                 let chapter: Chapter = new Chapter()
-                chapter.fromJson(data)
+                chapter.unserialize(data)
                 return chapter
             })
             this.authors = data['Authors'].map(data => {
                 let author: Author = new Author()
-                author.fromJson(data)
+                author.unserialize(data)
                 return author
             })
         }

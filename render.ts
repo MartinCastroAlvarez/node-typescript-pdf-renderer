@@ -31,7 +31,7 @@ parser.add_argument('-l', '--language', {
 let args = parser.parse_args()
 
 const command: Command = new Command()
-command.renderBook({
+command.renderPdf({
     title: args.title,
     language: args.language,
 })

@@ -36,22 +36,22 @@ export class Source implements Model {
     }
 
     // JSON serializers.
-    toJson(): SerializedSource {
+    serialize(): SerializedSource {
         return {
             "Type": (this as any).constructor.name,
             "Title": this.getTitle(),
-            "Authors": this.authors.map(author => author.toJson()),
-            "Logo": this.logo.toJson(),
+            "Authors": this.authors.map(author => author.serialize()),
+            "Logo": this.logo.serialize(),
         }
     }
-    fromJson(data: SerializedSource): void {
+    unserialize(data: SerializedSource): void {
         console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
         this.setTitle(data['Title'])
         this.authors = data['Authors'].map(data => {
             let author: Author = new Author()
-            author.fromJson(data)
+            author.unserialize(data)
             return author
         })
-        this.logo.fromJson(data['Logo'])
+        this.logo.unserialize(data['Logo'])
     }
 }

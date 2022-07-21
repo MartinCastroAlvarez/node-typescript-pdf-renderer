@@ -30,19 +30,19 @@ export class Chapter {
     }
 
     // JSON serializers.
-    toJson(): SerializedChapter {
+    serialize(): SerializedChapter {
         return {
             "Type": (this as any).constructor.name,
-            "Title": this.title.toJson(),
-            "Introduction": this.introduction.map(block => block.toJson()),
-            "Stories": this.stories.map(story => story.toJson()),
-            "Conclusion": this.conclusion.map(block => block.toJson()),
+            "Title": this.title.serialize(),
+            "Introduction": this.introduction.map(block => block.serialize()),
+            "Stories": this.stories.map(story => story.serialize()),
+            "Conclusion": this.conclusion.map(block => block.serialize()),
         }
     }
-    fromJson(data: SerializedChapter): void {
+    unserialize(data: SerializedChapter): void {
         console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
         if (data) {
-            this.title.fromJson(data['Title']) 
+            this.title.unserialize(data['Title']) 
             this.introduction = data['Introduction'].map(block => {
                 let yaml: Yaml = new Yaml()
                 return yaml.unserialize(block)
@@ -53,7 +53,7 @@ export class Chapter {
             })
             this.stories = data['Stories'].map(data => {
                 let story: Story = new Story()
-                story.fromJson(data)
+                story.unserialize(data)
                 return story
             })
         }

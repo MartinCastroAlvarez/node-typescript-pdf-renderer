@@ -25,17 +25,17 @@ export class Story implements Model {
     }
 
     // JSON serializers.
-    toJson(): SerializedStory {
+    serialize(): SerializedStory {
         return {
             "Type": (this as any).constructor.name,
-            "Title": this.title.toJson(),
-            "Blocks": this.blocks.map(block => block.toJson()),
+            "Title": this.title.serialize(),
+            "Blocks": this.blocks.map(block => block.serialize()),
         }
     }
-    fromJson(data: SerializedStory): void {
+    unserialize(data: SerializedStory): void {
         console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
         if (data) {
-            this.title.fromJson(data['Title']) 
+            this.title.unserialize(data['Title']) 
             this.blocks = data['Blocks'].map(block => {
                 let yaml: Yaml = new Yaml()
                 return yaml.unserialize(block)

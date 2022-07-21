@@ -1,10 +1,12 @@
 // ----------------------------------------------------------------
 // Purpose:
-// This library implements the File interface.
+// This library implements the Typeface interface.
 // ----------------------------------------------------------------
 
 import { Serialized } from './base'
 
-export interface SerializedFile extends Serialized {
-    Path?: string
+export interface SerializedTypeface extends Serialized {
+    Normal: string
+    Bold: string
+    Italics: string
 }

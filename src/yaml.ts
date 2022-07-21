@@ -6,7 +6,7 @@
 const yaml = require('js-yaml')
 
 import { Tree } from './tree'
-import { Reference } from './ref'
+import { Reference } from './reference'
 
 import { Analogy } from './models/analogy'
 import { Author } from './models/author'
@@ -20,11 +20,13 @@ import { Image } from './models/image'
 import { File } from './models/file'
 import { Joke } from './models/joke'
 import { List } from './models/list'
+import { Pallete } from './models/pallete'
 import { Proverb } from './models/proverb'
 import { Quote } from './models/quote'
 import { Source } from './models/source'
 import { Story } from './models/story'
 import { Text } from './models/text'
+import { Typeface } from './models/typeface'
 import { Question } from './models/question'
 
 // import { Challenge } from './models/challenge'
@@ -65,6 +67,7 @@ import { SerializedQuote } from './serializers/quote'
 import { SerializedSource } from './serializers/source'
 import { SerializedStory } from './serializers/story'
 import { SerializedText } from './serializers/text'
+import { SerializedTypeface } from './serializers/typeface'
 import { SerializedQuestion } from './serializers/question'
 
 export class Yaml {
@@ -80,6 +83,7 @@ export class Yaml {
 
     // Method responsible for resolving references inside YAML files.
     assemble(content: object): object {
+        console.log(`Assembling: ${content}`)
         for (let key in Object.keys(content)) {
             if (Array.isArray(content[key])) {
                 content[key] = content[key].map(item => this.curate(item))
@@ -88,107 +92,126 @@ export class Yaml {
             } else if (typeof content[key] === 'string' || content[key] instanceof String) {
                 let reference: Reference = new Reference()
                 reference.setText(content[key])
-                if (reference.isReference() {
-                    content[key] = this.assemble(reference.getContent())
+                if (reference.isValid()) {
+                    content[key] = this.assemble(reference.getPath())
+                    if (content[key].endsWith('.yaml'))
+                        content[key] = this.read(content[key])
                 }
             }
         }
         return content
     }
 
+    // Generates the full path of a reference.
+    dereference(): string {
+        console.log(`Dereferencing: ${this.getText()}`)
+        let tree: Tree = new Tree()
+        let path: string = this.getText()
+        path.replace(Reference.FONTS, tree.fonts)
+        path.replace(Reference.CONFIG, tree.config)
+        path.replace(Reference.IMAGES, tree.images)
+        path.replace(Reference.BOOKS, tree.books)
+        return path
+    }
+
     // Method responsible for parsing a YAML string and generating
     // the instances of the classes in the models directory.
     unserialize(data: Serialized): Model {
-        console.log(`Unserializing '${data.Type}': ${JSON.stringify(data)}`)
+        console.log(`Unserializing '${data.Type}'`)
         switch(data.Type) {
             case Analogy.name: {
                 let model: Analogy = new Analogy()
-                model.fromJson(<SerializedAnalogy>data)
+                model.unserialize(<SerializedAnalogy>data)
                 return <Model>model
             }
             case Author.name: {
                 let model: Author = new Author()
-                model.fromJson(<SerializedAuthor>data)
+                model.unserialize(<SerializedAuthor>data)
                 return <Model>model
             }
             case Brand.name: {
                 let model: Brand = new Brand()
-                model.fromJson(<SerializedBrand>data)
+                model.unserialize(<SerializedBrand>data)
                 return <Model>model
             }
             case Book.name: {
                 let model: Book = new Book()
-                model.fromJson(<SerializedBook>data)
+                model.unserialize(<SerializedBook>data)
                 return <Model>model
             }
             case Chapter.name: {
                 let model: Chapter = new Chapter()
-                model.fromJson(<SerializedChapter>data)
+                model.unserialize(<SerializedChapter>data)
                 return <Model>model
             }
             case Definition.name: {
                 let model: Definition = new Definition()
-                model.fromJson(<SerializedDefinition>data)
+                model.unserialize(<SerializedDefinition>data)
                 return <Model>model
             }
             case Example.name: {
                 let model: Example = new Example()
-                model.fromJson(<SerializedExample>data)
+                model.unserialize(<SerializedExample>data)
                 return <Model>model
             }
             case Image.name: {
                 let model: Image = new Image()
-                model.fromJson(<SerializedImage>data)
+                model.unserialize(<SerializedImage>data)
                 return <Model>model
             }
             case File.name: {
                 let model: File = new File()
-                model.fromJson(<SerializedFile>data)
+                model.unserialize(<SerializedFile>data)
                 return <Model>model
             }
             case Joke.name: {
                 let model: Joke = new Joke()
-                model.fromJson(<SerializedJoke>data)
+                model.unserialize(<SerializedJoke>data)
                 return <Model>model
             }
             case List.name: {
                 let model: List = new List()
-                model.fromJson(<SerializedList>data)
+                model.unserialize(<SerializedList>data)
                 return <Model>model
             }
             case Pallete.name: {
                 let model: Pallete = new Pallete()
-                model.fromJson(<SerializedQuote>data)
+                model.unserialize(<SerializedPallete>data)
                 return <Model>model
             }
             case Proverb.name: {
                 let model: Proverb = new Proverb()
-                model.fromJson(<SerializedQuote>data)
+                model.unserialize(<SerializedQuote>data)
                 return <Model>model
             }
             case Quote.name: {
                 let model: Quote = new Quote()
-                model.fromJson(<SerializedQuote>data)
+                model.unserialize(<SerializedQuote>data)
                 return <Model>model
             }
             case Source.name: {
                 let model: Source = new Source()
-                model.fromJson(<SerializedSource>data)
+                model.unserialize(<SerializedSource>data)
                 return <Model>model
             }
             case Story.name: {
                 let model: Story = new Story()
-                model.fromJson(<SerializedStory>data)
+                model.unserialize(<SerializedStory>data)
                 return <Model>model
             }
             case Text.name: {
                 let model: Text = new Text()
-                model.fromJson(<SerializedText>data)
+                model.unserialize(<SerializedText>data)
+                return <Model>model
+            }
+            case Typeface.name: {
+                let model: Text = new Typeface()
+                model.unserialize(<SerializedTypeface>data)
                 return <Model>model
             }
             case Question.name: {
                 let model: Question = new Question()
-                model.fromJson(<SerializedQuestion>data)
+                model.unserialize(<SerializedQuestion>data)
                 return <Model>model
             }
             default: {

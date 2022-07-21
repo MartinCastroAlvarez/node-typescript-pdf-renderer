@@ -7,7 +7,7 @@
 import { Serialized } from '../serializers/base'
 
 export interface Model {
-    toJson(): Serialized
+    serialize(): Serialized
     toString(): string
-    fromJson(data: Serialized): void
+    unserialize(data: Serialized): void
 }

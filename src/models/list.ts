@@ -27,18 +27,18 @@ export class List implements Model {
     }
 
     // JSON serializers.
-    toJson(): SerializedList {
+    serialize(): SerializedList {
         return {
             "Type": (this as any).constructor.name,
-            "Items": this.items.map(item => item.toJson()),
+            "Items": this.items.map(item => item.serialize()),
         }
     }
-    fromJson(data: SerializedList): void {
+    unserialize(data: SerializedList): void {
         console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
         if (data) {
             this.items = data['Items'].map(item => {
                 let text: Text = new Text()
-                text.fromJson(item)
+                text.unserialize(item)
                 return text
             })
         }

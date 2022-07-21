@@ -3,7 +3,7 @@
 // This class implements the Product class.
 // ----------------------------------------------------------------
 
-import { Language } from './utils/language'
+import { Language } from './enums/language'
 import { Config } from './config'
 import { Yaml } from './yaml'
 
@@ -35,22 +35,34 @@ export class Product {
 
     // Loading Book from YAML
     load(name: string): void {
-
+        // TODO
+        /*
+        render(params: Parameters): void {
+            language = Language[params.language.toUpperCase()]
+            if (!language)
+                throw new Error('Invalid language!')
+            if (!params.title.length || params.title.length > 30)
+                throw new Error('Invalid title!')
+            let product: Product = new Product()
+            let path: string = product.render(language)
+            console.log(`Book rendered into: ${path}`)
+        }
+        */
     }
 
     // Rendering PDF.
-    toPdf(language: Language = Language.EN) {
-        // TODO
+    toPdf(): string {
+        return "TODO"
     }
 
-    render(params: Parameters): void {
-        language = Language[params.language.toUpperCase()]
-        if (!language)
-            throw new Error('Invalid language!')
-        if (!params.title.length || params.title.length > 30)
-            throw new Error('Invalid title!')
-        let product: Product = new Product()
-        let path: string = product.render(language)
-        console.log(`Book rendered into: ${path}`)
+    // Rendering Video.
+    toVideo(): string {
+        return "TODO"
     }
+
+    // Rendering Course.
+    toCourse(): string {
+        return "TODO"
+    }
+
 }

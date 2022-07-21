@@ -20,27 +20,6 @@ export class Tree {
         this.books = path.join(this.root, 'books')
     }
 
-    getImagePath(name: string): string {
-        let fullPath: string = path.join(this.images, name)
-        if (!fs.existsSync(fullPath))
-            throw Error(`File does not exist: ${fullPath}`)
-        return fullPath
-    }
-
-    getFontPath(name: string): string {
-        let fullPath: string = path.join(this.fonts, name)
-        if (!fs.existsSync(fullPath))
-            throw Error(`File does not exist: ${fullPath}`)
-        return fullPath
-    }
-
-    getBookPath(name: string): string {
-        let fullPath: string = path.join(this.books, name, 'Book.yaml')
-        if (!fs.existsSync(fullPath))
-            throw Error(`File does not exist: ${fullPath}`)
-        return fullPath
-    }
-
     // Join path strings.
     join(root: string, path: string): string {
         return path.join(root, path)
@@ -48,7 +27,7 @@ export class Tree {
 
     // Evaluates if a file exists.
     exists(path: string): boolean {
-        return fs.existsSync(path))
+        return fs.existsSync(path)
     }
 
     // Read file from path.

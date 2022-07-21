@@ -19,16 +19,16 @@ export class Quote extends Text implements Model {
     }
 
     // JSON serializers.
-    toJson(): SerializedQuote {
-        let data: SerializedQuote = <SerializedQuote>super.toJson()
-        data['Author'] = this.author.toJson()
+    serialize(): SerializedQuote {
+        let data: SerializedQuote = <SerializedQuote>super.serialize()
+        data['Author'] = this.author.serialize()
         return data
     }
-    fromJson(data: SerializedQuote): void {
+    unserialize(data: SerializedQuote): void {
         console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
-        super.fromJson(data)
+        super.unserialize(data)
         if (data) {
-            this.author.fromJson(data['Author'])
+            this.author.unserialize(data['Author'])
         }
     }
 }

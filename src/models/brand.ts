@@ -12,13 +12,14 @@ import { Image } from './image'
 export class Brand implements Model {
     private title: string
     public readonly logo: Image
-    public readonly author: Author
+    public authors: Array<Author>
 
     // Lazy constructor.
     constructor() {
         this.title = ''
         this.logo = new Image()
         this.author = new Author()
+        this.authors = new Array<Author>()
     }
 
     // Title getter and setter.
@@ -31,20 +32,24 @@ export class Brand implements Model {
     }
 
     // JSON serializers.
-    toJson(): SerializedBrand {
+    serialize(): SerializedBrand {
         return {
             "Type": (this as any).constructor.name,
             "Title": this.getTitle(),
-            "Author": this.author.toJson(),
-            "Logo": this.logo.toJson(),
+            "Authors": this.authors.map(author => author.serialize()),
+            "Logo": this.logo.serialize(),
         }
     }
-    fromJson(data: SerializedBrand): void {
+    unserialize(data: SerializedBrand): void {
         console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
         if (data) {
             this.setTitle(data['Title'])
-            this.logo.fromJson(data['Logo'])
-            this.author.fromJson(data['Author'])
+            this.logo.unserialize(data['Logo'])
+            this.authors = data['Authors'].map(data => {
+                let author = new Author()
+                author.unserialize(data)
+                return author
+            })
         }
     }
 }

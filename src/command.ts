@@ -3,8 +3,8 @@
 // This class is the interface with the User to render the PDF.
 // ----------------------------------------------------------------
 
-import { Language } from './utils/language'
-import { Product } from './models/product'
+import { Language } from './enums/language'
+import { Product } from './product'
 
 interface Parameters {
     title: string

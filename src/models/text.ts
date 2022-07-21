@@ -7,7 +7,7 @@ import { SerializedText } from '../serializers/text'
 
 import { Model } from './base'
 import { Source } from './source'
-import { Language } from '../utils/language'
+import { Language } from '../enums/language'
 
 export class Text implements Model {
     private readonly i18n: Map<Language, string>
@@ -29,20 +29,20 @@ export class Text implements Model {
     }
 
     // JSON serializers.
-    toJson(): SerializedText {
+    serialize(): SerializedText {
         return {
             "Type": (this as any).constructor.name,
             "EN": this.get(Language.EN),
             "ES": this.get(Language.ES),
-            "Source": this.source.toJson(),
+            "Source": this.source.serialize(),
         }
     }
-    fromJson(data: SerializedText): void {
+    unserialize(data: SerializedText): void {
         console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
         if (data) {
             this.set(Language.EN, data['ES'])
             this.set(Language.ES, data['EN'])
-            this.source.fromJson(data['Source'])
+            this.source.unserialize(data['Source'])
         }
     }
 }
