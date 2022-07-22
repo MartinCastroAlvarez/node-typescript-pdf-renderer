@@ -8,12 +8,14 @@ import { SerializedTypeface } from '../serializers/typeface'
 import { Model } from './base'
 
 export class Typeface implements Model {
+    private cover: string
     private normal: string
     private italic: string
     private bold: string
 
     // Lazy constructor.
     constructor() {
+        this.cover = ''
         this.normal = ''
         this.bold = ''
         this.italic = ''
@@ -26,6 +28,10 @@ export class Typeface implements Model {
     // Bold font getter and setter.
     getBold(): string { return this.bold }
     setBold(font: string) { this.bold = font }
+
+    // Cover font getter and setter.
+    getCover(): string { return this.cover }
+    setCover(font: string) { this.cover = font }
 
     // Italic font getter and setter.
     getItalic(): string { return this.italic }
@@ -42,6 +48,7 @@ export class Typeface implements Model {
             "Type": (this as any).constructor.name,
             "Normal": this.getNormal(),
             "Bold": this.getBold(),
+            "Cover": this.getCover(),
             "Italic": this.getItalic(),
         }
     }
@@ -50,6 +57,7 @@ export class Typeface implements Model {
             console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
             this.setNormal(data['Normal'])
             this.setBold(data['Bold'])
+            this.setCover(data['Cover'])
             this.setItalic(data['Italic'])
         }
     }

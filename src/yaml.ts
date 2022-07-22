@@ -92,7 +92,8 @@ import { SerializedTypeface } from './serializers/typeface'
 import { SerializedQuestion } from './serializers/question'
 
 class MissingTypeError extends Error {}
-class InvalidObjectError extends Error {}
+class NotImplementedError extends Error {}
+class InvalidReferenceError extends Error {}
 
 export class Yaml {
 
@@ -129,21 +130,33 @@ export class Yaml {
         if (text.startsWith(`${Reference.FONTS}/`)) {
             console.log(`Dereferencing font: ${text}`)
             text = text.replace(Reference.FONTS, tree.fonts)
+            if (!tree.exists(text))
+                throw new InvalidReferenceError(`File not found: ${text}`)
         } else if (text.startsWith(`${Reference.CONFIG}/`)) {
             console.log(`Dereferencing config: ${text}`)
             text = text.replace(Reference.CONFIG, tree.config)
+            if (!tree.exists(text))
+                throw new InvalidReferenceError(`File not found: ${text}`)
         } else if (text.startsWith(`${Reference.IMAGES}/`))  {
             console.log(`Dereferencing image: ${text}`)
             text = text.replace(Reference.IMAGES, tree.images)
+            if (!tree.exists(text))
+                throw new InvalidReferenceError(`File not found: ${text}`)
         } else if (text.startsWith(`${Reference.FILES}/`))  {
             console.log(`Dereferencing file: ${text}`)
             text = text.replace(Reference.FILES, tree.files)
+            if (!tree.exists(text))
+                throw new InvalidReferenceError(`File not found: ${text}`)
         } else if (text.startsWith(`${Reference.BOOKS}/`)) {
             console.log(`Dereferencing book: ${text}`)
             text = text.replace(Reference.BOOKS, tree.books)
+            if (!tree.exists(text))
+                throw new InvalidReferenceError(`File not found: ${text}`)
         } else if (text.startsWith(`${Reference.PERSONS}/`)) {
             console.log(`Dereferencing person: ${text}`)
             text = text.replace(Reference.PERSONS, tree.persons)
+            if (!tree.exists(text))
+                throw new InvalidReferenceError(`File not found: ${text}`)
         }
         return text
     }
@@ -251,7 +264,7 @@ export class Yaml {
                 return <Model>model
             }
             default: {
-                throw new InvalidObjectError(`Not implemented ${typeof data}: ${JSON.stringify(data)}`)
+                throw new NotImplementedError(`Not implemented ${typeof data}: ${JSON.stringify(data)}`)
             }
         }
     }

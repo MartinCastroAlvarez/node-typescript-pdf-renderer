@@ -6,6 +6,7 @@
 import { Serialized } from './base'
 
 export interface SerializedTypeface extends Serialized {
+    Cover: string
     Normal: string
     Bold: string
     Italic: string

@@ -9,6 +9,9 @@ import { Model } from './base'
 import { Source } from './source'
 import { Language } from '../enums/language'
 
+class EmptynessError extends Error {}
+class TranslationError extends Error {}
+
 export class Text implements Model {
     private readonly i18n: Map<Language, string>
     public readonly source: Source
@@ -20,8 +23,16 @@ export class Text implements Model {
     }
 
     // Text getter and setter.
-    get(language: Language = Language.EN): string { return this.i18n[language] }
-    set(language: Language = Language.EN, text: string) { this.i18n[language] = text }
+    get(language: Language = Language.EN): string {
+        if (!this.i18n[language])
+            throw new TranslationError(`Not supported: ${language}`)
+        return this.i18n[language]
+    }
+    set(language: Language = Language.EN, text: string) {
+        if (!text)
+            throw new EmptynessError(`Invalid ${language} text: ${text}`)
+        this.i18n[language] = text
+    }
 
     // String serializers.
     toString(): string {
