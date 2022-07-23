@@ -78,7 +78,6 @@ export class Book implements Model {
     public afterword: Array<Model>
     public acknowledgements: Array<Model>
     public legal: Array<Model>
-    public prologue: Array<Model>
 
     // Lazy constructor.
     constructor() {
@@ -87,7 +86,6 @@ export class Book implements Model {
         this.foreword = new Array<Model>()
         this.afterword = new Array<Model>()
         this.acknowledgements = new Array<Model>()
-        this.prologue = new Array<Model>()
         this.legal = new Array<Model>()
         this.title = new Text()
         this.subtitle = new Text()
@@ -122,7 +120,6 @@ export class Book implements Model {
             "Foreword": this.foreword?.map(block => block.serialize()),
             "Afterword": this.afterword?.map(block => block.serialize()),
             "Acknowledgements": this.acknowledgements?.map(block => block.serialize()),
-            "Prologue": this.prologue?.map(block => block.serialize()),
         }
     }
     unserialize(data: SerializedBook): void {
@@ -134,7 +131,6 @@ export class Book implements Model {
             this.afterword = data['Afterword']?.map(block => Yaml.unserialize(block))
             this.legal = data['Legal']?.map(block => Yaml.unserialize(block))
             this.acknowledgements = data['Acknowledgements']?.map(block => Yaml.unserialize(block))
-            this.prologue = data['Prologue']?.map(block => Yaml.unserialize(block))
             this.chapters = data['Chapters']?.map(block => <Chapter>Yaml.unserialize(block))
             this.authors = data['Authors']?.map(block => <Person>Yaml.unserialize(block))
         }

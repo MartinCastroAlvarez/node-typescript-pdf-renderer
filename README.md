@@ -58,10 +58,12 @@ yarn install
 
 ### Rendering a PDF in English
 ```bash
-yarn run build && yarn run render --book "Crypto" --language "en" --format "pdf"
+yarn run build && yarn run render --book "Sample" --language "en" --format "pdf"
 ```
+
+The PDF is available at [./builds/Sample/pdf/en/final.pdf]
 
 ### Rendering a PDF in Spanish
 ```bash
-yarn run build && yarn run render --book "Crypto" --language "es" --format "pdf"
+yarn run build && yarn run render --book "Sample" --language "es" --format "pdf"
 ```

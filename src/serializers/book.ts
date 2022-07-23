@@ -19,6 +19,5 @@ export interface SerializedBook extends Serialized {
     Afterword?: Array<Serialized>
     Acknowledgements?: Array<Serialized>
     Legal?: Array<Serialized>
-    Prologue?: Array<Serialized>
     Topics?: Array<SerializedTopic>
 }

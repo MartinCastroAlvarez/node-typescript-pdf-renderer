@@ -53,10 +53,13 @@ export class Html implements Product {
     }
 
     // Public PDF directory.
-    public getPath(): void {
+    public getPath(): string {
         return Tree.join(
-            Tree.join(Tree.builds, this.getTitle()),
-            "pdf",
+            Tree.join(
+                Tree.join(Tree.builds, this.getTitle()),
+                "html",
+            ),
+            this.getLanguage(),
         )
     }
 

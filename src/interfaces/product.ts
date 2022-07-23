@@ -13,7 +13,7 @@ export interface Product {
     setTitle(title: string): void
     getLanguage(): Language
     setLanguage(language: Language): void
-    public load(): void
-    public render(): void
-    public getPath(): void
+    load(): void
+    render(): void
+    getPath(): string
 }

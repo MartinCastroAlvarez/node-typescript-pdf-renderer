@@ -16,6 +16,7 @@ export class Log {
             depth: 1,
             maxArrayLength: 3,
             maxStringLength: 100,
+            breakLength: 1000000,
             sorted: true,
             compact: true,
         })

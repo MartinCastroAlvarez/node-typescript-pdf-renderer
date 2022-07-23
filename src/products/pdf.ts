@@ -7,12 +7,14 @@
 // ----------------------------------------------------------------
 
 const PDFDocument = require('pdfkit')
+const merge = require('easy-pdf-merge')
 
 import { Language } from '../enums/language'
 
 import { Product } from '../interfaces/product'
 
 import { Book } from '../models/book'
+import { Chapter } from '../models/chapter'
 
 import { SerializedBook } from '../serializers/book'
 
@@ -58,21 +60,51 @@ export class Pdf implements Product {
     }
 
     // Public PDF directory.
-    public getPath(): void {
+    public getPath(): string {
         return Tree.join(
-            Tree.join(Tree.builds, this.getTitle()),
-            "pdf",
+            Tree.join(
+                Tree.join(Tree.builds, this.getTitle()),
+                "pdf",
+            ),
+            this.getLanguage(),
         )
     }
 
-    // Rendering.
+    // Rendering the final product.
     public render(): void {
-        const intro: PDFDocument = renderIntroduction()
+        Tree.create(this.getPath())
+        this.merge(
+            [
+                this.getBeginning(),
+                this.getLegal(),
+                this.getTableOfContents(),
+                this.getAcknowledgement(),
+                this.getForeword(),
+                ...this.book.chapters.map(chapter => this.getChapter(chapter)),
+                this.getAfterword(),
+                this.getEnding(),
+            ],
+            Tree.join(this.getPath(), 'final.pdf'),
+        )
+    }
+
+    // Merging parts of the PDF.
+    private merge(docs: Array<any>, path: string): void {
+        Log.info("Merging documents", docs)
+        const parts: Array<string> = docs.map((doc, index) => {
+            Log.info("Processing document", index)
+            return this.save(doc, index.toString())
+        })
+        merge(parts, path, error => {
+            if (error) {
+                Log.error("Failed to merge files", error)
+            }
+        })
     }
 
     // Creating a new PDF document.
-    private initializeDocument(): PDFDocument {
-        const doc = new PDFDocument({
+    private init(): any {
+        const doc: any = new PDFDocument({
             bufferPages: true,
             autoFirstPage: true,
             size: 'A4',
@@ -86,23 +118,77 @@ export class Pdf implements Product {
     }
 
     // Flushing document to the file system.
-    private terminateDocument(doc: PDFDocument, name: string): PDFDocument {
-        let path: string = Tree.join(
-            Tree.join(
-                Tree.join(Tree.builds, this.getTitle()),
-                "pdf",
-            ),
-            `${name}.pdf`,
-        )
+    private save(doc: any, name: string): string {
+        let path = Tree.join(this.getPath(), `${name}.pdf`)
+        Log.info("Saving doc", doc)
+        Log.info("Saving into", path)
         doc.pipe(Tree.stream(path))
         doc.flushPages()
         doc.end()
-        return doc
+        return path
     }
 
     // Rendering introduction.
-    private renderIntroduction(): PDFDocument {
-        let doc: PDFDocument = this.initializeDocument()
+    private getBeginning(): any {
+        let doc: any = this.init()
+        doc.text("FIXME: Beginning!") // FIXME
+        Log.info("Beginning", doc)
+        return doc
+    }
+
+    // Rendering TOC section.
+    private getTableOfContents(): any {
+        let doc: any = this.init()
+        doc.text("FIXME: Table of Contents!") // FIXME
+        Log.info("Table of Contents", doc)
+        return doc
+    }
+
+    // Rendering legal text.
+    private getLegal(): any {
+        let doc: any = this.init()
+        doc.text("FIXME: Legal!") // FIXME
+        Log.info("Legal", doc)
+        return doc
+    }
+
+    // Rendering acknowledgements text.
+    private getAcknowledgement(): any {
+        let doc: any = this.init()
+        doc.text("FIXME: Acknoledgements!") // FIXME
+        Log.info("Legal", doc)
+        return doc
+    }
+
+    // Rendering foreword text.
+    private getForeword(): any {
+        let doc: any = this.init()
+        doc.text("FIXME: Foreword!") // FIXME
+        Log.info("Foreword", doc)
+        return doc
+    }
+
+    // Rendering afterword text.
+    private getAfterword(): any {
+        let doc: any = this.init()
+        doc.text("FIXME: Afterword!") // FIXME
+        Log.info("Afterword", doc)
+        return doc
+    }
+
+    // Rendering ending .
+    private getEnding(): any {
+        let doc: any = this.init()
+        doc.text("FIXME: Ending!") // FIXME
+        Log.info("Ending", doc)
+        return doc
+    }
+
+    // Rendering chapter.
+    private getChapter(chapter: Chapter): any {
+        let doc: any = this.init()
+        doc.text(chapter.title.get()) // FIXME
+        Log.info("Chapter", doc)
         return doc
     }
 }

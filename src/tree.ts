@@ -50,6 +50,14 @@ export class Tree {
         return fs.readdirSync(path)
     }
 
+    // Creating a directory structure.
+    public static create(path: string) {
+        Log.info('Creating directory', path)
+        fs.mkdirSync(path, {
+            recursive: true,
+        })
+    }
+
     // Creating a write stream to a file.
     public static stream(path: string): object {
         Log.info('Writing to', path)

@@ -36,7 +36,7 @@ export class Command {
         product.setLanguage(language)
         product.setTitle(args.title)
         product.load()
-        let path: string = product.render()
-        Log.success('Pdf rendered into', path)
+        product.render()
+        Log.success('Rendered into', product.getPath())
     }
 }
