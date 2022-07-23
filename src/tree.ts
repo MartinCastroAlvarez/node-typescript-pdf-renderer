@@ -17,6 +17,7 @@ export class Tree {
     public readonly books: string
     public readonly persons: string
     public readonly files: string
+    public readonly topics: string
 
     constructor() {
         this.root = path.dirname(__dirname)
@@ -25,6 +26,7 @@ export class Tree {
         this.images = path.join(this.root, 'images')
         this.books = path.join(this.root, 'books')
         this.persons = path.join(this.root, 'persons')
+        this.topics = path.join(this.root, 'topics')
         this.files = path.join(this.root, 'files')
     }
 

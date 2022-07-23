@@ -1,11 +1,75 @@
+# ----------------------------------------------------------------
+# A sample book
+# ----------------------------------------------------------------
 Type: 'Book'
 Title:
-  Type: 'Text'
-  EN: 'Blockchain Engineering'
-  ES: 'Ingeniería de Blockchain'
+  EN: 'Lorem Ipsum Dolor'
+  ES: 'Lorem Ipsum Dolor'
 Subtitle:
-  Type: 'Text'
-  EN: 'The complete guide to Web3.0 software development'
-  ES: 'La guía completa de desarrollo de software en Web3.0'
+  EN: 'Lorem ipsum dolor sit amet'
+  ES: 'Lorem ipsum dolor sit amet'
 Authors:
   - '@person/MartinCastro.yaml'
+Chapters:
+
+  # ----------------------------------------------------------------
+  # A sample chapter.
+  # ----------------------------------------------------------------
+  - Type: 'Chapter'
+    Title:
+      EN: 'Lorem Ipsum Dolor'
+      ES: 'Lorem Ipsum Dolor'
+    Stories:
+
+      # ----------------------------------------------------------------
+      # A sample story.
+      # ----------------------------------------------------------------
+      - Type: 'Story'
+        Title:
+          EN: 'Lorem Ipsum Dolor'
+          ES: 'Lorem Ipsum Dolor'
+        Topics:
+          - '@topic/Blockchain.yaml'
+          - '@topic/Ethereum.yaml'
+
+      # ----------------------------------------------------------------
+      # A sample story.
+      # ----------------------------------------------------------------
+      - Type: 'Story'
+        Title:
+          EN: 'Lorem Ipsum Dolor'
+          ES: 'Lorem Ipsum Dolor'
+        Topics:
+          - '@topic/Blockchain.yaml'
+          - '@topic/Ethereum.yaml'
+
+  # ----------------------------------------------------------------
+  # A sample chapter.
+  # ----------------------------------------------------------------
+  - Type: 'Chapter'
+    Title:
+      EN: 'Lorem Ipsum Dolor'
+      ES: 'Lorem Ipsum Dolor'
+    Stories:
+
+      # ----------------------------------------------------------------
+      # A sample story.
+      # ----------------------------------------------------------------
+      - Type: 'Story'
+        Title:
+          EN: 'Lorem Ipsum Dolor'
+          ES: 'Lorem Ipsum Dolor'
+        Topics:
+          - '@topic/Blockchain.yaml'
+          - '@topic/Ethereum.yaml'
+
+      # ----------------------------------------------------------------
+      # A sample story.
+      # ----------------------------------------------------------------
+      - Type: 'Story'
+        Title:
+          EN: 'Lorem Ipsum Dolor'
+          ES: 'Lorem Ipsum Dolor'
+        Topics:
+          - '@topic/Blockchain.yaml'
+          - '@topic/Ethereum.yaml'

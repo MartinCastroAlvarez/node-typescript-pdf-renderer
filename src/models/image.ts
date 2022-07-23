@@ -5,7 +5,8 @@
 
 import { SerializedImage } from '../serializers/image'
 
-import { Model } from './base'
+import { Model } from '../interfaces/model'
+
 import { File } from './file'
 
 class InvalidImageHeightError extends Error {}

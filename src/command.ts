@@ -4,38 +4,47 @@
 // ----------------------------------------------------------------
 
 import { Language } from './enums/language'
+import { Arguments } from './interfaces/arguments'
 import { Product } from './product'
-
-interface Parameters {
-    title: string
-    language: string
-}
 
 export class Command {
     // Method responsible for rendering a PDF.
-    renderPdf(params: Parameters): void {
+    renderPdf(args: Arguments): void {
         let product: Product = new Product()
-        product.setLanguage(Language[params.language.toUpperCase()])
-        product.setTitle(params.title)
+        product.setLanguage(Language[args.language.toUpperCase()])
+        product.setTitle(args.title)
+        product.load()
         let path: string = product.toPdf()
         console.log(`PDF rendered into: ${path}`)
     }
 
     // Method responsible for rendering a course.
-    renderCourse(params: Parameters): void {
+    renderCourse(args: Arguments): void {
         let product: Product = new Product()
-        product.setLanguage(Language[params.language.toUpperCase()])
-        product.setTitle(params.title)
+        product.setLanguage(Language[args.language.toUpperCase()])
+        product.setTitle(args.title)
+        product.load()
         let path: string = product.toCourse()
         console.log(`Course rendered into: ${path}`)
     }
 
     // Method responsible for rendering a video.
-    renderVideo(params: Parameters): void {
+    renderVideo(args: Arguments): void {
         let product: Product = new Product()
-        product.setLanguage(Language[params.language.toUpperCase()])
-        product.setTitle(params.title)
+        product.setLanguage(Language[args.language.toUpperCase()])
+        product.setTitle(args.title)
+        product.load()
         let path: string = product.toVideo()
         console.log(`Video rendered into: ${path}`)
+    }
+
+    // Method responsible for rendering a video.
+    renderHtml(args: Arguments): void {
+        let product: Product = new Product()
+        product.setLanguage(Language[args.language.toUpperCase()])
+        product.setTitle(args.title)
+        product.load()
+        let path: string = product.toHtml()
+        console.log(`HTML rendered into: ${path}`)
     }
 }

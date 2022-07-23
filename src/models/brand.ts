@@ -5,8 +5,9 @@
 
 import { SerializedBrand } from '../serializers/brand'
 
+import { Model } from '../interfaces/model'
+
 import { Person } from './person'
-import { Model } from './base'
 import { Image } from './image'
 
 export class Brand implements Model {

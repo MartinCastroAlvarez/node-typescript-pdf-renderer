@@ -5,7 +5,7 @@
 
 import { SerializedTypeface } from '../serializers/typeface'
 
-import { Model } from './base'
+import { Model } from '../interfaces/model'
 
 export class Typeface implements Model {
     private cover: string

@@ -5,7 +5,8 @@
 
 import { SerializedPerson } from '../serializers/person'
 
-import { Model } from './base'
+import { Model } from '../interfaces/model'
+
 import { Image } from './image'
 import { Text } from './text'
 

@@ -12,27 +12,28 @@ import { Config } from './config'
 import { Yaml } from './yaml'
 
 class InvalidLanguageError extends Error {}
-
-interface Render {
-    title: string
-    language: string
-}
+class InvalidTitleError extends Error {}
+class WorkInProgressError extends Error {}
 
 export class Product {
-    private book: Book 
+    private title: string
+    private book: Book
     private language: Language
     public readonly config: Config
 
     constructor() {
         this.book = new Book()
+        this.title = ''
         this.language = Language.EN
         this.config = new Config()
     }
 
     // Title getter and setter.
+    getTitle(): string { return this.title }
     setTitle(title: string) {
-        let yaml: Yaml = new Yaml()
-        this.book.unserialize(<SerializedBook>yaml.read(`@books/${title}.yaml`))
+        if (!title)
+            throw new InvalidTitleError('Invalid title!')
+        this.title = title
     }
 
     // Language getter and setter.
@@ -43,20 +44,33 @@ export class Product {
         this.language = language
     }
 
+    // Loading book from YAML files.
+    load(): void {
+        let yaml: Yaml = new Yaml()
+        this.book.unserialize(<SerializedBook>yaml.read(`@books/${this.getTitle()}.yaml`))
+    }
+
     // Rendering PDF.
     toPdf(): string {
         console.log(`Book: ${JSON.stringify(this.book.serialize())}`)
-        return "TODO"
+        return "FIXME"
     }
 
     // Rendering Video.
     toVideo(): string {
-        return "TODO"
+        throw new WorkInProgressError('WIP')
+        return "FIXME"
     }
 
     // Rendering Course.
     toCourse(): string {
-        return "TODO"
+        throw new WorkInProgressError('WIP')
+        return "FIXME"
     }
 
+    // Rendering HTML page.
+    toHtml(): string {
+        throw new WorkInProgressError('WIP')
+        return "FIXME"
+    }
 }

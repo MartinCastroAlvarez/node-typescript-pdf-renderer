@@ -7,7 +7,7 @@ import { SerializedFile } from '../serializers/file'
 
 import { Tree } from '../tree'
 
-import { Model } from './base'
+import { Model } from '../interfaces/model'
 
 class FileNotFoundError extends Error {}
 

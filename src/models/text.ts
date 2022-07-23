@@ -5,7 +5,8 @@
 
 import { SerializedText } from '../serializers/text'
 
-import { Model } from './base'
+import { Model } from '../interfaces/model'
+
 import { Source } from './source'
 import { Language } from '../enums/language'
 

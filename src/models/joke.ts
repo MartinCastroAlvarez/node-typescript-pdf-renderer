@@ -5,7 +5,8 @@
 
 import { SerializedJoke } from '../serializers/joke'
 
-import { Model } from './base'
+import { Model } from '../interfaces/model'
+
 import { Text } from './text'
 
 export class Joke extends Text implements Model {}

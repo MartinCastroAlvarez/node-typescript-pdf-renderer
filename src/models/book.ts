@@ -58,8 +58,9 @@
 
 import { SerializedBook } from '../serializers/book'
 
+import { Model } from '../interfaces/model'
+
 import { Person } from './person'
-import { Model } from './base'
 import { Chapter } from './chapter'
 import { Text } from './text'
 import { Yaml } from '../yaml'
@@ -114,42 +115,34 @@ export class Book implements Model {
             console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
             this.title.unserialize(data['Title'])
             this.subtitle.unserialize(data['Subtitle'])
+            let yaml: Yaml = new Yaml()
             this.foreword = data['Foreword']?.map(block => {
                 console.log(`Loading book foreword.`)
-                let yaml: Yaml = new Yaml()
                 return yaml.unserialize(block)
             })
             this.afterword = data['Afterword']?.map(block => {
                 console.log(`Loading book afterword.`)
-                let yaml: Yaml = new Yaml()
                 return yaml.unserialize(block)
             })
             this.legal = data['Legal']?.map(block => {
                 console.log(`Loading book legal text.`)
-                let yaml: Yaml = new Yaml()
                 return yaml.unserialize(block)
             })
             this.acknowledgements = data['Acknowledgements']?.map(block => {
                 console.log(`Loading book legal acknowledgements.`)
-                let yaml: Yaml = new Yaml()
                 return yaml.unserialize(block)
             })
             this.prologue = data['Prologue']?.map(block => {
                 console.log(`Loading book legal prologue.`)
-                let yaml: Yaml = new Yaml()
                 return yaml.unserialize(block)
             })
-            this.chapters = data['Chapters']?.map(data => {
+            this.chapters = data['Chapters']?.map(block => {
                 console.log(`Loading book chapters.`)
-                let chapter: Chapter = new Chapter()
-                chapter.unserialize(data)
-                return chapter
+                return <Chapter>yaml.unserialize(block)
             })
-            this.authors = data['Authors']?.map(data => {
+            this.authors = data['Authors']?.map(block => {
                 console.log(`Loading book persons.`)
-                let person: Person = new Person()
-                person.unserialize(data)
-                return person
+                return <Person>yaml.unserialize(block)
             })
         }
     }

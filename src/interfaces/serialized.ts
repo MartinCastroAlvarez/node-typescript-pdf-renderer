@@ -1,7 +1,6 @@
 // ----------------------------------------------------------------
 // Purpose:
-// This library defines the Serialized interface that must be
-// implemented by other interfaces in this directory.
+// This library defines the Serialized interface.
 // ----------------------------------------------------------------
 
 export interface Serialized {

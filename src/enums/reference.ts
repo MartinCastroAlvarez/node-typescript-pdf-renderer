@@ -5,9 +5,10 @@
 
 export enum Reference {
     FONTS = '@fonts',
-    IMAGES = '@images',
+    IMAGES = '@image',
     BOOKS = '@books',
     CONFIG = '@config',
     PERSONS = '@person',
-    FILES = '@files',
+    TOPICS = '@topic',
+    FILES = '@file',
 }

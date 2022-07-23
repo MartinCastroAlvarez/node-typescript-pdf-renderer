@@ -5,7 +5,8 @@
 
 import { SerializedList } from '../serializers/list'
 
-import { Model } from './base'
+import { Model } from '../interfaces/model'
+
 import { Text } from './text'
 
 export class List implements Model {

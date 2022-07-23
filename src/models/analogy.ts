@@ -5,7 +5,8 @@
 
 import { SerializedAnalogy } from '../serializers/analogy'
 
-import { Model } from './base'
+import { Model } from '../interfaces/model'
+
 import { Text } from './text'
 
 export class Analogy extends Text implements Model {}

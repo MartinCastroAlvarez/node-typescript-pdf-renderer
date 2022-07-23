@@ -5,8 +5,9 @@
 
 import { SerializedSource } from '../serializers/source'
 
+import { Model } from '../interfaces/model'
+
 import { Person } from './person'
-import { Model } from './base'
 import { Image } from './image'
 import { Text } from './text'
 

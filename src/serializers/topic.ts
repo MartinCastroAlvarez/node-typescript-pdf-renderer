@@ -1,15 +1,15 @@
 // ----------------------------------------------------------------
 // Purpose:
-// This library implements the Person serializer.
+// This library implements the Topic interface.
 // ----------------------------------------------------------------
 
 import { Serialized } from '../interfaces/serialized'
 
+import { SerializedText } from './text'
 import { SerializedImage } from './image'
 
-export interface SerializedPerson extends Serialized {
-    Name?: string
-    Website?: string
-    Email?: string
+export interface SerializedTopic extends Serialized {
+    Title?: SerializedText
+    Description?: SerializedText
     Logo?: SerializedImage
 }

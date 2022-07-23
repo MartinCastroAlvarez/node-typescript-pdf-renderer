@@ -1,10 +1,9 @@
 // ----------------------------------------------------------------
 // Purpose:
-// This library defines the Model interface that must be
-// implemented by other classes in this directory.
+// This library defines the Model interface.
 // ----------------------------------------------------------------
 
-import { Serialized } from '../serializers/base'
+import { Serialized } from './serialized'
 
 export interface Model {
     serialize(): Serialized

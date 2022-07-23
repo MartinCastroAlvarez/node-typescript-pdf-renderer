@@ -8,9 +8,11 @@ const yaml = require('js-yaml')
 import { Tree } from './tree'
 import { Reference } from './enums/reference'
 
+import { Model } from './interfaces/model'
+import { Serialized } from './interfaces/serialized'
+
 import { Analogy } from './models/analogy'
 import { Person } from './models/person'
-import { Model } from './models/base'
 import { Brand } from './models/brand'
 import { Book } from './models/book'
 import { Chapter } from './models/chapter'
@@ -26,6 +28,7 @@ import { Quote } from './models/quote'
 import { Source } from './models/source'
 import { Story } from './models/story'
 import { Text } from './models/text'
+import { Topic } from './models/topic'
 import { Typeface } from './models/typeface'
 import { Question } from './models/question'
 
@@ -72,7 +75,6 @@ import { Question } from './models/question'
 
 import { SerializedAnalogy } from './serializers/analogy'
 import { SerializedPerson } from './serializers/person'
-import { Serialized } from './serializers/base'
 import { SerializedBrand } from './serializers/brand'
 import { SerializedBook } from './serializers/book'
 import { SerializedChapter } from './serializers/chapter'
@@ -88,10 +90,10 @@ import { SerializedQuote } from './serializers/quote'
 import { SerializedSource } from './serializers/source'
 import { SerializedStory } from './serializers/story'
 import { SerializedText } from './serializers/text'
+import { SerializedTopic} from './serializers/topic'
 import { SerializedTypeface } from './serializers/typeface'
 import { SerializedQuestion } from './serializers/question'
 
-class MissingTypeError extends Error {}
 class NotImplementedError extends Error {}
 class InvalidReferenceError extends Error {}
 
@@ -131,17 +133,17 @@ export class Yaml {
             console.log(`Dereferencing font: ${text}`)
             text = text.replace(Reference.FONTS, tree.fonts)
             if (!tree.exists(text))
-                throw new InvalidReferenceError(`File not found: ${text}`)
+                throw new InvalidReferenceError(`Font file not found: ${text}`)
         } else if (text.startsWith(`${Reference.CONFIG}/`)) {
             console.log(`Dereferencing config: ${text}`)
             text = text.replace(Reference.CONFIG, tree.config)
             if (!tree.exists(text))
-                throw new InvalidReferenceError(`File not found: ${text}`)
+                throw new InvalidReferenceError(`Config file not found: ${text}`)
         } else if (text.startsWith(`${Reference.IMAGES}/`))  {
             console.log(`Dereferencing image: ${text}`)
             text = text.replace(Reference.IMAGES, tree.images)
             if (!tree.exists(text))
-                throw new InvalidReferenceError(`File not found: ${text}`)
+                throw new InvalidReferenceError(`Image file not found: ${text}`)
         } else if (text.startsWith(`${Reference.FILES}/`))  {
             console.log(`Dereferencing file: ${text}`)
             text = text.replace(Reference.FILES, tree.files)
@@ -151,12 +153,17 @@ export class Yaml {
             console.log(`Dereferencing book: ${text}`)
             text = text.replace(Reference.BOOKS, tree.books)
             if (!tree.exists(text))
-                throw new InvalidReferenceError(`File not found: ${text}`)
+                throw new InvalidReferenceError(`Book file not found: ${text}`)
         } else if (text.startsWith(`${Reference.PERSONS}/`)) {
             console.log(`Dereferencing person: ${text}`)
             text = text.replace(Reference.PERSONS, tree.persons)
             if (!tree.exists(text))
-                throw new InvalidReferenceError(`File not found: ${text}`)
+                throw new InvalidReferenceError(`Person file not found: ${text}`)
+        } else if (text.startsWith(`${Reference.TOPICS}/`)) {
+            console.log(`Dereferencing topic: ${text}`)
+            text = text.replace(Reference.TOPICS, tree.topics)
+            if (!tree.exists(text))
+                throw new InvalidReferenceError(`Topic file not found: ${text}`)
         }
         return text
     }
@@ -166,7 +173,7 @@ export class Yaml {
     unserialize(data: Serialized): Model {
         console.log(`Unserializing '${data.Type}'`)
         if (!data || !data.Type)
-            throw new MissingTypeError(`Missing type in ${typeof data}: ${JSON.stringify(data)}`)
+            data.Type = Text.name
         switch(data.Type) {
             case Analogy.name: {
                 let model: Analogy = new Analogy()
@@ -251,6 +258,11 @@ export class Yaml {
             case Text.name: {
                 let model: Text = new Text()
                 model.unserialize(<SerializedText>data)
+                return <Model>model
+            }
+            case Topic.name: {
+                let model: Topic = new Topic()
+                model.unserialize(<SerializedTopic>data)
                 return <Model>model
             }
             case Typeface.name: {

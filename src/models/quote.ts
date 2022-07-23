@@ -5,8 +5,9 @@
 
 import { SerializedQuote } from '../serializers/quote'
 
+import { Model } from '../interfaces/model'
+
 import { Person } from './person'
-import { Model } from './base'
 import { Text } from './text'
 
 export class Quote extends Text implements Model {

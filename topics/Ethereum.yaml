@@ -1,0 +1,14 @@
+# ----------------------------------------------------------------
+# Purpose:
+# Defines a Topic that can be referenced using `@person/<name>.yaml`
+# ----------------------------------------------------------------
+Type: 'Topic'
+Title:
+  EN: 'Ethereum'
+  ES: 'Ethereum'
+Description:
+  EN: 'Lorem ipsum dolor sit amet'
+  ES: 'Lorem ipsum dolor sit amet'
+Logo:
+  Type: 'Image'
+  Path: '@image/topics/ethereum.png'
