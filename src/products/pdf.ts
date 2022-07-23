@@ -53,29 +53,56 @@ export class Pdf implements Product {
     }
 
     // Loading book from YAML files.
-    load(): void {
+    public load(): void {
         this.book.unserialize(<SerializedBook>Yaml.read(`@books/${this.getTitle()}.yaml`))
     }
 
-    // Rendering.
-    render(): string {
-        Log.info("Lorem", this.book)
+    // Public PDF directory.
+    public getPath(): void {
+        return Tree.join(
+            Tree.join(Tree.builds, this.getTitle()),
+            "pdf",
+        )
+    }
 
-        // Initializing PDF document.
-        let doc = new PDFDocument({
+    // Rendering.
+    public render(): void {
+        const intro: PDFDocument = renderIntroduction()
+    }
+
+    // Creating a new PDF document.
+    private initializeDocument(): PDFDocument {
+        const doc = new PDFDocument({
             bufferPages: true,
             autoFirstPage: true,
             size: 'A4',
         })
+        doc.on('pageAdded', () => {
+            doc 
+                .font(Config.typeface.getBold())
+                .text(Config.brand.getTitle())
+        })
+        return doc
+    }
 
-        // Writing PDF to the file system.
-        let name: string = `${this.getTitle()}.pdf`
-        let path: string = Tree.join(Tree.builds, name)
+    // Flushing document to the file system.
+    private terminateDocument(doc: PDFDocument, name: string): PDFDocument {
+        let path: string = Tree.join(
+            Tree.join(
+                Tree.join(Tree.builds, this.getTitle()),
+                "pdf",
+            ),
+            `${name}.pdf`,
+        )
         doc.pipe(Tree.stream(path))
         doc.flushPages()
         doc.end()
+        return doc
+    }
 
-        // Returning path.
-        return path
+    // Rendering introduction.
+    private renderIntroduction(): PDFDocument {
+        let doc: PDFDocument = this.initializeDocument()
+        return doc
     }
 }

@@ -14,19 +14,13 @@ import { SerializedPallete } from './serializers/pallete'
 import { SerializedTypeface } from './serializers/typeface'
 
 export class Config {
-    public readonly brand: Brand
-    public readonly pallete: Pallete
-    public readonly typeface: Typeface
-
-    constructor() {
-        this.brand = new Brand()
-        this.pallete = new Pallete()
-        this.typeface = new Typeface()
-    }
-
-    load(): void {
-        this.brand.unserialize(<SerializedBrand>Yaml.read('@config/Brand.yaml'))
-        this.pallete.unserialize(<SerializedPallete>Yaml.read('@config/Pallete.yaml'))
-        this.typeface.unserialize(<SerializedTypeface>Yaml.read('@config/Typeface.yaml'))
-    }
+    public static brand: Brand = <Brand>Yaml.unserialize(
+        <SerializedBrand>Yaml.read('@config/Brand.yaml')
+    )
+    public static pallete: Pallete = <Pallete>Yaml.unserialize(
+        <SerializedPallete>Yaml.read('@config/Pallete.yaml')
+    )
+    public static typeface: Typeface= <Typeface>Yaml.unserialize(
+        <SerializedTypeface>Yaml.read('@config/Typeface.yaml')
+    )
 }

@@ -15,7 +15,7 @@ export class Log {
         return util.inspect(data, {
             depth: 1,
             maxArrayLength: 3,
-            maxStringLength: 20,
+            maxStringLength: 100,
             sorted: true,
             compact: true,
         })

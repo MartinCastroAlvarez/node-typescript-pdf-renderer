@@ -12,6 +12,7 @@ import { Book } from '../models/book'
 import { SerializedBook } from '../serializers/book'
 
 import { Yaml } from '../yaml'
+import { Tree } from '../tree'
 
 import { Config } from '../config'
 import { Log } from '../logging'
@@ -47,12 +48,19 @@ export class Course implements Product {
     }
 
     // Loading book from YAML files.
-    load(): void {
+    public load(): void {
         this.book.unserialize(<SerializedBook>Yaml.read(`@books/${this.getTitle()}.yaml`))
     }
 
+    // Public PDF directory.
+    public getPath(): void {
+        return Tree.join(
+            Tree.join(Tree.builds, this.getTitle()),
+            "pdf",
+        )
+    }
+
     // Rendering.
-    render(): string {
-        return "FIXME"
+    public render(): void {
     }
 }

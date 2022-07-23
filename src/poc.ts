@@ -1,36 +1,3 @@
-// ----------------------------------------------------------------
-// Purpose:
-// This class is the interface with the User to render the PDF.
-//
-// Reference:
-// - http://pdfkit.org/docs/getting_started.html
-// ----------------------------------------------------------------
-
-const readYamlFile = require('read-yaml-file')
-const PDFDocument = require('pdfkit')
-const path = require('path')
-const fs = require('fs')
-
-// ----------------------------------------------------------------
-// Creating a new PDF document object.
-// ----------------------------------------------------------------
-const doc = new PDFDocument({
-    bufferPages: true,
-    autoFirstPage: true,
-    font: fonts.normal,
-    fontSize: 8,
-    size: 'A4',
-})
-
-// ----------------------------------------------------------------
-// Setting style when a new page is added.
-// ----------------------------------------------------------------
-let pageNumber = 1
-doc.on('pageAdded', () => {
-    doc
-        .font(fonts.bold)
-        .text("Page Title")
-})
 
 // ----------------------------------------------------------------
 // Adding content to the PDF.
