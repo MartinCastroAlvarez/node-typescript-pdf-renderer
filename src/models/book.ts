@@ -74,19 +74,19 @@ export class Book implements Model {
 
     public chapters: Array<Chapter>
     public authors: Array<Person>
-    public foreword: Array<Model>
-    public afterword: Array<Model>
-    public acknowledgements: Array<Model>
-    public legal: Array<Model>
+    public acknowledgements: Array<Text>
+    public foreword: Array<Text>
+    public afterword: Array<Text>
+    public legal: Array<Text>
 
     // Lazy constructor.
     constructor() {
         this.chapters = new Array<Chapter>()
         this.authors = new Array<Person>()
-        this.foreword = new Array<Model>()
-        this.afterword = new Array<Model>()
-        this.acknowledgements = new Array<Model>()
-        this.legal = new Array<Model>()
+        this.foreword = new Array<Text>()
+        this.afterword = new Array<Text>()
+        this.acknowledgements = new Array<Text>()
+        this.legal = new Array<Text>()
         this.title = new Text()
         this.subtitle = new Text()
     }
@@ -127,12 +127,12 @@ export class Book implements Model {
             Log.info('Loading Book', data)
             this.title.unserialize(data['Title'])
             this.subtitle.unserialize(data['Subtitle'])
-            this.foreword = data['Foreword']?.map(block => Yaml.unserialize(block))
-            this.afterword = data['Afterword']?.map(block => Yaml.unserialize(block))
-            this.legal = data['Legal']?.map(block => Yaml.unserialize(block))
-            this.acknowledgements = data['Acknowledgements']?.map(block => Yaml.unserialize(block))
-            this.chapters = data['Chapters']?.map(block => <Chapter>Yaml.unserialize(block))
-            this.authors = data['Authors']?.map(block => <Person>Yaml.unserialize(block))
+            this.foreword = data['Foreword']?.map(x => <Text>Yaml.unserialize(x))
+            this.afterword = data['Afterword']?.map(x => <Text>Yaml.unserialize(x))
+            this.legal = data['Legal']?.map(x => <Text>Yaml.unserialize(x))
+            this.acknowledgements = data['Acknowledgements']?.map(x => <Text>Yaml.unserialize(x))
+            this.chapters = data['Chapters']?.map(x => <Chapter>Yaml.unserialize(x))
+            this.authors = data['Authors']?.map(x => <Person>Yaml.unserialize(x))
         }
     }
 }

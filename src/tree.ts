@@ -13,7 +13,7 @@ import { DirectoryNotFoundError } from './errors/tree'
 
 const root: string = path.dirname(__dirname)
 
-export class Tree {
+export abstract class Tree {
     public static readonly root: string = root
     public static readonly fonts: string = path.join(root, 'fonts')
     public static readonly config: string = path.join(root, 'config')
@@ -23,6 +23,7 @@ export class Tree {
     public static readonly topics: string = path.join(root, 'topics')
     public static readonly files: string = path.join(root, 'files')
     public static readonly builds: string = path.join(root, 'builds')
+    public static readonly i18n: string = path.join(root, 'i18n')
 
     // Join path strings.
     public static join(directory: string, name: string): string {

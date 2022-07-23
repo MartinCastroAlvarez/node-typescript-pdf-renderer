@@ -13,7 +13,7 @@ import { SerializedBrand } from './serializers/brand'
 import { SerializedPallete } from './serializers/pallete'
 import { SerializedTypeface } from './serializers/typeface'
 
-export class Config {
+export abstract class Config {
     public static brand: Brand = <Brand>Yaml.unserialize(
         <SerializedBrand>Yaml.read('@config/Brand.yaml')
     )

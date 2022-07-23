@@ -103,7 +103,7 @@ import { SerializedTopic} from './serializers/topic'
 import { SerializedTypeface } from './serializers/typeface'
 import { SerializedQuestion } from './serializers/question'
 
-export class Yaml {
+export abstract class Yaml {
 
     // Method responsible for reading the content of a file.
     public static read(path: string): Serialized {
@@ -163,6 +163,11 @@ export class Yaml {
             text = text.replace(Reference.PERSONS, Tree.persons)
             if (!Tree.exists(text))
                 throw new InvalidReferenceError(`Person file not found: ${text}`)
+        } else if (text.startsWith(`${Reference.PERSONS}/`)) {
+            Log.info('Dereferencing i18n text', text)
+            text = text.replace(Reference.I18N, Tree.i18n)
+            if (!Tree.exists(text))
+                throw new InvalidReferenceError(`I18N file not found: ${text}`)
         } else if (text.startsWith(`${Reference.TOPICS}/`)) {
             Log.info('Dereferencing topic', text)
             text = text.replace(Reference.TOPICS, Tree.topics)

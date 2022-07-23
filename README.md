@@ -23,6 +23,7 @@ TBD
 |[topics](./topics)|Directory with YAML files with topics details that can be referenced.|
 |[config](./config)|Directory with YAML files with general configuration.|
 |[books](./books)|Directory with YAML files defining books.|
+|[i18n](./i18n)|Directory with YAML files defining translations.|
 
 #### Content
 

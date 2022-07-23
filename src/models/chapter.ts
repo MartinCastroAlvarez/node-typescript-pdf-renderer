@@ -16,15 +16,15 @@ import { Yaml } from '../yaml'
 
 export class Chapter {
     public readonly title: Text 
-    public introduction: Array<Model>
+    public introduction: Array<Text>
+    public conclusion: Array<Text>
     public stories: Array<Story>
-    public conclusion: Array<Model>
 
     // Lazy constructor.
     constructor() {
-        this.introduction = new Array<Model>()
         this.stories = new Array<Story>()
-        this.conclusion = new Array<Model>()
+        this.introduction = new Array<Text>()
+        this.conclusion = new Array<Text>()
         this.title = new Text()
     }
 
@@ -59,9 +59,9 @@ export class Chapter {
         if (data) {
             Log.info('Loading Chapter', data)
             this.title.unserialize(data['Title']) 
-            this.introduction = data['Introduction']?.map(block => Yaml.unserialize(block))
-            this.conclusion = data['Conclusion']?.map(block => Yaml.unserialize(block))
-            this.stories = data['Stories']?.map(data => <Story>Yaml.unserialize(data))
+            this.introduction = data['Introduction']?.map(x => <Text>Yaml.unserialize(x))
+            this.conclusion = data['Conclusion']?.map(x => <Text>Yaml.unserialize(x))
+            this.stories = data['Stories']?.map(x => <Story>Yaml.unserialize(x))
         }
     }
 }

@@ -11,4 +11,5 @@ export enum Reference {
     PERSONS = '@person',
     TOPICS = '@topic',
     FILES = '@file',
+    I18N = '@i18n',
 }

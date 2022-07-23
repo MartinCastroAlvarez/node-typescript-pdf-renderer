@@ -77,6 +77,7 @@ export class Pdf implements Product {
             [
                 this.getBeginning(),
                 this.getLegal(),
+                this.getAbout(),
                 this.getTableOfContents(),
                 this.getAcknowledgement(),
                 this.getForeword(),
@@ -157,6 +158,14 @@ export class Pdf implements Product {
         let doc: any = this.init()
         doc.text("FIXME: Acknoledgements!") // FIXME
         Log.info("Legal", doc)
+        return doc
+    }
+
+    // Rendering about text.
+    private getAbout(): any {
+        let doc: any = this.init()
+        doc.text("FIXME: About the Authors!") // FIXME
+        Log.info("About", doc)
         return doc
     }
 

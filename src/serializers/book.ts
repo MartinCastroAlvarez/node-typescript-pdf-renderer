@@ -15,9 +15,9 @@ export interface SerializedBook extends Serialized {
     Subtitle?: SerializedText
     Chapters?: Array<SerializedChapter>
     Authors?: Array<SerializedPerson>
-    Foreword?: Array<Serialized>
-    Afterword?: Array<Serialized>
-    Acknowledgements?: Array<Serialized>
-    Legal?: Array<Serialized>
+    Foreword?: Array<SerializedText>
+    Afterword?: Array<SerializedText>
+    Acknowledgements?: Array<SerializedText>
+    Legal?: Array<SerializedText>
     Topics?: Array<SerializedTopic>
 }
