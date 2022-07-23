@@ -102,8 +102,7 @@ export class Yaml {
     // Method responsible for reading the content of a file.
     read(path: string): Serialized {
         console.log(`Reading YAML: ${path}`)
-        let tree: Tree = new Tree()
-        let rawContent: string = tree.read(this.dereference(path))
+        let rawContent: string = Tree.read(this.dereference(path))
         let parsedContent: any = yaml.load(rawContent)
         let curatedContent: any = this.assemble(parsedContent)
         return <Serialized>curatedContent
@@ -128,41 +127,40 @@ export class Yaml {
 
     // Generates the full path of a reference.
     dereference(text: string): string {
-        let tree: Tree = new Tree()
         if (text.startsWith(`${Reference.FONTS}/`)) {
             console.log(`Dereferencing font: ${text}`)
-            text = text.replace(Reference.FONTS, tree.fonts)
-            if (!tree.exists(text))
+            text = text.replace(Reference.FONTS, Tree.fonts)
+            if (!Tree.exists(text))
                 throw new InvalidReferenceError(`Font file not found: ${text}`)
         } else if (text.startsWith(`${Reference.CONFIG}/`)) {
             console.log(`Dereferencing config: ${text}`)
-            text = text.replace(Reference.CONFIG, tree.config)
-            if (!tree.exists(text))
+            text = text.replace(Reference.CONFIG, Tree.config)
+            if (!Tree.exists(text))
                 throw new InvalidReferenceError(`Config file not found: ${text}`)
         } else if (text.startsWith(`${Reference.IMAGES}/`))  {
             console.log(`Dereferencing image: ${text}`)
-            text = text.replace(Reference.IMAGES, tree.images)
-            if (!tree.exists(text))
+            text = text.replace(Reference.IMAGES, Tree.images)
+            if (!Tree.exists(text))
                 throw new InvalidReferenceError(`Image file not found: ${text}`)
         } else if (text.startsWith(`${Reference.FILES}/`))  {
             console.log(`Dereferencing file: ${text}`)
-            text = text.replace(Reference.FILES, tree.files)
-            if (!tree.exists(text))
+            text = text.replace(Reference.FILES, Tree.files)
+            if (!Tree.exists(text))
                 throw new InvalidReferenceError(`File not found: ${text}`)
         } else if (text.startsWith(`${Reference.BOOKS}/`)) {
             console.log(`Dereferencing book: ${text}`)
-            text = text.replace(Reference.BOOKS, tree.books)
-            if (!tree.exists(text))
+            text = text.replace(Reference.BOOKS, Tree.books)
+            if (!Tree.exists(text))
                 throw new InvalidReferenceError(`Book file not found: ${text}`)
         } else if (text.startsWith(`${Reference.PERSONS}/`)) {
             console.log(`Dereferencing person: ${text}`)
-            text = text.replace(Reference.PERSONS, tree.persons)
-            if (!tree.exists(text))
+            text = text.replace(Reference.PERSONS, Tree.persons)
+            if (!Tree.exists(text))
                 throw new InvalidReferenceError(`Person file not found: ${text}`)
         } else if (text.startsWith(`${Reference.TOPICS}/`)) {
             console.log(`Dereferencing topic: ${text}`)
-            text = text.replace(Reference.TOPICS, tree.topics)
-            if (!tree.exists(text))
+            text = text.replace(Reference.TOPICS, Tree.topics)
+            if (!Tree.exists(text))
                 throw new InvalidReferenceError(`Topic file not found: ${text}`)
         }
         return text

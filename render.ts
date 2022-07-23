@@ -28,10 +28,18 @@ parser.add_argument('-l', '--language', {
     required: true,
 })
 
+// Each book shall support multiple formats.
+parser.add_argument('-f', '--format', {
+    help: 'Format such as "pdf", "html" or "course".',
+    default: 'pdf',
+    required: true,
+})
+
 let args = parser.parse_args()
 
 const command: Command = new Command()
-command.renderPdf({
+command.run({
     title: args.title,
     language: args.language,
+    format: args.format,
 })

@@ -22,8 +22,7 @@ export class File implements Model {
     // Path getter and setter.
     getPath(): string { return this.path }
     setPath(path: string) {
-        let tree: Tree = new Tree()
-        if (!tree.exists(path))
+        if (!Tree.exists(path))
             throw new FileNotFoundError(`Path not exists: ${path}`)
         this.path = path
     }

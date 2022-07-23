@@ -11,66 +11,6 @@ const PDFDocument = require('pdfkit')
 const path = require('path')
 const fs = require('fs')
 
-// This interface is responsible for transforming the User input
-// into a Typescript object, suitable for the App class.
-interface Parameters {
-    name: string
-}
-
-class App {
-    private name: string
- 
-    constructor(params: Parameters) {
-        // Parsing parameters from CLI arguments.
-        this.name = params.name
-    }
-
-    run(): void {
-        // Main hook.
-        throw Error(this.name)
-        console.log(`Hello, {this.name}`)
-    }
-}
-
-export default App
-
-/*
-
-// ----------------------------------------------------------------
-// Application constants.
-// ----------------------------------------------------------------
-const lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam in suscipit purus.  Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Vivamus nec hendrerit felis. Morbi aliquam facilisis risus eu lacinia. Sed eu leo in turpis fringilla hendrerit. Ut nec accumsan nisl.'
-
-// ----------------------------------------------------------------
-// Definining file system structure.
-// ----------------------------------------------------------------
-const fonts: String = path.join(__dirname, 'fonts')
-const images = path.join(__dirname, 'images')
-const books = path.join(__dirname, 'books')
-const chapters = path.join(__dirname, 'chapters')
-const chapters = path.join(__dirname, 'chapters')
-
-throw Error(fonts, images, books, chapters)
-
-let x = {
-    normal: 'fonts/montserrat/MontserratAlternates-Light.ttf',
-    bold: 'fonts/montserrat/MontserratAlternates-Bold.ttf',
-    italic: 'fonts/montserrat/MontserratAlternates-Italic.ttf',
-}
-
-// ----------------------------------------------------------------
-// ----------------------------------------------------------------
-readYamlFile('foo.yml').then(data => {
-  console.log(data)
-  //=> {foo: true}
-})
-
-const fonts = {
-    normal: 'fonts/montserrat/MontserratAlternates-Light.ttf',
-    bold: 'fonts/montserrat/MontserratAlternates-Bold.ttf',
-    italic: 'fonts/montserrat/MontserratAlternates-Italic.ttf',
-}
-
 // ----------------------------------------------------------------
 // Creating a new PDF document object.
 // ----------------------------------------------------------------

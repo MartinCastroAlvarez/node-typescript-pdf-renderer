@@ -1,24 +1,27 @@
 // ----------------------------------------------------------------
 // Purpose:
-// This class implements the Product class.
+// This class implements the HTML Product class.
 // ----------------------------------------------------------------
 
-import { Language } from './enums/language'
+import { Language } from '../enums/language'
 
-import { SerializedBook } from './serializers/book'
-import { Book } from './models/book'
+import { Product } from '../interfaces/product'
 
-import { Config } from './config'
-import { Yaml } from './yaml'
+import { Book } from '../models/book'
+
+import { SerializedBook } from '../serializers/book'
+
+import { Yaml } from '../yaml'
+
+import { Config } from '../config'
 
 class InvalidLanguageError extends Error {}
 class InvalidTitleError extends Error {}
-class WorkInProgressError extends Error {}
 
-export class Product {
+export class Html implements Product {
     private title: string
-    private book: Book
     private language: Language
+    public readonly book: Book
     public readonly config: Config
 
     constructor() {
@@ -48,29 +51,12 @@ export class Product {
     load(): void {
         let yaml: Yaml = new Yaml()
         this.book.unserialize(<SerializedBook>yaml.read(`@books/${this.getTitle()}.yaml`))
+        this.config.load()
     }
 
-    // Rendering PDF.
-    toPdf(): string {
+    // Rendering.
+    render(): string {
         console.log(`Book: ${JSON.stringify(this.book.serialize())}`)
-        return "FIXME"
-    }
-
-    // Rendering Video.
-    toVideo(): string {
-        throw new WorkInProgressError('WIP')
-        return "FIXME"
-    }
-
-    // Rendering Course.
-    toCourse(): string {
-        throw new WorkInProgressError('WIP')
-        return "FIXME"
-    }
-
-    // Rendering HTML page.
-    toHtml(): string {
-        throw new WorkInProgressError('WIP')
         return "FIXME"
     }
 }

@@ -3,48 +3,38 @@
 // This class is the interface with the User to render the PDF.
 // ----------------------------------------------------------------
 
+import { Format } from './enums/format'
 import { Language } from './enums/language'
+
 import { Arguments } from './interfaces/arguments'
-import { Product } from './product'
+import { Product } from './interfaces/product'
+
+import { Pdf } from './products/pdf'
+import { Course } from './products/course'
+import { Html } from './products/html'
+import { Video } from './products/video'
+
+class NotImplementedError extends Error {}
 
 export class Command {
-    // Method responsible for rendering a PDF.
-    renderPdf(args: Arguments): void {
-        let product: Product = new Product()
-        product.setLanguage(Language[args.language.toUpperCase()])
+    run(args: Arguments): void {
+        let language: Language = Language[args.language.toUpperCase()]
+        let format: Format = Format[args.format.toUpperCase()]
+        let product: Product
+        if (format == Format.PDF)
+            product = new Pdf()
+        else if (format == Format.HTML)
+            product = new Html()
+        else if (format == Format.VIDEO)
+            product = new Video()
+        else if (format == Format.COURSE)
+            product = new Course()
+        else
+            throw new NotImplementedError(`Not implemented format!`)
+        product.setLanguage(language)
         product.setTitle(args.title)
         product.load()
-        let path: string = product.toPdf()
+        let path: string = product.render()
         console.log(`PDF rendered into: ${path}`)
-    }
-
-    // Method responsible for rendering a course.
-    renderCourse(args: Arguments): void {
-        let product: Product = new Product()
-        product.setLanguage(Language[args.language.toUpperCase()])
-        product.setTitle(args.title)
-        product.load()
-        let path: string = product.toCourse()
-        console.log(`Course rendered into: ${path}`)
-    }
-
-    // Method responsible for rendering a video.
-    renderVideo(args: Arguments): void {
-        let product: Product = new Product()
-        product.setLanguage(Language[args.language.toUpperCase()])
-        product.setTitle(args.title)
-        product.load()
-        let path: string = product.toVideo()
-        console.log(`Video rendered into: ${path}`)
-    }
-
-    // Method responsible for rendering a video.
-    renderHtml(args: Arguments): void {
-        let product: Product = new Product()
-        product.setLanguage(Language[args.language.toUpperCase()])
-        product.setTitle(args.title)
-        product.load()
-        let path: string = product.toHtml()
-        console.log(`HTML rendered into: ${path}`)
     }
 }

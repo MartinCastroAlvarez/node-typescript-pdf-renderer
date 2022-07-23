@@ -1,10 +1,11 @@
 // ----------------------------------------------------------------
 // Purpose:
-// This library implements the Arguments interface.
+// This library implements the Format enum.
 // ----------------------------------------------------------------
 
-export interface Arguments {
-    title: string
-    language: string
-    format: string
+export enum Format {
+    PDF = 'pdf',
+    COURSE = 'course',
+    HTML = 'html',
+    VIDEO = 'video',
 }
