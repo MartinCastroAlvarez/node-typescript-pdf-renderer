@@ -46,6 +46,7 @@ TBD
 |[src/serializers](./src/serializers)|Application serializer interfaces.|
 |[src/products](./src/products)|Application products.|
 |[src/adapter](./src/adapters)|Application adapters.|
+|[src/errors](./src/errors)|Application errors.|
 
 ## Instructions
 

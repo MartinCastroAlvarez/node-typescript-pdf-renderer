@@ -12,8 +12,8 @@ import { Log } from '../logging'
 import { Source } from './source'
 import { Language } from '../enums/language'
 
-class EmptynessError extends Error {}
-class TranslationError extends Error {}
+import { EmptynessError } from '../errors/text'
+import { TranslationError } from '../errors/text'
 
 export class Text implements Model {
     private readonly i18n: Map<Language, string>

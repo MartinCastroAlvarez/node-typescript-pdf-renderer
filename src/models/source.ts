@@ -13,7 +13,7 @@ import { Person } from './person'
 import { Image } from './image'
 import { Text } from './text'
 
-class InvalidTitleError extends Error {}
+import { InvalidTitleError } from '../errors/source'
 
 export class Source implements Model {
     private title: string

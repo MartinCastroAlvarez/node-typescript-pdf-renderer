@@ -19,11 +19,11 @@ import { SerializedBook } from '../serializers/book'
 import { Yaml } from '../yaml'
 import { Tree } from '../tree'
 
+import { InvalidLanguageError } from '../errors/product'
+import { InvalidTitleError } from '../errors/product'
+
 import { Config } from '../config'
 import { Log } from '../logging'
-
-class InvalidLanguageError extends Error {}
-class InvalidTitleError extends Error {}
 
 export class Pdf implements Product {
     private title: string

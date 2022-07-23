@@ -16,7 +16,7 @@ import { Video } from './products/video'
 
 import { Log } from './logging'
 
-class NotImplementedError extends Error {}
+import { NotImplementedError } from './errors/command'
 
 export class Command {
     public static run(args: Arguments): void {

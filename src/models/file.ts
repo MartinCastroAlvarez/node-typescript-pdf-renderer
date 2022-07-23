@@ -11,7 +11,7 @@ import { Model } from '../interfaces/model'
 
 import { Log } from '../logging'
 
-class FileNotFoundError extends Error {}
+import { FileNotFoundError } from '../errors/tree'
 
 export class File implements Model {
     private path: string

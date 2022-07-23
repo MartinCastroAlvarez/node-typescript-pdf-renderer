@@ -12,7 +12,7 @@ import { Log } from '../logging'
 import { Image } from './image'
 import { Text } from './text'
 
-class InvalidPersonTitleError extends Error {}
+import { InvalidPersonTitleError } from '../errors/person'
 
 export class Person implements Model {
     private name: string

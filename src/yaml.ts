@@ -13,6 +13,9 @@ import { Reference } from './enums/reference'
 import { Model } from './interfaces/model'
 import { Serialized } from './interfaces/serialized'
 
+import { NotImplementedError } from './errors/yaml'
+import { InvalidReferenceError } from './errors/yaml'
+
 import { Analogy } from './models/analogy'
 import { Person } from './models/person'
 import { Brand } from './models/brand'
@@ -95,9 +98,6 @@ import { SerializedText } from './serializers/text'
 import { SerializedTopic} from './serializers/topic'
 import { SerializedTypeface } from './serializers/typeface'
 import { SerializedQuestion } from './serializers/question'
-
-class NotImplementedError extends Error {}
-class InvalidReferenceError extends Error {}
 
 export class Yaml {
 

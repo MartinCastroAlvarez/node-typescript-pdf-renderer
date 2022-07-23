@@ -8,8 +8,8 @@ const path = require('path')
 
 import { Log } from './logging'
 
-class FileNotFoundError extends Error {}
-class DirectoryNotFoundError extends Error {}
+import { FileNotFoundError } from './errors/tree'
+import { DirectoryNotFoundError } from './errors/tree'
 
 const root: string = path.dirname(__dirname)
 

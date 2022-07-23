@@ -16,8 +16,8 @@ import { Yaml } from '../yaml'
 import { Config } from '../config'
 import { Log } from '../logging'
 
-class InvalidLanguageError extends Error {}
-class InvalidTitleError extends Error {}
+import { InvalidLanguageError } from '../errors/product'
+import { InvalidTitleError } from '../errors/product'
 
 export class Course implements Product {
     private title: string

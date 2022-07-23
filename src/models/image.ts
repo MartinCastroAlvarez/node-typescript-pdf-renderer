@@ -11,12 +11,12 @@ import { Log } from '../logging'
 
 import { File } from './file'
 
-class InvalidImageHeightError extends Error {}
-class InvalidImageWidthError extends Error {}
-class InvalidImageLeftError extends Error {}
-class InvalidImageRightError extends Error {}
-class InvalidImageTopError extends Error {}
-class InvalidImageBottomError extends Error {}
+import { InvalidImageHeightError } from '../errors/image'
+import { InvalidImageWidthError } from '../errors/image'
+import { InvalidImageLeftError } from '../errors/image'
+import { InvalidImageRightError } from '../errors/image'
+import { InvalidImageTopError } from '../errors/image'
+import { InvalidImageBottomError } from '../errors/image'
 
 export class Image extends File implements Model {
     private width: number
