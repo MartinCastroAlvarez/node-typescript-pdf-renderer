@@ -100,33 +100,33 @@ class InvalidReferenceError extends Error {}
 export class Yaml {
 
     // Method responsible for reading the content of a file.
-    read(path: string): Serialized {
+    public static read(path: string): Serialized {
         console.log(`Reading YAML: ${path}`)
-        let rawContent: string = Tree.read(this.dereference(path))
+        let rawContent: string = Tree.read(Yaml.dereference(path))
         let parsedContent: any = yaml.load(rawContent)
-        let curatedContent: any = this.assemble(parsedContent)
+        let curatedContent: any = Yaml.assemble(parsedContent)
         return <Serialized>curatedContent
     }
 
     // Method responsible for resolving references inside YAML files.
-    assemble(content: any): any {
+    public static assemble(content: any): any {
         console.log(`Assembling ${typeof content}: ${JSON.stringify(content)}`)
         if (Array.isArray(content) || content instanceof Array) {
-            content = content.map(item => this.assemble(item))
+            content = content.map(item => Yaml.assemble(item))
         } else if (typeof content == "object" && content != null) {
             for (let key in content) {
-                content[key] = this.assemble(content[key])
+                content[key] = Yaml.assemble(content[key])
             }
         } else if (typeof content === 'string' || content instanceof String) {
-            content = this.dereference(<string>content)
+            content = Yaml.dereference(<string>content)
             if (content.endsWith('.yaml'))
-                content = this.read(<string>content)
+                content = Yaml.read(<string>content)
         }
         return content
     }
 
     // Generates the full path of a reference.
-    dereference(text: string): string {
+    public static dereference(text: string): string {
         if (text.startsWith(`${Reference.FONTS}/`)) {
             console.log(`Dereferencing font: ${text}`)
             text = text.replace(Reference.FONTS, Tree.fonts)
@@ -168,7 +168,7 @@ export class Yaml {
 
     // Method responsible for parsing a YAML string and generating
     // the instances of the classes in the models directory.
-    unserialize(data: Serialized): Model {
+    public static unserialize(data: Serialized): Model {
         console.log(`Unserializing '${data.Type}'`)
         if (!data || !data.Type)
             data.Type = Text.name

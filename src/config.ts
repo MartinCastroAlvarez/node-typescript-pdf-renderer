@@ -25,9 +25,8 @@ export class Config {
     }
 
     load(): void {
-        let yaml: Yaml = new Yaml()
-        this.brand.unserialize(<SerializedBrand>yaml.read('@config/Brand.yaml'))
-        this.pallete.unserialize(<SerializedPallete>yaml.read('@config/Pallete.yaml'))
-        this.typeface.unserialize(<SerializedTypeface>yaml.read('@config/Typeface.yaml'))
+        this.brand.unserialize(<SerializedBrand>Yaml.read('@config/Brand.yaml'))
+        this.pallete.unserialize(<SerializedPallete>Yaml.read('@config/Pallete.yaml'))
+        this.typeface.unserialize(<SerializedTypeface>Yaml.read('@config/Typeface.yaml'))
     }
 }

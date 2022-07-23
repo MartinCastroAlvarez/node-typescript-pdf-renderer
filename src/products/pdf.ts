@@ -28,13 +28,11 @@ export class Pdf implements Product {
     private title: string
     private language: Language
     public readonly book: Book
-    public readonly config: Config
 
     constructor() {
         this.book = new Book()
         this.title = ''
         this.language = Language.EN
-        this.config = new Config()
     }
 
     // Title getter and setter.
@@ -55,9 +53,7 @@ export class Pdf implements Product {
 
     // Loading book from YAML files.
     load(): void {
-        let yaml: Yaml = new Yaml()
-        this.book.unserialize(<SerializedBook>yaml.read(`@books/${this.getTitle()}.yaml`))
-        this.config.load()
+        this.book.unserialize(<SerializedBook>Yaml.read(`@books/${this.getTitle()}.yaml`))
     }
 
     // Rendering.

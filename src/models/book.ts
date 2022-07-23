@@ -129,34 +129,33 @@ export class Book implements Model {
             console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
             this.title.unserialize(data['Title'])
             this.subtitle.unserialize(data['Subtitle'])
-            let yaml: Yaml = new Yaml()
             this.foreword = data['Foreword']?.map(block => {
                 console.log(`Loading book foreword.`)
-                return yaml.unserialize(block)
+                return Yaml.unserialize(block)
             })
             this.afterword = data['Afterword']?.map(block => {
                 console.log(`Loading book afterword.`)
-                return yaml.unserialize(block)
+                return Yaml.unserialize(block)
             })
             this.legal = data['Legal']?.map(block => {
                 console.log(`Loading book legal text.`)
-                return yaml.unserialize(block)
+                return Yaml.unserialize(block)
             })
             this.acknowledgements = data['Acknowledgements']?.map(block => {
                 console.log(`Loading book legal acknowledgements.`)
-                return yaml.unserialize(block)
+                return Yaml.unserialize(block)
             })
             this.prologue = data['Prologue']?.map(block => {
                 console.log(`Loading book legal prologue.`)
-                return yaml.unserialize(block)
+                return Yaml.unserialize(block)
             })
             this.chapters = data['Chapters']?.map(block => {
                 console.log(`Loading book chapters.`)
-                return <Chapter>yaml.unserialize(block)
+                return <Chapter>Yaml.unserialize(block)
             })
             this.authors = data['Authors']?.map(block => {
                 console.log(`Loading book persons.`)
-                return <Person>yaml.unserialize(block)
+                return <Person>Yaml.unserialize(block)
             })
         }
     }

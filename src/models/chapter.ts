@@ -57,19 +57,18 @@ export class Chapter {
     unserialize(data: SerializedChapter): void {
         if (data) {
             console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
-            let yaml: Yaml = new Yaml()
             this.title.unserialize(data['Title']) 
             this.introduction = data['Introduction']?.map(block => {
                 console.log(`Loading chapter introduction.`)
-                return yaml.unserialize(block)
+                return Yaml.unserialize(block)
             })
             this.conclusion = data['Conclusion']?.map(block => {
                 console.log(`Loading chapter conclusion.`)
-                return yaml.unserialize(block)
+                return Yaml.unserialize(block)
             })
             this.stories = data['Stories']?.map(data => {
                 console.log(`Loading chapter stories.`)
-                return <Story>yaml.unserialize(data)
+                return <Story>Yaml.unserialize(data)
             })
         }
     }
