@@ -35,10 +35,9 @@ parser.add_argument('-f', '--format', {
     required: true,
 })
 
-let args = parser.parse_args()
+let args: any = parser.parse_args()
 
-const command: Command = new Command()
-command.run({
+Command.run({
     title: args.title,
     language: args.language,
     format: args.format,

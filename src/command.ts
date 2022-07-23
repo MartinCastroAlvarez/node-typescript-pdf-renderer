@@ -17,7 +17,7 @@ import { Video } from './products/video'
 class NotImplementedError extends Error {}
 
 export class Command {
-    run(args: Arguments): void {
+    public static run(args: Arguments): void {
         let language: Language = Language[args.language.toUpperCase()]
         let format: Format = Format[args.format.toUpperCase()]
         let product: Product

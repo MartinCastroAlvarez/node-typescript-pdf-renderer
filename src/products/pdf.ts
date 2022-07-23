@@ -20,6 +20,7 @@ import { Yaml } from '../yaml'
 import { Tree } from '../tree'
 
 import { Config } from '../config'
+import { Log } from '../logging'
 
 class InvalidLanguageError extends Error {}
 class InvalidTitleError extends Error {}
