@@ -7,6 +7,8 @@ import { SerializedQuote } from '../serializers/quote'
 
 import { Model } from '../interfaces/model'
 
+import { Log } from '../logging'
+
 import { Person } from './person'
 import { Text } from './text'
 
@@ -28,7 +30,7 @@ export class Quote extends Text implements Model {
     unserialize(data: SerializedQuote): void {
         super.unserialize(data)
         if (data) {
-            console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
+            Log.info('Loading Quote', data)
             this.author.unserialize(data['Author'])
         }
     }

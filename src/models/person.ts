@@ -7,6 +7,8 @@ import { SerializedPerson } from '../serializers/person'
 
 import { Model } from '../interfaces/model'
 
+import { Log } from '../logging'
+
 import { Image } from './image'
 import { Text } from './text'
 
@@ -59,7 +61,7 @@ export class Person implements Model {
     }
     unserialize(data: SerializedPerson): void {
         if (data) {
-            console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
+            Log.info('Loading Person', data)
             this.setName(data['Name'])
             this.setWebsite(data['Website'])
             this.setEmail(data['Email'])

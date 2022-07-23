@@ -66,6 +66,7 @@ import { Text } from './text'
 import { Topic } from './topic'
 
 import { Yaml } from '../yaml'
+import { Log } from '../logging'
 
 export class Book implements Model {
     public readonly title: Text
@@ -126,37 +127,16 @@ export class Book implements Model {
     }
     unserialize(data: SerializedBook): void {
         if (data) {
-            console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
+            Log.info('Loading Book', data)
             this.title.unserialize(data['Title'])
             this.subtitle.unserialize(data['Subtitle'])
-            this.foreword = data['Foreword']?.map(block => {
-                console.log(`Loading book foreword.`)
-                return Yaml.unserialize(block)
-            })
-            this.afterword = data['Afterword']?.map(block => {
-                console.log(`Loading book afterword.`)
-                return Yaml.unserialize(block)
-            })
-            this.legal = data['Legal']?.map(block => {
-                console.log(`Loading book legal text.`)
-                return Yaml.unserialize(block)
-            })
-            this.acknowledgements = data['Acknowledgements']?.map(block => {
-                console.log(`Loading book legal acknowledgements.`)
-                return Yaml.unserialize(block)
-            })
-            this.prologue = data['Prologue']?.map(block => {
-                console.log(`Loading book legal prologue.`)
-                return Yaml.unserialize(block)
-            })
-            this.chapters = data['Chapters']?.map(block => {
-                console.log(`Loading book chapters.`)
-                return <Chapter>Yaml.unserialize(block)
-            })
-            this.authors = data['Authors']?.map(block => {
-                console.log(`Loading book persons.`)
-                return <Person>Yaml.unserialize(block)
-            })
+            this.foreword = data['Foreword']?.map(block => Yaml.unserialize(block))
+            this.afterword = data['Afterword']?.map(block => Yaml.unserialize(block))
+            this.legal = data['Legal']?.map(block => Yaml.unserialize(block))
+            this.acknowledgements = data['Acknowledgements']?.map(block => Yaml.unserialize(block))
+            this.prologue = data['Prologue']?.map(block => Yaml.unserialize(block))
+            this.chapters = data['Chapters']?.map(block => <Chapter>Yaml.unserialize(block))
+            this.authors = data['Authors']?.map(block => <Person>Yaml.unserialize(block))
         }
     }
 }

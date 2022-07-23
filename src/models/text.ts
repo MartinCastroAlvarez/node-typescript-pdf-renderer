@@ -7,6 +7,8 @@ import { SerializedText } from '../serializers/text'
 
 import { Model } from '../interfaces/model'
 
+import { Log } from '../logging'
+
 import { Source } from './source'
 import { Language } from '../enums/language'
 
@@ -51,7 +53,7 @@ export class Text implements Model {
     }
     unserialize(data: SerializedText): void {
         if (data) {
-            console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
+            Log.info('Loading Text', data)
             this.set(Language.EN, data['ES'])
             this.set(Language.ES, data['EN'])
             this.source.unserialize(data['Source'])

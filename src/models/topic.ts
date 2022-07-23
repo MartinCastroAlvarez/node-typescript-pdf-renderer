@@ -7,6 +7,8 @@ import { SerializedTopic } from '../serializers/topic'
 
 import { Model } from '../interfaces/model'
 
+import { Log } from '../logging'
+
 import { Image } from './image'
 import { Text } from './text'
 
@@ -38,7 +40,7 @@ export class Topic implements Model {
     }
     unserialize(data: SerializedTopic): void {
         if (data) {
-            console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
+            Log.info('Loading Topic', data)
             this.title.unserialize(data['Title'])
             this.description.unserialize(data['Description'])
             this.logo.unserialize(data['Logo'])

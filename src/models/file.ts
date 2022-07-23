@@ -9,6 +9,8 @@ import { Tree } from '../tree'
 
 import { Model } from '../interfaces/model'
 
+import { Log } from '../logging'
+
 class FileNotFoundError extends Error {}
 
 export class File implements Model {
@@ -41,7 +43,7 @@ export class File implements Model {
     }
     unserialize(data: SerializedFile): void {
         if (data) {
-            console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
+            Log.info('Loading File', data)
             this.setPath(data['Path'])
         }
     }

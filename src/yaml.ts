@@ -6,6 +6,8 @@
 const yaml = require('js-yaml')
 
 import { Tree } from './tree'
+import { Log } from './logging'
+
 import { Reference } from './enums/reference'
 
 import { Model } from './interfaces/model'
@@ -101,7 +103,7 @@ export class Yaml {
 
     // Method responsible for reading the content of a file.
     public static read(path: string): Serialized {
-        console.log(`Reading YAML: ${path}`)
+        Log.info('Reading YAML', path)
         let rawContent: string = Tree.read(Yaml.dereference(path))
         let parsedContent: any = yaml.load(rawContent)
         let curatedContent: any = Yaml.assemble(parsedContent)
@@ -110,7 +112,7 @@ export class Yaml {
 
     // Method responsible for resolving references inside YAML files.
     public static assemble(content: any): any {
-        console.log(`Assembling ${typeof content}: ${JSON.stringify(content)}`)
+        Log.info('Assembling', content)
         if (Array.isArray(content) || content instanceof Array) {
             content = content.map(item => Yaml.assemble(item))
         } else if (typeof content == "object" && content != null) {
@@ -128,37 +130,37 @@ export class Yaml {
     // Generates the full path of a reference.
     public static dereference(text: string): string {
         if (text.startsWith(`${Reference.FONTS}/`)) {
-            console.log(`Dereferencing font: ${text}`)
+            Log.info('Dereferencing font', text)
             text = text.replace(Reference.FONTS, Tree.fonts)
             if (!Tree.exists(text))
                 throw new InvalidReferenceError(`Font file not found: ${text}`)
         } else if (text.startsWith(`${Reference.CONFIG}/`)) {
-            console.log(`Dereferencing config: ${text}`)
+            Log.info('Dereferencing config', text)
             text = text.replace(Reference.CONFIG, Tree.config)
             if (!Tree.exists(text))
                 throw new InvalidReferenceError(`Config file not found: ${text}`)
         } else if (text.startsWith(`${Reference.IMAGES}/`))  {
-            console.log(`Dereferencing image: ${text}`)
+            Log.info('Dereferencing image', text)
             text = text.replace(Reference.IMAGES, Tree.images)
             if (!Tree.exists(text))
                 throw new InvalidReferenceError(`Image file not found: ${text}`)
         } else if (text.startsWith(`${Reference.FILES}/`))  {
-            console.log(`Dereferencing file: ${text}`)
+            Log.info('Dereferencing file', text)
             text = text.replace(Reference.FILES, Tree.files)
             if (!Tree.exists(text))
                 throw new InvalidReferenceError(`File not found: ${text}`)
         } else if (text.startsWith(`${Reference.BOOKS}/`)) {
-            console.log(`Dereferencing book: ${text}`)
+            Log.info('Dereferencing book', text)
             text = text.replace(Reference.BOOKS, Tree.books)
             if (!Tree.exists(text))
                 throw new InvalidReferenceError(`Book file not found: ${text}`)
         } else if (text.startsWith(`${Reference.PERSONS}/`)) {
-            console.log(`Dereferencing person: ${text}`)
+            Log.info('Dereferencing person', text)
             text = text.replace(Reference.PERSONS, Tree.persons)
             if (!Tree.exists(text))
                 throw new InvalidReferenceError(`Person file not found: ${text}`)
         } else if (text.startsWith(`${Reference.TOPICS}/`)) {
-            console.log(`Dereferencing topic: ${text}`)
+            Log.info('Dereferencing topic', text)
             text = text.replace(Reference.TOPICS, Tree.topics)
             if (!Tree.exists(text))
                 throw new InvalidReferenceError(`Topic file not found: ${text}`)
@@ -169,7 +171,7 @@ export class Yaml {
     // Method responsible for parsing a YAML string and generating
     // the instances of the classes in the models directory.
     public static unserialize(data: Serialized): Model {
-        console.log(`Unserializing '${data.Type}'`)
+        Log.info('Unserializing', data.Type)
         if (!data || !data.Type)
             data.Type = Text.name
         switch(data.Type) {

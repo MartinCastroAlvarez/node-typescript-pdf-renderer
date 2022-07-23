@@ -59,6 +59,8 @@ export class Pdf implements Product {
 
     // Rendering.
     render(): string {
+        Log.info("Lorem", this.book)
+
         // Initializing PDF document.
         let doc = new PDFDocument({
             bufferPages: true,

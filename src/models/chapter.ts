@@ -11,6 +11,7 @@ import { Text } from './text'
 import { Topic } from './topic'
 import { Story } from './story'
 
+import { Log } from '../logging'
 import { Yaml } from '../yaml'
 
 export class Chapter {
@@ -56,20 +57,11 @@ export class Chapter {
     }
     unserialize(data: SerializedChapter): void {
         if (data) {
-            console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
+            Log.info('Loading Chapter', data)
             this.title.unserialize(data['Title']) 
-            this.introduction = data['Introduction']?.map(block => {
-                console.log(`Loading chapter introduction.`)
-                return Yaml.unserialize(block)
-            })
-            this.conclusion = data['Conclusion']?.map(block => {
-                console.log(`Loading chapter conclusion.`)
-                return Yaml.unserialize(block)
-            })
-            this.stories = data['Stories']?.map(data => {
-                console.log(`Loading chapter stories.`)
-                return <Story>Yaml.unserialize(data)
-            })
+            this.introduction = data['Introduction']?.map(block => Yaml.unserialize(block))
+            this.conclusion = data['Conclusion']?.map(block => Yaml.unserialize(block))
+            this.stories = data['Stories']?.map(data => <Story>Yaml.unserialize(data))
         }
     }
 }

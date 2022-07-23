@@ -6,6 +6,8 @@
 import * as fs from 'fs'
 const path = require('path')
 
+import { Log } from './logging'
+
 class FileNotFoundError extends Error {}
 class DirectoryNotFoundError extends Error {}
 
@@ -34,7 +36,7 @@ export class Tree {
 
     // Read file from path.
     public static read(path: string) {
-        console.log(`Reading file: ${path}`)
+        Log.info('Reading file', path)
         if (!Tree.exists(path))
             throw new FileNotFoundError(`File does not exist: ${path}`)
         return fs.readFileSync(path, 'utf8')
@@ -42,7 +44,7 @@ export class Tree {
 
     // List files in directory.
     public static list(path: string) {
-        console.log(`Listing files in: ${path}`)
+        Log.info('Listing files in', path)
         if (!Tree.exists(path))
             throw new DirectoryNotFoundError(`File does not exist: ${path}`)
         return fs.readdirSync(path)
@@ -50,6 +52,7 @@ export class Tree {
 
     // Creating a write stream to a file.
     public static stream(path: string): object {
+        Log.info('Writing to', path)
         return fs.createWriteStream(path)
     }
 }

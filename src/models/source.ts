@@ -7,6 +7,8 @@ import { SerializedSource } from '../serializers/source'
 
 import { Model } from '../interfaces/model'
 
+import { Log } from '../logging'
+
 import { Person } from './person'
 import { Image } from './image'
 import { Text } from './text'
@@ -49,7 +51,7 @@ export class Source implements Model {
     }
     unserialize(data: SerializedSource): void {
         if (data) {
-            console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
+            Log.info('Loading Source', data)
             this.setTitle(data['Title'])
             this.authors = data['Authors']?.map(data => {
                 let person: Person = new Person()

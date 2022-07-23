@@ -7,6 +7,8 @@ import { SerializedStory } from '../serializers/story'
 
 import { Model } from '../interfaces/model'
 
+import { Log } from '../logging'
+
 import { Topic } from './topic'
 import { Text } from './text'
 import { Yaml } from '../yaml'
@@ -39,16 +41,10 @@ export class Story implements Model {
     }
     unserialize(data: SerializedStory): void {
         if (data) {
-            console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
+            Log.info('Loading Story', data)
             this.title.unserialize(data['Title']) 
-            this.blocks = data['Blocks']?.map(block => {
-                console.log(`Loading story blocks.`)
-                return Yaml.unserialize(block)
-            })
-            this.topics = data['Topics']?.map(topic => {
-                console.log(`Loading story topics.`)
-                return <Topic>Yaml.unserialize(topic)
-            })
+            this.blocks = data['Blocks']?.map(block => Yaml.unserialize(block))
+            this.topics = data['Topics']?.map(topic => <Topic>Yaml.unserialize(topic))
         }
     }
 }

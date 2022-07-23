@@ -7,6 +7,8 @@ import { SerializedPallete } from '../serializers/pallete'
 
 import { Model } from '../interfaces/model'
 
+import { Log } from '../logging'
+
 export class Pallete implements Model {
     private primary: string
     private secondary: string
@@ -61,7 +63,7 @@ export class Pallete implements Model {
     }
     unserialize(data: SerializedPallete): void {
         if (data) {
-            console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
+            Log.info('Loading Pallete', data)
             this.setPrimary(data['Primary'])
             this.setSecondary(data['Secondary'])
             this.setWhite(data['White'])

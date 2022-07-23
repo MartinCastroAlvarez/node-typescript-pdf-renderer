@@ -7,6 +7,8 @@ import { SerializedList } from '../serializers/list'
 
 import { Model } from '../interfaces/model'
 
+import { Log } from '../logging'
+
 import { Text } from './text'
 
 export class List implements Model {
@@ -36,7 +38,7 @@ export class List implements Model {
     }
     unserialize(data: SerializedList): void {
         if (data) {
-            console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
+            Log.info('Loading List', data)
             this.items = data['Items']?.map(item => {
                 let text: Text = new Text()
                 text.unserialize(item)

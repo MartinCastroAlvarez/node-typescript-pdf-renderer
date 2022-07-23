@@ -14,6 +14,7 @@ import { SerializedBook } from '../serializers/book'
 import { Yaml } from '../yaml'
 
 import { Config } from '../config'
+import { Log } from '../logging'
 
 class InvalidLanguageError extends Error {}
 class InvalidTitleError extends Error {}
@@ -52,7 +53,6 @@ export class Video implements Product {
 
     // Rendering.
     render(): string {
-        console.log(`Book: ${JSON.stringify(this.book.serialize())}`)
         return "FIXME"
     }
 }

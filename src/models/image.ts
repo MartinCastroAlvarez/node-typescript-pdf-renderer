@@ -7,6 +7,8 @@ import { SerializedImage } from '../serializers/image'
 
 import { Model } from '../interfaces/model'
 
+import { Log } from '../logging'
+
 import { File } from './file'
 
 class InvalidImageHeightError extends Error {}
@@ -103,7 +105,7 @@ export class Image extends File implements Model {
     }
     unserialize(data: SerializedImage): void {
         if (data) {
-            console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
+            Log.info('Loading Image', data)
             this.setPath(data['Path'])
             this.setWidth(data['Width'])
             this.setHeight(data['Height'])

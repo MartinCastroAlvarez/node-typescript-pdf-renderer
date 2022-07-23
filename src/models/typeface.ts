@@ -7,6 +7,8 @@ import { SerializedTypeface } from '../serializers/typeface'
 
 import { Model } from '../interfaces/model'
 
+import { Log } from '../logging'
+
 export class Typeface implements Model {
     private cover: string
     private normal: string
@@ -54,7 +56,7 @@ export class Typeface implements Model {
     }
     unserialize(data: SerializedTypeface): void {
         if (data) {
-            console.log(`Loading ${data.Type}: ${JSON.stringify(data)}`)
+            Log.info('Loading Typeface', data)
             this.setNormal(data['Normal'])
             this.setBold(data['Bold'])
             this.setCover(data['Cover'])

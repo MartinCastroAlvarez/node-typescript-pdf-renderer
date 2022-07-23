@@ -14,6 +14,8 @@ import { Course } from './products/course'
 import { Html } from './products/html'
 import { Video } from './products/video'
 
+import { Log } from './logging'
+
 class NotImplementedError extends Error {}
 
 export class Command {
@@ -35,6 +37,6 @@ export class Command {
         product.setTitle(args.title)
         product.load()
         let path: string = product.render()
-        console.log(`PDF rendered into: ${path}`)
+        Log.success('Pdf rendered into', path)
     }
 }
