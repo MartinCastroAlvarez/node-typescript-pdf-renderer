@@ -8,8 +8,10 @@ import { SerializedChapter } from '../serializers/chapter'
 import { Model } from '../interfaces/model'
 
 import { Text } from './text'
-import { Yaml } from '../yaml'
+import { Topic } from './topic'
 import { Story } from './story'
+
+import { Yaml } from '../yaml'
 
 export class Chapter {
     public readonly title: Text 
@@ -30,11 +32,23 @@ export class Chapter {
         return `<${(this as any).constructor.name}: ${this.title.get()}>`
     }
 
+    // Extracts topics from Stories.
+    getTopics(): Array<Topic> {
+        let set: Set<string> = new Set<string>()
+        return this.stories.reduce(
+            (accumulator, story) => accumulator.concat(story.topics),
+            []
+        ).filter(
+            topic => !set.has(topic.title.get()) && set.add(topic.title.get())
+        )
+    }
+
     // JSON serializers.
     serialize(): SerializedChapter {
         return {
             "Type": (this as any).constructor.name,
             "Title": this.title.serialize(),
+            "Topics": this.getTopics()?.map(topic => topic.serialize()),
             "Introduction": this.introduction?.map(block => block.serialize()),
             "Stories": this.stories?.map(story => story.serialize()),
             "Conclusion": this.conclusion?.map(block => block.serialize()),

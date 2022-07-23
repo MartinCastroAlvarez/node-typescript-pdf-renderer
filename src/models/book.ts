@@ -63,6 +63,8 @@ import { Model } from '../interfaces/model'
 import { Person } from './person'
 import { Chapter } from './chapter'
 import { Text } from './text'
+import { Topic } from './topic'
+
 import { Yaml } from '../yaml'
 
 export class Book implements Model {
@@ -95,12 +97,24 @@ export class Book implements Model {
         return `<${(this as any).constructor.name}: ${this.title.get()}>`
     }
 
+    // Extracts topics from Chapters.
+    getTopics(): Array<Topic> {
+        let set: Set<string> = new Set<string>()
+        return this.chapters.reduce(
+            (accumulator, chapter) => accumulator.concat(chapter.getTopics()),
+            []
+        ).filter(
+            topic => !set.has(topic.title.get()) && set.add(topic.title.get())
+        )
+    }
+
     // JSON serializers.
     serialize(): SerializedBook {
         return {
             "Type": (this as any).constructor.name,
             "Title": this.title.serialize(),
             "Subtitle": this.title.serialize(),
+            "Topics": this.getTopics()?.map(topic => topic.serialize()),
             "Chapters": this.chapters?.map(chapter => chapter.serialize()),
             "Authors": this.authors?.map(person => person.serialize()),
             "Legal": this.legal?.map(block => block.serialize()),

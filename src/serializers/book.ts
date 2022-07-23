@@ -7,6 +7,7 @@ import { Serialized } from '../interfaces/serialized'
 
 import { SerializedPerson } from './person'
 import { SerializedChapter } from './chapter'
+import { SerializedTopic } from './topic'
 import { SerializedText } from './text'
 
 export interface SerializedBook extends Serialized {
@@ -19,4 +20,5 @@ export interface SerializedBook extends Serialized {
     Acknowledgements?: Array<Serialized>
     Legal?: Array<Serialized>
     Prologue?: Array<Serialized>
+    Topics?: Array<SerializedTopic>
 }
