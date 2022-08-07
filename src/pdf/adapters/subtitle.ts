@@ -15,9 +15,15 @@ export class SubtitleAdapter implements Adapter {
     public static adapt(document: any, text: string): void {
         Log.info("Adapting subtitle to PDF", text)
         if (text)
-            document.text(
+            document
+                .fillColor(Config.pallete.getPrimary())
+                .font(Config.typeface.getBold())
+                .text(
                 text,
-                {}
+                {
+                    align: 'center',
+                    lineBreak: true,
+                }
             )
     }
 }

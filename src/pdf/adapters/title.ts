@@ -15,9 +15,17 @@ export class TitleAdapter implements Adapter {
     public static adapt(document: any, text: string): void {
         Log.info("Adapting title to PDF", text)
         if (text)
-            document.text(
+            document
+                .fontSize(30)
+                .fillColor(Config.pallete.getPrimary())
+                .font(Config.typeface.getBold())
+                .text(
                 text,
-                {}
+                {
+                    align: 'center',
+                    paragraphGap: 10,
+                    lineBreak: true,
+                }
             )
     }
 }
