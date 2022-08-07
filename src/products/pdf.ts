@@ -28,11 +28,11 @@ import { Log } from '../logging'
 export class Pdf implements Product {
     private language: Language
     private book: Book
-    private sections: Array<Document>
+    private sections: Array<Section>
 
     constructor() {
         this.book = new Book()
-        this.sections = new Array<Document>()
+        this.sections = new Array<Section>()
         this.language = Language.EN
     }
 
@@ -72,23 +72,22 @@ export class Pdf implements Product {
 
     // Building product & all its sections.
     public build(): void {
-        this.sections.push(new Cover())
-
-        /*
-        this.getBeginning(),
-        this.getLegal(),
-        this.getAbout(),
-        this.getTableOfContents(),
-        this.getAcknowledgement(),
-        this.getForeword(),
-        ...this.book.chapters.map(chapter => this.getChapter(chapter)),
-        this.getAfterword(),
-        this.getEnding(),
-       */
+        this.sections.push(new CoverSection())
+        this.sections.push(new TitleSection())
+        this.sections.push(new LegalSection())
+        this.sections.push(new AboutSection())
+        this.sections.push(new AcknowledgementsSection())
+        this.sections.push(new ForewordSection())
+        for (let chapter of this.getBook().chapters) {
+            this.sections.push(new ChapterSection())
+        }
+        this.sections.push(new AfterwordSection())
+        this.sections.push(new BackSection())
+        this.sections.push(new TableOfContentsSection())
     }
 }
 
-export class Document {
+export class Section {
     protected doc: any
 
     constructor() {
@@ -107,9 +106,72 @@ export class Document {
     public getDocument(): any { return this.doc }
 }
 
-export class Cover extends Document {
+export class CoverSection extends Section {
     constructor() {
         super()
-        this.doc.text('Lorem Ipsum')
+        this.doc.text('Lorem Ipsum') // FIXME
+    }
+}
+
+export class TitleSection extends Section {
+    constructor() {
+        super()
+        this.doc.text('Title') // FIXME
+    }
+}
+
+export class LegalSection extends Section {
+    constructor() {
+        super()
+        this.doc.text('Legal') // FIXME
+    }
+}
+
+export class AboutSection extends Section {
+    constructor() {
+        super()
+        this.doc.text('About') // FIXME
+    }
+}
+
+export class AcknowledgementsSection extends Section {
+    constructor() {
+        super()
+        this.doc.text('Acknowledgements') // FIXME
+    }
+}
+
+export class ForewordSection extends Section {
+    constructor() {
+        super()
+        this.doc.text('Forewords') // FIXME
+    }
+}
+
+export class AfterwordSection extends Section {
+    constructor() {
+        super()
+        this.doc.text('Afterwords') // FIXME
+    }
+}
+
+export class BackSection extends Section {
+    constructor() {
+        super()
+        this.doc.text('Back') // FIXME
+    }
+}
+
+export class TableOfContentsSection extends Section {
+    constructor() {
+        super()
+        this.doc.text('TableOfContents') // FIXME
+    }
+}
+
+export class ChapterSection extends Section {
+    constructor() {
+        super()
+        this.doc.text('Chapter') // FIXME
     }
 }
