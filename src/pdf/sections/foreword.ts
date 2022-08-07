@@ -6,22 +6,21 @@
 // - https://pdfkit.org/
 // ----------------------------------------------------------------
 
-import { Yaml } from '../yaml'
+import { PdfSection } from './section'
 
-import { Section } from './section'
+import { Config } from '../../config'
+import { Log } from '../../logging'
+import { Yaml } from '../../yaml'
 
-import { Config } from '../config'
-import { Log } from '../logging'
-
-export class AcknowledgementsSection extends Section {
+export class ForewordSection extends PdfSection {
     public build(): void {
         super.build()
-        Log.info("Building book acknowledgements section", this.getBook())
+        Log.info("Building book foreword section", this.getBook())
         this.getDocument().text(
-            Yaml.getString('@i18n/Acknowledgements.yaml').get(this.getLanguage()),
+            Yaml.getString('@i18n/Foreword.yaml').get(this.getLanguage()),
             {}
         )
-        for (let text of this.getBook().acknowledgements) {
+        for (let text of this.getBook().foreword) {
             this.getDocument().text(
                 text.get(this.getLanguage()),
                 {}

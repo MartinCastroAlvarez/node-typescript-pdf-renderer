@@ -8,14 +8,16 @@
 
 const PDFDocument = require('pdfkit')
 
-import { Language } from '../enums/language'
+import { Language } from '../../enums/language'
 
-import { Book } from '../models/book'
+import { Section } from '../../interfaces/section'
 
-import { Config } from '../config'
-import { Log } from '../logging'
+import { Book } from '../../models/book'
 
-export abstract class Section {
+import { Config } from '../../config'
+import { Log } from '../../logging'
+
+export abstract class PdfSection implements Section {
     private doc: any
     private book: Book
     private language: Language
@@ -38,12 +40,8 @@ export abstract class Section {
                 .font(Config.typeface.getBold())
                 .text(this.getPageTitle())
         })
-        /*
-        this.doc.info.Title = 
-        this.doc.info.Author = 
-        this.doc.info.Subject = this
-        this.doc.info.MonDate = 
-        */
+        this.doc.info.Title = this.getPageTitle()
+        this.doc.info.Author = Config.brand.getTitle()
     }
 
     // Returns the title of the book for each page.

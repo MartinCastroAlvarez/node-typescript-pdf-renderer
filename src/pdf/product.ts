@@ -12,6 +12,7 @@ const merge = require('easy-pdf-merge')
 import { Language } from '../enums/language'
 
 import { Product } from '../interfaces/product'
+import { Section } from '../interfaces/section'
 
 import { Book } from '../models/book'
 import { Chapter } from '../models/chapter'
@@ -24,17 +25,16 @@ import { InvalidTitleError } from '../errors/product'
 import { Config } from '../config'
 import { Log } from '../logging'
 
-import { Section } from './section'
-import { ChapterSection } from './chapter'
-import { CoverSection } from './cover'
-import { InfoSection } from './info'
-import { LegalSection } from './legal'
-import { AuthorsSection } from './authors'
-import { AcknowledgementsSection } from './acknowledgements'
-import { ForewordSection } from './foreword'
-import { AfterwordSection } from './afterword'
-import { BackSection } from './back'
-import { TableOfContentsSection } from './contents'
+import { AcknowledgementsSection } from './sections/acknowledgements'
+import { TableOfContentsSection } from './sections/contents'
+import { AfterwordSection } from './sections/afterword'
+import { ForewordSection } from './sections/foreword'
+import { AuthorsSection } from './sections/authors'
+import { ChapterSection } from './sections/chapter'
+import { CoverSection } from './sections/cover'
+import { TitleSection } from './sections/title'
+import { LegalSection } from './sections/legal'
+import { BackSection } from './sections/back'
 
 export class Pdf implements Product {
     private language: Language
@@ -94,7 +94,7 @@ export class Pdf implements Product {
         this.sections.push(cover)
 
         // Info section.
-        const info: InfoSection = new InfoSection()
+        const info: TitleSection = new TitleSection()
         info.setBook(this.getBook())
         info.setLanguage(this.getLanguage())
         info.build()

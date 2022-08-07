@@ -6,17 +6,16 @@
 // - https://pdfkit.org/
 // ----------------------------------------------------------------
 
-import { Yaml } from '../yaml'
+import { PdfSection } from './section'
 
-import { Section } from './section'
+import { Config } from '../../config'
+import { Log } from '../../logging'
+import { Yaml } from '../../yaml'
 
-import { Config } from '../config'
-import { Log } from '../logging'
-
-export class InfoSection extends Section {
+export class CoverSection extends PdfSection {
     public build(): void {
         super.build()
-        Log.info("Building book title", this.getBook())
+        Log.info("Building book cover", this.getBook())
         this.getDocument().text(
             this.getBook().title.get(this.getLanguage()),
             {}

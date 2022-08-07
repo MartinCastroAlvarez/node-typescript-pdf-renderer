@@ -6,16 +6,15 @@
 // - https://pdfkit.org/
 // ----------------------------------------------------------------
 
-import { Chapter } from '../models/chapter'
+import { Chapter } from '../../models/chapter'
 
-import { Yaml } from '../yaml'
+import { PdfSection } from './section'
 
-import { Section } from './section'
+import { Config } from '../../config'
+import { Log } from '../../logging'
+import { Yaml } from '../../yaml'
 
-import { Config } from '../config'
-import { Log } from '../logging'
-
-export class ChapterSection extends Section {
+export class ChapterSection extends PdfSection {
     protected chapter: Chapter
 
     constructor() {

@@ -6,14 +6,13 @@
 // - https://pdfkit.org/
 // ----------------------------------------------------------------
 
-import { Yaml } from '../yaml'
+import { PdfSection } from './section'
 
-import { Section } from './section'
+import { Config } from '../../config'
+import { Log } from '../../logging'
+import { Yaml } from '../../yaml'
 
-import { Config } from '../config'
-import { Log } from '../logging'
-
-export class AuthorsSection extends Section {
+export class AuthorsSection extends PdfSection {
     public build(): void {
         super.build()
         Log.info("Building book authors section", this.getBook())
