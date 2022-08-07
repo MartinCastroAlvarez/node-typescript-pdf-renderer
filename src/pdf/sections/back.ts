@@ -12,17 +12,14 @@ import { Config } from '../../config'
 import { Log } from '../../logging'
 import { Yaml } from '../../yaml'
 
+import { TitleAdapter } from '../adapters/title'
+import { SubtitleAdapter } from '../adapters/subtitle'
+
 export class BackSection extends PdfSection {
     public build(): void {
         super.build()
         Log.info("Building book back cover", this.getBook())
-        this.getDocument().text(
-            this.getBook().title.get(this.getLanguage()),
-            {}
-        )
-        this.getDocument().text(
-            this.getBook().subtitle.get(this.getLanguage()),
-            {}
-        )
+        TitleAdapter.adapt(this.getDocument(), this.getBook().title.get(this.Language()))
+        SubtitleAdapter.adapt(this.getDocument(), this.getBook().subtitle.get(this.Language()))
     }
 }

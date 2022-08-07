@@ -14,6 +14,9 @@ import { Config } from '../../config'
 import { Log } from '../../logging'
 import { Yaml } from '../../yaml'
 
+import { TextAdapter } from '../adapters/text'
+import { TitleAdapter } from '../adapters/title'
+
 export class ChapterSection extends PdfSection {
     protected chapter: Chapter
 
@@ -29,6 +32,6 @@ export class ChapterSection extends PdfSection {
     public build(): void {
         super.build()
         Log.info("Building chapter", this.getChapter())
-        this.getDocument().text('Chapter') // FIXME
+        TitleAdapter.adapt(this.getDocument(), this.getChapter().title.get(this.Language()))
     }
 }

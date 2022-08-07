@@ -11,12 +11,12 @@ import { Adapter } from '../../interfaces/adapter'
 import { Config } from '../../config'
 import { Log } from '../../logging'
 
-export class TextAdapter implements Adapter {
-    public static adapt(document: any, text: string): void {
-        Log.info("Adapting text to PDF", text)
-        if (text)
+export class AvatarAdapter implements Adapter {
+    public static adapt(document: any, path: string): void {
+        Log.info("Adapting logo to PDF", path)
+        if (path)
             document.text(
-                text,
+                path,
                 {}
             )
     }

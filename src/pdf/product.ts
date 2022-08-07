@@ -12,7 +12,6 @@ const merge = require('easy-pdf-merge')
 import { Language } from '../enums/language'
 
 import { Product } from '../interfaces/product'
-import { Section } from '../interfaces/section'
 
 import { Book } from '../models/book'
 import { Chapter } from '../models/chapter'
@@ -24,6 +23,8 @@ import { InvalidTitleError } from '../errors/product'
 
 import { Config } from '../config'
 import { Log } from '../logging'
+
+import { PdfSection } from './sections/section'
 
 import { AcknowledgementsSection } from './sections/acknowledgements'
 import { TableOfContentsSection } from './sections/contents'
@@ -39,11 +40,11 @@ import { BackSection } from './sections/back'
 export class Pdf implements Product {
     private language: Language
     private book: Book
-    private sections: Array<Section>
+    private sections: Array<PdfSection>
 
     constructor() {
         this.book = new Book()
-        this.sections = new Array<Section>()
+        this.sections = new Array<PdfSection>()
         this.language = Language.EN
     }
 

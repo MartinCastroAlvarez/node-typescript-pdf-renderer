@@ -11,9 +11,9 @@ import { Adapter } from '../../interfaces/adapter'
 import { Config } from '../../config'
 import { Log } from '../../logging'
 
-export class TextAdapter implements Adapter {
+export class TitleAdapter implements Adapter {
     public static adapt(document: any, text: string): void {
-        Log.info("Adapting text to PDF", text)
+        Log.info("Adapting title to PDF", text)
         if (text)
             document.text(
                 text,
