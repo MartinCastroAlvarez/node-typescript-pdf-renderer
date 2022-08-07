@@ -8,6 +8,42 @@ Title:
 Subtitle:
   EN: 'Lorem ipsum dolor sit amet'
   ES: 'Lorem ipsum dolor sit amet'
+Foreword:
+  - EN: 'Lorem ipsum dolor sit amet'
+    ES: 'Lorem ipsum dolor sit amet'
+  - EN: 'Lorem ipsum dolor sit amet'
+    ES: 'Lorem ipsum dolor sit amet'
+  - EN: 'Lorem ipsum dolor sit amet'
+    ES: 'Lorem ipsum dolor sit amet'
+  - EN: 'Lorem ipsum dolor sit amet'
+    ES: 'Lorem ipsum dolor sit amet'
+Afterword:
+  - EN: 'Lorem ipsum dolor sit amet'
+    ES: 'Lorem ipsum dolor sit amet'
+  - EN: 'Lorem ipsum dolor sit amet'
+    ES: 'Lorem ipsum dolor sit amet'
+  - EN: 'Lorem ipsum dolor sit amet'
+    ES: 'Lorem ipsum dolor sit amet'
+  - EN: 'Lorem ipsum dolor sit amet'
+    ES: 'Lorem ipsum dolor sit amet'
+Acknowledgements:
+  - EN: 'Lorem ipsum dolor sit amet'
+    ES: 'Lorem ipsum dolor sit amet'
+  - EN: 'Lorem ipsum dolor sit amet'
+    ES: 'Lorem ipsum dolor sit amet'
+  - EN: 'Lorem ipsum dolor sit amet'
+    ES: 'Lorem ipsum dolor sit amet'
+  - EN: 'Lorem ipsum dolor sit amet'
+    ES: 'Lorem ipsum dolor sit amet'
+Legal:
+  - EN: 'Lorem ipsum dolor sit amet'
+    ES: 'Lorem ipsum dolor sit amet'
+  - EN: 'Lorem ipsum dolor sit amet'
+    ES: 'Lorem ipsum dolor sit amet'
+  - EN: 'Lorem ipsum dolor sit amet'
+    ES: 'Lorem ipsum dolor sit amet'
+  - EN: 'Lorem ipsum dolor sit amet'
+    ES: 'Lorem ipsum dolor sit amet'
 Authors:
   - '@person/MartinCastro.yaml'
 Chapters:

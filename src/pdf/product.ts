@@ -96,12 +96,12 @@ export class Pdf implements Product {
         legal.build()
         this.sections.push(legal)
 
-        // About section.
-        const about: AboutSection = new AboutSection()
-        about.setBook(this.getBook())
-        about.setLanguage(this.getLanguage())
-        about.build()
-        this.sections.push(about)
+        // Authors section.
+        const authors: AuthorsSection = new AuthorsSection()
+        authors.setBook(this.getBook())
+        authors.setLanguage(this.getLanguage())
+        authors.build()
+        this.sections.push(authors)
 
         // Acknowledgements section.
         const acknowledgements: AcknowledgementsSection = new AcknowledgementsSection()
@@ -117,7 +117,7 @@ export class Pdf implements Product {
         foreword.build()
         this.sections.push(foreword)
 
-        // Foreword section.
+        // Chapters section.
         for (let chapter of this.getBook().chapters) {
             const section: ChapterSection = new ChapterSection()
             section.setChapter(chapter)
@@ -160,10 +160,6 @@ abstract class Section {
         this.language = Language.EN
     }
 
-    private getTitle(): string {
-        return `${this.getBook().title.get(this.getLanguage())} - ${Config.brand.getTitle()}`
-    }
-
     public build(): void {
         Log.info("Building section", this.getBook())
         this.doc = new PDFDocument({
@@ -175,7 +171,7 @@ abstract class Section {
         this.doc.on('pageAdded', () => {
             this.doc 
                 .font(Config.typeface.getBold())
-                .text(this.getTitle())
+                .text(this.getPageTitle())
         })
         /*
         this.doc.info.Title = 
@@ -183,6 +179,11 @@ abstract class Section {
         this.doc.info.Subject = this
         this.doc.info.MonDate = 
         */
+    }
+
+    // Returns the title of the book for each page.
+    private getPageTitle(): string {
+        return `${this.getBook().title.get(this.getLanguage())} - ${Config.brand.getTitle()}`
     }
 
     // Language getter and setter.
@@ -219,7 +220,14 @@ class CoverSection extends Section {
     public build(): void {
         super.build()
         Log.info("Building book cover", this.getBook())
-        this.getDocument().text('Lorem Ipsum') // FIXME
+        this.getDocument().text(
+            this.getBook().title.get(this.getLanguage()),
+            {}
+        )
+        this.getDocument().text(
+            this.getBook().subtitle.get(this.getLanguage()),
+            {}
+        )
     }
 }
 
@@ -227,7 +235,14 @@ class TitleSection extends Section {
     public build(): void {
         super.build()
         Log.info("Building book title", this.getBook())
-        this.getDocument().text('Title') // FIXME
+        this.getDocument().text(
+            this.getBook().title.get(this.getLanguage()),
+            {}
+        )
+        this.getDocument().text(
+            this.getBook().subtitle.get(this.getLanguage()),
+            {}
+        )
     }
 }
 
@@ -235,15 +250,40 @@ class LegalSection extends Section {
     public build(): void {
         super.build()
         Log.info("Building book legal warning", this.getBook())
-        this.getDocument().text('Legal') // FIXME
+        this.getDocument().text(
+            Yaml.getString('@i18n/Legal.yaml').get(this.getLanguage()),
+            {}
+        )
+        for (let text of this.getBook().legal) {
+            this.getDocument().text(
+                text.get(this.getLanguage()),
+                {}
+            )
+        }
     }
 }
 
-class AboutSection extends Section {
+class AuthorsSection extends Section {
     public build(): void {
         super.build()
-        Log.info("Building book about section", this.getBook())
-        this.getDocument().text('About') // FIXME
+        Log.info("Building book authors section", this.getBook())
+        for (let author of this.getBook().authors) {
+            this.getDocument().text(
+                author.getName(),
+                {}
+            )
+            if (author.getWebsite())
+                this.getDocument().text(
+                    author.getWebsite(),
+                    {}
+                )
+            if (author.getEmail())
+                this.getDocument().text(
+                    author.getEmail(),
+                    {}
+                )
+            // author.logo // FIXME
+        }
     }
 }
 
@@ -251,7 +291,16 @@ class AcknowledgementsSection extends Section {
     public build(): void {
         super.build()
         Log.info("Building book acknowledgements section", this.getBook())
-        this.getDocument().text('Acknowledgements') // FIXME
+        this.getDocument().text(
+            Yaml.getString('@i18n/Acknowledgements.yaml').get(this.getLanguage()),
+            {}
+        )
+        for (let text of this.getBook().acknowledgements) {
+            this.getDocument().text(
+                text.get(this.getLanguage()),
+                {}
+            )
+        }
     }
 }
 
@@ -259,7 +308,16 @@ class ForewordSection extends Section {
     public build(): void {
         super.build()
         Log.info("Building book foreword section", this.getBook())
-        this.getDocument().text('Forewords') // FIXME
+        this.getDocument().text(
+            Yaml.getString('@i18n/Foreword.yaml').get(this.getLanguage()),
+            {}
+        )
+        for (let text of this.getBook().foreword) {
+            this.getDocument().text(
+                text.get(this.getLanguage()),
+                {}
+            )
+        }
     }
 }
 
@@ -267,7 +325,16 @@ class AfterwordSection extends Section {
     public build(): void {
         super.build()
         Log.info("Building book afterword section", this.getBook())
-        this.getDocument().text('Afterwords') // FIXME
+        this.getDocument().text(
+            Yaml.getString('@i18n/Afterword.yaml').get(this.getLanguage()),
+            {}
+        )
+        for (let text of this.getBook().afterword) {
+            this.getDocument().text(
+                text.get(this.getLanguage()),
+                {}
+            )
+        }
     }
 }
 
@@ -275,7 +342,14 @@ class BackSection extends Section {
     public build(): void {
         super.build()
         Log.info("Building book back cover", this.getBook())
-        this.getDocument().text('Back') // FIXME
+        this.getDocument().text(
+            this.getBook().title.get(this.getLanguage()),
+            {}
+        )
+        this.getDocument().text(
+            this.getBook().subtitle.get(this.getLanguage()),
+            {}
+        )
     }
 }
 

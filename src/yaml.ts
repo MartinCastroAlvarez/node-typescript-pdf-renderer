@@ -163,7 +163,7 @@ export abstract class Yaml {
             text = text.replace(Reference.PERSONS, Tree.persons)
             if (!Tree.exists(text))
                 throw new InvalidReferenceError(`Person file not found: ${text}`)
-        } else if (text.startsWith(`${Reference.PERSONS}/`)) {
+        } else if (text.startsWith(`${Reference.I18N}/`)) {
             Log.info('Dereferencing i18n text', text)
             text = text.replace(Reference.I18N, Tree.i18n)
             if (!Tree.exists(text))
@@ -174,6 +174,13 @@ export abstract class Yaml {
             if (!Tree.exists(text))
                 throw new InvalidReferenceError(`Topic file not found: ${text}`)
         }
+        return text
+    }
+
+    // Getting a i18n string that is not part of a specific product.
+    public static getString(path: string): Text {
+        const text: Text = new Text()
+        text.unserialize(<SerializedText>Yaml.read(path))
         return text
     }
 

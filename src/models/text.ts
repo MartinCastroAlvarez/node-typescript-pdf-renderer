@@ -54,8 +54,8 @@ export class Text implements Model {
     unserialize(data: SerializedText): void {
         if (data) {
             Log.info('Loading Text', data)
-            this.set(Language.EN, data['ES'])
-            this.set(Language.ES, data['EN'])
+            this.set(Language.EN, data['EN'])
+            this.set(Language.ES, data['ES'])
             this.source.unserialize(data['Source'])
         }
     }
