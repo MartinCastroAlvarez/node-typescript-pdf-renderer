@@ -46,7 +46,7 @@ TBD
 |[src/models](./src/models)|Application models.|
 |[src/serializers](./src/serializers)|Application serializer interfaces.|
 |[src/products](./src/products)|Application products.|
-|[src/adapter](./src/adapters)|Application adapters.|
+|[src/section](./src/draft)|Application product section.|
 |[src/errors](./src/errors)|Application errors.|
 
 ## Instructions
@@ -59,12 +59,23 @@ yarn install
 
 ### Rendering a PDF in English
 ```bash
-yarn run build && yarn run render --book "Sample" --language "en" --format "pdf"
+yarn run build && yarn run render --title "sample" --language "en" --format "pdf"
 ```
 
-The PDF is available at [./builds/Sample/pdf/en/final.pdf]
+The PDF is available at [./builds/sample/pdf/en/final.pdf]
 
 ### Rendering a PDF in Spanish
+
 ```bash
-yarn run build && yarn run render --book "Sample" --language "es" --format "pdf"
+yarn run build && yarn run render --title "sample" --language "es" --format "pdf"
 ```
+
+The PDF is available at [./builds/sample/pdf/es/final.pdf]
+
+### Rendering a PDF in multiple languages
+
+```bash
+yarn run build && yarn run render --title "sample" --language "en,es" --format "pdf"
+```
+
+The PDF is available at [./builds/sample/pdf/es/final.pdf] and [./builds/sample/pdf/en/final.pdf]

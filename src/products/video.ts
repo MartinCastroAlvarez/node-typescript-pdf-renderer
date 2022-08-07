@@ -9,8 +9,6 @@ import { Product } from '../interfaces/product'
 
 import { Book } from '../models/book'
 
-import { SerializedBook } from '../serializers/book'
-
 import { Yaml } from '../yaml'
 import { Tree } from '../tree'
 
@@ -21,23 +19,17 @@ import { InvalidLanguageError } from '../errors/product'
 import { InvalidTitleError } from '../errors/product'
 
 export class Video implements Product {
-    private title: string
     private language: Language
-    public readonly book: Book
+    private book: Book
 
     constructor() {
         this.book = new Book()
-        this.title = ''
         this.language = Language.EN
     }
 
-    // Title getter and setter.
-    getTitle(): string { return this.title }
-    setTitle(title: string) {
-        if (!title)
-            throw new InvalidTitleError('Invalid title!')
-        this.title = title
-    }
+    // Book getter and setter.
+    getBook(): Book { return this.book }
+    setBook(book: Book) { this.book = book }
 
     // Language getter and setter.
     getLanguage(): Language { return this.language }
@@ -47,23 +39,13 @@ export class Video implements Product {
         this.language = language
     }
 
-    // Loading book from YAML files.
-    public load(): void {
-        this.book.unserialize(<SerializedBook>Yaml.read(`@books/${this.getTitle()}.yaml`))
+    // Building product and all its sections.
+    public build(): void {
+        throw Error("Not Implemented")
     }
 
-    // Public PDF directory.
-    public getPath(): string {
-        return Tree.join(
-            Tree.join(
-                Tree.join(Tree.builds, this.getTitle()),
-                "video",
-            ),
-            this.getLanguage(),
-        )
-    }
-
-    // Rendering.
-    public render(): void {
+    // Rending product.
+    public render(path: string): void {
+        throw Error("Not Implemented")
     }
 }

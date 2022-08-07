@@ -59,6 +59,14 @@ export abstract class Tree {
         })
     }
 
+    // Cleaning a directory recurisvely.
+    public static clean(path: string) {
+        Log.info('Cleaning directory', path)
+        for (const file of Tree.list(path)) {
+            fs.unlinkSync(Tree.join(path, file))
+        }
+    }
+
     // Creating a write stream to a file.
     public static stream(path: string): object {
         Log.info('Writing to', path)

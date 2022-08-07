@@ -8,12 +8,10 @@ import { Language } from '../enums/language'
 import { Book } from '../models/book'
 
 export interface Product {
-    book: Book
-    getTitle(): string
-    setTitle(title: string): void
+    getBook(): Book
+    setBook(book: Book): void
     getLanguage(): Language
     setLanguage(language: Language): void
-    load(): void
-    render(): void
-    getPath(): string
+    build(): void
+    render(path: string): void
 }
