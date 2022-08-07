@@ -32,6 +32,6 @@ export class ChapterSection extends PdfSection {
     public build(): void {
         super.build()
         Log.info("Building chapter", this.getChapter())
-        TitleAdapter.adapt(this.getDocument(), this.getChapter().title.get(this.Language()))
+        TitleAdapter.adapt(this.getDocument(), this.getChapter().title.get(this.getLanguage()))
     }
 }

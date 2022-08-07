@@ -19,7 +19,7 @@ export class BackSection extends PdfSection {
     public build(): void {
         super.build()
         Log.info("Building book back cover", this.getBook())
-        TitleAdapter.adapt(this.getDocument(), this.getBook().title.get(this.Language()))
-        SubtitleAdapter.adapt(this.getDocument(), this.getBook().subtitle.get(this.Language()))
+        TitleAdapter.adapt(this.getDocument(), this.getBook().title.get(this.getLanguage()))
+        SubtitleAdapter.adapt(this.getDocument(), this.getBook().subtitle.get(this.getLanguage()))
     }
 }
