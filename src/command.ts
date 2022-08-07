@@ -42,22 +42,22 @@ export class Command {
             format = Format[f.toUpperCase()]
             Log.info("Parsing format:", format)
 
-            // Creating a new product.
-            if (format == Format.PDF)
-                product = new Pdf()
-            else if (format == Format.HTML)
-                product = new Html()
-            else if (format == Format.VIDEO)
-                product = new Video()
-            else if (format == Format.COURSE)
-                product = new Course()
-            else
-                throw new NotImplementedError(`Not implemented format!`)
-
             // Iterating over each language.
             for (let l of args.language.split(",")) {
                 language = Language[l.toUpperCase()]
                 Log.info("Parsing language:", language)
+
+                // Creating a new product.
+                if (format == Format.PDF)
+                    product = new Pdf()
+                else if (format == Format.HTML)
+                    product = new Html()
+                else if (format == Format.VIDEO)
+                    product = new Video()
+                else if (format == Format.COURSE)
+                    product = new Course()
+                else
+                    throw new NotImplementedError(`Not implemented format!`)
 
                 // Deciding path.
                 path = Tree.join(

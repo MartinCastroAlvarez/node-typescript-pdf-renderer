@@ -28,11 +28,11 @@ import { Log } from '../logging'
 export class Pdf implements Product {
     private language: Language
     private book: Book
-    private sections: Array<any>
+    private sections: Array<Document>
 
     constructor() {
         this.book = new Book()
-        this.sections = new Array<any>()
+        this.sections = new Array<Document>()
         this.language = Language.EN
     }
 
@@ -72,8 +72,9 @@ export class Pdf implements Product {
 
     // Building product & all its sections.
     public build(): void {
+        this.sections.push(new Cover())
+
         /*
-        this.sections.append()
         this.getBeginning(),
         this.getLegal(),
         this.getAbout(),
@@ -88,26 +89,27 @@ export class Pdf implements Product {
 }
 
 export class Document {
-    private doc: Any
+    protected doc: any
 
     constructor() {
-        this.doc: any = new PDFDocument({
+        this.doc = new PDFDocument({
             bufferPages: true,
             autoFirstPage: true,
             size: 'A4',
         })
-        doc.on('pageAdded', () => {
-            doc 
+        this.doc.on('pageAdded', () => {
+            this.doc 
                 .font(Config.typeface.getBold())
                 .text(Config.brand.getTitle())
         })
     }
 
-    public getDocument(): Any { return doc }
+    public getDocument(): any { return this.doc }
 }
 
 export class Cover extends Document {
     constructor() {
-        super.
+        super()
+        this.doc.text('Lorem Ipsum')
     }
 }
