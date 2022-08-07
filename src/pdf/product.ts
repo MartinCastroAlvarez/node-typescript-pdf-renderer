@@ -4,9 +4,9 @@
 //
 // References:
 // - https://pdfkit.org/
+// - https://www.clearlingo.co.nz/blog/how-to-order-the-pages-of-a-book
 // ----------------------------------------------------------------
 
-const PDFDocument = require('pdfkit')
 const merge = require('easy-pdf-merge')
 
 import { Language } from '../enums/language'
@@ -16,7 +16,6 @@ import { Product } from '../interfaces/product'
 import { Book } from '../models/book'
 import { Chapter } from '../models/chapter'
 
-import { Yaml } from '../yaml'
 import { Tree } from '../tree'
 
 import { InvalidLanguageError } from '../errors/product'
@@ -24,6 +23,18 @@ import { InvalidTitleError } from '../errors/product'
 
 import { Config } from '../config'
 import { Log } from '../logging'
+
+import { Section } from './section'
+import { ChapterSection } from './chapter'
+import { CoverSection } from './cover'
+import { InfoSection } from './info'
+import { LegalSection } from './legal'
+import { AuthorsSection } from './authors'
+import { AcknowledgementsSection } from './acknowledgements'
+import { ForewordSection } from './foreword'
+import { AfterwordSection } from './afterword'
+import { BackSection } from './back'
+import { TableOfContentsSection } from './contents'
 
 export class Pdf implements Product {
     private language: Language
@@ -82,12 +93,12 @@ export class Pdf implements Product {
         cover.build()
         this.sections.push(cover)
 
-        // Title section.
-        const title: TitleSection = new TitleSection()
-        title.setBook(this.getBook())
-        title.setLanguage(this.getLanguage())
-        title.build()
-        this.sections.push(title)
+        // Info section.
+        const info: InfoSection = new InfoSection()
+        info.setBook(this.getBook())
+        info.setLanguage(this.getLanguage())
+        info.build()
+        this.sections.push(info)
 
         // Legal section.
         const legal: LegalSection = new LegalSection()
@@ -147,216 +158,5 @@ export class Pdf implements Product {
         contents.setLanguage(this.getLanguage())
         contents.build()
         this.sections.splice(5, 0, contents)
-    }
-}
-
-abstract class Section {
-    private doc: any
-    private book: Book
-    private language: Language
-
-    constructor() {
-        this.book = new Book()
-        this.language = Language.EN
-    }
-
-    public build(): void {
-        Log.info("Building section", this.getBook())
-        this.doc = new PDFDocument({
-            bufferPages: true,
-            autoFirstPage: true,
-            // font: Config.typeface.getBold(), // FIXME
-            size: 'A4',
-        })
-        this.doc.on('pageAdded', () => {
-            this.doc 
-                .font(Config.typeface.getBold())
-                .text(this.getPageTitle())
-        })
-        /*
-        this.doc.info.Title = 
-        this.doc.info.Author = 
-        this.doc.info.Subject = this
-        this.doc.info.MonDate = 
-        */
-    }
-
-    // Returns the title of the book for each page.
-    private getPageTitle(): string {
-        return `${this.getBook().title.get(this.getLanguage())} - ${Config.brand.getTitle()}`
-    }
-
-    // Language getter and setter.
-    getLanguage(): Language { return this.language }
-    setLanguage(language: Language) { this.language = language }
-
-    public getDocument(): any { return this.doc }
-
-    // Book getter and setter.
-    getBook(): Book { return this.book }
-    setBook(book: Book) { this.book = book }
-}
-
-class ChapterSection extends Section {
-    protected chapter: Chapter
-
-    constructor() {
-        super()
-        this.chapter = new Chapter()
-    }
-
-    // Book getter and setter.
-    getChapter(): Chapter { return this.chapter }
-    setChapter(chapter: Chapter) { this.chapter = chapter }
-
-    public build(): void {
-        super.build()
-        Log.info("Building chapter", this.getChapter())
-        this.getDocument().text('Chapter') // FIXME
-    }
-}
-
-class CoverSection extends Section {
-    public build(): void {
-        super.build()
-        Log.info("Building book cover", this.getBook())
-        this.getDocument().text(
-            this.getBook().title.get(this.getLanguage()),
-            {}
-        )
-        this.getDocument().text(
-            this.getBook().subtitle.get(this.getLanguage()),
-            {}
-        )
-    }
-}
-
-class TitleSection extends Section {
-    public build(): void {
-        super.build()
-        Log.info("Building book title", this.getBook())
-        this.getDocument().text(
-            this.getBook().title.get(this.getLanguage()),
-            {}
-        )
-        this.getDocument().text(
-            this.getBook().subtitle.get(this.getLanguage()),
-            {}
-        )
-    }
-}
-
-class LegalSection extends Section {
-    public build(): void {
-        super.build()
-        Log.info("Building book legal warning", this.getBook())
-        this.getDocument().text(
-            Yaml.getString('@i18n/Legal.yaml').get(this.getLanguage()),
-            {}
-        )
-        for (let text of this.getBook().legal) {
-            this.getDocument().text(
-                text.get(this.getLanguage()),
-                {}
-            )
-        }
-    }
-}
-
-class AuthorsSection extends Section {
-    public build(): void {
-        super.build()
-        Log.info("Building book authors section", this.getBook())
-        for (let author of this.getBook().authors) {
-            this.getDocument().text(
-                author.getName(),
-                {}
-            )
-            if (author.getWebsite())
-                this.getDocument().text(
-                    author.getWebsite(),
-                    {}
-                )
-            if (author.getEmail())
-                this.getDocument().text(
-                    author.getEmail(),
-                    {}
-                )
-            // author.logo // FIXME
-        }
-    }
-}
-
-class AcknowledgementsSection extends Section {
-    public build(): void {
-        super.build()
-        Log.info("Building book acknowledgements section", this.getBook())
-        this.getDocument().text(
-            Yaml.getString('@i18n/Acknowledgements.yaml').get(this.getLanguage()),
-            {}
-        )
-        for (let text of this.getBook().acknowledgements) {
-            this.getDocument().text(
-                text.get(this.getLanguage()),
-                {}
-            )
-        }
-    }
-}
-
-class ForewordSection extends Section {
-    public build(): void {
-        super.build()
-        Log.info("Building book foreword section", this.getBook())
-        this.getDocument().text(
-            Yaml.getString('@i18n/Foreword.yaml').get(this.getLanguage()),
-            {}
-        )
-        for (let text of this.getBook().foreword) {
-            this.getDocument().text(
-                text.get(this.getLanguage()),
-                {}
-            )
-        }
-    }
-}
-
-class AfterwordSection extends Section {
-    public build(): void {
-        super.build()
-        Log.info("Building book afterword section", this.getBook())
-        this.getDocument().text(
-            Yaml.getString('@i18n/Afterword.yaml').get(this.getLanguage()),
-            {}
-        )
-        for (let text of this.getBook().afterword) {
-            this.getDocument().text(
-                text.get(this.getLanguage()),
-                {}
-            )
-        }
-    }
-}
-
-class BackSection extends Section {
-    public build(): void {
-        super.build()
-        Log.info("Building book back cover", this.getBook())
-        this.getDocument().text(
-            this.getBook().title.get(this.getLanguage()),
-            {}
-        )
-        this.getDocument().text(
-            this.getBook().subtitle.get(this.getLanguage()),
-            {}
-        )
-    }
-}
-
-class TableOfContentsSection extends Section {
-    public build(): void {
-        super.build()
-        Log.info("Building book table of contents", this.getBook())
-        this.getDocument().text('TableOfContents') // FIXME
     }
 }
