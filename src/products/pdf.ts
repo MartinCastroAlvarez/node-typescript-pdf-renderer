@@ -60,11 +60,12 @@ export class Pdf implements Product {
             section.getDocument().end()
             return partPath
         })
-        const final: string = Tree.join(path, 'final.pdf')
-        merge(parts, path, error => {
-            if (error)
+        const finalPath: string = Tree.join(path, 'final.pdf')
+        merge(parts, finalPath, error => {
+            if (error) {
                 Log.error("Failed to merge files", error)
-            else
+                throw Error("Rendering failed!")
+            } else
                 Log.info("Merged doc files successfully", this.sections)
         })
 
@@ -72,106 +73,216 @@ export class Pdf implements Product {
 
     // Building product & all its sections.
     public build(): void {
-        this.sections.push(new CoverSection())
-        this.sections.push(new TitleSection())
-        this.sections.push(new LegalSection())
-        this.sections.push(new AboutSection())
-        this.sections.push(new AcknowledgementsSection())
-        this.sections.push(new ForewordSection())
+        Log.info("Building PDF product", this.getBook())
+
+        // Cover section.
+        const cover: CoverSection = new CoverSection()
+        cover.setBook(this.getBook())
+        cover.setLanguage(this.getLanguage())
+        cover.build()
+        this.sections.push(cover)
+
+        // Title section.
+        const title: TitleSection = new TitleSection()
+        title.setBook(this.getBook())
+        title.setLanguage(this.getLanguage())
+        title.build()
+        this.sections.push(title)
+
+        // Legal section.
+        const legal: LegalSection = new LegalSection()
+        legal.setBook(this.getBook())
+        legal.setLanguage(this.getLanguage())
+        legal.build()
+        this.sections.push(legal)
+
+        // About section.
+        const about: AboutSection = new AboutSection()
+        about.setBook(this.getBook())
+        about.setLanguage(this.getLanguage())
+        about.build()
+        this.sections.push(about)
+
+        // Acknowledgements section.
+        const acknowledgements: AcknowledgementsSection = new AcknowledgementsSection()
+        acknowledgements.setBook(this.getBook())
+        acknowledgements.setLanguage(this.getLanguage())
+        acknowledgements.build()
+        this.sections.push(acknowledgements)
+
+        // Foreword section.
+        const foreword: ForewordSection = new ForewordSection()
+        foreword.setBook(this.getBook())
+        foreword.setLanguage(this.getLanguage())
+        foreword.build()
+        this.sections.push(foreword)
+
+        // Foreword section.
         for (let chapter of this.getBook().chapters) {
-            this.sections.push(new ChapterSection())
+            const section: ChapterSection = new ChapterSection()
+            section.setChapter(chapter)
+            section.setBook(this.getBook())
+            section.setLanguage(this.getLanguage())
+            section.build()
+            this.sections.push(section)
         }
-        this.sections.push(new AfterwordSection())
-        this.sections.push(new BackSection())
-        this.sections.push(new TableOfContentsSection())
+
+        // Afterword section.
+        const afterword: AfterwordSection = new AfterwordSection()
+        afterword.setBook(this.getBook())
+        afterword.setLanguage(this.getLanguage())
+        afterword.build()
+        this.sections.push(afterword)
+
+        // Back Cover section.
+        const back: BackSection = new BackSection()
+        back.setBook(this.getBook())
+        back.setLanguage(this.getLanguage())
+        back.build()
+        this.sections.push(back)
+
+        // Table of Contents section.
+        const contents: TableOfContentsSection = new TableOfContentsSection()
+        contents.setBook(this.getBook())
+        contents.setLanguage(this.getLanguage())
+        contents.build()
+        this.sections.splice(5, 0, contents)
     }
 }
 
-export class Section {
-    protected doc: any
+abstract class Section {
+    private doc: any
+    private book: Book
+    private language: Language
 
     constructor() {
+        this.book = new Book()
+        this.language = Language.EN
+    }
+
+    private getTitle(): string {
+        return `${this.getBook().title.get(this.getLanguage())} - ${Config.brand.getTitle()}`
+    }
+
+    public build(): void {
+        Log.info("Building section", this.getBook())
         this.doc = new PDFDocument({
             bufferPages: true,
             autoFirstPage: true,
+            // font: Config.typeface.getBold(), // FIXME
             size: 'A4',
         })
         this.doc.on('pageAdded', () => {
             this.doc 
                 .font(Config.typeface.getBold())
-                .text(Config.brand.getTitle())
+                .text(this.getTitle())
         })
+        /*
+        this.doc.info.Title = 
+        this.doc.info.Author = 
+        this.doc.info.Subject = this
+        this.doc.info.MonDate = 
+        */
     }
+
+    // Language getter and setter.
+    getLanguage(): Language { return this.language }
+    setLanguage(language: Language) { this.language = language }
 
     public getDocument(): any { return this.doc }
+
+    // Book getter and setter.
+    getBook(): Book { return this.book }
+    setBook(book: Book) { this.book = book }
 }
 
-export class CoverSection extends Section {
+class ChapterSection extends Section {
+    protected chapter: Chapter
+
     constructor() {
         super()
-        this.doc.text('Lorem Ipsum') // FIXME
+        this.chapter = new Chapter()
+    }
+
+    // Book getter and setter.
+    getChapter(): Chapter { return this.chapter }
+    setChapter(chapter: Chapter) { this.chapter = chapter }
+
+    public build(): void {
+        super.build()
+        Log.info("Building chapter", this.getChapter())
+        this.getDocument().text('Chapter') // FIXME
     }
 }
 
-export class TitleSection extends Section {
-    constructor() {
-        super()
-        this.doc.text('Title') // FIXME
+class CoverSection extends Section {
+    public build(): void {
+        super.build()
+        Log.info("Building book cover", this.getBook())
+        this.getDocument().text('Lorem Ipsum') // FIXME
     }
 }
 
-export class LegalSection extends Section {
-    constructor() {
-        super()
-        this.doc.text('Legal') // FIXME
+class TitleSection extends Section {
+    public build(): void {
+        super.build()
+        Log.info("Building book title", this.getBook())
+        this.getDocument().text('Title') // FIXME
     }
 }
 
-export class AboutSection extends Section {
-    constructor() {
-        super()
-        this.doc.text('About') // FIXME
+class LegalSection extends Section {
+    public build(): void {
+        super.build()
+        Log.info("Building book legal warning", this.getBook())
+        this.getDocument().text('Legal') // FIXME
     }
 }
 
-export class AcknowledgementsSection extends Section {
-    constructor() {
-        super()
-        this.doc.text('Acknowledgements') // FIXME
+class AboutSection extends Section {
+    public build(): void {
+        super.build()
+        Log.info("Building book about section", this.getBook())
+        this.getDocument().text('About') // FIXME
     }
 }
 
-export class ForewordSection extends Section {
-    constructor() {
-        super()
-        this.doc.text('Forewords') // FIXME
+class AcknowledgementsSection extends Section {
+    public build(): void {
+        super.build()
+        Log.info("Building book acknowledgements section", this.getBook())
+        this.getDocument().text('Acknowledgements') // FIXME
     }
 }
 
-export class AfterwordSection extends Section {
-    constructor() {
-        super()
-        this.doc.text('Afterwords') // FIXME
+class ForewordSection extends Section {
+    public build(): void {
+        super.build()
+        Log.info("Building book foreword section", this.getBook())
+        this.getDocument().text('Forewords') // FIXME
     }
 }
 
-export class BackSection extends Section {
-    constructor() {
-        super()
-        this.doc.text('Back') // FIXME
+class AfterwordSection extends Section {
+    public build(): void {
+        super.build()
+        Log.info("Building book afterword section", this.getBook())
+        this.getDocument().text('Afterwords') // FIXME
     }
 }
 
-export class TableOfContentsSection extends Section {
-    constructor() {
-        super()
-        this.doc.text('TableOfContents') // FIXME
+class BackSection extends Section {
+    public build(): void {
+        super.build()
+        Log.info("Building book back cover", this.getBook())
+        this.getDocument().text('Back') // FIXME
     }
 }
 
-export class ChapterSection extends Section {
-    constructor() {
-        super()
-        this.doc.text('Chapter') // FIXME
+class TableOfContentsSection extends Section {
+    public build(): void {
+        super.build()
+        Log.info("Building book table of contents", this.getBook())
+        this.getDocument().text('TableOfContents') // FIXME
     }
 }
