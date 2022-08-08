@@ -18,9 +18,12 @@ import { PdfSection } from '../Section'
 export class Background implements Feature {
     apply(section: Section): void {
         Log.info("Adding background to PDF", section)
-        const document: any = (section as PdfSection).getDocument()
+
         const width: number = (section as PdfSection).getWidth()
         const height: number = (section as PdfSection).getHeight()
+
+        // Updating document.
+        const document: any = (section as PdfSection).getDocument()
         document
             .rect(0, 0, width, height)
             .fill(Config.pallete.getPrimary())

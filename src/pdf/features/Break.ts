@@ -17,7 +17,10 @@ import { PdfSection } from '../Section'
 export class Break implements Feature {
     apply(section: Section): void {
         Log.info("Adding break to PDF", section)
-        (section as PdfSection).getDocument()
+
+        // Updating document.
+        const document: any = (section as PdfSection).getDocument()
+        document
             .fontSize(Config.dimensions.getNormal())
             .font(Config.typeface.getNormal())
             .text("\n")
