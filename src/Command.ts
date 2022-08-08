@@ -12,14 +12,14 @@ import { Product } from './interfaces/Product'
 import { Book } from './models/Book'
 import { SerializedBook } from './serializers/Book'
 
-import { Pdf } from './pdf/Product'
-import { Html } from './html/Product'
-import { Video } from './video/Product'
 import { Course } from './course/Product'
+import { Html } from './html/Product'
+import { Pdf } from './pdf/Product'
+import { Video } from './video/Product'
 
-import { Yaml } from './Yaml'
-import { Tree } from './Tree'
 import { Log } from './Logging'
+import { Tree } from './Tree'
+import { Yaml } from './Yaml'
 
 import { NotImplementedError } from './errors/Command'
 

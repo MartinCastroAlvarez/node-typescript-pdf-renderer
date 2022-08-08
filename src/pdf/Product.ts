@@ -14,29 +14,26 @@ import { Language } from '../enums/Language'
 import { Product } from '../interfaces/Product'
 
 import { Book } from '../models/Book'
-import { Chapter } from '../models/Chapter'
 
 import { Tree } from '../Tree'
 
-import { InvalidLanguageError } from '../errors/Product'
-import { RenderingError } from '../errors/Product'
+import { InvalidLanguageError, RenderingError } from '../errors/Product'
 import { FileAlreadyExistsError } from '../errors/Tree'
 
-import { Config } from '../Config'
 import { Log } from '../Logging'
 
 import { PdfSection } from './Section'
 
 import { AcknowledgementsSection } from './sections/Acknowledgements'
-import { TableOfContentsSection } from './sections/Contents'
 import { AfterwordSection } from './sections/Afterword'
-import { ForewordSection } from './sections/Foreword'
 import { AuthorsSection } from './sections/Authors'
-import { ChapterSection } from './sections/Chapter'
-import { CoverSection } from './sections/Cover'
-import { TitleSection } from './sections/Title'
-import { LegalSection } from './sections/Legal'
 import { BackSection } from './sections/Back'
+import { ChapterSection } from './sections/Chapter'
+import { TableOfContentsSection } from './sections/Contents'
+import { CoverSection } from './sections/Cover'
+import { ForewordSection } from './sections/Foreword'
+import { LegalSection } from './sections/Legal'
+import { TitleSection } from './sections/Title'
 
 export class Pdf implements Product {
     private language: Language = Language.EN

@@ -5,9 +5,9 @@
 
 import { Serialized } from '../interfaces/Serialized'
 
+import { SerializedStory } from './Story'
 import { SerializedText } from './Text'
 import { SerializedTopic } from './Topic'
-import { SerializedStory } from './Story'
 
 export interface SerializedChapter extends Serialized {
     Title?: SerializedText

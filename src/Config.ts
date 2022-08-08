@@ -6,14 +6,14 @@
 import { Yaml } from './Yaml'
 
 import { Brand } from './models/Brand'
+import { Dimensions } from './models/Dimensions'
 import { Pallete } from './models/Pallete'
 import { Typeface } from './models/Typeface'
-import { Dimensions } from './models/Dimensions'
 
 import { SerializedBrand } from './serializers/Brand'
+import { SerializedDimensions } from './serializers/Dimensions'
 import { SerializedPallete } from './serializers/Pallete'
 import { SerializedTypeface } from './serializers/Typeface'
-import { SerializedDimensions } from './serializers/Dimensions'
 
 export abstract class Config {
     public static brand: Brand = <Brand>Yaml.unserialize(

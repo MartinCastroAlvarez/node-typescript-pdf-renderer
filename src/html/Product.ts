@@ -5,16 +5,13 @@
 
 import { Language } from '../enums/Language'
 
-import { Section } from '../interfaces/Section'
 import { Product } from '../interfaces/Product'
+import { Section } from '../interfaces/Section'
 
 import { Book } from '../models/Book'
 
-import { Yaml } from '../Yaml'
-import { Tree } from '../Tree'
 
 import { Config } from '../Config'
-import { Log } from '../Logging'
 
 import { InvalidLanguageError } from '../errors/Product'
 

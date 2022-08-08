@@ -1,9 +1,4 @@
 // ----------------------------------------------------------------
-// Purpose:
-// This library implements the Question class.
-// ----------------------------------------------------------------
-
-import { SerializedQuestion } from '../serializers/Question'
 
 import { Model } from '../interfaces/Model'
 

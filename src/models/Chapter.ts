@@ -5,11 +5,10 @@
 
 import { SerializedChapter } from '../serializers/Chapter'
 
-import { Model } from '../interfaces/Model'
 
+import { Story } from './Story'
 import { Text } from './Text'
 import { Topic } from './Topic'
-import { Story } from './Story'
 
 import { Log } from '../Logging'
 import { Yaml } from '../Yaml'

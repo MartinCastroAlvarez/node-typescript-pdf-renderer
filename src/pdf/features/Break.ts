@@ -15,12 +15,11 @@ import { Log } from '../../Logging'
 import { PdfSection } from '../Section'
 
 export class Break implements Feature {
-    adapt(section: Section): void {
+    apply(section: Section): void {
         Log.info("Adding break to PDF", section)
-        (section as PdfSection)
-            .getDocument()
-                .fontSize(Config.dimensions.getNormal())
-                .font(Config.typeface.getNormal())
-                .text("\n")
+        (section as PdfSection).getDocument()
+            .fontSize(Config.dimensions.getNormal())
+            .font(Config.typeface.getNormal())
+            .text("\n")
     }
 }

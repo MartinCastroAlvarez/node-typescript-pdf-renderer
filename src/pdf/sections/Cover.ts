@@ -8,12 +8,10 @@
 
 import { PdfSection } from '../Section'
 
-import { Config } from '../../Config'
 import { Log } from '../../Logging'
-import { Yaml } from '../../Yaml'
 
-import { TitleAdapter } from '../adapters/Title'
 import { SubtitleAdapter } from '../adapters/Subtitle'
+import { TitleAdapter } from '../adapters/Title'
 
 import { Background } from '../features/Background'
 
@@ -23,9 +21,9 @@ export class CoverSection extends PdfSection {
     public build(): void {
         super.build()
         Log.info("Building book cover", this.getBook())
-        new BackgroundAdapter().apply(this)
+        new Background().apply(this)
         new TitleAdapter().apply(this, this.getBook().title)
-        new SubtitleAdapter().adapt(this, this.getBook().subtitle)
+        new SubtitleAdapter().apply(this, this.getBook().subtitle)
         Log.info("Cover built successfully", this.getBook())
     }
 }

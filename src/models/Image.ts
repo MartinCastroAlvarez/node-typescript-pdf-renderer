@@ -11,12 +11,7 @@ import { Log } from '../Logging'
 
 import { File } from './File'
 
-import { InvalidImageHeightError } from '../errors/Image'
-import { InvalidImageWidthError } from '../errors/Image'
-import { InvalidImageLeftError } from '../errors/Image'
-import { InvalidImageRightError } from '../errors/Image'
-import { InvalidImageTopError } from '../errors/Image'
-import { InvalidImageBottomError } from '../errors/Image'
+import { InvalidImageBottomError, InvalidImageHeightError, InvalidImageLeftError, InvalidImageRightError, InvalidImageTopError, InvalidImageWidthError } from '../errors/Image'
 
 export class Image extends File implements Model {
     private width: number = 100

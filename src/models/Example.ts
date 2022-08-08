@@ -1,9 +1,4 @@
 // ----------------------------------------------------------------
-// Purpose:
-// This library implements the Example class.
-// ----------------------------------------------------------------
-
-import { SerializedExample } from '../serializers/Example'
 
 import { Model } from '../interfaces/Model'
 

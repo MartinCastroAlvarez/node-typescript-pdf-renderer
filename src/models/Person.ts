@@ -12,7 +12,6 @@ import { Log } from '../Logging'
 import { Image } from './Image'
 import { Text } from './Text'
 
-import { InvalidPersonTitleError } from '../errors/Person'
 
 export class Person implements Model {
     public readonly name: Text = new Text()

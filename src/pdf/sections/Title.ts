@@ -8,12 +8,10 @@
 
 import { PdfSection } from '../Section'
 
-import { Config } from '../../Config'
 import { Log } from '../../Logging'
-import { Yaml } from '../../Yaml'
 
-import { TitleAdapter } from '../adapters/Title'
 import { SubtitleAdapter } from '../adapters/Subtitle'
+import { TitleAdapter } from '../adapters/Title'
 
 export class TitleSection extends PdfSection {
     public getTitle(): string { return 'Title' }
@@ -22,10 +20,10 @@ export class TitleSection extends PdfSection {
         super.build()
         Log.info("Building book title", this.getBook())
         for (let author of this.getBook().authors) {
-            new SubtitleAdapter().adapt(this, author.name)
+            new SubtitleAdapter().apply(this, author.name)
         }
-        new TitleAdapter().adapt(this, this.getBook().title)
-        new SubtitleAdapter().adapt(this, this.getBook().subtitle)
+        new TitleAdapter().apply(this, this.getBook().title)
+        new SubtitleAdapter().apply(this, this.getBook().subtitle)
         Log.info("Title built successfully", this.getBook())
     }
 }

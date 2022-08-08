@@ -9,11 +9,10 @@ import { Model } from '../interfaces/Model'
 
 import { Log } from '../Logging'
 
-import { Person } from './Person'
 import { Image } from './Image'
+import { Person } from './Person'
 import { Text } from './Text'
 
-import { InvalidTitleError } from '../errors/Source'
 
 export class Source implements Model {
     private title: Text = new Text()

@@ -10,11 +10,8 @@ import { Chapter } from '../../models/Chapter'
 
 import { PdfSection } from '../Section'
 
-import { Config } from '../../Config'
 import { Log } from '../../Logging'
-import { Yaml } from '../../Yaml'
 
-import { TextAdapter } from '../adapters/Text'
 import { TitleAdapter } from '../adapters/Title'
 
 export class ChapterSection extends PdfSection {
@@ -29,7 +26,7 @@ export class ChapterSection extends PdfSection {
     public build(): void {
         super.build()
         Log.info("Building chapter", this.getChapter())
-        new TitleAdapter().adapt(this, this.getChapter().title)
+        new TitleAdapter().apply(this, this.getChapter().title)
         Log.info("Chapter built successfully", this.getChapter())
     }
 }

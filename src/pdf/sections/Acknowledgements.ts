@@ -8,7 +8,6 @@
 
 import { PdfSection } from '../Section'
 
-import { Config } from '../../Config'
 import { Log } from '../../Logging'
 import { Yaml } from '../../Yaml'
 
@@ -21,9 +20,9 @@ export class AcknowledgementsSection extends PdfSection {
     public build(): void {
         super.build()
         Log.info("Building book acknowledgements section", this.getBook())
-        new TitleAdapter().adapt(this, Yaml.getString('@i18n/Acknowledgements.yaml'))
+        new TitleAdapter().apply(this, Yaml.getString('@i18n/Acknowledgements.yaml'))
         for (let text of this.getBook().acknowledgements) {
-            new TextAdapter().adapt(this, text)
+            new TextAdapter().apply(this, text)
         }
         Log.info("Acknowledgements built successfully", this.getBook())
     }

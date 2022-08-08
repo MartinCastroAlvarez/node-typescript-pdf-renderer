@@ -5,8 +5,8 @@
 
 import { Serialized } from '../interfaces/Serialized'
 
-import { SerializedText } from './Text'
 import { SerializedImage } from './Image'
+import { SerializedText } from './Text'
 
 export interface SerializedTopic extends Serialized {
     Title?: SerializedText

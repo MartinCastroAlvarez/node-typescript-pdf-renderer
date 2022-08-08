@@ -7,14 +7,12 @@
 // ----------------------------------------------------------------
 
 import { Adapter } from '../../interfaces/Adapter'
-import { Section } from '../../interfaces/Section'
 import { Model } from '../../interfaces/Model'
+import { Section } from '../../interfaces/Section'
 
-import { Config } from '../../Config'
-import { Log } from '../../Logging'
 
 export class AvatarAdapter implements Adapter {
-    adapt(section: Section, model: Model): void {
+    apply(section: Section, model: Model): void {
         /*
         Log.info("Adapting logo to PDF", path)
         if (path)

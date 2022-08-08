@@ -5,10 +5,10 @@
 
 import { Serialized } from '../interfaces/Serialized'
 
-import { SerializedPerson } from './Person'
 import { SerializedChapter } from './Chapter'
-import { SerializedTopic } from './Topic'
+import { SerializedPerson } from './Person'
 import { SerializedText } from './Text'
+import { SerializedTopic } from './Topic'
 
 export interface SerializedBook extends Serialized {
     Title?: SerializedText

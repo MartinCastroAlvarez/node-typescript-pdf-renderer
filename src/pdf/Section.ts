@@ -9,19 +9,19 @@
 
 const PDFDocument = require('pdfkit');
 
-import { Language } from '../enums/Language'
+import { Language } from '../enums/Language';
 
-import { Section } from '../interfaces/Section'
+import { Section } from '../interfaces/Section';
 
-import { Book } from '../models/Book'
+import { Book } from '../models/Book';
 
-import { Tree } from '../Tree'
+import { Tree } from '../Tree';
 
-import { InvalidLanguageError } from '../errors/Product'
-import { FileAlreadyExistsError } from '../errors/Tree'
+import { InvalidLanguageError } from '../errors/Product';
+import { FileAlreadyExistsError } from '../errors/Tree';
 
-import { Config } from '../Config'
-import { Log } from '../Logging'
+import { Config } from '../Config';
+import { Log } from '../Logging';
 
 export class PdfSection implements Section {
     private language: Language = Language.EN

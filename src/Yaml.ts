@@ -5,38 +5,37 @@
 
 const yaml = require('js-yaml')
 
-import { Tree } from './Tree'
 import { Log } from './Logging'
+import { Tree } from './Tree'
 
 import { Reference } from './enums/Reference'
 
 import { Model } from './interfaces/Model'
 import { Serialized } from './interfaces/Serialized'
 
-import { NotImplementedError } from './errors/Yaml'
-import { InvalidReferenceError } from './errors/Yaml'
+import { InvalidReferenceError, NotImplementedError } from './errors/Yaml'
 
 import { Analogy } from './models/Analogy'
-import { Person } from './models/Person'
-import { Brand } from './models/Brand'
 import { Book } from './models/Book'
+import { Brand } from './models/Brand'
 import { Chapter } from './models/Chapter'
 import { Definition } from './models/Definition'
 import { Dimensions } from './models/Dimensions'
 import { Example } from './models/Example'
-import { Image } from './models/Image'
 import { File } from './models/File'
+import { Image } from './models/Image'
 import { Joke } from './models/Joke'
 import { List } from './models/List'
 import { Pallete } from './models/Pallete'
+import { Person } from './models/Person'
 import { Proverb } from './models/Proverb'
+import { Question } from './models/Question'
 import { Quote } from './models/Quote'
 import { Source } from './models/Source'
 import { Story } from './models/Story'
 import { Text } from './models/Text'
 import { Topic } from './models/Topic'
 import { Typeface } from './models/Typeface'
-import { Question } from './models/Question'
 
 // import { Challenge } from './models/Challenge' // FIXME
 // import { Legend } from './models/Legend' // FIXME
@@ -80,26 +79,25 @@ import { Question } from './models/Question'
 // import { Statistics } from './models/code' // FIXME
 
 import { SerializedAnalogy } from './serializers/Analogy'
-import { SerializedPerson } from './serializers/Person'
-import { SerializedBrand } from './serializers/Brand'
 import { SerializedBook } from './serializers/Book'
+import { SerializedBrand } from './serializers/Brand'
 import { SerializedChapter } from './serializers/Chapter'
 import { SerializedDefinition } from './serializers/Definition'
 import { SerializedDimensions } from './serializers/Dimensions'
 import { SerializedExample } from './serializers/Example'
-import { SerializedImage } from './serializers/Image'
 import { SerializedFile } from './serializers/File'
+import { SerializedImage } from './serializers/Image'
 import { SerializedJoke } from './serializers/Joke'
 import { SerializedList } from './serializers/List'
 import { SerializedPallete } from './serializers/Pallete'
-import { SerializedProverb } from './serializers/Proverb'
+import { SerializedPerson } from './serializers/Person'
+import { SerializedQuestion } from './serializers/Question'
 import { SerializedQuote } from './serializers/Quote'
 import { SerializedSource } from './serializers/Source'
 import { SerializedStory } from './serializers/Story'
 import { SerializedText } from './serializers/Text'
-import { SerializedTopic} from './serializers/Topic'
+import { SerializedTopic } from './serializers/Topic'
 import { SerializedTypeface } from './serializers/Typeface'
-import { SerializedQuestion } from './serializers/Question'
 
 export abstract class Yaml {
 

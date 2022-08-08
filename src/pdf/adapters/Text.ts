@@ -7,8 +7,8 @@
 // ----------------------------------------------------------------
 
 import { Adapter } from '../../interfaces/Adapter'
-import { Section } from '../../interfaces/Section'
 import { Model } from '../../interfaces/Model'
+import { Section } from '../../interfaces/Section'
 
 import { Config } from '../../Config'
 import { Log } from '../../Logging'
@@ -18,7 +18,7 @@ import { PdfSection } from '../Section'
 import { Text } from '../../models/Text'
 
 export class TextAdapter implements Adapter {
-    adapt(section: Section, model: Model): void {
+    apply(section: Section, model: Model): void {
         Log.info("Adapting text to PDF", model)
         const string: string = (model as Text).get(section.getLanguage())
         if (string) {

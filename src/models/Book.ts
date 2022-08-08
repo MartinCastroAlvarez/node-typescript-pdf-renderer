@@ -60,13 +60,13 @@ import { SerializedBook } from '../serializers/Book'
 
 import { Model } from '../interfaces/Model'
 
-import { Person } from './Person'
 import { Chapter } from './Chapter'
+import { Person } from './Person'
 import { Text } from './Text'
 import { Topic } from './Topic'
 
-import { Yaml } from '../Yaml'
 import { Log } from '../Logging'
+import { Yaml } from '../Yaml'
 
 export class Book implements Model {
     public chapters: Array<Chapter> = new Array<Chapter>()

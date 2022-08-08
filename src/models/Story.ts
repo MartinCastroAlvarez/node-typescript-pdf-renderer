@@ -9,10 +9,10 @@ import { Model } from '../interfaces/Model'
 
 import { Log } from '../Logging'
 
-import { Source } from './Source'
-import { Topic } from './Topic'
-import { Text } from './Text'
 import { Yaml } from '../Yaml'
+import { Source } from './Source'
+import { Text } from './Text'
+import { Topic } from './Topic'
 
 export class Story implements Model {
     public readonly title: Text = new Text()

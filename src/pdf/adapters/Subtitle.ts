@@ -7,34 +7,37 @@
 // ----------------------------------------------------------------
 
 import { Adapter } from '../../interfaces/Adapter'
-import { Section } from '../../interfaces/Section'
 import { Model } from '../../interfaces/Model'
+import { Section } from '../../interfaces/Section'
 
 import { Config } from '../../Config'
 import { Log } from '../../Logging'
 
 import { PdfSection } from '../Section'
 
+import { Break } from '../features/Break'
+
 import { Text } from '../../models/Text'
 
 export class SubtitleAdapter implements Adapter {
-    adapt(section: Section, model: Model): void {
+    apply(section: Section, model: Model): void {
         Log.info("Adapting subtitle to PDF", model)
         const string: string = (model as Text).get(section.getLanguage())
         if (string) {
+            new Break().apply(section)
             (section as PdfSection)
                 .getDocument()
-                .text("\n")
                 .fontSize(Config.dimensions.getSubtitle())
                 .fillColor(Config.pallete.getPrimary())
                 .font(Config.typeface.getBold())
                 .text(
                     string,
                     {
-                        align: 'center',
+                        align: 'left',
                         lineBreak: true,
                     }
                 )
+            new Break().apply(section)
         }
     }
 }

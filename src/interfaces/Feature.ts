@@ -1,9 +1,4 @@
 // ----------------------------------------------------------------
-// Purpose:
-// This class implements the Feature interface.
-// ----------------------------------------------------------------
-
-import { Language } from '../enums/Language'
 
 import { Section } from './Section'
 

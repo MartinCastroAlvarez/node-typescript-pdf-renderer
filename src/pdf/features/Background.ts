@@ -14,10 +14,9 @@ import { Log } from '../../Logging'
 
 import { PdfSection } from '../Section'
 
-import { Text } from '../../models/Text'
 
 export class Background implements Feature {
-    add(section: Section): void {
+    apply(section: Section): void {
         Log.info("Adding background to PDF", section)
         const document: any = (section as PdfSection).getDocument()
         const width: number = (section as PdfSection).getWidth()

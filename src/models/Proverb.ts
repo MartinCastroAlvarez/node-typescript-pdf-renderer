@@ -1,9 +1,4 @@
 // ----------------------------------------------------------------
-// Purpose:
-// This library implements the Proverb class.
-// ----------------------------------------------------------------
-
-import { SerializedProverb } from '../serializers/Proverb'
 
 import { Model } from '../interfaces/Model'
 

@@ -9,8 +9,8 @@ import { Model } from '../interfaces/Model'
 
 import { Log } from '../Logging'
 
-import { Person } from './Person'
 import { Image } from './Image'
+import { Person } from './Person'
 
 export class Brand implements Model {
     private title: string = ''
