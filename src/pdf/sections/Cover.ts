@@ -8,7 +8,7 @@
 
 import { PdfSection } from '../Section'
 
-import { Config } from '../../config'
+import { Config } from '../../Config'
 import { Log } from '../../Logging'
 import { Yaml } from '../../Yaml'
 

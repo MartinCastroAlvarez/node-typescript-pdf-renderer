@@ -3,17 +3,17 @@
 // This library implements the Source class.
 // ----------------------------------------------------------------
 
-import { SerializedSource } from '../serializers/source'
+import { SerializedSource } from '../serializers/Source'
 
-import { Model } from '../interfaces/model'
+import { Model } from '../interfaces/Model'
 
-import { Log } from '../logging'
+import { Log } from '../Logging'
 
-import { Person } from './person'
-import { Image } from './image'
-import { Text } from './text'
+import { Person } from './Person'
+import { Image } from './Image'
+import { Text } from './Text'
 
-import { InvalidTitleError } from '../errors/source'
+import { InvalidTitleError } from '../errors/Source'
 
 export class Source implements Model {
     private title: Text = new Text()

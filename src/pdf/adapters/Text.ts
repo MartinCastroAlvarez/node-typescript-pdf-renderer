@@ -32,7 +32,7 @@ export class TextAdapter implements Adapter {
                     {
                         indent: Config.dimensions.getNormal(),
                         wordSpacing: 4,
-                        characterSpacing: 12
+                        characterSpacing: 12,
                         align: 'justify',
                         paragraphGap: Config.dimensions.getNormal(),
                         lineBreak: true,

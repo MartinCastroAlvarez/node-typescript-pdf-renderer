@@ -5,7 +5,7 @@
 
 import { Serialized } from '../interfaces/Serialized'
 
-import { SerializedPerson } from './person'
+import { SerializedPerson } from './Person'
 import { SerializedImage } from './Image'
 import { SerializedText } from './Text'
 
