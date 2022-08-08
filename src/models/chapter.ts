@@ -18,7 +18,7 @@ export class Chapter {
     public readonly title: Text = new Text()
     public introduction: Array<Text> = new Array<Text>()
     public conclusion: Array<Text> = new Array<Text>()
-    public stories: Array<Story> = new Array<Text>()
+    public stories: Array<Story> = new Array<Story>()
 
     // String serializers.
     toString(): string {

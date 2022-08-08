@@ -20,38 +20,30 @@ export class Source implements Model {
     public authors: Array<Person> = new Array<Person>()
     public readonly avatar: Image = new Image()
 
-    // Title getter and setter.
-    getTitle(): string { return this.title }
-    setTitle(title: string) {
-        if (!title || title.length > 30)
-            throw new InvalidTitleError(`Invalid title name: {title}`)
-        this.title = title
-    }
-
     // String serializers.
     toString(): string {
-        return `<${(this as any).constructor.name}: ${this.getTitle()}>`
+        return `<${(this as any).constructor.name}: ${this.title.get()}>`
     }
 
     // JSON serializers.
     serialize(): SerializedSource {
         return {
             "Type": (this as any).constructor.name,
-            "Title": this.getTitle(),
             "Authors": this.authors?.map(person => person.serialize()),
+            "Title": this.title.serialize(),
             "Avatar": this.avatar.serialize(),
         }
     }
     unserialize(data: SerializedSource): void {
         if (data) {
             Log.info('Loading Source', data)
-            this.setTitle(data['Title'])
+            this.avatar.unserialize(data['Avatar'])
+            this.title.unserialize(data['Title'])
             this.authors = data['Authors']?.map(data => {
                 let person: Person = new Person()
                 person.unserialize(data)
                 return person
             })
-            this.avatar.unserialize(data['Avatar'])
         }
     }
 }
