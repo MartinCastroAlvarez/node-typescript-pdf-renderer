@@ -9,25 +9,28 @@
 import { Adapter } from '../../interfaces/Adapter'
 import { Model } from '../../interfaces/Model'
 import { Section } from '../../interfaces/Section'
-
+import { Log } from '../../Logging'
+import { Break } from '../features/Break'
+import { PdfSection } from '../Section'
 
 export class AvatarAdapter implements Adapter {
     apply(section: Section, model: Model): void {
-        /*
-        Log.info("Adapting logo to PDF", path)
-        if (path)
-            document
-                .fontSize(Config.dimensions.getNormal())
-                .fillColor(Config.pallete.getBlack())
-                .font(Config.typeface.getNormal())
-                .text(
-                    path,
-                    {
-                        align: 'justify',
-                        paragraphGap: Config.dimensions.getNormal(),
-                        lineBreak: true,
-                    }
-                )
-        */
+        Log.info("Adapting avatar to PDF", model)
+
+        // Checking if link is empty.
+        const path: string = (model as Image).getPath()
+        if (!path) return
+
+        // Space before the avatar.
+        new Break().apply(section)
+
+        // Updating document.
+        const document: any = (section as PdfSection).getDocument()
+        document
+            .text(path)
+
+        // Space after the avtar.
+        new Break().apply(section)
+
     }
 }
