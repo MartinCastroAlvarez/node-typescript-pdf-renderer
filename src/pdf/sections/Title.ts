@@ -21,6 +21,9 @@ export class TitleSection extends PdfSection {
     public build(): void {
         super.build()
         Log.info("Building book title", this.getBook())
+        for (let author of this.getBook().authors) {
+            new SubtitleAdapter().adapt(this, author.name)
+        }
         new TitleAdapter().adapt(this, this.getBook().title)
         new SubtitleAdapter().adapt(this, this.getBook().subtitle)
         Log.info("Title built successfully", this.getBook())

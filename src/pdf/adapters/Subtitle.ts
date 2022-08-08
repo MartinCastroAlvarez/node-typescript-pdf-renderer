@@ -24,6 +24,7 @@ export class SubtitleAdapter implements Adapter {
         if (string) {
             (section as PdfSection)
                 .getDocument()
+                .text("\n")
                 .fontSize(Config.dimensions.getSubtitle())
                 .fillColor(Config.pallete.getPrimary())
                 .font(Config.typeface.getBold())
@@ -31,7 +32,6 @@ export class SubtitleAdapter implements Adapter {
                     string,
                     {
                         align: 'center',
-                        paragraphGap: Config.dimensions.getSubtitle(),
                         lineBreak: true,
                     }
                 )

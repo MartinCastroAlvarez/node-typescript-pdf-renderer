@@ -25,13 +25,13 @@ export class TitleAdapter implements Adapter {
             (section as PdfSection)
                 .getDocument()
                 .fontSize(Config.dimensions.getTitle())
+                .text("\n")
                 .fillColor(Config.pallete.getPrimary())
                 .font(Config.typeface.getBold())
                 .text(
                     string,
                     {
                         align: 'center',
-                        paragraphGap: Config.dimensions.getTitle(),
                         lineBreak: true,
                     }
                 )

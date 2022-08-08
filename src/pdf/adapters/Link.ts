@@ -32,15 +32,16 @@ export class LinkAdapter implements Adapter {
                 .fontSize(Config.dimensions.getNormal())
                 .fillColor(Config.pallete.getPrimary())
                 .font(Config.typeface.getBold())
+                .text("\n")
                 .text(
                     string,
                     {
                         align: 'center',
                         url: string,
-                        paragraphGap: Config.dimensions.getNormal(),
                         lineBreak: true,
                     }
                 )
+                .text("\n")
             document
                 .rect(left, startingPosition, width, height)
                 .fill(Config.pallete.getGrey())

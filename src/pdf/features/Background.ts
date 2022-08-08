@@ -1,14 +1,13 @@
 // ----------------------------------------------------------------
 // Purpose:
-// This class implements the background adapter.
+// This class implements the Background adapter.
 //
 // References:
 // - https://pdfkit.org/
 // ----------------------------------------------------------------
 
-import { Adapter } from '../../interfaces/Adapter'
+import { Feature } from '../../interfaces/Feature'
 import { Section } from '../../interfaces/Section'
-import { Model } from '../../interfaces/Model'
 
 import { Config } from '../../Config'
 import { Log } from '../../Logging'
@@ -17,9 +16,9 @@ import { PdfSection } from '../Section'
 
 import { Text } from '../../models/Text'
 
-export class BackgroundAdapter implements Adapter {
-    adapt(section: Section, model: Model): void {
-        Log.info("Adapting background to PDF", section)
+export class Background implements Feature {
+    add(section: Section): void {
+        Log.info("Adding background to PDF", section)
         const document: any = (section as PdfSection).getDocument()
         const width: number = (section as PdfSection).getWidth()
         const height: number = (section as PdfSection).getHeight()

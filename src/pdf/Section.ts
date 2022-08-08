@@ -87,9 +87,10 @@ export class PdfSection implements Section {
             }
         })
         this.doc.on('pageAdded', () => {
-            this.doc 
-                .font(Config.typeface.getBold())
-                .text(this.getBook().title.get(this.getLanguage()))
+            // FIXME
+            // this.doc 
+            //     .font(Config.typeface.getBold())
+            //     .text(this.getBook().title.get(this.getLanguage()))
         })
         this.doc.info.Title = this.getBook().title.get(this.getLanguage())
         this.doc.info.Author = Config.brand.getTitle()

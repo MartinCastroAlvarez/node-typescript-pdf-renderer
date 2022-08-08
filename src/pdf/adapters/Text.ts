@@ -24,17 +24,18 @@ export class TextAdapter implements Adapter {
         if (string) {
             (section as PdfSection)
                 .getDocument()
-                .fontSize(Config.dimensions.getNormal())
                 .fillColor(Config.pallete.getBlack())
+                .fontSize(Config.dimensions.getNormal())
                 .font(Config.typeface.getNormal())
                 .text(
                     string,
                     {
                         indent: Config.dimensions.getNormal(),
-                        wordSpacing: 4,
-                        characterSpacing: 12,
+                        wordSpacing: 1,
+                        lineSpacing: 10,
+                        characterSpacing: 1,
                         align: 'justify',
-                        paragraphGap: Config.dimensions.getNormal(),
+                        // paragraphGap: Config.dimensions.getNormal(),
                         lineBreak: true,
                     }
                 )
