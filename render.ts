@@ -9,7 +9,7 @@
 
 const { ArgumentParser } = require('argparse')
 
-import { Command } from './src/command'
+import { Command } from './src/Command'
 
 const parser = new ArgumentParser({
     description: 'Book rendering with Node & Typescript'

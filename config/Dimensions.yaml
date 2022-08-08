@@ -3,7 +3,7 @@
 # This file defines the sizes used in the renders.
 # ----------------------------------------------------------------
 Type: 'Dimensions'
-Normal: 8
+Normal: 9
 Subtitle: 12
-Title: 16
-Margin: 30
+Title: 18
+Margin: 80
