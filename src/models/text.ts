@@ -9,21 +9,13 @@ import { Model } from '../interfaces/model'
 
 import { Log } from '../logging'
 
-import { Source } from './source'
 import { Language } from '../enums/language'
 
 import { EmptynessError } from '../errors/text'
 import { TranslationError } from '../errors/text'
 
 export class Text implements Model {
-    private readonly i18n: Map<Language, string>
-    public readonly source: Source
-
-    // Lazy constructor.
-    constructor() {
-        this.i18n = new Map<Language, string>()
-        this.source = new Source()
-    }
+    private readonly i18n: Map<Language, string> = new Map<Language, string>()
 
     // Text getter and setter.
     get(language: Language = Language.EN): string {
@@ -48,7 +40,6 @@ export class Text implements Model {
             "Type": (this as any).constructor.name,
             "EN": this.get(Language.EN),
             "ES": this.get(Language.ES),
-            "Source": this.source.serialize(),
         }
     }
     unserialize(data: SerializedText): void {
@@ -56,7 +47,6 @@ export class Text implements Model {
             Log.info('Loading Text', data)
             this.set(Language.EN, data['EN'])
             this.set(Language.ES, data['ES'])
-            this.source.unserialize(data['Source'])
         }
     }
 }

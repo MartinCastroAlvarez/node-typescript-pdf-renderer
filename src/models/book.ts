@@ -69,27 +69,14 @@ import { Yaml } from '../yaml'
 import { Log } from '../logging'
 
 export class Book implements Model {
-    public readonly title: Text
-    public readonly subtitle: Text
-
-    public chapters: Array<Chapter>
-    public authors: Array<Person>
-    public acknowledgements: Array<Text>
-    public foreword: Array<Text>
-    public afterword: Array<Text>
-    public legal: Array<Text>
-
-    // Lazy constructor.
-    constructor() {
-        this.chapters = new Array<Chapter>()
-        this.authors = new Array<Person>()
-        this.foreword = new Array<Text>()
-        this.afterword = new Array<Text>()
-        this.acknowledgements = new Array<Text>()
-        this.legal = new Array<Text>()
-        this.title = new Text()
-        this.subtitle = new Text()
-    }
+    public chapters: Array<Chapter> = new Array<Chapter>()
+    public authors: Array<Person> = new Array<Person>()
+    public foreword: Array<Text> = new Array<Text>()
+    public afterword: Array<Text> = new Array<Text>()
+    public acknowledgements: Array<Text> = new Array<Text>()
+    public legal: Array<Text> = new Array<Text>()
+    public readonly title: Text = new Text()
+    public readonly subtitle: Text = new Text()
 
     // String serializers.
     toString(): string {

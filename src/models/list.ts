@@ -12,12 +12,7 @@ import { Log } from '../logging'
 import { Text } from './text'
 
 export class List implements Model {
-    public items: Array<Text>
-
-    // Lazy constructor.
-    constructor() {
-        this.items = new Array<Text>()
-    }
+    public items: Array<Text> = new Array<Text>()
 
     // List size getter.
     getSize(): number {

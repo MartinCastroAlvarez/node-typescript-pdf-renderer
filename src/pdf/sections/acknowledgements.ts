@@ -15,7 +15,7 @@ import { Yaml } from '../../yaml'
 import { TextAdapter } from '../adapters/text'
 import { TitleAdapter } from '../adapters/title'
 
-export class AcknowledgementsSection extends Product {
+export class AcknowledgementsSection extends Pdf {
     public build(): void {
         super.build()
         Log.info("Building book acknowledgements section", this.getBook())

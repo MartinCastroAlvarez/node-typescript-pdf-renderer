@@ -13,16 +13,9 @@ import { Image } from './image'
 import { Text } from './text'
 
 export class Topic implements Model {
-    public readonly title: Text
-    public readonly description: Text
-    public readonly avatar: Image
-
-    // Lazy constructor.
-    constructor() {
-        this.title = new Text()
-        this.description = new Text()
-        this.avatar = new Image()
-    }
+    public readonly title: Text = new Text()
+    public readonly description: Text = new Text()
+    public readonly avatar: Image = new Image()
 
     // String serializers.
     toString(): string {

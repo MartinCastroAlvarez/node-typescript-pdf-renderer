@@ -14,12 +14,7 @@ import { Log } from '../logging'
 import { FileNotFoundError } from '../errors/tree'
 
 export class File implements Model {
-    private path: string
-
-    // Lazy constructor.
-    constructor() {
-        this.path = ''
-    }
+    private path: string = ''
 
     // Path getter and setter.
     getPath(): string { return this.path }

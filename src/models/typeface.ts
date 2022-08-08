@@ -10,18 +10,10 @@ import { Model } from '../interfaces/model'
 import { Log } from '../logging'
 
 export class Typeface implements Model {
-    private cover: string
-    private normal: string
-    private italic: string
-    private bold: string
-
-    // Lazy constructor.
-    constructor() {
-        this.cover = ''
-        this.normal = ''
-        this.bold = ''
-        this.italic = ''
-    }
+    private cover: string = ''
+    private normal: string = ''
+    private italic: string = ''
+    private bold: string = ''
 
     // Normal font getter and setter.
     getNormal(): string { return this.normal }

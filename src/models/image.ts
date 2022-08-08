@@ -19,23 +19,12 @@ import { InvalidImageTopError } from '../errors/image'
 import { InvalidImageBottomError } from '../errors/image'
 
 export class Image extends File implements Model {
-    private width: number
-    private height: number
-    private left: number
-    private right: number
-    private top: number
-    private bottom: number
-
-    // Lazy constructor.
-    constructor() {
-        super()
-        this.width = 100
-        this.height = 100
-        this.left = 0
-        this.right = 0
-        this.top = 0
-        this.bottom = 0
-    }
+    private width: number = 100
+    private height: number = 100
+    private left: number = 0
+    private right: number = 0
+    private top: number = 0
+    private bottom: number = 0
 
     // Width getter and setter.
     getWidth(): number { return this.width }

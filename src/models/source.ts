@@ -16,16 +16,9 @@ import { Text } from './text'
 import { InvalidTitleError } from '../errors/source'
 
 export class Source implements Model {
-    private title: string
-    public authors: Array<Person>
-    public readonly avatar: Image
-
-    // Lazy constructor.
-    constructor() {
-        this.title = ''
-        this.authors = new Array<Person>()
-        this.avatar = new Image()
-    }
+    private title: Text = new Text()
+    public authors: Array<Person> = new Array<Person>()
+    public readonly avatar: Image = new Image()
 
     // Title getter and setter.
     getTitle(): string { return this.title }

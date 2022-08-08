@@ -7,21 +7,24 @@
 // ----------------------------------------------------------------
 
 import { Adapter } from '../../interfaces/adapter'
-import { Section } from '../../interfaces/section'
+import { Product } from '../../interfaces/product'
 import { Model } from '../../interfaces/model'
 
-import { PdfSection } from '../sections/section'
 import { Text } from '../../models/text'
 
 import { Config } from '../../config'
 import { Log } from '../../logging'
 
+import { Pdf } from '../product'
+
 export class TitleAdapter implements Adapter {
-    adapt(section: Section, model: Model): void {
+    adapt(product: Product, model: Model): void {
         Log.info("Adapting title to PDF", model)
-        const string: string = (<Text>model).get(section.getLanguage())
+        const pdf: Pdf = <Pdf>product
+        const text: Text = <Text>model
+        const string: string = text.get(pdf.getLanguage())
         if (string) {
-            (<PdfSection>section).getDocument()
+            pdf.getDocument()
                 .fontSize(Config.dimensions.getTitle())
                 .fillColor(Config.pallete.getPrimary())
                 .font(Config.typeface.getBold())

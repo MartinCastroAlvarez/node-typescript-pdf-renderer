@@ -13,8 +13,7 @@ export interface Product {
     setBook(book: Book): void
     getLanguage(): Language
     setLanguage(language: Language): void
-    merge(): void
     build(): void
-    render(path: string): void
+    render(path: string): string
     getTitle(): string
 }

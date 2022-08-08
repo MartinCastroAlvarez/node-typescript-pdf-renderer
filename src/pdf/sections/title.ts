@@ -15,7 +15,7 @@ import { Yaml } from '../../yaml'
 import { TitleAdapter } from '../adapters/title'
 import { SubtitleAdapter } from '../adapters/subtitle'
 
-export class TitleSection extends Product {
+export class TitleSection extends Pdf {
     public build(): void {
         super.build()
         Log.info("Building book title", this.getBook())

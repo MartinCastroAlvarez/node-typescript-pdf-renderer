@@ -33,9 +33,7 @@ import { Proverb } from './models/proverb'
 import { Quote } from './models/quote'
 import { Source } from './models/source'
 import { Story } from './models/story'
-import { Subtitle } from './models/subtitle'
 import { Text } from './models/text'
-import { Title } from './models/title'
 import { Topic } from './models/topic'
 import { Typeface } from './models/typeface'
 import { Question } from './models/question'
@@ -98,9 +96,7 @@ import { SerializedProverb } from './serializers/proverb'
 import { SerializedQuote } from './serializers/quote'
 import { SerializedSource } from './serializers/source'
 import { SerializedStory } from './serializers/story'
-import { SerializedSubtitle } from './serializers/subtitle'
 import { SerializedText } from './serializers/text'
-import { SerializedTitle } from './serializers/title'
 import { SerializedTopic} from './serializers/topic'
 import { SerializedTypeface } from './serializers/typeface'
 import { SerializedQuestion } from './serializers/question'
@@ -278,19 +274,9 @@ export abstract class Yaml {
                 model.unserialize(<SerializedStory>data)
                 return <Model>model
             }
-            case Subtitle.name: {
-                let model: Subtitle = new Subtitle()
-                model.unserialize(<SerializedSubtitle>data)
-                return <Model>model
-            }
             case Text.name: {
                 let model: Text = new Text()
                 model.unserialize(<SerializedText>data)
-                return <Model>model
-            }
-            case Title.name: {
-                let model: Title = new Title()
-                model.unserialize(<SerializedTitle>data)
                 return <Model>model
             }
             case Topic.name: {

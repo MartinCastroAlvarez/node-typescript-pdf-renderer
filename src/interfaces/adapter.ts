@@ -6,8 +6,8 @@
 import { Language } from '../enums/language'
 
 import { Model } from './model'
-import { Section } from './section'
+import { Product } from './product'
 
 export interface Adapter {
-    adapt(section: Section, model: Model): void
+    adapt(product: Product, model: Model): void
 }

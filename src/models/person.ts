@@ -15,18 +15,10 @@ import { Text } from './text'
 import { InvalidPersonTitleError } from '../errors/person'
 
 export class Person implements Model {
-    public readonly name: Text
-    public readonly website: Text
-    public readonly email: Text
-    public readonly avatar: Image
-
-    // Lazy constructor.
-    constructor() {
-        this.name = new Text()
-        this.website = new Text()
-        this.email = new Text()
-        this.avatar = new Image()
-    }
+    public readonly name: Text = new Text()
+    public readonly website: Text = new Text()
+    public readonly email: Text = new Text()
+    public readonly avatar: Image = new Image()
 
     // String serializers.
     toString(): string {

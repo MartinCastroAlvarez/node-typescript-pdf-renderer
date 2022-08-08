@@ -13,16 +13,9 @@ import { Person } from './person'
 import { Image } from './image'
 
 export class Brand implements Model {
-    private title: string
-    public readonly avatar: Image
-    public authors: Array<Person>
-
-    // Lazy constructor.
-    constructor() {
-        this.title = ''
-        this.avatar = new Image()
-        this.authors = new Array<Person>()
-    }
+    private title: string = ''
+    public readonly avatar: Image = new Image()
+    public authors: Array<Person> = new Array<Person>()
 
     // Title getter and setter.
     getTitle(): string { return this.title }

@@ -15,18 +15,10 @@ import { Log } from '../logging'
 import { Yaml } from '../yaml'
 
 export class Chapter {
-    public readonly title: Text 
-    public introduction: Array<Text>
-    public conclusion: Array<Text>
-    public stories: Array<Story>
-
-    // Lazy constructor.
-    constructor() {
-        this.stories = new Array<Story>()
-        this.introduction = new Array<Text>()
-        this.conclusion = new Array<Text>()
-        this.title = new Text()
-    }
+    public readonly title: Text = new Text()
+    public introduction: Array<Text> = new Array<Text>()
+    public conclusion: Array<Text> = new Array<Text>()
+    public stories: Array<Story> = new Array<Text>()
 
     // String serializers.
     toString(): string {

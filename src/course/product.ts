@@ -18,15 +18,9 @@ import { Log } from '../logging'
 import { InvalidLanguageError } from '../errors/product'
 
 export class Course implements Product {
-    private language: Language
-    private book: Book
-    public readonly sections: Array<Product>
-
-    constructor() {
-        this.book = new Book()
-        this.sections = new Array<Product>()
-        this.language = Language.EN
-    }   
+    private language: Language = Language.EN
+    private book: Book = new Book()
+    public readonly sections: Array<Product> = new Array<Product>()
 
     // Book getter and setter.
     getBook(): Book { return this.book }
@@ -40,13 +34,18 @@ export class Course implements Product {
         this.language = language
     }
 
+    // Returns the title of the book.
+    public getTitle(): string {
+        return `${this.getBook().title.get(this.getLanguage())} - ${Config.brand.getTitle()}`
+    }
+
     // Building product and all its sections.
     public build(): void {
         throw Error("Not Implemented")
     }
 
     // Rending product.
-    public render(path: string): void {
+    public render(path: string): string {
         throw Error("Not Implemented")
     }
 }

@@ -10,18 +10,10 @@ import { Model } from '../interfaces/model'
 import { Log } from '../logging'
 
 export class Dimensions implements Model {
-    private normal: number
-    private title: number
-    private subtitle: number
-    private margin: number
-
-    // Lazy constructor.
-    constructor() {
-        this.normal = 8
-        this.title = 16
-        this.subtitle = 12
-        this.margin = 40
-    }
+    private normal: number = 8
+    private title: number = 16
+    private subtitle: number = 12
+    private margin: number = 40
 
     // Margin font getter and setter.
     getMargin(): number { return this.margin }
@@ -56,7 +48,7 @@ export class Dimensions implements Model {
     }
     unserialize(data: SerializedDimensions): void {
         if (data) {
-            Log.info('Loading Typeface', data)
+            Log.info('Loading Dimensions', data)
             this.setNormal(data['Normal'])
             this.setMargin(data['Margin'])
             this.setTitle(data['Title'])

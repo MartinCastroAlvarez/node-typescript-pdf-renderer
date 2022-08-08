@@ -9,21 +9,16 @@ import { Model } from '../interfaces/model'
 
 import { Log } from '../logging'
 
+import { Source } from './source'
 import { Topic } from './topic'
 import { Text } from './text'
 import { Yaml } from '../yaml'
 
 export class Story implements Model {
-    public readonly title: Text
-    public blocks: Array<Model>
-    public topics: Array<Topic>
-
-    // Lazy constructor.
-    constructor() {
-        this.blocks = new Array<Model>()
-        this.title = new Text()
-        this.topics = new Array<Topic>()
-    }
+    public readonly title: Text = new Text()
+    public sources: Array<Source> = new Array<Source>()
+    public blocks: Array<Model> = new Array<Model>()
+    public topics: Array<Topic> = new Array<Topic>()
 
     // String serializers.
     toString(): string {
@@ -37,6 +32,7 @@ export class Story implements Model {
             "Title": this.title.serialize(),
             "Blocks": this.blocks?.map(block => block.serialize()),
             "Topics": this.topics?.map(topic => topic.serialize()),
+            "Sources": this.sources?.map(source => source.serialize()),
         }
     }
     unserialize(data: SerializedStory): void {
@@ -45,6 +41,7 @@ export class Story implements Model {
             this.title.unserialize(data['Title']) 
             this.blocks = data['Blocks']?.map(block => Yaml.unserialize(block))
             this.topics = data['Topics']?.map(topic => <Topic>Yaml.unserialize(topic))
+            this.sources = data['Source']?.map(source => <Source>Yaml.unserialize(source))
         }
     }
 }

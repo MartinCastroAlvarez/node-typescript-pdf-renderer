@@ -13,13 +13,7 @@ import { Person } from './person'
 import { Text } from './text'
 
 export class Quote extends Text implements Model {
-    public readonly author: Person
-
-    // Lazy constructor.
-    constructor() {
-        super()
-        this.author = new Person()
-    }
+    public readonly author: Person = new Person()
 
     // JSON serializers.
     serialize(): SerializedQuote {

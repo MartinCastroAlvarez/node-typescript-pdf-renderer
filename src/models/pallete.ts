@@ -10,20 +10,11 @@ import { Model } from '../interfaces/model'
 import { Log } from '../logging'
 
 export class Pallete implements Model {
-    private primary: string
-    private secondary: string
-    private white: string
-    private grey: string
-    private black: string
-
-    // Lazy constructor.
-    constructor() {
-        this.primary = ''
-        this.secondary = ''
-        this.white = ''
-        this.grey = ''
-        this.black = ''
-    }
+    private primary: string = ''
+    private secondary: string = ''
+    private white: string = ''
+    private grey: string = ''
+    private black: string = ''
 
     // Primary color getter and setter.
     getPrimary(): string { return this.primary }

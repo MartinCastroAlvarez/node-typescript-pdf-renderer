@@ -7,4 +7,4 @@ export class ProductError extends Error {}
 
 export class InvalidLanguageError extends ProductError {}
 
-export class InvalidTitleError extends ProductError {}
+export class RenderingError extends ProductError {}
