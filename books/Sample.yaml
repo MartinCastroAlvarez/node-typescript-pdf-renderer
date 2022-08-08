@@ -84,8 +84,8 @@ Chapters:
   # ----------------------------------------------------------------
   - Type: 'Chapter'
     Title:
-      EN: 'Lorem Ipsum Dolor'
-      ES: 'Lorem Ipsum Dolor'
+      EN: 'Sit Amet Consectetur'
+      ES: 'Sit Amet Consectetur'
     Stories:
 
       # ----------------------------------------------------------------

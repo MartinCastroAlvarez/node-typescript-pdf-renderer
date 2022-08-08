@@ -8,7 +8,6 @@
 // ----------------------------------------------------------------
 
 const merge = require('easy-pdf-merge')
-const PDFDocument = require('pdfkit');
 
 import { Language } from '../enums/language'
 
@@ -26,6 +25,8 @@ import { FileAlreadyExistsError } from '../errors/tree'
 import { Config } from '../config'
 import { Log } from '../logging'
 
+import { PdfSection } from './section'
+
 import { AcknowledgementsSection } from './sections/acknowledgements'
 import { TableOfContentsSection } from './sections/contents'
 import { AfterwordSection } from './sections/afterword'
@@ -40,19 +41,7 @@ import { BackSection } from './sections/back'
 export class Pdf implements Product {
     private language: Language = Language.EN
     private book: Book = new Book()
-    public readonly sections: Array<Product> = new Array<Product>()
-
-    private doc: any = new PDFDocument({
-        bufferPages: true,
-        autoFirstPage: false,
-        size: 'A4',
-        margins: {
-            top: Config.dimensions.getMargin(),
-            bottom: Config.dimensions.getMargin(),
-            left: Config.dimensions.getMargin(),
-            right: Config.dimensions.getMargin(),
-        }
-    })
+    public readonly sections: Array<PdfSection> = new Array<PdfSection>()
 
     // Book getter and setter.
     getBook(): Book { return this.book }
@@ -69,28 +58,22 @@ export class Pdf implements Product {
     // Rending product.
     public render(path: string): string {
         Log.info("Rendering product", this)
-        const finalPath: string = `${(this as any).constructor.name}.pdf`
+        const finalPath: string = Tree.join(path, 'Final.pdf')
         if (Tree.exists(finalPath))
-            throw new FileAlreadyExistsError(`File already exists: {finalPath}`)
-        if (this.sections.length) {
-            const parts: Array<string> = this.sections.map(section => section.render(path))
-            merge(parts, finalPath, error => {
-                if (error) {
-                    Log.error("Failed to merge files", error)
-                    throw new RenderingError("Rendering failed!")
-                } else
-                    Log.info("Merged doc files successfully", this.sections)
-            })
-        } else {
-            this.getDocument().pipe(Tree.stream(finalPath))
-            this.getDocument().flushPages()
-            this.getDocument().end()
-        }
+            throw new FileAlreadyExistsError(`File already exists: ${finalPath}`)
+        const parts: Array<string> = this.sections.map(section => section.render(path))
+        merge(parts, finalPath, error => {
+            if (error) {
+                Log.error("Failed to merge files", error)
+                throw new RenderingError("Rendering failed!")
+            } else
+                Log.info("Merged doc files successfully", this.sections)
+        })
         return finalPath
     }
 
     // Building product & all its sections.
-    public merge(): void {
+    public build(): void {
         Log.info("Building PDF product", this.getBook())
 
         // Cover section.
@@ -165,30 +148,8 @@ export class Pdf implements Product {
         contents.setLanguage(this.getLanguage())
         contents.build()
         this.sections.splice(5, 0, contents)
+
+        // End of build.
+        Log.info("PDF product built successfully", this.getBook())
     }
-
-    // Building a new empty document.
-    public build(): void {
-        Log.info("Building section", this.getBook())
-
-        this.doc.on('pageAdded', () => {
-            this.doc 
-                .font(Config.typeface.getBold())
-                .text(this.getTitle())
-        })
-        this.doc.info.Title = this.getTitle()
-        this.doc.info.Author = Config.brand.getTitle()
-    }
-
-    // Returns the title of the book.
-    public getTitle(): string {
-        return `${this.getBook().title.get(this.getLanguage())} - ${Config.brand.getTitle()}`
-    }
-
-    // PDF-Specific getters.
-    public getDocument(): any { return this.doc }
-    public getWidth(): number { return this.doc.page.width }
-    public getHeight(): number { return this.doc.page.height }
-    public getInnerWidth(): number { return this.doc.page.width - Config.dimensions.getMargin() * 2 }
-    public getInnerHeight(): number { return this.doc.page.height - Config.dimensions.getMargin() * 2 }
 }

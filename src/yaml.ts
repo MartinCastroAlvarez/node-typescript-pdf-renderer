@@ -131,52 +131,28 @@ export abstract class Yaml {
 
     // Generates the full path of a reference.
     public static dereference(text: string): string {
-        if (text.startsWith(`${Reference.FONTS}/`)) {
-            Log.info('Dereferencing font', text)
-            text = text.replace(Reference.FONTS, Tree.fonts)
-            if (!Tree.exists(text))
-                throw new InvalidReferenceError(`Font file not found: ${text}`)
-        } else if (text.startsWith(`${Reference.CONFIG}/`)) {
-            Log.info('Dereferencing config', text)
-            text = text.replace(Reference.CONFIG, Tree.config)
-            if (!Tree.exists(text))
-                throw new InvalidReferenceError(`Config file not found: ${text}`)
-        } else if (text.startsWith(`${Reference.IMAGES}/`))  {
-            Log.info('Dereferencing image', text)
-            text = text.replace(Reference.IMAGES, Tree.images)
-            if (!Tree.exists(text))
-                throw new InvalidReferenceError(`Image file not found: ${text}`)
-        } else if (text.startsWith(`${Reference.FILES}/`))  {
-            Log.info('Dereferencing file', text)
-            text = text.replace(Reference.FILES, Tree.files)
+        const mapping: object = {
+            [Reference.BOOKS]: Tree.books,
+            [Reference.PERSONS]: Tree.persons,
+            [Reference.I18N]: Tree.i18n,
+            [Reference.TOPICS]: Tree.topics,
+            [Reference.FONTS]: Tree.fonts,
+            [Reference.IMAGES]: Tree.images,
+            [Reference.FILES]: Tree.files,
+            [Reference.CONFIG]: Tree.config,
+        }
+        if (mapping[text.split("/")[0]] !== undefined) {
+            Log.info('Dereferencing', text)
+            text = text.replace(text.split("/")[0], mapping[text.split("/")[0]])
             if (!Tree.exists(text))
                 throw new InvalidReferenceError(`File not found: ${text}`)
-        } else if (text.startsWith(`${Reference.BOOKS}/`)) {
-            Log.info('Dereferencing book', text)
-            text = text.replace(Reference.BOOKS, Tree.books)
-            if (!Tree.exists(text))
-                throw new InvalidReferenceError(`Book file not found: ${text}`)
-        } else if (text.startsWith(`${Reference.PERSONS}/`)) {
-            Log.info('Dereferencing person', text)
-            text = text.replace(Reference.PERSONS, Tree.persons)
-            if (!Tree.exists(text))
-                throw new InvalidReferenceError(`Person file not found: ${text}`)
-        } else if (text.startsWith(`${Reference.I18N}/`)) {
-            Log.info('Dereferencing i18n text', text)
-            text = text.replace(Reference.I18N, Tree.i18n)
-            if (!Tree.exists(text))
-                throw new InvalidReferenceError(`I18N file not found: ${text}`)
-        } else if (text.startsWith(`${Reference.TOPICS}/`)) {
-            Log.info('Dereferencing topic', text)
-            text = text.replace(Reference.TOPICS, Tree.topics)
-            if (!Tree.exists(text))
-                throw new InvalidReferenceError(`Topic file not found: ${text}`)
         }
         return text
     }
 
     // Getting a i18n string that is not part of a specific product.
     public static getString(path: string): Text {
+        Log.info('Loading string', path)
         const text: Text = new Text()
         text.unserialize(<SerializedText>Yaml.read(path))
         return text
@@ -185,119 +161,119 @@ export abstract class Yaml {
     // Method responsible for parsing a YAML string and generating
     // the instances of the classes in the models directory.
     public static unserialize(data: Serialized): Model {
-        Log.info('Unserializing', data)
+        Log.info('Unserializing', typeof data, data)
         if (!data || !data.Type)
             data.Type = Text.name
+        let instance: Model
         switch(data.Type) {
             case Analogy.name: {
-                let model: Analogy = new Analogy()
-                model.unserialize(<SerializedAnalogy>data)
-                return <Model>model
+                instance = new Analogy()
+                instance.unserialize(<SerializedAnalogy>data)
+                return instance
             }
             case Person.name: {
-                let model: Person = new Person()
-                model.unserialize(<SerializedPerson>data)
-                return <Model>model
+                instance = new Person()
+                instance.unserialize(<SerializedPerson>data)
+                return instance
             }
             case Brand.name: {
-                let model: Brand = new Brand()
-                model.unserialize(<SerializedBrand>data)
-                return <Model>model
+                instance = new Brand()
+                instance.unserialize(<SerializedBrand>data)
+                return instance
             }
             case Book.name: {
-                let model: Book = new Book()
-                model.unserialize(<SerializedBook>data)
-                return <Model>model
+                instance = new Book()
+                instance.unserialize(<SerializedBook>data)
+                return instance
             }
             case Chapter.name: {
-                let model: Chapter = new Chapter()
-                model.unserialize(<SerializedChapter>data)
-                return <Model>model
+                instance = new Chapter()
+                instance.unserialize(<SerializedChapter>data)
+                return instance
             }
             case Definition.name: {
-                let model: Definition = new Definition()
-                model.unserialize(<SerializedDefinition>data)
-                return <Model>model
+                instance = new Definition()
+                instance.unserialize(<SerializedDefinition>data)
+                return instance
             }
             case Dimensions.name: {
-                let model: Dimensions = new Dimensions()
-                model.unserialize(<SerializedDimensions>data)
-                return <Model>model
+                instance = new Dimensions()
+                instance.unserialize(<SerializedDimensions>data)
+                return instance
             }
             case Example.name: {
-                let model: Example = new Example()
-                model.unserialize(<SerializedExample>data)
-                return <Model>model
+                instance = new Example()
+                instance.unserialize(<SerializedExample>data)
+                return instance
             }
             case Image.name: {
-                let model: Image = new Image()
-                model.unserialize(<SerializedImage>data)
-                return <Model>model
+                instance = new Image()
+                instance.unserialize(<SerializedImage>data)
+                return instance
             }
             case File.name: {
-                let model: File = new File()
-                model.unserialize(<SerializedFile>data)
-                return <Model>model
+                instance = new File()
+                instance.unserialize(<SerializedFile>data)
+                return instance
             }
             case Joke.name: {
-                let model: Joke = new Joke()
-                model.unserialize(<SerializedJoke>data)
-                return <Model>model
+                instance = new Joke()
+                instance.unserialize(<SerializedJoke>data)
+                return instance
             }
             case List.name: {
-                let model: List = new List()
-                model.unserialize(<SerializedList>data)
-                return <Model>model
+                instance = new List()
+                instance.unserialize(<SerializedList>data)
+                return instance
             }
             case Pallete.name: {
-                let model: Pallete = new Pallete()
-                model.unserialize(<SerializedPallete>data)
-                return <Model>model
+                instance = new Pallete()
+                instance.unserialize(<SerializedPallete>data)
+                return instance
             }
             case Proverb.name: {
-                let model: Proverb = new Proverb()
-                model.unserialize(<SerializedQuote>data)
-                return <Model>model
+                instance = new Proverb()
+                instance.unserialize(<SerializedQuote>data)
+                return instance
             }
             case Quote.name: {
-                let model: Quote = new Quote()
-                model.unserialize(<SerializedQuote>data)
-                return <Model>model
+                instance = new Quote()
+                instance.unserialize(<SerializedQuote>data)
+                return instance
             }
             case Source.name: {
-                let model: Source = new Source()
-                model.unserialize(<SerializedSource>data)
-                return <Model>model
+                instance = new Source()
+                instance.unserialize(<SerializedSource>data)
+                return instance
             }
             case Story.name: {
-                let model: Story = new Story()
-                model.unserialize(<SerializedStory>data)
-                return <Model>model
+                instance = new Story()
+                instance.unserialize(<SerializedStory>data)
+                return instance
             }
             case Text.name: {
-                let model: Text = new Text()
-                model.unserialize(<SerializedText>data)
-                return <Model>model
+                instance = new Text()
+                instance.unserialize(<SerializedText>data)
+                return instance
             }
             case Topic.name: {
-                let model: Topic = new Topic()
-                model.unserialize(<SerializedTopic>data)
-                return <Model>model
+                instance = new Topic()
+                instance.unserialize(<SerializedTopic>data)
+                return instance
             }
             case Typeface.name: {
-                let model: Typeface = new Typeface()
-                model.unserialize(<SerializedTypeface>data)
-                return <Model>model
+                instance = new Typeface()
+                instance.unserialize(<SerializedTypeface>data)
+                return instance
             }
             case Question.name: {
-                let model: Question = new Question()
-                model.unserialize(<SerializedQuestion>data)
-                return <Model>model
+                instance = new Question()
+                instance.unserialize(<SerializedQuestion>data)
+                return instance
             }
             default: {
                 throw new NotImplementedError(`Not implemented ${typeof data}: ${JSON.stringify(data)}`)
             }
         }
     }
-
 }

@@ -7,14 +7,14 @@
 // ----------------------------------------------------------------
 
 import { Adapter } from '../../interfaces/adapter'
-import { Product } from '../../interfaces/product'
+import { Section } from '../../interfaces/section'
 import { Model } from '../../interfaces/model'
 
 import { Config } from '../../config'
 import { Log } from '../../logging'
 
 export class TextAdapter implements Adapter {
-    adapt(product: Product, model: Model): void {
+    adapt(section: Section, model: Model): void {
         /*
         Log.info("Adapting text to PDF", text)
         if (text)

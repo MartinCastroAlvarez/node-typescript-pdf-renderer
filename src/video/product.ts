@@ -5,6 +5,7 @@
 
 import { Language } from '../enums/language'
 
+import { Section } from '../interfaces/section'
 import { Product } from '../interfaces/product'
 
 import { Book } from '../models/book'
@@ -20,7 +21,7 @@ import { InvalidLanguageError } from '../errors/product'
 export class Video implements Product {
     private language: Language = Language.EN
     private book: Book = new Book()
-    public readonly sections: Array<Product> = new Array<Product>()
+    public readonly sections: Array<Section> = new Array<Section>()
 
     // Book getter and setter.
     getBook(): Book { return this.book }

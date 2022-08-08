@@ -75,12 +75,14 @@ export class Command {
                 Tree.clean(path)
 
                 // Renering product.
+                Log.info("Rendering product", book)
                 product.setBook(book)
                 product.setLanguage(language)
                 product.build()
                 product.render(path)
                 Log.success('Rendered into', path)
             }
+
         }
     }
 }

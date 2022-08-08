@@ -6,14 +6,12 @@
 // - https://nodejs.org/api/util.html#utilinspectobject-options
 // ----------------------------------------------------------------
 
-const util = require('util');
+const util = require('util')
 
 import { Console } from './enums/console'
 
 export class Log {
     public static serialize(data: any) {
-        if (typeof data.serialized === 'function')
-            return data.serialize()
         return util.inspect(data, {
             depth: 1,
             maxArrayLength: 3,
@@ -24,7 +22,7 @@ export class Log {
         })
     }
 
-    public static info(label: string, data: any): void {
+    public static info(label: string, ...data: Array<any>): void {
         console.log(
             '%s [!] - %s - %s%s: %s',
             Console.Bright,
@@ -35,7 +33,7 @@ export class Log {
         )
     }
 
-    public static error(label: string, data: any): void {
+    public static error(label: string, ...data: Array<any>): void {
         console.log(
             '%s%s [x] - %s - %s%s: %s',
             Console.FgRed,
@@ -47,7 +45,7 @@ export class Log {
         )
     }
 
-    public static success(label: string, data: any): void {
+    public static success(label: string, ...data: Array<any>): void {
         console.log(
             '%s%s [✔] - %s - %s: %s',
             Console.BgGreen,

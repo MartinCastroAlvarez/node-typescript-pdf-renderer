@@ -1,16 +1,14 @@
 // ----------------------------------------------------------------
 // Purpose:
-// This class implements the Product interface.
+// This class implements the Section interface.
 // ----------------------------------------------------------------
 
 import { Language } from '../enums/language'
 
 import { Book } from '../models/book'
 
-import { Section } from './section'
-
-export interface Product {
-    sections: Array<Section>
+export interface Section {
+    getTitle(): string
     getBook(): Book
     setBook(book: Book): void
     getLanguage(): Language

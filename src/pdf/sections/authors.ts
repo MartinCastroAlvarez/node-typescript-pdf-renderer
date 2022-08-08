@@ -6,7 +6,7 @@
 // - https://pdfkit.org/
 // ----------------------------------------------------------------
 
-import { Pdf } from '../product'
+import { PdfSection } from '../section'
 
 import { Config } from '../../config'
 import { Log } from '../../logging'
@@ -18,7 +18,9 @@ import { SubtitleAdapter } from '../adapters/subtitle'
 import { AvatarAdapter } from '../adapters/avatar'
 import { LinkAdapter } from '../adapters/link'
 
-export class AuthorsSection extends Pdf {
+export class AuthorsSection extends PdfSection {
+    public getTitle(): string { return 'Authors' }
+
     public build(): void {
         super.build()
         Log.info("Building book authors section", this.getBook())
@@ -29,5 +31,6 @@ export class AuthorsSection extends Pdf {
             new LinkAdapter().adapt(this, author.website)
             new LinkAdapter().adapt(this, author.email)
         }
+        Log.info("Authors built successfully", this.getBook())
     }
 }

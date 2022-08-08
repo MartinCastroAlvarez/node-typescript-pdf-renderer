@@ -6,7 +6,7 @@
 // - https://pdfkit.org/
 // ----------------------------------------------------------------
 
-import { Pdf } from '../product'
+import { PdfSection } from '../section'
 
 import { Config } from '../../config'
 import { Log } from '../../logging'
@@ -15,7 +15,9 @@ import { Yaml } from '../../yaml'
 import { TextAdapter } from '../adapters/text'
 import { TitleAdapter } from '../adapters/title'
 
-export class ForewordSection extends Pdf {
+export class ForewordSection extends PdfSection {
+    public getTitle(): string { return 'Foreword' }
+
     public build(): void {
         super.build()
         Log.info("Building book foreword section", this.getBook())
@@ -23,5 +25,6 @@ export class ForewordSection extends Pdf {
         for (let text of this.getBook().foreword) {
             new TextAdapter().adapt(this, text)
         }
+        Log.info("Foreword built successfully", this.getBook())
     }
 }
