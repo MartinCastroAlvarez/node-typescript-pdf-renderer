@@ -6,13 +6,17 @@
 // - https://pdfkit.org/
 // ----------------------------------------------------------------
 
-import { Config } from '../../Config'
 import { Adapter } from '../../interfaces/Adapter'
 import { Model } from '../../interfaces/Model'
 import { Section } from '../../interfaces/Section'
+
+import { Config } from '../../Config'
 import { Log } from '../../Logging'
+
 import { Text } from '../../models/Text'
+
 import { Break } from '../features/Break'
+
 import { PdfSection } from '../Section'
 
 export class LinkAdapter implements Adapter {

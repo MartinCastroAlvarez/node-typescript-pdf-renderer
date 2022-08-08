@@ -9,8 +9,13 @@
 import { Adapter } from '../../interfaces/Adapter'
 import { Model } from '../../interfaces/Model'
 import { Section } from '../../interfaces/Section'
+
 import { Log } from '../../Logging'
+
+import { Image } from '../../models/Image'
+
 import { Break } from '../features/Break'
+
 import { PdfSection } from '../Section'
 
 export class AvatarAdapter implements Adapter {
