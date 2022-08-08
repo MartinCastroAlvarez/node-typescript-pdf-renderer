@@ -40,8 +40,6 @@ export class TextAdapter implements Adapter {
                 string,
                 {
                     indent: Config.dimensions.getNormal(),
-                    wordSpacing: 1,
-                    lineSpacing: 10,
                     characterSpacing: 1,
                     align: 'justify',
                     // paragraphGap: Config.dimensions.getNormal(),

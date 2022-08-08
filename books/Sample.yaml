@@ -48,6 +48,18 @@ Chapters:
   # A sample chapter.
   # ----------------------------------------------------------------
   - Type: 'Chapter'
+    Introduction:
+      - '@i18n/LoremIpsum.yaml'
+      - '@i18n/LoremIpsum.yaml'
+      - '@i18n/LoremIpsum.yaml'
+      - '@i18n/LoremIpsum.yaml'
+      - '@i18n/LoremIpsum.yaml'
+    Conclusion:
+      - '@i18n/LoremIpsum.yaml'
+      - '@i18n/LoremIpsum.yaml'
+      - '@i18n/LoremIpsum.yaml'
+      - '@i18n/LoremIpsum.yaml'
+      - '@i18n/LoremIpsum.yaml'
     Title:
       EN: 'Lorem Ipsum Dolor'
       ES: 'Lorem Ipsum Dolor'
@@ -79,6 +91,18 @@ Chapters:
   # A sample chapter.
   # ----------------------------------------------------------------
   - Type: 'Chapter'
+    Introduction:
+      - '@i18n/LoremIpsum.yaml'
+      - '@i18n/LoremIpsum.yaml'
+      - '@i18n/LoremIpsum.yaml'
+      - '@i18n/LoremIpsum.yaml'
+      - '@i18n/LoremIpsum.yaml'
+    Conclusion:
+      - '@i18n/LoremIpsum.yaml'
+      - '@i18n/LoremIpsum.yaml'
+      - '@i18n/LoremIpsum.yaml'
+      - '@i18n/LoremIpsum.yaml'
+      - '@i18n/LoremIpsum.yaml'
     Title:
       EN: 'Sit Amet Consectetur'
       ES: 'Sit Amet Consectetur'

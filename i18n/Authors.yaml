@@ -1,6 +1,0 @@
-# ----------------------------------------------------------------
-# Purpose:
-# Defines a Translation that can be referenced using `@i18n/<name>.yaml`
-# ----------------------------------------------------------------
-EN: 'About the Authors'
-ES: 'Acerca de los Autores'
