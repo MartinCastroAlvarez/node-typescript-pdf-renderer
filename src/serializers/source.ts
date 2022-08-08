@@ -11,5 +11,5 @@ import { SerializedImage } from './image'
 export interface SerializedSource extends Serialized {
     Title?: string
     Authors?: Array<SerializedPerson>
-    Logo?: SerializedImage
+    Avatar?: SerializedImage
 }

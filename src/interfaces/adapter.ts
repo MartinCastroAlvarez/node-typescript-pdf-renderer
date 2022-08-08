@@ -5,4 +5,9 @@
 
 import { Language } from '../enums/language'
 
-export interface Adapter {}
+import { Model } from './model'
+import { Section } from './section'
+
+export interface Adapter {
+    adapt(section: Section, model: Model, language: Language): void
+}

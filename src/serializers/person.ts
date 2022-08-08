@@ -6,10 +6,11 @@
 import { Serialized } from '../interfaces/serialized'
 
 import { SerializedImage } from './image'
+import { SerializedText } from './textj'
 
 export interface SerializedPerson extends Serialized {
-    Name?: string
-    Website?: string
-    Email?: string
-    Logo?: SerializedImage
+    Name?: SerializedText
+    Website?: SerializedText
+    Email?: SerializedText
+    Avatar?: SerializedImage
 }

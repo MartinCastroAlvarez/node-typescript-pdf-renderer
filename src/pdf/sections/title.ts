@@ -19,7 +19,7 @@ export class TitleSection extends PdfSection {
     public build(): void {
         super.build()
         Log.info("Building book title", this.getBook())
-        TitleAdapter.adapt(this.getDocument(), this.getBook().title.get(this.getLanguage()))
-        SubtitleAdapter.adapt(this.getDocument(), this.getBook().subtitle.get(this.getLanguage()))
+        TitleAdapter.adapt(this, this.getBook().title, this.getLanguage())
+        SubtitleAdapter.adapt(this, this.getBook().subtitle, this.getLanguage())
     }
 }

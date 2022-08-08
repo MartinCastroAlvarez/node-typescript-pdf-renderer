@@ -13,13 +13,19 @@ export class Dimensions implements Model {
     private normal: number
     private title: number
     private subtitle: number
+    private margin: number
 
     // Lazy constructor.
     constructor() {
-        this.normal = ''
-        this.title = ''
-        this.subtitle = ''
+        this.normal = 8
+        this.title = 16
+        this.subtitle = 12
+        this.margin = 40
     }
+
+    // Margin font getter and setter.
+    getMargin(): number { return this.margin }
+    setMargin(size: number) { this.margin = size }
 
     // Normal font getter and setter.
     getNormal(): number { return this.normal }
@@ -43,6 +49,7 @@ export class Dimensions implements Model {
         return {
             "Type": (this as any).constructor.name,
             "Normal": this.getNormal(),
+            "Margin": this.getMargin(),
             "Title": this.getTitle(),
             "Subtitle": this.getSubtitle(),
         }
@@ -51,6 +58,7 @@ export class Dimensions implements Model {
         if (data) {
             Log.info('Loading Typeface', data)
             this.setNormal(data['Normal'])
+            this.setMargin(data['Margin'])
             this.setTitle(data['Title'])
             this.setSubtitle(data['Subtitle'])
         }

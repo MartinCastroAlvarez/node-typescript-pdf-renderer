@@ -2,6 +2,8 @@
 # Purpose:
 # This file defines the sizes used in the renders.
 # ----------------------------------------------------------------
-Normal: 10
-Subtitle: 20
-Title: 40
+Type: 'Dimensions'
+Normal: 8
+Subtitle: 12
+Title: 16
+Margin: 30

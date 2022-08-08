@@ -19,9 +19,9 @@ export class LegalSection extends PdfSection {
     public build(): void {
         super.build()
         Log.info("Building book legal warning", this.getBook())
-        TitleAdapter.adapt(this.getDocument(), Yaml.getString('@i18n/Legal.yaml').get(this.getLanguage()))
+        TitleAdapter.adapt(this, Yaml.getString('@i18n/Legal.yaml'), this.getLanguage())
         for (let text of this.getBook().legal) {
-            TextAdapter.adapt(this.getDocument(), text.get(this.getLanguage()))
+            TextAdapter.adapt(this, text, this.getLanguage())
         }
     }
 }

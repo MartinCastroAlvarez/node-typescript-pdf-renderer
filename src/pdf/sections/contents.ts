@@ -19,9 +19,9 @@ export class TableOfContentsSection extends PdfSection {
     public build(): void {
         super.build()
         Log.info("Building book table of contents", this.getBook())
-        TitleAdapter.adapt(this.getDocument(), Yaml.getString('@i18n/TableOfContents.yaml').get(this.getLanguage()))
+        TitleAdapter.adapt(this, Yaml.getString('@i18n/TableOfContents.yaml'), this.getLanguage())
         for (let chapter of this.getBook().chapters) {
-            TextAdapter.adapt(this.getDocument(), chapter.title.get(this.getLanguage()))
+            TextAdapter.adapt(this, chapter.title, this.getLanguage())
         }
     }
 }

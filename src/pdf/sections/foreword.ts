@@ -19,9 +19,9 @@ export class ForewordSection extends PdfSection {
     public build(): void {
         super.build()
         Log.info("Building book foreword section", this.getBook())
-        TitleAdapter.adapt(this.getDocument(), Yaml.getString('@i18n/Foreword.yaml').get(this.getLanguage()))
+        TitleAdapter.adapt(this, Yaml.getString('@i18n/Foreword.yaml'), this.getLanguage())
         for (let text of this.getBook().foreword) {
-            TextAdapter.adapt(this.getDocument(), text.get(this.getLanguage()))
+            TextAdapter.adapt(this, text, this.getLanguage())
         }
     }
 }

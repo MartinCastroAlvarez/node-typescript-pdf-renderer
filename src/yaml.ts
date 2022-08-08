@@ -22,6 +22,7 @@ import { Brand } from './models/brand'
 import { Book } from './models/book'
 import { Chapter } from './models/chapter'
 import { Definition } from './models/definition'
+import { Dimensions } from './models/dimensions'
 import { Example } from './models/example'
 import { Image } from './models/image'
 import { File } from './models/file'
@@ -39,46 +40,46 @@ import { Topic } from './models/topic'
 import { Typeface } from './models/typeface'
 import { Question } from './models/question'
 
-// import { Challenge } from './models/challenge'
-// import { Legend } from './models/legend'
-// import { Conspiracy } from './models/conspiracy'
-// import { Prophecy } from './models/prophecy'
-// import { Exaggeration } from './models/exaggeration'
-// import { Challenge } from './models/challenge'
-// import { Tale } from './models/tale'
-// import { Motivation } from './models/motivation'
-// import { Surprise } from './models/surprise'
-// import { Paper } from './models/paper'
-// import { Quiz } from './models/quiz'
-// import { Map } from './models/map'
-// import { Table } from './models/table'
-// import { Bar } from './models/bar'
-// import { Pie } from './models/pie'
-// import { Line } from './models/Line'
-// import { Graph } from './models/graph'
-// import { Math } from './models/math'
-// import { Code } from './models/code'
-// import { SocialAcceptance } from './models/code'
-// import { TurningPoint } from './models/code'
-// import { Cliffhanger } from './models/code'
-// import { HumanScale } from './models/code'
-// import { PersonalExperience } from './models/code'
-// import { Benefit } from './models/code'
-// import { Imagine } from './models/code'
-// import { Authority } from './models/code'
-// import { Challenge } from './models/code'
-// import { Feelings } from './models/code'
-// import { Childhood } from './models/code'
-// import { Game } from './models/code'
-// import { Urgent } from './models/code'
-// import { TerrorTale } from './models/code'
-// import { HeroicTale } from './models/code'
-// import { EroticTale } from './models/code'
-// import { Link } from './models/code'
-// import { Post } from './models/code'
-// import { Research } from './models/code'
-// import { Study } from './models/code'
-// import { Statistics } from './models/code'
+// import { Challenge } from './models/challenge' // FIXME
+// import { Legend } from './models/legend' // FIXME
+// import { Conspiracy } from './models/conspiracy' // FIXME
+// import { Prophecy } from './models/prophecy' // FIXME
+// import { Exaggeration } from './models/exaggeration' // FIXME
+// import { Challenge } from './models/challenge' // FIXME
+// import { Tale } from './models/tale' // FIXME
+// import { Motivation } from './models/motivation' // FIXME
+// import { Surprise } from './models/surprise' // FIXME
+// import { Paper } from './models/paper' // FIXME
+// import { Quiz } from './models/quiz' // FIXME
+// import { Map } from './models/map' // FIXME
+// import { Table } from './models/table' // FIXME
+// import { Bar } from './models/bar' // FIXME
+// import { Pie } from './models/pie' // FIXME
+// import { Line } from './models/Line' // FIXME
+// import { Graph } from './models/graph' // FIXME
+// import { Math } from './models/math' // FIXME
+// import { Code } from './models/code' // FIXME
+// import { SocialAcceptance } from './models/code' // FIXME
+// import { TurningPoint } from './models/code' // FIXME
+// import { Cliffhanger } from './models/code' // FIXME
+// import { HumanScale } from './models/code' // FIXME
+// import { PersonalExperience } from './models/code' // FIXME
+// import { Benefit } from './models/code' // FIXME
+// import { Imagine } from './models/code' // FIXME
+// import { Authority } from './models/code' // FIXME
+// import { Challenge } from './models/code' // FIXME
+// import { Feelings } from './models/code' // FIXME
+// import { Childhood } from './models/code' // FIXME
+// import { Game } from './models/code' // FIXME
+// import { Urgent } from './models/code' // FIXME
+// import { TerrorTale } from './models/code' // FIXME
+// import { HeroicTale } from './models/code' // FIXME
+// import { EroticTale } from './models/code' // FIXME
+// import { Link } from './models/code' // FIXME
+// import { Post } from './models/code' // FIXME
+// import { Research } from './models/code' // FIXME
+// import { Study } from './models/code' // FIXME
+// import { Statistics } from './models/code' // FIXME
 
 import { SerializedAnalogy } from './serializers/analogy'
 import { SerializedPerson } from './serializers/person'
@@ -86,6 +87,7 @@ import { SerializedBrand } from './serializers/brand'
 import { SerializedBook } from './serializers/book'
 import { SerializedChapter } from './serializers/chapter'
 import { SerializedDefinition } from './serializers/definition'
+import { SerializedDimensions } from './serializers/dimensions'
 import { SerializedExample } from './serializers/example'
 import { SerializedImage } from './serializers/image'
 import { SerializedFile } from './serializers/file'
@@ -187,7 +189,7 @@ export abstract class Yaml {
     // Method responsible for parsing a YAML string and generating
     // the instances of the classes in the models directory.
     public static unserialize(data: Serialized): Model {
-        Log.info('Unserializing', data.Type)
+        Log.info('Unserializing', data)
         if (!data || !data.Type)
             data.Type = Text.name
         switch(data.Type) {
@@ -219,6 +221,11 @@ export abstract class Yaml {
             case Definition.name: {
                 let model: Definition = new Definition()
                 model.unserialize(<SerializedDefinition>data)
+                return <Model>model
+            }
+            case Dimensions.name: {
+                let model: Dimensions = new Dimensions()
+                model.unserialize(<SerializedDimensions>data)
                 return <Model>model
             }
             case Example.name: {

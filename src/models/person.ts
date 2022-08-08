@@ -15,57 +15,41 @@ import { Text } from './text'
 import { InvalidPersonTitleError } from '../errors/person'
 
 export class Person implements Model {
-    private name: string
-    private website: string
-    private email: string
-    public readonly logo: Image
+    public readonly name: Text
+    public readonly website: Text
+    public readonly email: Text
+    public readonly avatar: Image
 
     // Lazy constructor.
     constructor() {
-        this.name = ''
-        this.website = ''
-        this.email = ''
-        this.logo = new Image()
+        this.name = new Text()
+        this.website = new Text()
+        this.email = new Text()
+        this.avatar = new Image()
     }
-
-    // Name getter and setter.
-    getName(): string { return this.name }
-    setName(name: string) {
-        if (!name || name.length > 50)
-            throw new InvalidPersonTitleError(`Invalid person name: ${name}`)
-        this.name = name
-    }
-
-    // Website getter and setter.
-    getWebsite(): string { return this.website }
-    setWebsite(website: string) { this.website = website }
-
-    // Email getter and setter.
-    getEmail(): string { return this.email }
-    setEmail(email: string) { this.email = email }
 
     // String serializers.
     toString(): string {
-        return `<${(this as any).constructor.name}: ${this.getName()}>`
+        return `<${(this as any).constructor.name}: ${this.name.get()}>`
     }
 
     // JSON serializers.
     serialize(): SerializedPerson {
         return {
             "Type": (this as any).constructor.name,
-            "Name": this.getName(),
-            "Website": this.getWebsite(),
-            "Email": this.getEmail(),
-            "Logo": this.logo.serialize(),
+            "Name": this.name.serialize(),
+            "Website": this.website.serialize(),
+            "Email": this.email.serialize(),
+            "Avatar": this.avatar.serialize(),
         }
     }
     unserialize(data: SerializedPerson): void {
         if (data) {
             Log.info('Loading Person', data)
-            this.setName(data['Name'])
-            this.setWebsite(data['Website'])
-            this.setEmail(data['Email'])
-            this.logo.unserialize(data['Logo'])
+            this.name.unserialize(data['Name'])
+            this.website.unserialize(data['Website'])
+            this.email.unserialize(data['Email'])
+            this.avatar.unserialize(data['Avatar'])
         }
     }
 }

@@ -15,13 +15,13 @@ import { Text } from './text'
 export class Topic implements Model {
     public readonly title: Text
     public readonly description: Text
-    public readonly logo: Image
+    public readonly avatar: Image
 
     // Lazy constructor.
     constructor() {
         this.title = new Text()
         this.description = new Text()
-        this.logo = new Image()
+        this.avatar = new Image()
     }
 
     // String serializers.
@@ -35,7 +35,7 @@ export class Topic implements Model {
             "Type": (this as any).constructor.name,
             "Title": this.title.serialize(),
             "Description": this.description.serialize(),
-            "Logo": this.logo.serialize(),
+            "Avatar": this.avatar.serialize(),
         }
     }
     unserialize(data: SerializedTopic): void {
@@ -43,7 +43,7 @@ export class Topic implements Model {
             Log.info('Loading Topic', data)
             this.title.unserialize(data['Title'])
             this.description.unserialize(data['Description'])
-            this.logo.unserialize(data['Logo'])
+            this.avatar.unserialize(data['Avatar'])
         }
     }
 }

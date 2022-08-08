@@ -18,13 +18,13 @@ import { InvalidTitleError } from '../errors/source'
 export class Source implements Model {
     private title: string
     public authors: Array<Person>
-    public readonly logo: Image
+    public readonly avatar: Image
 
     // Lazy constructor.
     constructor() {
         this.title = ''
         this.authors = new Array<Person>()
-        this.logo = new Image()
+        this.avatar = new Image()
     }
 
     // Title getter and setter.
@@ -46,7 +46,7 @@ export class Source implements Model {
             "Type": (this as any).constructor.name,
             "Title": this.getTitle(),
             "Authors": this.authors?.map(person => person.serialize()),
-            "Logo": this.logo.serialize(),
+            "Avatar": this.avatar.serialize(),
         }
     }
     unserialize(data: SerializedSource): void {
@@ -58,7 +58,7 @@ export class Source implements Model {
                 person.unserialize(data)
                 return person
             })
-            this.logo.unserialize(data['Logo'])
+            this.avatar.unserialize(data['Avatar'])
         }
     }
 }

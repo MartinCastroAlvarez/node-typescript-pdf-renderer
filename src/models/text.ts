@@ -33,7 +33,7 @@ export class Text implements Model {
     }
     set(language: Language = Language.EN, text: string) {
         if (!text)
-            throw new EmptynessError(`Invalid ${language} text: ${text}`)
+            throw new EmptynessError(`Invalid '${language}' text: ${text}`)
         this.i18n[language] = text
     }
 

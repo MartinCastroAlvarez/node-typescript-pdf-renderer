@@ -10,6 +10,6 @@ import { SerializedPerson } from './person'
 
 export interface SerializedBrand extends Serialized {
     Title?: string
-    Logo?: SerializedImage
+    Avatar?: SerializedImage
     Authors?: Array<SerializedPerson>
 }

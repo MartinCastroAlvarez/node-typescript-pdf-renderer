@@ -11,5 +11,5 @@ import { SerializedImage } from './image'
 export interface SerializedTopic extends Serialized {
     Title?: SerializedText
     Description?: SerializedText
-    Logo?: SerializedImage
+    Avatar?: SerializedImage
 }

@@ -14,13 +14,13 @@ import { Image } from './image'
 
 export class Brand implements Model {
     private title: string
-    public readonly logo: Image
+    public readonly avatar: Image
     public authors: Array<Person>
 
     // Lazy constructor.
     constructor() {
         this.title = ''
-        this.logo = new Image()
+        this.avatar = new Image()
         this.authors = new Array<Person>()
     }
 
@@ -39,14 +39,14 @@ export class Brand implements Model {
             "Type": (this as any).constructor.name,
             "Title": this.getTitle(),
             "Authors": this.authors?.map(person => person.serialize()),
-            "Logo": this.logo.serialize(),
+            "Avatar": this.avatar.serialize(),
         }
     }
     unserialize(data: SerializedBrand): void {
         if (data) {
             Log.info('Loading Brand', data)
             this.setTitle(data['Title'])
-            this.logo.unserialize(data['Logo'])
+            this.avatar.unserialize(data['Avatar'])
             this.authors = data['Authors']?.map(data => {
                 let person = new Person()
                 person.unserialize(data)

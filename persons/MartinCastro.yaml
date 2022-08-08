@@ -3,9 +3,18 @@
 # Defines a Person that can be referenced using `@person/<name>.yaml`
 # ----------------------------------------------------------------
 Type: 'Person'
-Name: 'Martin Alejandro Castro Alvarez'
-Website: 'https://github.com/MartinCastroAlvarez'
-Email: 'martincastro.10.5@gmail.com'
-Logo:
+Name:
+  Type: 'Text'
+  EN: 'Martin Alejandro Castro Alvarez'
+  ES: 'Martin Alejandro Castro Alvarez'
+Website:
+  Type: 'Text'
+  EN: 'https://github.com/MartinCastroAlvarez?lang=en'
+  ES: 'https://github.com/MartinCastroAlvarez?lang=es'
+Email:
+  Type: 'Text'
+  EN: 'martincastro.10.5@gmail.com'
+  ES : 'martincastro.10.5@gmail.com'
+Avatar:
   Type: 'Image'
   Path: '@image/persons/martincastro.jpeg'

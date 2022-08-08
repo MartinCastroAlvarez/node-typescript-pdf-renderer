@@ -19,9 +19,9 @@ export class AfterwordSection extends PdfSection {
     public build(): void {
         super.build()
         Log.info("Building book afterword section", this.getBook())
-        TitleAdapter.adapt(this.getDocument(), Yaml.getString('@i18n/Afterword.yaml').get(this.getLanguage()))
+        TitleAdapter.adapt(this, Yaml.getString('@i18n/Afterword.yaml'), this.getLanguage())
         for (let text of this.getBook().afterword) {
-            TextAdapter.adapt(this.getDocument(), text.get(this.getLanguage()))
+            TextAdapter.adapt(this, text, this.getLanguage())
         }
     }
 }

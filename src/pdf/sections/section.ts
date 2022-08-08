@@ -31,9 +31,14 @@ export abstract class PdfSection implements Section {
         Log.info("Building section", this.getBook())
         this.doc = new PDFDocument({
             bufferPages: true,
-            autoFirstPage: true,
-            // font: Config.typeface.getBold(), // FIXME
+            // autoFirstPage: true,
             size: 'A4',
+            margins: {
+                top: Config.dimensions.getMargin(),
+                bottom: Config.dimensions.getMargin(),
+                left: Config.dimensions.getMargin(),
+                right: Config.dimensions.getMargin(),
+            }
         })
         this.doc.on('pageAdded', () => {
             this.doc 
@@ -54,6 +59,10 @@ export abstract class PdfSection implements Section {
     public setLanguage(language: Language) { this.language = language }
 
     public getDocument(): any { return this.doc }
+    public getWidth(): number { return this.doc.page.width }
+    public getHeight(): number { return this.doc.page.height }
+    public getInnerWidth(): number { return this.doc.page.width - Config.dimensions.getMargin() * 2 }
+    public getInnerHeight(): number { return this.doc.page.height - Config.dimensions.getMargin() * 2 }
 
     // Book getter and setter.
     getBook(): Book { return this.book }
