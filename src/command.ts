@@ -78,6 +78,7 @@ export class Command {
                 product.setBook(book)
                 product.setLanguage(language)
                 product.build()
+                product.merge()
                 product.render(path)
                 Log.success('Rendered into', path)
             }

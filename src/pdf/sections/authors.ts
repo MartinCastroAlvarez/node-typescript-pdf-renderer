@@ -6,7 +6,7 @@
 // - https://pdfkit.org/
 // ----------------------------------------------------------------
 
-import { PdfSection } from './section'
+import { Pdf } from '../product'
 
 import { Config } from '../../config'
 import { Log } from '../../logging'
@@ -18,16 +18,16 @@ import { SubtitleAdapter } from '../adapters/subtitle'
 import { AvatarAdapter } from '../adapters/avatar'
 import { LinkAdapter } from '../adapters/link'
 
-export class AuthorsSection extends PdfSection {
+export class AuthorsSection extends Pdf {
     public build(): void {
         super.build()
         Log.info("Building book authors section", this.getBook())
-        TitleAdapter.adapt(this, Yaml.getString('@i18n/Authors.yaml'), this.getLanguage())
+        new TitleAdapter().adapt(this, Yaml.getString('@i18n/Authors.yaml'))
         for (let author of this.getBook().authors) {
-            AvatarAdapter.adapt(this, author.avatar, this.getLanguage())
-            SubtitleAdapter.adapt(this, author.name, this.getLanguage())
-            LinkAdapter.adapt(this, author.website, this.getLanguage())
-            LinkAdapter.adapt(this, author.email, this.getLanguage())
+            new AvatarAdapter().adapt(this, author.avatar)
+            new SubtitleAdapter().adapt(this, author.name)
+            new LinkAdapter().adapt(this, author.website)
+            new LinkAdapter().adapt(this, author.email)
         }
     }
 }

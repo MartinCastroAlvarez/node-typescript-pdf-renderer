@@ -12,6 +12,8 @@ import { Console } from './enums/console'
 
 export class Log {
     public static serialize(data: any) {
+        if (typeof data.serialized === 'function')
+            return data.serialize()
         return util.inspect(data, {
             depth: 1,
             maxArrayLength: 3,

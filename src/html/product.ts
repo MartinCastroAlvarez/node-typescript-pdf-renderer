@@ -16,16 +16,17 @@ import { Config } from '../config'
 import { Log } from '../logging'
 
 import { InvalidLanguageError } from '../errors/product'
-import { InvalidTitleError } from '../errors/product'
 
 export class Html implements Product {
     private language: Language
     private book: Book
+    public readonly sections: Array<Product>
 
     constructor() {
         this.book = new Book()
+        this.sections = new Array<Product>()
         this.language = Language.EN
-    }
+    }   
 
     // Book getter and setter.
     getBook(): Book { return this.book }
