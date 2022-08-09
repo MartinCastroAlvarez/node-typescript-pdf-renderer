@@ -15,6 +15,7 @@ Email:
   Type: 'Text'
   EN: 'martincastro.10.5@gmail.com'
   ES : 'martincastro.10.5@gmail.com'
+Bio: '@i18n/LoremIpsum.yaml'
 Avatar:
   Type: 'Image'
   Path: '@image/persons/martincastro.jpeg'

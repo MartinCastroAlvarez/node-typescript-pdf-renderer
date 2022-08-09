@@ -11,6 +11,7 @@ import { SerializedText } from './Text'
 export interface SerializedPerson extends Serialized {
     Name?: SerializedText
     Website?: SerializedText
+    Bio?: SerializedText
     Email?: SerializedText
     Avatar?: SerializedImage
 }

@@ -12,6 +12,7 @@ import { Log } from '../Logging'
 export class Pallete implements Model {
     private primary: string = ''
     private secondary: string = ''
+    private tertiary: string = ''
     private white: string = ''
     private grey: string = ''
     private black: string = ''
@@ -23,6 +24,10 @@ export class Pallete implements Model {
     // Secondary color getter and setter.
     getSecondary(): string { return this.secondary }
     setSecondary(color: string) { this.secondary = color }
+
+    // Tertiary color getter and setter.
+    getTertiary(): string { return this.tertiary }
+    setTertiary(color: string) { this.tertiary = color }
 
     // White color getter and setter.
     getWhite(): string { return this.white }
@@ -47,6 +52,7 @@ export class Pallete implements Model {
             "Type": (this as any).constructor.name,
             "Primary": this.getPrimary(),
             "Secondary": this.getPrimary(),
+            "Tertiary": this.getTertiary(),
             "White": this.getWhite(),
             "Black": this.getBlack(),
             "Grey": this.getGrey(),
@@ -57,6 +63,7 @@ export class Pallete implements Model {
             Log.info('Loading Pallete', data)
             this.setPrimary(data['Primary'])
             this.setSecondary(data['Secondary'])
+            this.setTertiary(data['Tertiary'])
             this.setWhite(data['White'])
             this.setBlack(data['Black'])
             this.setGrey(data['Grey'])

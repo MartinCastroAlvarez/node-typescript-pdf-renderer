@@ -25,6 +25,7 @@ export class AuthorsSection extends PdfSection {
         for (let author of this.getBook().authors) {
             new AvatarAdapter().apply(this, author.avatar)
             new SubtitleAdapter().apply(this, author.name)
+            new TextAdapter().apply(this, author.bio)
             new LinkAdapter().apply(this, author.website)
             new LinkAdapter().apply(this, author.email)
         }

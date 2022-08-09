@@ -8,6 +8,7 @@ import { Serialized } from '../interfaces/Serialized'
 export interface SerializedPallete extends Serialized {
     Primary?: string
     Secondary?: string
+    Tertiary?: string
     White?: string
     Black?: string
     Grey?: string

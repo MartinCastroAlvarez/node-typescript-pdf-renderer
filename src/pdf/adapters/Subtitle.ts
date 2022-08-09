@@ -36,7 +36,7 @@ export class SubtitleAdapter implements Adapter {
         // Updating document.
         document
             .fontSize(Config.dimensions.getSubtitle())
-            .fillColor(Config.pallete.getSecondary())
+            .fillColor(Config.pallete.getBlack())
             .font(Config.typeface.getBold())
             .text(
                 string,

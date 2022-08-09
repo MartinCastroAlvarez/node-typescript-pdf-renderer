@@ -30,21 +30,21 @@ export class TextAdapter implements Adapter {
         // Space before the text.
         new Break().apply(section)
 
+        // Defining options.
+        const options: object = {
+            indent: Config.dimensions.getTitle(),
+            align: 'justify',
+            // paragraphGap: Config.dimensions.getNormal(),
+            lineBreak: true,
+        }
+
         // Updating document.
         const document: any = (section as PdfSection).getDocument()
         document
             .fillColor(Config.pallete.getBlack())
             .fontSize(Config.dimensions.getNormal())
             .font(Config.typeface.getNormal())
-            .text(
-                string,
-                {
-                    indent: Config.dimensions.getTitle(),
-                    align: 'justify',
-                    // paragraphGap: Config.dimensions.getNormal(),
-                    lineBreak: true,
-                }
-            )
+            .text(string, options)
 
         // Space after the text.
         new Break().apply(section)

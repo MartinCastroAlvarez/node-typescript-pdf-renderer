@@ -27,38 +27,44 @@ export class LinkAdapter implements Adapter {
         const string: string = (model as Text).get(section.getLanguage())
         if (!string) return
 
-        const width: number = (section as PdfSection).getInnerWidth()
-        const left: number = (section as PdfSection).getMarginLeft()
-        const top: number = (section as PdfSection).getCurrentVerticalPosition()
-        const height: number = Config.dimensions.getNormal() * 2
-        const startingPosition = (section as PdfSection).getCurrentVerticalPosition()
+        // Extracting PDFKit document.
+        const document: any = (section as PdfSection).getDocument()
 
         // Space before the link.
         new Break().apply(section)
 
-        // Updating document.
-        const document: any = (section as PdfSection).getDocument()
+        // Defining text options.
+        const options: object = {
+            align: 'center',
+            link: string,
+            lineBreak: true,
+            underline: true,
+        }
+
+        // Setting font family and size.
         document
             .fontSize(Config.dimensions.getNormal())
-            .fillColor(Config.pallete.getPrimary())
             .font(Config.typeface.getBold())
-            .text("\n")
-            .text(
-                string,
-                {
-                    align: 'center',
-                    url: string,
-                    lineBreak: true,
-                }
-            )
-            .text("\n")
+
+        // Extracting current position.
+        const width: number = (section as PdfSection).getInnerWidth()
+        const left: number = (section as PdfSection).getMarginLeft()
+        const padding: number = Config.dimensions.getBreak()
+        const top: number = (section as PdfSection).getCurrentVerticalPosition() - padding
+        const height: number = document.heightOfString(string, options) + 2 * padding
+
+        // Adding grey background.
+        document
+            .rect(left, top, width, height)
+            .fill(Config.pallete.getGrey())
+
+        // Updating document.
+        document
+            .fillColor(Config.pallete.getPrimary())
+            .text(string, options)
 
         // Space after the link.
         new Break().apply(section)
-
-        // document
-        //     .rect(left, startingPosition, width, height)
-        //     .fill(Config.pallete.getGrey())
 
     }
 }

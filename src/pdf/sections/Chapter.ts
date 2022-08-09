@@ -18,6 +18,7 @@ import { TitleAdapter } from '../adapters/Title'
 import { SubtitleAdapter } from '../adapters/Subtitle'
 
 import { Break } from '../features/Break'
+import { Landscape } from '../features/Landscape'
 
 export class ChapterSection extends PdfSection {
     protected chapter: Chapter = new Chapter()
@@ -51,6 +52,12 @@ export class ChapterSection extends PdfSection {
         new SubtitleAdapter().apply(this, Yaml.getString('@i18n/Afterword.yaml'))
         for (let text of this.getChapter().conclusion) {
             new TextAdapter().apply(this, text)
+        }
+
+        // Padding with landscapes.
+        while (this.getPages() % 4 != 0) {
+            this.getDocument().addPage()
+            new Landscape().apply(this)
         }
 
         Log.info("Chapter built successfully", this.getChapter())

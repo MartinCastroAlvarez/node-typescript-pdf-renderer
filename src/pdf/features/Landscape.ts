@@ -1,6 +1,6 @@
 // ----------------------------------------------------------------
 // Purpose:
-// This class implements the Background adapter.
+// This class implements the Landscape adapter.
 //
 // References:
 // - https://pdfkit.org/
@@ -10,14 +10,16 @@ import { Feature } from '../../interfaces/Feature'
 import { Section } from '../../interfaces/Section'
 
 import { Config } from '../../Config'
+import { Yaml } from '../../Yaml'
+import { Tree } from '../../Tree'
 import { Log } from '../../Logging'
 
 import { PdfSection } from '../Section'
 
 
-export class Background implements Feature {
+export class Landscape implements Feature {
     apply(section: Section): void {
-        Log.info("Adding background to PDF", section)
+        Log.info("Adding landscape to PDF", section)
 
         // Detecting page size.
         const width: number = (section as PdfSection).getWidth()
@@ -26,14 +28,13 @@ export class Background implements Feature {
         // Extracting PDFKit document.
         const document: any = (section as PdfSection).getDocument()
 
-        // Creating a gradient.
-        const gradient: any = document.linearGradient(0, 0, width, height)
-        gradient.stop(0, Config.pallete.getSecondary())
-        gradient.stop(1, Config.pallete.getTertiary())
+        // Choosing a random landscape.
+        const directory: string = Yaml.dereference('@image/landscapes')
+        const landscapes: Array<string> = Tree.list(directory)
+        const path: string = landscapes[Math.floor(Math.random() * landscapes.length)]
+        const fullPath: string = Tree.join(directory, path)
 
-        // Updating document.
-        document
-            .rect(0, 0, width, height)
-            .fill(gradient)
+        // Adding the landscapes.
+        document.image(fullPath, 0, 0, {width: width, height: height})
     }
 }

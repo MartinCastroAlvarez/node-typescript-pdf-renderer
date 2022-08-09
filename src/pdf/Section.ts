@@ -27,6 +27,7 @@ export class PdfSection implements Section {
     private language: Language = Language.EN
     private book: Book = new Book()
     private doc: any = new PDFDocument()
+    private pages: number = 0
 
     // Book getter and setter.
     getBook(): Book { return this.book }
@@ -42,6 +43,7 @@ export class PdfSection implements Section {
 
     // PDF-Specific getters.
     public getDocument(): any { return this.doc }
+    public getPages(): number { return this.pages }
     public getWidth(): number { return this.doc.page.width }
     public getHeight(): number { return this.doc.page.height }
     public getCurrentHorizontalPosition(): number { return this.doc.x }
@@ -56,6 +58,9 @@ export class PdfSection implements Section {
     public getInnerHeight(): number {
         return this.doc.page.height - this.getMarginBottom() - this.getMarginTop()
     }
+
+    // PDF-Specific setters.
+    public addPage(): void { this.getDocument().addPage() }
 
     // Rending product.
     public render(path: string): string {
@@ -86,7 +91,9 @@ export class PdfSection implements Section {
                 right: Config.dimensions.getMargin(),
             }
         })
+        this.pages++
         this.doc.on('pageAdded', () => {
+            this.pages++
             // FIXME
             // this.doc 
             //     .font(Config.typeface.getBold())
