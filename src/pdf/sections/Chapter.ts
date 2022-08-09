@@ -55,7 +55,7 @@ export class ChapterSection extends PdfSection {
         }
 
         // Padding with landscapes.
-        while (this.getPages() % 4 != 0) {
+        while (this.getPages() % 2 != 0) {
             this.getDocument().addPage()
             new Landscape().apply(this)
         }

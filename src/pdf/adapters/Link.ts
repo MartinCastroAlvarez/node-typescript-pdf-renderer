@@ -44,7 +44,7 @@ export class LinkAdapter implements Adapter {
         // Setting font family and size.
         document
             .fontSize(Config.dimensions.getNormal())
-            .font(Config.typeface.getBold())
+            .font(Config.typeface.getNormal())
 
         // Extracting current position.
         const width: number = (section as PdfSection).getInnerWidth()

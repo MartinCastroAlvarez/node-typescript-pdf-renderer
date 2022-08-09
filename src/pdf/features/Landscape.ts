@@ -36,5 +36,7 @@ export class Landscape implements Feature {
 
         // Adding the landscapes.
         document.image(fullPath, 0, 0, {width: width, height: height})
+
+        Log.info("Added landscape to PDF", path)
     }
 }

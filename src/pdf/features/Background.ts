@@ -35,5 +35,7 @@ export class Background implements Feature {
         document
             .rect(0, 0, width, height)
             .fill(gradient)
+
+        Log.info("Added background to PDF", section)
     }
 }
