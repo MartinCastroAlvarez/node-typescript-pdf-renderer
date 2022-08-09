@@ -14,10 +14,15 @@ export class Dimensions implements Model {
     private title: number = 16
     private subtitle: number = 12
     private margin: number = 40
+    private break: number = 4
 
     // Margin font getter and setter.
     getMargin(): number { return this.margin }
     setMargin(size: number) { this.margin = size }
+
+    // Break font getter and setter.
+    getBreak(): number { return this.break }
+    setBreak(size: number) { this.break = size }
 
     // Normal font getter and setter.
     getNormal(): number { return this.normal }
@@ -42,6 +47,7 @@ export class Dimensions implements Model {
             "Type": (this as any).constructor.name,
             "Normal": this.getNormal(),
             "Margin": this.getMargin(),
+            "Break": this.getBreak(),
             "Title": this.getTitle(),
             "Subtitle": this.getSubtitle(),
         }
@@ -51,6 +57,7 @@ export class Dimensions implements Model {
             Log.info('Loading Dimensions', data)
             this.setNormal(data['Normal'])
             this.setMargin(data['Margin'])
+            this.setBreak(data['Break'])
             this.setTitle(data['Title'])
             this.setSubtitle(data['Subtitle'])
         }

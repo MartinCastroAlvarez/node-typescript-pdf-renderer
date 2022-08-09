@@ -21,7 +21,7 @@ export class Break implements Feature {
         // Updating document.
         const document: any = (section as PdfSection).getDocument()
         document
-            .fontSize(Config.dimensions.getNormal())
+            .fontSize(Config.dimensions.getBreak())
             .font(Config.typeface.getNormal())
             .text("\n")
     }

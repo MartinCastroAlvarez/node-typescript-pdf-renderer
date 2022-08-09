@@ -39,8 +39,7 @@ export class TextAdapter implements Adapter {
             .text(
                 string,
                 {
-                    indent: Config.dimensions.getNormal(),
-                    characterSpacing: 1,
+                    indent: Config.dimensions.getTitle(),
                     align: 'justify',
                     // paragraphGap: Config.dimensions.getNormal(),
                     lineBreak: true,

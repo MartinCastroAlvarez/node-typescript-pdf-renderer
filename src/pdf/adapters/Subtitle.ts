@@ -27,14 +27,16 @@ export class SubtitleAdapter implements Adapter {
         const string: string = (model as Text).get(section.getLanguage())
         if (!string) return
 
+        // Extracting PDFKit document.
+        const document: any = (section as PdfSection).getDocument()
+
         // Space before the subtitle.
         new Break().apply(section)
 
         // Updating document.
-        const document: any = (section as PdfSection).getDocument()
         document
             .fontSize(Config.dimensions.getSubtitle())
-            .fillColor(Config.pallete.getPrimary())
+            .fillColor(Config.pallete.getSecondary())
             .font(Config.typeface.getBold())
             .text(
                 string,

@@ -10,4 +10,5 @@ export interface SerializedDimensions extends Serialized {
     Title?: number
     Subtitle?: number
     Margin?: number
+    Break?: number
 }

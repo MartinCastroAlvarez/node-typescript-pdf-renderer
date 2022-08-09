@@ -19,14 +19,21 @@ export class Background implements Feature {
     apply(section: Section): void {
         Log.info("Adding background to PDF", section)
 
+        // Detecting page size.
         const width: number = (section as PdfSection).getWidth()
         const height: number = (section as PdfSection).getHeight()
 
-        // Updating document.
+        // Extracting PDFKit document.
         const document: any = (section as PdfSection).getDocument()
+
+        // Creating a gradient.
+        const gradient: any = document.linearGradient(0, 0, width, height)
+        gradient.stop(0, Config.pallete.getSecondary())
+        gradient.stop(1, Config.pallete.getPrimary())
+
+        // Updating document.
         document
             .rect(0, 0, width, height)
-            .fill(Config.pallete.getPrimary())
-            .fill(Config.pallete.getSecondary())
+            .fill(gradient)
     }
 }

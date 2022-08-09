@@ -1,6 +1,6 @@
 // ----------------------------------------------------------------
 // Purpose:
-// This class implements the Title adapter.
+// This class implements the Subheading adapter.
 //
 // References:
 // - https://pdfkit.org/
@@ -19,9 +19,9 @@ import { Break } from '../features/Break'
 
 import { PdfSection } from '../Section'
 
-export class TitleAdapter implements Adapter {
+export class SubheadingAdapter implements Adapter {
     apply(section: Section, model: Model): void {
-        Log.info("Adapting title to PDF", model)
+        Log.info("Adapting subheading to PDF", model)
 
         // Checking if title is empty.
         const string: string = (model as Text).get(section.getLanguage())
@@ -35,13 +35,13 @@ export class TitleAdapter implements Adapter {
 
         // Updating document.
         document
-            .fontSize(Config.dimensions.getTitle())
-            .fillColor(Config.pallete.getPrimary())
+            .fontSize(Config.dimensions.getSubtitle())
+            .fillColor(Config.pallete.getWhite())
             .font(Config.typeface.getBold())
             .text(
                 string,
                 {
-                    align: 'left',
+                    align: 'center',
                     lineBreak: true,
                 }
             )

@@ -129,3 +129,50 @@ Chapters:
         Topics:
           - '@topic/Blockchain.yaml'
           - '@topic/Ethereum.yaml'
+
+  # ----------------------------------------------------------------
+  # A sample chapter.
+  # ----------------------------------------------------------------
+  - Type: 'Chapter'
+    Introduction:
+      - '@i18n/LoremIpsum.yaml'
+      - '@i18n/LoremIpsum.yaml'
+      - '@i18n/LoremIpsum.yaml'
+      - '@i18n/LoremIpsum.yaml'
+      - '@i18n/LoremIpsum.yaml'
+      - '@i18n/LoremIpsum.yaml'
+      - '@i18n/LoremIpsum.yaml'
+    Conclusion:
+      - '@i18n/LoremIpsum.yaml'
+      - '@i18n/LoremIpsum.yaml'
+      - '@i18n/LoremIpsum.yaml'
+      - '@i18n/LoremIpsum.yaml'
+      - '@i18n/LoremIpsum.yaml'
+      - '@i18n/LoremIpsum.yaml'
+      - '@i18n/LoremIpsum.yaml'
+    Title:
+      EN: 'Sit Amet Dolor'
+      ES: 'Sit Amet Dolor'
+    Stories:
+
+      # ----------------------------------------------------------------
+      # A sample story.
+      # ----------------------------------------------------------------
+      - Type: 'Story'
+        Title:
+          EN: 'Lorem Ipsum Dolor'
+          ES: 'Lorem Ipsum Dolor'
+        Topics:
+          - '@topic/Blockchain.yaml'
+          - '@topic/Ethereum.yaml'
+
+      # ----------------------------------------------------------------
+      # A sample story.
+      # ----------------------------------------------------------------
+      - Type: 'Story'
+        Title:
+          EN: 'Lorem Ipsum Dolor'
+          ES: 'Lorem Ipsum Dolor'
+        Topics:
+          - '@topic/Blockchain.yaml'
+          - '@topic/Ethereum.yaml'

@@ -33,7 +33,7 @@ export class ChapterSection extends PdfSection {
         Log.info("Building chapter", this.getChapter())
 
         // Spaces before the Chapter title.
-        Array(20).fill(0).forEach(i => new Break().apply(this))
+        Array(17).fill(0).forEach(i => new Break().apply(this))
 
         // Chapter title.
         new TitleAdapter().apply(this, this.getChapter().title)
