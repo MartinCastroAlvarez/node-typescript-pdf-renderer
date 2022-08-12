@@ -8,12 +8,11 @@
 
 import { PdfSection } from '../Section'
 
-import { Log } from '../../Logging'
+import { Log } from '../../utils/Logging'
 import { Yaml } from '../../Yaml'
 
-import { TextAdapter } from '../adapters/Text'
-import { TitleAdapter } from '../adapters/Title'
 import { SubtitleAdapter } from '../adapters/Subtitle'
+import { IndexAdapter } from '../adapters/Index'
 
 import { AcknowledgementsSection } from './Acknowledgements'
 import { AfterwordSection } from './Afterword'
@@ -39,7 +38,7 @@ export class TableOfContentsSection extends PdfSection {
         Log.info("Building book table of contents", this.getBook())
 
         // Table of contents title.
-        const title: TitleAdapter = new TitleAdapter()
+        const title: SubtitleAdapter = new SubtitleAdapter()
         title.setModel(Yaml.getString('@i18n/TableOfContents.yaml'))
         title.setSection(this)
         title.apply()
@@ -49,25 +48,47 @@ export class TableOfContentsSection extends PdfSection {
         Log.info("Indexing table of contents", this.getBook())
 
         // Table of contents.
+        let page: number = 1
         for (let section of this.getSections()) {
             switch(section.constructor.name) {
                 case ForewordSection.name: {
-                    // new SubtitleAdapter().apply(this, Yaml.getString('@i18n/Foreword.yaml'))
+                    // FIXME: Add page number.
+                    let index: IndexAdapter = new IndexAdapter()
+                    index.setModel(Yaml.getString('@i18n/Foreword.yaml'))
+                    index.setSection(this)
+                    index.setPage(page)
+                    index.apply()
+                    page += section.getPages()
                     continue
                 }
                 case ChapterSection.name: {
-                    // new SubtitleAdapter().apply(this, (section as ChapterSection).getChapter().title)
-                    // for (let story of (section as ChapterSection).getChapter().stories) {
-                    //     new TextAdapter().apply(this, story.title)
-                    // }
+                    // FIXME: Add page number.
+                    let index: IndexAdapter = new IndexAdapter()
+                    index.setModel((section as ChapterSection).getChapter().title)
+                    index.setSection(this)
+                    index.setPage(page)
+                    index.apply()
+                    page += section.getPages()
                     continue
                 }
                 case AfterwordSection.name: {
-                    // new SubtitleAdapter().apply(this, Yaml.getString('@i18n/Afterword.yaml'))
+                    // FIXME: Add page number.
+                    let index: IndexAdapter = new IndexAdapter()
+                    index.setModel(Yaml.getString('@i18n/Afterword.yaml'))
+                    index.setSection(this)
+                    index.setPage(page)
+                    index.apply()
+                    page += section.getPages()
                     continue
                 }
                 case BibliographySection.name: {
-                    // new SubtitleAdapter().apply(this, Yaml.getString('@i18n/Bibliography.yaml'))
+                    // FIXME: Add page number.
+                    let index: IndexAdapter = new IndexAdapter()
+                    index.setModel(Yaml.getString('@i18n/Bibliography.yaml'))
+                    index.setSection(this)
+                    index.setPage(page)
+                    index.apply()
+                    page += section.getPages()
                     continue
                 }
             }

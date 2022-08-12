@@ -8,7 +8,7 @@
 
 import { PdfSection } from '../Section'
 
-import { Log } from '../../Logging'
+import { Log } from '../../utils/Logging'
 import { Yaml } from '../../Yaml'
 
 import { TextAdapter } from '../adapters/Text'
@@ -27,8 +27,7 @@ export class ForewordSection extends PdfSection {
         // Spaces before the title.
         const breaks: Break = new Break()
         breaks.setSection(this)
-        breaks.setBig()
-        breaks.apply()
+        breaks.big()
 
         // Foreword title.
         let title: TitleAdapter = new TitleAdapter()
@@ -38,6 +37,7 @@ export class ForewordSection extends PdfSection {
 
         // Foreword text.
         for (let text of this.getBook().foreword) {
+            // FIXME: ANY ADAPTER
             let adapter: TextAdapter = new TextAdapter()
             adapter.setModel(text)
             adapter.setSection(this)
@@ -47,7 +47,6 @@ export class ForewordSection extends PdfSection {
         // Padding with landscapes.
         const landscape: Landscape = new Landscape()
         landscape.setSection(this)
-        landscape.setPadding(2)
-        landscape.apply()
+        landscape.pad(2)
     }
 }

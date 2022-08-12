@@ -7,7 +7,7 @@ import { SerializedTopic } from '../serializers/Topic'
 
 import { Model } from '../interfaces/Model'
 
-import { Log } from '../Logging'
+import { Log } from '../utils/Logging'
 
 import { Image } from './Image'
 import { Text } from './Text'

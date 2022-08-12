@@ -8,23 +8,20 @@
 
 import { Feature } from '../../interfaces/Feature'
 
+import { Random } from '../../utils/Random'
+
 import { Config } from '../../Config'
 import { Yaml } from '../../Yaml'
-import { Tree } from '../../Tree'
-import { Log } from '../../Logging'
+import { Tree } from '../../utils/Tree'
+import { Log } from '../../utils/Logging'
 
 import { PdfSection } from '../Section'
 
 export class Landscape implements Feature {
     private section: PdfSection = new PdfSection()
-    private padding: number = 2
 
     getSection(): PdfSection { return this.section }
     setSection(section: PdfSection) { this.section = section }
-
-    // Padding getter and setter.
-    getPadding(): number { return this.padding }
-    setPadding(padding: number) { this.padding = padding }
 
     apply(): void {
         Log.info("Adding landscape to PDF", this.getSection())
@@ -37,17 +34,20 @@ export class Landscape implements Feature {
         const directory: string = Yaml.dereference('@image/landscapes')
         const landscapes: Array<string> = Tree.list(directory)
 
+        // Choosing a random landscape.
+        const path: string = Random.choice(landscapes)
+        const fullPath: string = Tree.join(directory, path)
+
+        // Adding the landscapes.
+        this.getSection().getDocument()
+            .image(fullPath, 0, 0, {width: width, height: height})
+    }
+
+    pad(pages: number = 2) {
         // Padding book with landscapes.
-        while (this.getSection().getPages() % this.getPadding() != 0) {
-            // Adding an empty page.
+        while (this.getSection().getPages() % pages != 0) {
             this.getSection().getDocument().addPage()
-
-            // Choosing a random landscape.
-            const path: string = landscapes[Math.floor(Math.random() * landscapes.length)]
-            const fullPath: string = Tree.join(directory, path)
-
-            // Adding the landscapes.
-            this.getSection().getDocument().image(fullPath, 0, 0, {width: width, height: height})
+            this.apply()
         }
     }
 }

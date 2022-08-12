@@ -7,7 +7,7 @@ import { SerializedList } from '../serializers/List'
 
 import { Model } from '../interfaces/Model'
 
-import { Log } from '../Logging'
+import { Log } from '../utils/Logging'
 
 import { Text } from './Text'
 

@@ -8,7 +8,7 @@
 
 import { PdfSection } from '../Section'
 
-import { Log } from '../../Logging'
+import { Log } from '../../utils/Logging'
 import { Yaml } from '../../Yaml'
 
 import { TextAdapter } from '../adapters/Text'
@@ -48,7 +48,6 @@ export class BibliographySection extends PdfSection {
         // Padding with landscapes.
         const landscape: Landscape = new Landscape()
         landscape.setSection(this)
-        landscape.setPadding(2)
-        landscape.apply()
+        landscape.pad(2)
     }
 }

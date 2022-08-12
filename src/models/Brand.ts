@@ -7,7 +7,7 @@ import { SerializedBrand } from '../serializers/Brand'
 
 import { Model } from '../interfaces/Model'
 
-import { Log } from '../Logging'
+import { Log } from '../utils/Logging'
 
 import { Image } from './Image'
 import { Person } from './Person'

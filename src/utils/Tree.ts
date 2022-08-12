@@ -8,9 +8,9 @@ const path = require('path')
 
 import { Log } from './Logging'
 
-import { DirectoryNotFoundError, FileNotFoundError } from './errors/Tree'
+import { DirectoryNotFoundError, FileNotFoundError } from '../errors/Tree'
 
-const root: string = path.dirname(__dirname)
+const root: string = path.dirname(path.dirname(__dirname))
 
 export abstract class Tree {
     public static readonly root: string = root

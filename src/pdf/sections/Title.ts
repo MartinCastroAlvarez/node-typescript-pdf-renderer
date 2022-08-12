@@ -8,7 +8,7 @@
 
 import { PdfSection } from '../Section'
 
-import { Log } from '../../Logging'
+import { Log } from '../../utils/Logging'
 
 import { SubtitleAdapter } from '../adapters/Subtitle'
 import { TitleAdapter } from '../adapters/Title'
@@ -33,8 +33,7 @@ export class TitleSection extends PdfSection {
         // Space before the title.
         const breaks: Break = new Break()
         breaks.setSection(this)
-        breaks.setBig()
-        breaks.apply()
+        breaks.big()
 
         // Book title.
         let title: TitleAdapter = new TitleAdapter()

@@ -11,7 +11,7 @@ import { Text } from './Text'
 import { Topic } from './Topic'
 import { Source } from './Source'
 
-import { Log } from '../Logging'
+import { Log } from '../utils/Logging'
 import { Yaml } from '../Yaml'
 
 export class Chapter {

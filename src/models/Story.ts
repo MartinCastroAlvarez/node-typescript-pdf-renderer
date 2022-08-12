@@ -7,7 +7,7 @@ import { SerializedStory } from '../serializers/Story'
 
 import { Model } from '../interfaces/Model'
 
-import { Log } from '../Logging'
+import { Log } from '../utils/Logging'
 
 import { Yaml } from '../Yaml'
 import { Source } from './Source'

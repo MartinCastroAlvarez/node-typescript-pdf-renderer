@@ -11,7 +11,7 @@ import { Model } from '../../interfaces/Model'
 import { Section } from '../../interfaces/Section'
 
 import { Config } from '../../Config'
-import { Log } from '../../Logging'
+import { Log } from '../../utils/Logging'
 
 import { Text } from '../../models/Text'
 
@@ -42,7 +42,7 @@ export class LinkAdapter implements Adapter {
         // Space before the link.
         const breaks: Break = new Break()
         breaks.setSection(this.getSection())
-        breaks.apply()
+        breaks.small()
 
         // Defining text options.
         const options: object = {
@@ -76,6 +76,6 @@ export class LinkAdapter implements Adapter {
             .text(string, options)
 
         // Space after the link.
-        breaks.apply()
+        breaks.small()
     }
 }

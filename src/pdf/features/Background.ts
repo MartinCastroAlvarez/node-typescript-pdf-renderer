@@ -9,7 +9,7 @@
 import { Feature } from '../../interfaces/Feature'
 
 import { Config } from '../../Config'
-import { Log } from '../../Logging'
+import { Log } from '../../utils/Logging'
 
 import { PdfSection } from '../Section'
 

@@ -7,7 +7,7 @@ import { SerializedText } from '../serializers/Text'
 
 import { Model } from '../interfaces/Model'
 
-import { Log } from '../Logging'
+import { Log } from '../utils/Logging'
 
 import { Language } from '../enums/Language'
 

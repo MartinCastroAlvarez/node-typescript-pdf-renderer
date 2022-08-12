@@ -7,7 +7,7 @@ import { SerializedQuote } from '../serializers/Quote'
 
 import { Model } from '../interfaces/Model'
 
-import { Log } from '../Logging'
+import { Log } from '../utils/Logging'
 
 import { Person } from './Person'
 import { Text } from './Text'

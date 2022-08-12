@@ -8,7 +8,7 @@
 
 import { PdfSection } from '../Section'
 
-import { Log } from '../../Logging'
+import { Log } from '../../utils/Logging'
 import { Yaml } from '../../Yaml'
 
 import { TextAdapter } from '../adapters/Text'

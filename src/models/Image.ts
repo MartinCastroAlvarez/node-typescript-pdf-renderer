@@ -7,7 +7,7 @@ import { SerializedImage } from '../serializers/Image'
 
 import { Model } from '../interfaces/Model'
 
-import { Log } from '../Logging'
+import { Log } from '../utils/Logging'
 
 import { File } from './File'
 

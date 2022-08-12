@@ -15,12 +15,12 @@ import { Product } from '../interfaces/Product'
 
 import { Book } from '../models/Book'
 
-import { Tree } from '../Tree'
+import { Tree } from '../utils/Tree'
 
 import { InvalidLanguageError, RenderingError } from '../errors/Product'
 import { FileAlreadyExistsError } from '../errors/Tree'
 
-import { Log } from '../Logging'
+import { Log } from '../utils/Logging'
 
 import { PdfSection } from './Section'
 

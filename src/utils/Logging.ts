@@ -8,7 +8,7 @@
 
 const util = require('util')
 
-import { Console } from './enums/Console'
+import { Console } from '../enums/Console'
 
 export class Log {
     public static serialize(data: any) {

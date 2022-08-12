@@ -1,6 +1,6 @@
 // ----------------------------------------------------------------
 // Purpose:
-// This class implements the text adapter.
+// This class implements the Index adapter.
 //
 // References:
 // - https://pdfkit.org/
@@ -19,9 +19,10 @@ import { Break } from '../features/Break'
 
 import { PdfSection } from '../Section'
 
-export class SubtitleAdapter implements Adapter {
+export class IndexAdapter implements Adapter {
     private model: Text = new Text()
     private section: PdfSection = new PdfSection()
+    private page: number = 1
 
     getSection(): PdfSection { return this.section }
     setSection(section: PdfSection) { this.section = section }
@@ -29,35 +30,47 @@ export class SubtitleAdapter implements Adapter {
     getModel(): Text { return this.model }
     setModel(model: Text ) { this.model = model }
 
-    apply(): void {
-        Log.info("Adapting subtitle to PDF", this.getModel(), this.getSection())
+    getPage(): number { return this.page }
+    setPage(page: number) { this.page = page }
 
-        // Checking if subtitle is empty.
-        const string: string = this.getModel().get(this.getSection().getLanguage())
+    apply(): void {
+        Log.info("Adapting index to PDF", this.getModel(), this.getSection())
+
+        // Extracting source title.
+        let string: string = this.getModel().get(this.getSection().getLanguage())
         if (!string) return
 
-        // Extracting PDFKit document.
-        const document: any = this.getSection().getDocument()
-
-        // Space before the subtitle.
-        const breaks: Break = new Break()
-        breaks.setSection(this.getSection())
-        breaks.small()
-
-        // Updating document.
+        // Adding index title.
         this.getSection().getDocument()
-            .fontSize(Config.dimensions.getSubtitle())
             .fillColor(Config.pallete.getBlack())
-            .font(Config.typeface.getBold())
+            .fontSize(Config.dimensions.getSmall())
+            .font(Config.typeface.getItalic())
             .text(
                 string,
                 {
                     align: 'left',
+                    continue: true,
+                    lineBreak: false,
+                }
+            )
+
+        // Adding index page.
+        this.getSection().getDocument()
+            .fillColor(Config.pallete.getBlack())
+            .fontSize(Config.dimensions.getSmall())
+            .font(Config.typeface.getItalic())
+            .text(
+                this.getPage().toString(),
+                {
+                    align: 'right',
+                    continue: false,
                     lineBreak: true,
                 }
             )
 
-        // Space after the subtitle.
+        // Adding a space.
+        const breaks: Break = new Break()
+        breaks.setSection(this.getSection())
         breaks.small()
     }
 }

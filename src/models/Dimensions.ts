@@ -7,7 +7,7 @@ import { SerializedDimensions } from '../serializers/Dimensions'
 
 import { Model } from '../interfaces/Model'
 
-import { Log } from '../Logging'
+import { Log } from '../utils/Logging'
 
 export class Dimensions implements Model {
     private normal: number = 8

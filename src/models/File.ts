@@ -5,11 +5,11 @@
 
 import { SerializedFile } from '../serializers/File'
 
-import { Tree } from '../Tree'
+import { Tree } from '../utils/Tree'
 
 import { Model } from '../interfaces/Model'
 
-import { Log } from '../Logging'
+import { Log } from '../utils/Logging'
 
 import { FileNotFoundError } from '../errors/Tree'
 

@@ -11,7 +11,7 @@ import { Model } from '../../interfaces/Model'
 import { Section } from '../../interfaces/Section'
 
 import { Config } from '../../Config'
-import { Log } from '../../Logging'
+import { Log } from '../../utils/Logging'
 
 import { Text } from '../../models/Text'
 import { Source } from '../../models/Source'

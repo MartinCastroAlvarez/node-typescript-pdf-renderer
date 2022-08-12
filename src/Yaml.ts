@@ -5,8 +5,8 @@
 
 const yaml = require('js-yaml')
 
-import { Log } from './Logging'
-import { Tree } from './Tree'
+import { Log } from './utils/Logging'
+import { Tree } from './utils/Tree'
 
 import { Reference } from './enums/Reference'
 

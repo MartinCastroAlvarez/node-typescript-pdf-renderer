@@ -11,13 +11,13 @@ import { Section } from '../interfaces/Section';
 
 import { Book } from '../models/Book';
 
-import { Tree } from '../Tree';
+import { Tree } from '../utils/Tree';
 
 import { InvalidLanguageError } from '../errors/Product';
 import { FileAlreadyExistsError } from '../errors/Tree';
 
 import { Config } from '../Config';
-import { Log } from '../Logging';
+import { Log } from '../utils/Logging';
 
 export class PdfSection implements Section {
     private language: Language = Language.EN

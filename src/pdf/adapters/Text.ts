@@ -11,7 +11,7 @@ import { Model } from '../../interfaces/Model'
 import { Section } from '../../interfaces/Section'
 
 import { Config } from '../../Config'
-import { Log } from '../../Logging'
+import { Log } from '../../utils/Logging'
 
 import { Text } from '../../models/Text'
 
@@ -39,7 +39,7 @@ export class TextAdapter implements Adapter {
         // Space before the text.
         const breaks: Break = new Break()
         breaks.setSection(this.getSection())
-        breaks.apply()
+        breaks.small()
 
         // Defining options.
         const options: object = {
@@ -57,6 +57,6 @@ export class TextAdapter implements Adapter {
             .text(string, options)
 
         // Space after the text.
-        breaks.apply()
+        breaks.small()
     }
 }

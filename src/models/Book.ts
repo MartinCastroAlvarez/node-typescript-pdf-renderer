@@ -65,7 +65,7 @@ import { Person } from './Person'
 import { Text } from './Text'
 import { Topic } from './Topic'
 
-import { Log } from '../Logging'
+import { Log } from '../utils/Logging'
 import { Yaml } from '../Yaml'
 
 export class Book implements Model {

@@ -11,7 +11,7 @@ import { Model } from '../../interfaces/Model'
 import { Section } from '../../interfaces/Section'
 
 import { Config } from '../../Config'
-import { Log } from '../../Logging'
+import { Log } from '../../utils/Logging'
 
 import { Text } from '../../models/Text'
 
@@ -39,7 +39,7 @@ export class HeadingAdapter implements Adapter {
         // Space before the title.
         const breaks: Break = new Break()
         breaks.setSection(this.getSection())
-        breaks.apply()
+        breaks.small()
 
         // Updating document.
         this.getSection().getDocument()
@@ -55,6 +55,6 @@ export class HeadingAdapter implements Adapter {
             )
 
         // Space after the title.
-        breaks.apply()
+        breaks.small()
     }
 }

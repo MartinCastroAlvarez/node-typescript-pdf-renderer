@@ -7,7 +7,7 @@ import { SerializedPallete } from '../serializers/Pallete'
 
 import { Model } from '../interfaces/Model'
 
-import { Log } from '../Logging'
+import { Log } from '../utils/Logging'
 
 export class Pallete implements Model {
     private primary: string = ''

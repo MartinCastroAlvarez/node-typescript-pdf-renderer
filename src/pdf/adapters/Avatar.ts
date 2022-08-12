@@ -9,7 +9,7 @@
 import { Adapter } from '../../interfaces/Adapter'
 import { Model } from '../../interfaces/Model'
 
-import { Log } from '../../Logging'
+import { Log } from '../../utils/Logging'
 
 import { Image } from '../../models/Image'
 
@@ -37,12 +37,12 @@ export class AvatarAdapter implements Adapter {
         // Space before the avatar.
         const breaks: Break = new Break()
         breaks.setSection(this.getSection())
-        breaks.apply()
+        breaks.small()
 
         // Updating document.
         this.getSection().getDocument().text(path)
 
         // Space after the avtar.
-        breaks.apply()
+        breaks.small()
     }
 }
