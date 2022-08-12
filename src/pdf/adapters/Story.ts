@@ -18,6 +18,7 @@ import { Story } from '../../models/Story'
 import { PdfSection } from '../Section'
 
 import { SubtitleAdapter } from './Subtitle'
+import { AnyAdapter } from './Any'
 
 export class StoryAdapter implements Adapter {
     private model: Story = new Story()
@@ -39,6 +40,11 @@ export class StoryAdapter implements Adapter {
         title.apply()
 
         // Story body.
-        // FIXME
+        for (let model of this.getModel().blocks) {
+            let adapter: AnyAdapter = new AnyAdapter()
+            adapter.setModel(model)
+            adapter.setSection(this.getSection())
+            adapter.apply()
+        }
     }
 }

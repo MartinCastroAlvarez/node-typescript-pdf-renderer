@@ -36,9 +36,9 @@ export class AfterwordSection extends PdfSection {
         title.apply()
 
         // Afterword text.
-        for (let text of this.getBook().afterword) {
+        for (let model of this.getBook().afterword) {
             let adapter: AnyAdapter = new AnyAdapter()
-            adapter.setModel(text)
+            adapter.setModel(model)
             adapter.setSection(this)
             adapter.apply()
         }

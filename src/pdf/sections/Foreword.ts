@@ -36,9 +36,9 @@ export class ForewordSection extends PdfSection {
         title.apply()
 
         // Foreword text.
-        for (let text of this.getBook().foreword) {
+        for (let model of this.getBook().foreword) {
             let adapter: AnyAdapter = new AnyAdapter()
-            adapter.setModel(text)
+            adapter.setModel(model)
             adapter.setSection(this)
             adapter.apply()
         }

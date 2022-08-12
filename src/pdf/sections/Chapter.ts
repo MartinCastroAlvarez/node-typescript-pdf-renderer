@@ -50,9 +50,9 @@ export class ChapterSection extends PdfSection {
         foreword.setModel(Yaml.getString('@i18n/Foreword.yaml'))
         foreword.setSection(this)
         foreword.apply()
-        for (let text of this.getChapter().introduction) {
+        for (let model of this.getChapter().introduction) {
             let adapter: AnyAdapter = new AnyAdapter()
-            adapter.setModel(text)
+            adapter.setModel(model)
             adapter.setSection(this)
             adapter.apply()
         }
@@ -70,9 +70,9 @@ export class ChapterSection extends PdfSection {
         afterword.setModel(Yaml.getString('@i18n/Afterword.yaml'))
         afterword.setSection(this)
         afterword.apply()
-        for (let text of this.getChapter().conclusion) {
+        for (let model of this.getChapter().conclusion) {
             let adapter: AnyAdapter = new AnyAdapter()
-            adapter.setModel(text)
+            adapter.setModel(model)
             adapter.setSection(this)
             adapter.apply()
         }
