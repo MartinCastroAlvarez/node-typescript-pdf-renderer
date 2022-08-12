@@ -16,11 +16,11 @@ import { PdfSection } from '../Section'
 export class Break implements Feature {
     private section: PdfSection = new PdfSection()
 
-    getSection(): PdfSection { return this.section }
-    setSection(section: PdfSection) { this.section = section }
+    public getSection(): PdfSection { return this.section }
+    public setSection(section: PdfSection) { this.section = section }
 
-    apply(): void {
-        Log.info("Adding break to PDF", this.getSection())
+    public apply(): void {
+        // Log.info("Adding break to PDF", this.getSection())
         this.getSection().getDocument()  
             .fontSize(Config.dimensions.getBreak())
             .font(Config.typeface.getNormal())

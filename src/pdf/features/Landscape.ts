@@ -20,10 +20,10 @@ import { PdfSection } from '../Section'
 export class Landscape implements Feature {
     private section: PdfSection = new PdfSection()
 
-    getSection(): PdfSection { return this.section }
-    setSection(section: PdfSection) { this.section = section }
+    public getSection(): PdfSection { return this.section }
+    public setSection(section: PdfSection) { this.section = section }
 
-    apply(): void {
+    public apply(): void {
         Log.info("Adding landscape to PDF", this.getSection())
 
         // Detecting page size.
@@ -46,7 +46,7 @@ export class Landscape implements Feature {
     pad(pages: number = 2) {
         // Padding book with landscapes.
         while (this.getSection().getPages() % pages != 0) {
-            this.getSection().getDocument().addPage()
+            this.getSection().addUnnumberedPage()
             this.apply()
         }
     }

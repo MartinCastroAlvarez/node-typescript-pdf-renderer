@@ -24,13 +24,13 @@ export class ChapterAdapter implements Adapter {
     private model: Chapter = new Chapter()
     private section: PdfSection = new PdfSection()
 
-    getSection(): PdfSection { return this.section }
-    setSection(section: PdfSection) { this.section = section }
+    public getSection(): PdfSection { return this.section }
+    public setSection(section: PdfSection) { this.section = section }
 
-    getModel(): Chapter { return this.model }
-    setModel(model: Chapter) { this.model = model }
+    public getModel(): Chapter { return this.model }
+    public setModel(model: Chapter) { this.model = model }
 
-    apply(): void {
+    public apply(): void {
         Log.info("Adapting chapter to PDF", this.getModel(), this.getSection())
 
         // Generating string.

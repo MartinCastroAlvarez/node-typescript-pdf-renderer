@@ -24,11 +24,11 @@ export class AnyAdapter implements Adapter {
     private model: Model
     private section: PdfSection = new PdfSection()
 
-    getSection(): PdfSection { return this.section }
-    setSection(section: PdfSection) { this.section = section }
+    public getSection(): PdfSection { return this.section }
+    public setSection(section: PdfSection) { this.section = section }
 
-    getModel(): Model { return this.model }
-    setModel(model: Model) { this.model = model }
+    public getModel(): Model { return this.model }
+    public setModel(model: Model) { this.model = model }
 
     private getAdapter(): Adapter {
         switch (this.getModel().constructor.name) {
@@ -37,7 +37,7 @@ export class AnyAdapter implements Adapter {
         }
     }
 
-    apply(): void {
+    public apply(): void {
         Log.info("Adapting any to PDF", this.getModel(), this.getSection())
         const adapter: Adapter = this.getAdapter()
         adapter.setSection(this.getSection())

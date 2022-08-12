@@ -22,13 +22,13 @@ export class SourceAdapter implements Adapter {
     private model: Source = new Source()
     private section: PdfSection = new PdfSection()
 
-    getSection(): PdfSection { return this.section }
-    setSection(section: PdfSection) { this.section = section }
+    public getSection(): PdfSection { return this.section }
+    public setSection(section: PdfSection) { this.section = section }
 
-    getModel(): Source { return this.model }
-    setModel(model: Source) { this.model = model }
+    public getModel(): Source { return this.model }
+    public setModel(model: Source) { this.model = model }
 
-    apply(): void {
+    public apply(): void {
         Log.info("Adapting source to PDF", this.getModel(), this.getSection())
 
         // Extracting source title.

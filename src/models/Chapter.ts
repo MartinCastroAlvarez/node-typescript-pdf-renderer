@@ -34,8 +34,8 @@ export class Chapter implements Model {
     public setNumber(number: number) { this.number = number }
     public getLabel(language: Language): string {
         return [
-            Yaml.getString('@i18n/Chapter.yaml').get(language)
-            this.getNumber().toString()
+            Yaml.getString('@i18n/Chapter.yaml').get(language),
+            this.getNumber().toString(),
         ].join(' ')
     }
 

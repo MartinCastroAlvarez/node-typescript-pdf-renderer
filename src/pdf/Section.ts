@@ -23,7 +23,6 @@ export class PdfSection implements Section {
     private language: Language = Language.EN
     private book: Book = new Book()
     private doc: any = new PDFDocument()
-    private pages: number = 0
 
     // Book getter and setter.
     getBook(): Book { return this.book }
@@ -39,24 +38,38 @@ export class PdfSection implements Section {
 
     // PDF-Specific getters.
     public getDocument(): any { return this.doc }
-    public getPages(): number { return this.pages }
-    public getWidth(): number { return this.doc.page.width }
-    public getHeight(): number { return this.doc.page.height }
-    public getCurrentHorizontalPosition(): number { return this.doc.x }
-    public getCurrentVerticalPosition(): number { return this.doc.y }
-    public getMarginLeft(): number { return Config.dimensions.getMargin() }
-    public getMarginRight(): number { return Config.dimensions.getMargin() }
-    public getMarginTop(): number { return Config.dimensions.getMargin() }
-    public getMarginBottom(): number { return Config.dimensions.getMargin() }
+    public getPage(): any { return this.getDocument().page }
+    public getPages(): number { return this.getDocument().bufferedPageRange().count }
+    public getWidth(): number { return this.getPage().width }
+    public getHeight(): number { return this.getPage().height }
+    public getCurrentHorizontalPosition(): number { return this.getDocument().x }
+    public getCurrentVerticalPosition(): number { return this.getDocument().y }
+    public getMarginLeft(): number { return this.getPage().margins.left }
+    public getMarginRight(): number { return this.getPage().margins.right }
+    public getMarginTop(): number { return this.getPage().margins.top }
+    public getMarginBottom(): number { return this.getPage().margins.bottom }
     public getInnerWidth(): number {
-        return this.doc.page.width - this.getMarginLeft() - this.getMarginRight()
+        return this.getPage().width - this.getMarginLeft() - this.getMarginRight()
     }
     public getInnerHeight(): number {
-        return this.doc.page.height - this.getMarginBottom() - this.getMarginTop()
+        return this.getPage().height - this.getMarginBottom() - this.getMarginTop()
     }
 
     // PDF-Specific setters.
     public addPage(): void { this.getDocument().addPage() }
+    public addUnnumberedPage(): void {
+        this.getDocument().addPage()
+        this.getPage().unnumbered = true
+   }
+    public goTo(page: number): void { this.getDocument().switchToPage(page) }
+    public setMarginLeft(margin: number): void { this.getPage().margins.left = margin }
+    public setMarginRight(margin: number): void { this.getPage().margins.right = margin }
+    public setMarginTop(margin: number): void { this.getPage().margins.top = margin }
+    public setMarginBottom(margin: number): void { this.getPage().margins.bottom = margin }
+    public resetMarginLeft(): void { this.getPage().margins.left = Config.dimensions.getMargin() }
+    public resetMarginRight(): void { this.getPage().margins.right = Config.dimensions.getMargin() }
+    public resetMarginTop(): void { this.getPage().margins.top = Config.dimensions.getMargin() }
+    public resetMarginBottom(): void { this.getPage().margins.bottom = Config.dimensions.getMargin() }
 
     // Rending product.
     public render(path: string): string {
@@ -87,9 +100,7 @@ export class PdfSection implements Section {
                 right: Config.dimensions.getMargin(),
             }
         })
-        this.pages++
         this.doc.on('pageAdded', () => {
-            this.pages++
             // FIXME
             // this.doc 
             //     .font(Config.typeface.getBold())

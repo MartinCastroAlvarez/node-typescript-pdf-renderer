@@ -21,13 +21,13 @@ export class AvatarAdapter implements Adapter {
     private model: Image = new Image()
     private section: PdfSection = new PdfSection()
 
-    getSection(): PdfSection { return this.section }
-    setSection(section: PdfSection) { this.section = section }
+    public getSection(): PdfSection { return this.section }
+    public setSection(section: PdfSection) { this.section = section }
 
-    getModel(): Image { return this.model }
-    setModel(model: Image) { this.model = model }
+    public getModel(): Image { return this.model }
+    public setModel(model: Image) { this.model = model }
 
-    apply(): void {
+    public apply(): void {
         Log.info("Adapting avatar to PDF", this.getModel(), this.getSection())
 
         // Checking if link is empty.

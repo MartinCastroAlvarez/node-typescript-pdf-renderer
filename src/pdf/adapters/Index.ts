@@ -15,32 +15,29 @@ import { Log } from '../../utils/Logging'
 
 import { Break } from '../features/Break'
 
+import { AdapterNotSupportedError } from '../../errors/Adapter'
+
 import { PdfSection } from '../Section'
 
 import { Chapter } from '../../models/Chapter'
-
-import { AdapterNotSupportedError } from '../../errors/Adapter'
-
-import { AfterwordSection } from '../sections/Afterword'
-import { ChapterSection } from '../sections/Chapter'
-import { ForewordSection } from '../sections/Foreword'
-import { BibliographySection } from '../sections/Bibliography'
+import { Text } from '../../models/Text'
 
 export class IndexAdapter implements Adapter {
-    private model: Section = new Section()
+    private model: Model
     private section: PdfSection = new PdfSection()
-    private page: number = 1
+    private offset: number = 1
 
-    getSection(): PdfSection { return this.section }
-    setSection(section: PdfSection) { this.section = section }
+    public getSection(): PdfSection { return this.section }
+    public setSection(section: PdfSection) { this.section = section }
 
-    getModel(): Section { return this.model }
-    setModel(model: Section ) { this.model = model }
+    public getModel(): Model { return this.model }
+    public setModel(model: Model ) { this.model = model }
 
-    getPage(): number { return this.page }
-    setPage(page: number) { this.page = page }
+    public getOffset(): number { return this.offset }
+    public getPage(): number { return this.getOffset() + 1}
+    public setOffset(offset: number) { this.offset = offset }
 
-    apply(): void {
+    public apply(): void {
         Log.info("Adapting index to PDF", this.getModel(), this.getSection())
 
         // Adding index title.
@@ -75,39 +72,19 @@ export class IndexAdapter implements Adapter {
         const breaks: Break = new Break()
         breaks.setSection(this.getSection())
         breaks.small()
-
-        // FIXME: Add page number.
-    }
-
-    public isIndexed(): boolean {
-        switch(this.getSection().constructor.name) {
-            case ForewordSection.name: return true
-            case ChapterSection.name: return true
-            case AfterwordSection.name: return true
-            case BibliographySection.name: return true
-            default: return false
-        }
     }
 
     private getString(): string {
-        switch(this.getSection().constructor.name) {
-            case ForewordSection.name: {
-                return Yaml.getString('@i18n/Foreword.yaml')
-                    .get(this.getSection().getLanguage())
+        switch(this.getModel().constructor.name) {
+            case Text.name: {
+                let text: Text = (this.getModel() as Text)
+                return text.get(this.getSection().getLanguage())
             }
-            case AfterwordSection.name: {
-                return Yaml.getString('@i18n/Afterword.yaml')
-                    .get(this.getSection().getLanguage())
-            }
-            case BibliographySection.name: {
-                return Yaml.getString('@i18n/Bibliography.yaml')
-                    .get(this.getSection().getLanguage())
-            }
-            case ChapterSection.name: {
-                let chapter: Chapter = (this.getModel() as ChapterSection).getChapter()
+            case Chapter.name: {
+                let chapter: Chapter = (this.getModel() as Chapter)
                 return [
-                    chapter.getTitle().get(this.getSection().getLanguage()),
-                    chapter.getLabel().get(this.getSection().getLanguage()),
+                    chapter.title.get(this.getSection().getLanguage()),
+                    chapter.getLabel(this.getSection().getLanguage()),
                 ].join(': ')
             }
             default: {
@@ -115,5 +92,4 @@ export class IndexAdapter implements Adapter {
             }
         }
     }
-
 }

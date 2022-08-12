@@ -24,13 +24,13 @@ export class StoryAdapter implements Adapter {
     private model: Story = new Story()
     private section: PdfSection = new PdfSection()
 
-    getSection(): PdfSection { return this.section }
-    setSection(section: PdfSection) { this.section = section }
+    public getSection(): PdfSection { return this.section }
+    public setSection(section: PdfSection) { this.section = section }
 
-    getModel(): Story { return this.model }
-    setModel(model: Story) { this.model = model }
+    public getModel(): Story { return this.model }
+    public setModel(model: Story) { this.model = model }
 
-    apply(): void {
+    public apply(): void {
         Log.info("Adapting story to PDF", this.getModel(), this.getSection())
 
         // Story title.

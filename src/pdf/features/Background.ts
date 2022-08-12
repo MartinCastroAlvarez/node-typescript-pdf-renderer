@@ -17,10 +17,10 @@ import { PdfSection } from '../Section'
 export class Background implements Feature {
     private section: PdfSection = new PdfSection()
 
-    getSection(): PdfSection { return this.section }
-    setSection(section: PdfSection) { this.section = section }
+    public getSection(): PdfSection { return this.section }
+    public setSection(section: PdfSection) { this.section = section }
 
-    apply(): void {
+    public apply(): void {
         Log.info("Adding background to PDF", this.getSection())
 
         // Detecting page size.
