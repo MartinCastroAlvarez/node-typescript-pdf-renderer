@@ -47,7 +47,7 @@ export class Chapter implements Model {
             []
         ).filter(
             topic => !set.has(topic.title.get()) && set.add(topic.title.get())
-        )
+        ) || []
     }
 
     // Extracts Sources from Stories.
@@ -58,7 +58,7 @@ export class Chapter implements Model {
             []
         ).filter(
             source => source.title !== undefined && !set.has(source.title.get()) && set.add(source.title.get())
-        )
+        ) || []
     }
 
     // JSON serializers.

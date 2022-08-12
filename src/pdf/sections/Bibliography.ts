@@ -30,20 +30,13 @@ export class BibliographySection extends PdfSection {
         title.setSection(this)
         title.apply()
 
-        // Afterword text.
-        for (let text of this.getBook().afterword) {
-        }
-
-
         // Bibliography per chapter.
-        for (let chapter of this.getBook().chapters) {
-            chapter.getSources()?.forEach(source => {
-                let adapter: SourceAdapter = new SourceAdapter()
-                adapter.setModel(source)
-                adapter.setSection(this)
-                adapter.apply()
-            })
-        }
+        this.getBook().getSources().forEach(source => {
+            let adapter: SourceAdapter = new SourceAdapter()
+            adapter.setModel(source)
+            adapter.setSection(this)
+            adapter.apply()
+        })
 
         // Padding with landscapes.
         const landscape: Landscape = new Landscape()

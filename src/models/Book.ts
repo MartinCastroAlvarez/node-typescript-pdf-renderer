@@ -91,7 +91,18 @@ export class Book implements Model {
             []
         ).filter(
             topic => !set.has(topic.title.get()) && set.add(topic.title.get())
-        )
+        ) || []
+    }
+
+    // Extracts sources from Chapters.
+    public getSources(): Array<Source> {
+        let set: Set<string> = new Set<string>()
+        return this.chapters.reduce(
+            (accumulator, chapter) => accumulator.concat(chapter.getSources()),
+            []
+        ).filter(
+            topic => !set.has(source.title.get()) && set.add(source.title.get())
+        ) || []
     }
 
     // JSON serializers.

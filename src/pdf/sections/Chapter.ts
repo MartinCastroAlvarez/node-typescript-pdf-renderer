@@ -52,6 +52,9 @@ export class ChapterSection extends PdfSection {
         title.setSection(this)
         title.apply()
 
+        // Break after the title.
+        breaks.normal()
+
         // Chapter introduction.
         let foreword: SubtitleAdapter = new SubtitleAdapter()
         foreword.setModel(Yaml.getString('@i18n/Foreword.yaml'))
