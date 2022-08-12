@@ -31,19 +31,23 @@ export class AfterwordSection extends PdfSection {
         breaks.apply()
 
         // Afterword title.
-        new TitleAdapter().apply(this, Yaml.getString('@i18n/Afterword.yaml'))
+        let title: TitleAdapter = new TitleAdapter()
+        title.setModel(Yaml.getString('@i18n/Afterword.yaml'))
+        title.setSection(this)
+        title.apply()
 
         // Afterword text.
         for (let text of this.getBook().afterword) {
-            new TextAdapter().apply(this, text)
+            let adapter: TextAdapter = new TextAdapter()
+            adapter.setModel(text)
+            adapter.setSection(this)
+            adapter.apply()
         }
 
         // Padding with landscapes.
-        const landscape = new Landscape()
+        const landscape: Landscape = new Landscape()
         landscape.setSection(this)
         landscape.setPadding(2)
         landscape.apply()
-
-        Log.info("Afterword built successfully", this.getBook())
     }
 }

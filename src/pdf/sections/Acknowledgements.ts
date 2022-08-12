@@ -22,13 +22,17 @@ export class AcknowledgementsSection extends PdfSection {
         Log.info("Building book acknowledgements section", this.getBook())
 
         // Section title.
-        new SubtitleAdapter().apply(this, Yaml.getString('@i18n/Acknowledgements.yaml'))
+        let title: SubtitleAdapter = new SubtitleAdapter()
+        title.setModel(Yaml.getString('@i18n/Acknowledgements.yaml'))
+        title.setSection(this)
+        title.apply()
 
-        // Section contents.
+        // Acknowledgements text.
         for (let text of this.getBook().acknowledgements) {
-            new TextAdapter().apply(this, text)
+            let adapter: TextAdapter = new TextAdapter()
+            adapter.setModel(text)
+            adapter.setSection(this)
+            adapter.apply()
         }
-
-        Log.info("Acknowledgements built successfully", this.getBook())
     }
 }

@@ -24,7 +24,10 @@ export class TitleSection extends PdfSection {
 
         // Authors.
         for (let author of this.getBook().authors) {
-            new SubtitleAdapter().apply(this, author.name)
+            let name: SubtitleAdapter = new SubtitleAdapter()
+            name.setModel(author.name)
+            name.setSection(this)
+            name.apply()
         }
 
         // Space before the title.
@@ -33,10 +36,16 @@ export class TitleSection extends PdfSection {
         breaks.setBig()
         breaks.apply()
 
-        // Book title & subtitle.
-        new TitleAdapter().apply(this, this.getBook().title)
-        new SubtitleAdapter().apply(this, this.getBook().subtitle)
+        // Book title.
+        let title: TitleAdapter = new TitleAdapter()
+        title.setModel(this.getBook().title)
+        title.setSection(this)
+        title.apply()
 
-        Log.info("Title built successfully", this.getBook())
+        // Book subtitle.
+        let subtitle: SubtitleAdapter = new SubtitleAdapter()
+        subtitle.setModel(this.getBook().subtitle)
+        subtitle.setSection(this)
+        subtitle.apply()
     }
 }

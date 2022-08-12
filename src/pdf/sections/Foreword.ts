@@ -31,19 +31,23 @@ export class ForewordSection extends PdfSection {
         breaks.apply()
 
         // Foreword title.
-        new TitleAdapter().apply(this, Yaml.getString('@i18n/Foreword.yaml'))
+        let title: TitleAdapter = new TitleAdapter()
+        title.setModel(Yaml.getString('@i18n/Foreword.yaml'))
+        title.setSection(this)
+        title.apply()
 
         // Foreword text.
         for (let text of this.getBook().foreword) {
-            new TextAdapter().apply(this, text)
+            let adapter: TextAdapter = new TextAdapter()
+            adapter.setModel(text)
+            adapter.setSection(this)
+            adapter.apply()
         }
 
         // Padding with landscapes.
-        const landscape = new Landscape()
+        const landscape: Landscape = new Landscape()
         landscape.setSection(this)
         landscape.setPadding(2)
         landscape.apply()
-
-        Log.info("Foreword built successfully", this.getBook())
     }
 }

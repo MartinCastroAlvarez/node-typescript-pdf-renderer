@@ -25,21 +25,30 @@ export class BibliographySection extends PdfSection {
         Log.info("Building book legal warning", this.getBook())
 
         // Section title.
-        new SubtitleAdapter().apply(this, Yaml.getString('@i18n/Bibliography.yaml'))
+        let title: SubtitleAdapter = new SubtitleAdapter()
+        title.setModel(Yaml.getString('@i18n/Bibliography.yaml'))
+        title.setSection(this)
+        title.apply()
+
+        // Afterword text.
+        for (let text of this.getBook().afterword) {
+        }
+
 
         // Bibliography per chapter.
         for (let chapter of this.getBook().chapters) {
             chapter.getSources()?.forEach(source => {
-                new SourceAdapter().apply(this, source)
+                let adapter: SourceAdapter = new SourceAdapter()
+                adapter.setModel(source)
+                adapter.setSection(this)
+                adapter.apply()
             })
         }
 
         // Padding with landscapes.
-        const landscape = new Landscape()
+        const landscape: Landscape = new Landscape()
         landscape.setSection(this)
         landscape.setPadding(2)
         landscape.apply()
-
-        Log.info("Bibliography note built successfully", this.getBook())
     }
 }
