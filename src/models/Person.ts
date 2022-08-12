@@ -21,12 +21,12 @@ export class Person implements Model {
     public readonly avatar: Image = new Image()
 
     // String serializers.
-    toString(): string {
+    public toString(): string {
         return `<${(this as any).constructor.name}: ${this.name.get()}>`
     }
 
     // JSON serializers.
-    serialize(): SerializedPerson {
+   public serialize(): SerializedPerson {
         return {
             "Type": (this as any).constructor.name,
             "Name": this.name.serialize(),
@@ -36,7 +36,7 @@ export class Person implements Model {
             "Avatar": this.avatar.serialize(),
         }
     }
-    unserialize(data: SerializedPerson): void {
+    public unserialize(data: SerializedPerson): void {
         if (data) {
             Log.info('Loading Person', data)
             this.name.unserialize(data['Name'])

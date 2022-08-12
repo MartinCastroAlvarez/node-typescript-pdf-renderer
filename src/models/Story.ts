@@ -21,12 +21,12 @@ export class Story implements Model {
     public topics: Array<Topic> = new Array<Topic>()
 
     // String serializers.
-    toString(): string {
+    public toString(): string {
         return `<${(this as any).constructor.name}: ${this.title.get()}>`
     }
 
     // JSON serializers.
-    serialize(): SerializedStory {
+   public serialize(): SerializedStory {
         return {
             "Type": (this as any).constructor.name,
             "Title": this.title.serialize(),
@@ -35,7 +35,7 @@ export class Story implements Model {
             "Sources": this.sources?.map(source => source.serialize()),
         }
     }
-    unserialize(data: SerializedStory): void {
+    public unserialize(data: SerializedStory): void {
         if (data) {
             Log.info('Loading Story', data)
             this.title.unserialize(data['Title']) 

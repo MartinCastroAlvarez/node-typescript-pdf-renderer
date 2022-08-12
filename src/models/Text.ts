@@ -32,19 +32,19 @@ export class Text implements Model {
     }
 
     // String serializers.
-    toString(): string {
+    public toString(): string {
         return `<${(this as any).constructor.name}: ${this.get()}>`
     }
 
     // JSON serializers.
-    serialize(): SerializedText {
+   public serialize(): SerializedText {
         return {
             "Type": (this as any).constructor.name,
             "EN": this.get(Language.EN),
             "ES": this.get(Language.ES),
         }
     }
-    unserialize(data: SerializedText): void {
+    public unserialize(data: SerializedText): void {
         if (data) {
             Log.info('Loading Text', data)
             this.set(Language.EN, data['EN'])

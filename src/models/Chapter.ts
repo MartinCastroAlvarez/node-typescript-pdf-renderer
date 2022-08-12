@@ -16,18 +16,23 @@ import { Log } from '../utils/Logging'
 import { Yaml } from '../utils/Yaml'
 
 export class Chapter implements Model {
+    private number: number = 0
     public readonly title: Text = new Text()
     public introduction: Array<Model> = new Array<Model>()
     public conclusion: Array<Model> = new Array<Model>()
     public stories: Array<Story> = new Array<Story>()
 
     // String serializers.
-    toString(): string {
+    public toString(): string {
         return `<${(this as any).constructor.name}: ${this.title.get()}>`
     }
 
+    // Number getter.
+    public getNumber(): number { return this.number }
+    public setNumber(number: number) { this.number = number }
+
     // Extracts Topics from Stories.
-    getTopics(): Array<Topic> {
+    public getTopics(): Array<Topic> {
         let set: Set<string> = new Set<string>()
         return this.stories.reduce(
             (accumulator, story) => accumulator.concat(story.topics),
@@ -38,7 +43,7 @@ export class Chapter implements Model {
     }
 
     // Extracts Sources from Stories.
-    getSources(): Array<Source> {
+    public getSources(): Array<Source> {
         let set: Set<string> = new Set<string>()
         return this.stories.reduce(
             (accumulator, story) => accumulator.concat(story.sources),
@@ -49,7 +54,7 @@ export class Chapter implements Model {
     }
 
     // JSON serializers.
-    serialize(): SerializedChapter {
+   public serialize(): SerializedChapter {
         return {
             "Type": (this as any).constructor.name,
             "Title": this.title.serialize(),
@@ -59,7 +64,7 @@ export class Chapter implements Model {
             "Conclusion": this.conclusion?.map(block => block.serialize()) || [],
         }
     }
-    unserialize(data: SerializedChapter): void {
+    public unserialize(data: SerializedChapter): void {
         if (data) {
             Log.info('Loading Chapter', data)
             this.title.unserialize(data['Title']) 

@@ -42,12 +42,12 @@ export class Dimensions implements Model {
     setSubtitle(size: number) { this.subtitle = size }
 
     // String serializers.
-    toString(): string {
+    public toString(): string {
         return `<${(this as any).constructor.name}: ${this.getNormal()}>`
     }
 
     // JSON serializers.
-    serialize(): SerializedDimensions {
+   public serialize(): SerializedDimensions {
         return {
             "Type": (this as any).constructor.name,
             "Normal": this.getNormal(),
@@ -58,7 +58,7 @@ export class Dimensions implements Model {
             "Subtitle": this.getSubtitle(),
         }
     }
-    unserialize(data: SerializedDimensions): void {
+    public unserialize(data: SerializedDimensions): void {
         if (data) {
             Log.info('Loading Dimensions', data)
             this.setNormal(data['Normal'])

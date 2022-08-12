@@ -25,18 +25,18 @@ export class File implements Model {
     }
 
     // String serializers.
-    toString(): string {
+    public toString(): string {
         return `<${(this as any).constructor.name}: ${this.getPath()}>`
     }
 
     // JSON serializers.
-    serialize(): SerializedFile {
+   public serialize(): SerializedFile {
         return {
             "Type": (this as any).constructor.name,
             "Path": this.getPath(),
         }
     }
-    unserialize(data: SerializedFile): void {
+    public unserialize(data: SerializedFile): void {
         if (data) {
             Log.info('Loading File', data)
             this.setPath(data['Path'])

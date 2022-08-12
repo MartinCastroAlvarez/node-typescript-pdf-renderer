@@ -79,12 +79,12 @@ export class Book implements Model {
     public readonly subtitle: Text = new Text()
 
     // String serializers.
-    toString(): string {
+    public toString(): string {
         return `<${(this as any).constructor.name}: ${this.title.get()}>`
     }
 
     // Extracts topics from Chapters.
-    getTopics(): Array<Topic> {
+    public getTopics(): Array<Topic> {
         let set: Set<string> = new Set<string>()
         return this.chapters.reduce(
             (accumulator, chapter) => accumulator.concat(chapter.getTopics()),
@@ -95,7 +95,7 @@ export class Book implements Model {
     }
 
     // JSON serializers.
-    serialize(): SerializedBook {
+   public serialize(): SerializedBook {
         return {
             "Type": (this as any).constructor.name,
             "Title": this.title.serialize(),
@@ -109,7 +109,7 @@ export class Book implements Model {
             "Acknowledgements": this.acknowledgements?.map(block => block.serialize()),
         }
     }
-    unserialize(data: SerializedBook): void {
+    public unserialize(data: SerializedBook): void {
         if (data) {
             Log.info('Loading Book', data)
             this.title.unserialize(data['Title'])
@@ -118,8 +118,12 @@ export class Book implements Model {
             this.afterword = data['Afterword']?.map(x => <Text>Yaml.unserialize(x)) || []
             this.legal = data['Legal']?.map(x => <Text>Yaml.unserialize(x)) || []
             this.acknowledgements = data['Acknowledgements']?.map(x => <Text>Yaml.unserialize(x)) || []
-            this.chapters = data['Chapters']?.map(x => <Chapter>Yaml.unserialize(x)) || []
             this.authors = data['Authors']?.map(x => <Person>Yaml.unserialize(x)) || []
+            this.chapters = data['Chapters']?.map((x, index) => {
+                let chapter: Chapter = <Chapter>Yaml.unserialize(x)
+                chapter.setNumber(index + 1)
+                return chapter
+            }) || []
         }
     }
 }

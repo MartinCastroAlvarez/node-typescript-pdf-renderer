@@ -32,12 +32,12 @@ export class Typeface implements Model {
     setItalic(font: string) { this.italic = font }
 
     // String serializers.
-    toString(): string {
+    public toString(): string {
         return `<${(this as any).constructor.name}: ${this.getNormal()}>`
     }
 
     // JSON serializers.
-    serialize(): SerializedTypeface {
+   public serialize(): SerializedTypeface {
         return {
             "Type": (this as any).constructor.name,
             "Normal": this.getNormal(),
@@ -46,7 +46,7 @@ export class Typeface implements Model {
             "Italic": this.getItalic(),
         }
     }
-    unserialize(data: SerializedTypeface): void {
+    public unserialize(data: SerializedTypeface): void {
         if (data) {
             Log.info('Loading Typeface', data)
             this.setNormal(data['Normal'])

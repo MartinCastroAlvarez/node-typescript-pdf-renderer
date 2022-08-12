@@ -22,12 +22,12 @@ export class Brand implements Model {
     setTitle(title: string) { this.title = title }
 
     // String serializers.
-    toString(): string {
+    public toString(): string {
         return `<${(this as any).constructor.name}: ${this.getTitle()}>`
     }
 
     // JSON serializers.
-    serialize(): SerializedBrand {
+   public serialize(): SerializedBrand {
         return {
             "Type": (this as any).constructor.name,
             "Title": this.getTitle(),
@@ -35,7 +35,7 @@ export class Brand implements Model {
             "Avatar": this.avatar.serialize(),
         }
     }
-    unserialize(data: SerializedBrand): void {
+    public unserialize(data: SerializedBrand): void {
         if (data) {
             Log.info('Loading Brand', data)
             this.setTitle(data['Title'])

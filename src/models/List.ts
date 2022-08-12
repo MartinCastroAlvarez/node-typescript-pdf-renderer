@@ -20,18 +20,18 @@ export class List implements Model {
     }
 
     // String serializers.
-    toString(): string {
+    public toString(): string {
         return `<${(this as any).constructor.name}: ${this.getSize()}>`
     }
 
     // JSON serializers.
-    serialize(): SerializedList {
+   public serialize(): SerializedList {
         return {
             "Type": (this as any).constructor.name,
             "Items": this.items?.map(item => item.serialize()),
         }
     }
-    unserialize(data: SerializedList): void {
+    public unserialize(data: SerializedList): void {
         if (data) {
             Log.info('Loading List', data)
             this.items = data['Items']?.map(item => {

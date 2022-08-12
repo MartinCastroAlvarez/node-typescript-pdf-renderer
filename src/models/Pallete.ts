@@ -42,12 +42,12 @@ export class Pallete implements Model {
     setGrey(color: string) { this.grey = color }
 
     // String serializers.
-    toString(): string {
+    public toString(): string {
         return `<${(this as any).constructor.name}: ${this.getPrimary()}>`
     }
 
     // JSON serializers.
-    serialize(): SerializedPallete {
+   public serialize(): SerializedPallete {
         return {
             "Type": (this as any).constructor.name,
             "Primary": this.getPrimary(),
@@ -58,7 +58,7 @@ export class Pallete implements Model {
             "Grey": this.getGrey(),
         }
     }
-    unserialize(data: SerializedPallete): void {
+    public unserialize(data: SerializedPallete): void {
         if (data) {
             Log.info('Loading Pallete', data)
             this.setPrimary(data['Primary'])

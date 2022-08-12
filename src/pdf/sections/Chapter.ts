@@ -17,6 +17,7 @@ import { AnyAdapter } from '../adapters/Any'
 import { TitleAdapter } from '../adapters/Title'
 import { SubtitleAdapter } from '../adapters/Subtitle'
 import { StoryAdapter } from '../adapters/Story'
+import { ChapterAdapter } from '../adapters/Chapter'
 
 import { Break } from '../features/Break'
 import { Landscape } from '../features/Landscape'
@@ -38,6 +39,12 @@ export class ChapterSection extends PdfSection {
         const breaks: Break = new Break()
         breaks.setSection(this)
         breaks.big()
+
+        // Chapter number.
+        let chapter: ChapterAdapter = new ChapterAdapter()
+        chapter.setModel(this.getChapter())
+        chapter.setSection(this)
+        chapter.apply()
 
         // Chapter title.
         let title: TitleAdapter = new TitleAdapter()

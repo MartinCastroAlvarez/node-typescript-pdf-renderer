@@ -16,12 +16,12 @@ export class Quote extends Text implements Model {
     public readonly author: Person = new Person()
 
     // JSON serializers.
-    serialize(): SerializedQuote {
+   public serialize(): SerializedQuote {
         let data: SerializedQuote = <SerializedQuote>super.serialize()
         data['Author'] = this.author.serialize()
         return data
     }
-    unserialize(data: SerializedQuote): void {
+    public unserialize(data: SerializedQuote): void {
         super.unserialize(data)
         if (data) {
             Log.info('Loading Quote', data)

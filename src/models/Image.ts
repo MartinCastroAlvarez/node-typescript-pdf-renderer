@@ -70,12 +70,12 @@ export class Image extends File implements Model {
     }
 
     // String serializers.
-    toString(): string {
+    public toString(): string {
         return `<${(this as any).constructor.name}: ${this.getPath()}>`
     }
 
     // JSON serializers.
-    serialize(): SerializedImage {
+   public serialize(): SerializedImage {
         return {
             "Type": (this as any).constructor.name,
             "Path": this.getPath(),
@@ -87,7 +87,7 @@ export class Image extends File implements Model {
             "Right": this.getRight(),
         }
     }
-    unserialize(data: SerializedImage): void {
+    public unserialize(data: SerializedImage): void {
         if (data) {
             Log.info('Loading Image', data)
             this.setPath(data['Path'])

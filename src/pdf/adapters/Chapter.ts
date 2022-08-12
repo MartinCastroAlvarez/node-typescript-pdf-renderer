@@ -1,6 +1,6 @@
 // ----------------------------------------------------------------
 // Purpose:
-// This class implements the text adapter.
+// This class implements the Chapter adapter.
 //
 // References:
 // - https://pdfkit.org/
@@ -11,40 +11,44 @@ import { Model } from '../../interfaces/Model'
 import { Section } from '../../interfaces/Section'
 
 import { Config } from '../../Config'
+import { Yaml } from '../../utils/Yaml'
 import { Log } from '../../utils/Logging'
 
-import { Text } from '../../models/Text'
+import { Chapter } from '../../models/Chapter'
 
 import { Break } from '../features/Break'
 
 import { PdfSection } from '../Section'
 
-export class SubtitleAdapter implements Adapter {
-    private model: Text = new Text()
+export class ChapterAdapter implements Adapter {
+    private model: Chapter = new Chapter()
     private section: PdfSection = new PdfSection()
 
     getSection(): PdfSection { return this.section }
     setSection(section: PdfSection) { this.section = section }
 
-    getModel(): Text { return this.model }
-    setModel(model: Text ) { this.model = model }
+    getModel(): Chapter { return this.model }
+    setModel(model: Chapter) { this.model = model }
 
     apply(): void {
-        Log.info("Adapting subtitle to PDF", this.getModel(), this.getSection())
+        Log.info("Adapting chapter to PDF", this.getModel(), this.getSection())
 
-        // Checking if subtitle is empty.
-        const string: string = this.getModel().get(this.getSection().getLanguage())
-        if (!string) return
+        // Generating string.
+        const string: string = [
+            Yaml.getString('@i18n/Chapter.yaml')
+                .get(this.getSection().getLanguage()),
+            this.getModel().getNumber().toString()
+        ].join(' ')
 
-        // Space before the subtitle.
+        // Space before the title.
         const breaks: Break = new Break()
         breaks.setSection(this.getSection())
         breaks.small()
 
         // Updating document.
         this.getSection().getDocument()
-            .fontSize(Config.dimensions.getSubtitle())
-            .fillColor(Config.pallete.getBlack())
+            .fontSize(Config.dimensions.getTitle())
+            .fillColor(Config.pallete.getPrimary())
             .font(Config.typeface.getBold())
             .text(
                 string,
@@ -54,7 +58,7 @@ export class SubtitleAdapter implements Adapter {
                 }
             )
 
-        // Space after the subtitle.
+        // Space after the title.
         breaks.small()
     }
 }

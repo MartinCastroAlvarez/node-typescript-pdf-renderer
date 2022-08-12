@@ -18,12 +18,12 @@ export class Topic implements Model {
     public readonly avatar: Image = new Image()
 
     // String serializers.
-    toString(): string {
+    public toString(): string {
         return `<${(this as any).constructor.name}: ${this.title.get()}>`
     }
 
     // JSON serializers.
-    serialize(): SerializedTopic{
+   public serialize(): SerializedTopic{
         return {
             "Type": (this as any).constructor.name,
             "Title": this.title.serialize(),
@@ -31,7 +31,7 @@ export class Topic implements Model {
             "Avatar": this.avatar.serialize(),
         }
     }
-    unserialize(data: SerializedTopic): void {
+    public unserialize(data: SerializedTopic): void {
         if (data) {
             Log.info('Loading Topic', data)
             this.title.unserialize(data['Title'])
