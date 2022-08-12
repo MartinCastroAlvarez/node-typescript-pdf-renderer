@@ -1,11 +1,6 @@
 # ----------------------------------------------------------------
 # Purpose:
-# This file defines the sizes used in the renders.
+# Defines a Translation that can be referenced using `@i18n/<name>.yaml`
 # ----------------------------------------------------------------
-Type: 'Dimensions'
-Small: 9
-Normal: 12
-Subtitle: 16
-Title: 32
-Break: 8
-Margin: 80
+EN: 'Bibliography'
+ES: 'Bibliografía'

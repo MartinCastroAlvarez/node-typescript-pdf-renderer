@@ -44,7 +44,7 @@ export class Brand implements Model {
                 let person = new Person()
                 person.unserialize(data)
                 return person
-            })
+            }) || []
         }
     }
 }

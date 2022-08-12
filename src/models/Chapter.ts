@@ -9,6 +9,7 @@ import { SerializedChapter } from '../serializers/Chapter'
 import { Story } from './Story'
 import { Text } from './Text'
 import { Topic } from './Topic'
+import { Source } from './Source'
 
 import { Log } from '../Logging'
 import { Yaml } from '../Yaml'
@@ -24,7 +25,7 @@ export class Chapter {
         return `<${(this as any).constructor.name}: ${this.title.get()}>`
     }
 
-    // Extracts topics from Stories.
+    // Extracts Topics from Stories.
     getTopics(): Array<Topic> {
         let set: Set<string> = new Set<string>()
         return this.stories.reduce(
@@ -35,15 +36,26 @@ export class Chapter {
         )
     }
 
+    // Extracts Sources from Stories.
+    getSources(): Array<Source> {
+        let set: Set<string> = new Set<string>()
+        return this.stories.reduce(
+            (accumulator, story) => accumulator.concat(story.sources),
+            []
+        ).filter(
+            source => source.title !== undefined && !set.has(source.title.get()) && set.add(source.title.get())
+        )
+    }
+
     // JSON serializers.
     serialize(): SerializedChapter {
         return {
             "Type": (this as any).constructor.name,
             "Title": this.title.serialize(),
-            "Topics": this.getTopics()?.map(topic => topic.serialize()),
-            "Introduction": this.introduction?.map(block => block.serialize()),
-            "Stories": this.stories?.map(story => story.serialize()),
-            "Conclusion": this.conclusion?.map(block => block.serialize()),
+            "Topics": this.getTopics()?.map(topic => topic.serialize()) || [],
+            "Introduction": this.introduction?.map(block => block.serialize()) || [],
+            "Stories": this.stories?.map(story => story.serialize()) || [],
+            "Conclusion": this.conclusion?.map(block => block.serialize()) || [],
         }
     }
     unserialize(data: SerializedChapter): void {

@@ -114,12 +114,12 @@ export class Book implements Model {
             Log.info('Loading Book', data)
             this.title.unserialize(data['Title'])
             this.subtitle.unserialize(data['Subtitle'])
-            this.foreword = data['Foreword']?.map(x => <Text>Yaml.unserialize(x))
-            this.afterword = data['Afterword']?.map(x => <Text>Yaml.unserialize(x))
-            this.legal = data['Legal']?.map(x => <Text>Yaml.unserialize(x))
-            this.acknowledgements = data['Acknowledgements']?.map(x => <Text>Yaml.unserialize(x))
-            this.chapters = data['Chapters']?.map(x => <Chapter>Yaml.unserialize(x))
-            this.authors = data['Authors']?.map(x => <Person>Yaml.unserialize(x))
+            this.foreword = data['Foreword']?.map(x => <Text>Yaml.unserialize(x)) || []
+            this.afterword = data['Afterword']?.map(x => <Text>Yaml.unserialize(x)) || []
+            this.legal = data['Legal']?.map(x => <Text>Yaml.unserialize(x)) || []
+            this.acknowledgements = data['Acknowledgements']?.map(x => <Text>Yaml.unserialize(x)) || []
+            this.chapters = data['Chapters']?.map(x => <Chapter>Yaml.unserialize(x)) || []
+            this.authors = data['Authors']?.map(x => <Person>Yaml.unserialize(x)) || []
         }
     }
 }

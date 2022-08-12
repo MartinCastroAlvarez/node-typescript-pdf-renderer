@@ -11,6 +11,7 @@ import { SerializedText } from './Text'
 
 export interface SerializedSource extends Serialized {
     Title?: SerializedText
+    Link?: SerializedText
     Authors?: Array<SerializedPerson>
     Avatar?: SerializedImage
 }

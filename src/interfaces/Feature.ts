@@ -3,5 +3,8 @@
 import { Section } from './Section'
 
 export interface Feature {
-    apply(section: Section): void
+    getSection(): Section
+    setSection(section: Section): void
+    toString(): string
+    apply(): void
 }

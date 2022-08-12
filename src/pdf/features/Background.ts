@@ -7,7 +7,6 @@
 // ----------------------------------------------------------------
 
 import { Feature } from '../../interfaces/Feature'
-import { Section } from '../../interfaces/Section'
 
 import { Config } from '../../Config'
 import { Log } from '../../Logging'
@@ -16,26 +15,26 @@ import { PdfSection } from '../Section'
 
 
 export class Background implements Feature {
-    apply(section: Section): void {
-        Log.info("Adding background to PDF", section)
+    private section: PdfSection = new PdfSection()
+
+    getSection(): PdfSection { return this.section }
+    setSection(section: PdfSection) { this.section = section }
+
+    apply(): void {
+        Log.info("Adding background to PDF", this.getSection())
 
         // Detecting page size.
-        const width: number = (section as PdfSection).getWidth()
-        const height: number = (section as PdfSection).getHeight()
-
-        // Extracting PDFKit document.
-        const document: any = (section as PdfSection).getDocument()
+        const width: number = this.getSection().getWidth()
+        const height: number = this.getSection().getHeight()
 
         // Creating a gradient.
-        const gradient: any = document.linearGradient(0, 0, width, height)
+        const gradient: any = this.getSection().getDocument().linearGradient(0, 0, width, height)
         gradient.stop(0, Config.pallete.getSecondary())
         gradient.stop(1, Config.pallete.getTertiary())
 
         // Updating document.
-        document
+        this.getSection().getDocument()
             .rect(0, 0, width, height)
             .fill(gradient)
-
-        Log.info("Added background to PDF", section)
     }
 }

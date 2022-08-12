@@ -39,9 +39,9 @@ export class Story implements Model {
         if (data) {
             Log.info('Loading Story', data)
             this.title.unserialize(data['Title']) 
-            this.blocks = data['Blocks']?.map(block => Yaml.unserialize(block))
-            this.topics = data['Topics']?.map(topic => <Topic>Yaml.unserialize(topic))
-            this.sources = data['Source']?.map(source => <Source>Yaml.unserialize(source))
+            this.blocks = data['Blocks']?.map(block => Yaml.unserialize(block)) || []
+            this.topics = data['Topics']?.map(topic => <Topic>Yaml.unserialize(topic)) || []
+            this.sources = data['Sources']?.map(source => <Source>Yaml.unserialize(source)) || []
         }
     }
 }

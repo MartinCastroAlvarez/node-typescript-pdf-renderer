@@ -27,6 +27,9 @@ export class Text implements Model {
             throw new EmptynessError(`Invalid '${language}' text: ${text}`)
         this.i18n[language] = text
     }
+    isEmpty(language: Language = Language.EN): boolean {
+        return !this.i18n[language]
+    }
 
     // String serializers.
     toString(): string {

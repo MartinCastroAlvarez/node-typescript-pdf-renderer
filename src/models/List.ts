@@ -38,7 +38,7 @@ export class List implements Model {
                 let text: Text = new Text()
                 text.unserialize(item)
                 return text
-            })
+            }) || []
         }
     }
 }

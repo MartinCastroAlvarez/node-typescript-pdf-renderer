@@ -26,8 +26,9 @@ import { PdfSection } from './Section'
 
 import { AcknowledgementsSection } from './sections/Acknowledgements'
 import { AfterwordSection } from './sections/Afterword'
-import { AuthorsSection } from './sections/Authors'
+import { BiographySection } from './sections/Biography'
 import { BackSection } from './sections/Back'
+import { BibliographySection } from './sections/Bibliography'
 import { ChapterSection } from './sections/Chapter'
 import { TableOfContentsSection } from './sections/Contents'
 import { CoverSection } from './sections/Cover'
@@ -80,7 +81,7 @@ export class Pdf implements Product {
         cover.build()
         this.sections.push(cover)
 
-        // Info section.
+        // Title section.
         const title: TitleSection = new TitleSection()
         title.setBook(this.getBook())
         title.setLanguage(this.getLanguage())
@@ -94,12 +95,12 @@ export class Pdf implements Product {
         legal.build()
         this.sections.push(legal)
 
-        // Authors section.
-        const authors: AuthorsSection = new AuthorsSection()
-        authors.setBook(this.getBook())
-        authors.setLanguage(this.getLanguage())
-        authors.build()
-        this.sections.push(authors)
+        // Biography section.
+        const biography: BiographySection = new BiographySection()
+        biography.setBook(this.getBook())
+        biography.setLanguage(this.getLanguage())
+        biography.build()
+        this.sections.push(biography)
 
         // Acknowledgements section.
         const acknowledgements: AcknowledgementsSection = new AcknowledgementsSection()
@@ -107,6 +108,13 @@ export class Pdf implements Product {
         acknowledgements.setLanguage(this.getLanguage())
         acknowledgements.build()
         this.sections.push(acknowledgements)
+
+        // Table of Contents section.
+        const contents: TableOfContentsSection = new TableOfContentsSection()
+        contents.setBook(this.getBook())
+        contents.setLanguage(this.getLanguage())
+        contents.build()
+        this.sections.push(contents)
 
         // Foreword section.
         const foreword: ForewordSection = new ForewordSection()
@@ -132,6 +140,13 @@ export class Pdf implements Product {
         afterword.build()
         this.sections.push(afterword)
 
+        // Bibliography section.
+        const bibliography: BibliographySection = new BibliographySection()
+        bibliography.setBook(this.getBook())
+        bibliography.setLanguage(this.getLanguage())
+        bibliography.build()
+        this.sections.push(bibliography)
+
         // Back Cover section.
         const back: BackSection = new BackSection()
         back.setBook(this.getBook())
@@ -139,12 +154,9 @@ export class Pdf implements Product {
         back.build()
         this.sections.push(back)
 
-        // Table of Contents section.
-        const contents: TableOfContentsSection = new TableOfContentsSection()
-        contents.setBook(this.getBook())
-        contents.setLanguage(this.getLanguage())
-        contents.build()
-        this.sections.splice(5, 0, contents)
+        // Index book.
+        contents.setSections(this.sections)
+        contents.index()
 
         // End of build.
         Log.info("PDF product built successfully", this.getBook())

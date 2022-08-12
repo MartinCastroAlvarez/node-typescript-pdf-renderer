@@ -20,15 +20,26 @@ import { Break } from '../features/Break'
 import { PdfSection } from '../Section'
 
 export class TextAdapter implements Adapter {
-    apply(section: Section, model: Model): void {
-        Log.info("Adapting text to PDF", model)
+    private model: Text = new Text()
+    private section: PdfSection = new PdfSection()
 
-        // Checking if textis empty.
-        const string: string = (model as Text).get(section.getLanguage())
+    getSection(): PdfSection { return this.section }
+    setSection(section: PdfSection) { this.section = section }
+
+    getModel(): Text { return this.model }
+    setModel(model: Text) { this.model = model }
+
+    apply(): void {
+        Log.info("Adapting text to PDF", this.getModel(), this.getSection())
+
+        // Checking if text is empty.
+        const string: string = this.getModel().get(this.getSection().getLanguage())
         if (!string) return
 
         // Space before the text.
-        new Break().apply(section)
+        const breaks: Break = new Break()
+        breaks.setSection(this.getSection())
+        breaks.apply()
 
         // Defining options.
         const options: object = {
@@ -39,14 +50,13 @@ export class TextAdapter implements Adapter {
         }
 
         // Updating document.
-        const document: any = (section as PdfSection).getDocument()
-        document
+        this.getSection().getDocument()
             .fillColor(Config.pallete.getBlack())
             .fontSize(Config.dimensions.getNormal())
             .font(Config.typeface.getNormal())
             .text(string, options)
 
         // Space after the text.
-        new Break().apply(section)
+        breaks.apply()
     }
 }

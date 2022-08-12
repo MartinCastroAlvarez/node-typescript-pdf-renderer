@@ -20,18 +20,29 @@ import { Break } from '../features/Break'
 import { PdfSection } from '../Section'
 
 export class LinkAdapter implements Adapter {
-    apply(section: Section, model: Model): void {
-        Log.info("Adapting link to PDF", model)
+    private model: Text = new Text()
+    private section: PdfSection = new PdfSection()
+
+    getSection(): PdfSection { return this.section }
+    setSection(section: PdfSection) { this.section = section }
+
+    getModel(): Text { return this.model }
+    setModel(model: Text) { this.model = model }
+
+    apply(): void {
+        Log.info("Adapting link to PDF", this.getModel(), this.getSection())
 
         // Checking if link is empty.
-        const string: string = (model as Text).get(section.getLanguage())
+        const string: string = this.getModel().get(this.getSection().getLanguage())
         if (!string) return
 
         // Extracting PDFKit document.
-        const document: any = (section as PdfSection).getDocument()
+        const document: any = this.getSection().getDocument()
 
         // Space before the link.
-        new Break().apply(section)
+        const breaks: Break = new Break()
+        breaks.setSection(this.getSection())
+        breaks.apply()
 
         // Defining text options.
         const options: object = {
@@ -42,29 +53,29 @@ export class LinkAdapter implements Adapter {
         }
 
         // Setting font family and size.
-        document
+        this.getSection().getDocument()
             .fontSize(Config.dimensions.getNormal())
             .font(Config.typeface.getNormal())
 
         // Extracting current position.
-        const width: number = (section as PdfSection).getInnerWidth()
-        const left: number = (section as PdfSection).getMarginLeft()
+        const width: number = this.getSection().getInnerWidth()
+        const left: number = this.getSection().getMarginLeft()
         const padding: number = Config.dimensions.getBreak()
-        const top: number = (section as PdfSection).getCurrentVerticalPosition() - padding
-        const height: number = document.heightOfString(string, options) + 2 * padding
+        const top: number = this.getSection().getCurrentVerticalPosition() - padding
+        const height: number = this.getSection().getDocument()
+            .heightOfString(string, options) + 2 * padding
 
         // Adding grey background.
-        document
+        this.getSection().getDocument()
             .rect(left, top, width, height)
             .fill(Config.pallete.getGrey())
 
         // Updating document.
-        document
+        this.getSection().getDocument()
             .fillColor(Config.pallete.getPrimary())
             .text(string, options)
 
         // Space after the link.
-        new Break().apply(section)
-
+        breaks.apply()
     }
 }

@@ -15,7 +15,8 @@ import { Text } from './Text'
 
 
 export class Source implements Model {
-    private title: Text = new Text()
+    public readonly title: Text = new Text()
+    public readonly link: Text = new Text()
     public authors: Array<Person> = new Array<Person>()
     public readonly avatar: Image = new Image()
 
@@ -30,6 +31,7 @@ export class Source implements Model {
             "Type": (this as any).constructor.name,
             "Authors": this.authors?.map(person => person.serialize()),
             "Title": this.title.serialize(),
+            "Link": this.link.serialize(),
             "Avatar": this.avatar.serialize(),
         }
     }
@@ -38,11 +40,12 @@ export class Source implements Model {
             Log.info('Loading Source', data)
             this.avatar.unserialize(data['Avatar'])
             this.title.unserialize(data['Title'])
+            this.link.unserialize(data['Link'])
             this.authors = data['Authors']?.map(data => {
                 let person: Person = new Person()
                 person.unserialize(data)
                 return person
-            })
+            }) || []
         }
     }
 }

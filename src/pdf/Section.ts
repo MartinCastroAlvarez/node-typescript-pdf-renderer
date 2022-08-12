@@ -1,10 +1,6 @@
 // ----------------------------------------------------------------
 // Purpose:
-// This class implements the PDF Product class.
-//
-// References:
-// - https://pdfkit.org/
-// - https://www.clearlingo.co.nz/blog/how-to-order-the-pages-of-a-book
+// This class implements the PDF Section class.
 // ----------------------------------------------------------------
 
 const PDFDocument = require('pdfkit');
@@ -75,7 +71,7 @@ export class PdfSection implements Section {
     }
 
     // Section title.
-    public getTitle(): string { return 'section' }
+    public getTitle(): string { return this.constructor.name }
 
     // Building a new empty document.
     public build(): void {

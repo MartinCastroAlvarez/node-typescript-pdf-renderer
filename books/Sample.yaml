@@ -75,6 +75,25 @@ Chapters:
         Topics:
           - '@topic/Blockchain.yaml'
           - '@topic/Ethereum.yaml'
+        Sources:
+          - Type: 'Source'
+            Link:
+              EN: 'https://app.slack.com/'
+              ES: 'https://app.slack.com/'
+            Title:
+              EN: 'Lorem Ipsum Dolor'
+              ES: 'Lorem Ipsum Dolor'
+            Authors:
+              - '@person/MartinCastro.yaml'
+          - Type: 'Source'
+            Link:
+              EN: 'https://app.slack.com/'
+              ES: 'https://app.slack.com/'
+            Title:
+              EN: 'Lorem Ipsum Dolor'
+              ES: 'Lorem Ipsum Dolor'
+            Authors:
+              - '@person/MartinCastro.yaml'
 
       # ----------------------------------------------------------------
       # A sample story.
@@ -129,6 +148,22 @@ Chapters:
         Topics:
           - '@topic/Blockchain.yaml'
           - '@topic/Ethereum.yaml'
+        Sources:
+          - Type: 'Source'
+            Link:
+              EN: 'https://app.slack.com/'
+              ES: 'https://app.slack.com/'
+            Title:
+              EN: 'Lorem Ipsum Dolor'
+              ES: 'Lorem Ipsum Dolor'
+            Authors:
+              - '@person/MartinCastro.yaml'
+          - Type: 'Source'
+            Title:
+              EN: 'Lorem Ipsum Dolor'
+              ES: 'Lorem Ipsum Dolor'
+            Authors:
+              - '@person/MartinCastro.yaml'
 
   # ----------------------------------------------------------------
   # A sample chapter.

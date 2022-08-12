@@ -8,7 +8,6 @@
 
 import { Adapter } from '../../interfaces/Adapter'
 import { Model } from '../../interfaces/Model'
-import { Section } from '../../interfaces/Section'
 
 import { Log } from '../../Logging'
 
@@ -19,23 +18,31 @@ import { Break } from '../features/Break'
 import { PdfSection } from '../Section'
 
 export class AvatarAdapter implements Adapter {
-    apply(section: Section, model: Model): void {
-        Log.info("Adapting avatar to PDF", model)
+    private model: Image = new Image()
+    private section: PdfSection = new PdfSection()
+
+    getSection(): PdfSection { return this.section }
+    setSection(section: PdfSection) { this.section = section }
+
+    getModel(): Image { return this.model }
+    setModel(model: Image) { this.model = model }
+
+    apply(): void {
+        Log.info("Adapting avatar to PDF", this.getModel(), this.getSection())
 
         // Checking if link is empty.
-        const path: string = (model as Image).getPath()
+        const path: string = this.getModel().getPath()
         if (!path) return
 
         // Space before the avatar.
-        new Break().apply(section)
+        const breaks: Break = new Break()
+        breaks.setSection(this.getSection())
+        breaks.apply()
 
         // Updating document.
-        const document: any = (section as PdfSection).getDocument()
-        document
-            .text(path)
+        this.getSection().getDocument().text(path)
 
         // Space after the avtar.
-        new Break().apply(section)
-
+        breaks.apply()
     }
 }

@@ -15,13 +15,20 @@ import { TextAdapter } from '../adapters/Text'
 import { TitleAdapter } from '../adapters/Title'
 
 import { Landscape } from '../features/Landscape'
+import { Break } from '../features/Break'
 
 export class AfterwordSection extends PdfSection {
-    public getTitle(): string { return 'Afterword' }
+    public getTitle(): string { return this.constructor.name }
 
     public build(): void {
         super.build()
         Log.info("Building book afterword section", this.getBook())
+
+        // Spaces before the title.
+        const breaks: Break = new Break()
+        breaks.setSection(this)
+        breaks.setBig()
+        breaks.apply()
 
         // Afterword title.
         new TitleAdapter().apply(this, Yaml.getString('@i18n/Afterword.yaml'))
@@ -32,10 +39,10 @@ export class AfterwordSection extends PdfSection {
         }
 
         // Padding with landscapes.
-        while (this.getPages() % 2 != 0) {
-            this.getDocument().addPage()
-            new Landscape().apply(this)
-        }
+        const landscape = new Landscape()
+        landscape.setSection(this)
+        landscape.setPadding(2)
+        landscape.apply()
 
         Log.info("Afterword built successfully", this.getBook())
     }

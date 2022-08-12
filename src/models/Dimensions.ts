@@ -11,28 +11,33 @@ import { Log } from '../Logging'
 
 export class Dimensions implements Model {
     private normal: number = 8
+    private small: number = 6
     private title: number = 16
     private subtitle: number = 12
     private margin: number = 40
     private break: number = 4
 
-    // Margin font getter and setter.
+    // Margin size getter and setter.
     getMargin(): number { return this.margin }
     setMargin(size: number) { this.margin = size }
 
-    // Break font getter and setter.
+    // Break size getter and setter.
     getBreak(): number { return this.break }
     setBreak(size: number) { this.break = size }
 
-    // Normal font getter and setter.
+    // Normal size getter and setter.
     getNormal(): number { return this.normal }
     setNormal(size: number) { this.normal = size }
 
-    // Title font getter and setter.
+    // Small size getter and setter.
+    getSmall(): number { return this.small }
+    setSmall(size: number) { this.small = size }
+
+    // Title size getter and setter.
     getTitle(): number { return this.title }
     setTitle(size: number) { this.title = size }
 
-    // Subtitle font getter and setter.
+    // Subtitle size getter and setter.
     getSubtitle(): number { return this.subtitle }
     setSubtitle(size: number) { this.subtitle = size }
 
@@ -46,6 +51,7 @@ export class Dimensions implements Model {
         return {
             "Type": (this as any).constructor.name,
             "Normal": this.getNormal(),
+            "Small": this.getSmall(),
             "Margin": this.getMargin(),
             "Break": this.getBreak(),
             "Title": this.getTitle(),
@@ -56,6 +62,7 @@ export class Dimensions implements Model {
         if (data) {
             Log.info('Loading Dimensions', data)
             this.setNormal(data['Normal'])
+            this.setSmall(data['Small'])
             this.setMargin(data['Margin'])
             this.setBreak(data['Break'])
             this.setTitle(data['Title'])

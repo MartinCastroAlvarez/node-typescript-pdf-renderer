@@ -34,7 +34,10 @@ export class ChapterSection extends PdfSection {
         Log.info("Building chapter", this.getChapter())
 
         // Spaces before the Chapter title.
-        Array(17).fill(0).forEach(i => new Break().apply(this))
+        const breaks: Break = new Break()
+        breaks.setSection(this)
+        breaks.setBig()
+        breaks.apply()
 
         // Chapter title.
         new TitleAdapter().apply(this, this.getChapter().title)
@@ -55,10 +58,10 @@ export class ChapterSection extends PdfSection {
         }
 
         // Padding with landscapes.
-        while (this.getPages() % 2 != 0) {
-            this.getDocument().addPage()
-            new Landscape().apply(this)
-        }
+        const landscape = new Landscape()
+        landscape.setSection(this)
+        landscape.setPadding(2)
+        landscape.apply()
 
         Log.info("Chapter built successfully", this.getChapter())
     }

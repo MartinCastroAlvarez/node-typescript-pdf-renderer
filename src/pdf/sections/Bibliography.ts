@@ -12,30 +12,26 @@ import { Log } from '../../Logging'
 import { Yaml } from '../../Yaml'
 
 import { TextAdapter } from '../adapters/Text'
-import { TitleAdapter } from '../adapters/Title'
+import { SubtitleAdapter } from '../adapters/Subtitle'
+import { SourceAdapter } from '../adapters/Source'
 
 import { Landscape } from '../features/Landscape'
-import { Break } from '../features/Break'
 
-export class ForewordSection extends PdfSection {
+export class BibliographySection extends PdfSection {
     public getTitle(): string { return this.constructor.name }
 
     public build(): void {
         super.build()
-        Log.info("Building book foreword section", this.getBook())
+        Log.info("Building book legal warning", this.getBook())
 
-        // Spaces before the title.
-        const breaks: Break = new Break()
-        breaks.setSection(this)
-        breaks.setBig()
-        breaks.apply()
+        // Section title.
+        new SubtitleAdapter().apply(this, Yaml.getString('@i18n/Bibliography.yaml'))
 
-        // Foreword title.
-        new TitleAdapter().apply(this, Yaml.getString('@i18n/Foreword.yaml'))
-
-        // Foreword text.
-        for (let text of this.getBook().foreword) {
-            new TextAdapter().apply(this, text)
+        // Bibliography per chapter.
+        for (let chapter of this.getBook().chapters) {
+            chapter.getSources()?.forEach(source => {
+                new SourceAdapter().apply(this, source)
+            })
         }
 
         // Padding with landscapes.
@@ -44,6 +40,6 @@ export class ForewordSection extends PdfSection {
         landscape.setPadding(2)
         landscape.apply()
 
-        Log.info("Foreword built successfully", this.getBook())
+        Log.info("Bibliography note built successfully", this.getBook())
     }
 }

@@ -16,7 +16,7 @@ import { TitleAdapter } from '../adapters/Title'
 import { Break } from '../features/Break'
 
 export class TitleSection extends PdfSection {
-    public getTitle(): string { return 'Title' }
+    public getTitle(): string { return this.constructor.name }
 
     public build(): void {
         super.build()
@@ -28,7 +28,10 @@ export class TitleSection extends PdfSection {
         }
 
         // Space before the title.
-        Array(5).fill(0).forEach(i => new Break().apply(this))
+        const breaks: Break = new Break()
+        breaks.setSection(this)
+        breaks.setBig()
+        breaks.apply()
 
         // Book title & subtitle.
         new TitleAdapter().apply(this, this.getBook().title)
