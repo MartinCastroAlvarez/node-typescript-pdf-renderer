@@ -36,9 +36,6 @@ export class LinkAdapter implements Adapter {
         const string: string = this.getModel().get(this.getSection().getLanguage())
         if (!string) return
 
-        // Extracting PDFKit document.
-        const document: any = this.getSection().getDocument()
-
         // Space before the link.
         const breaks: Break = new Break()
         breaks.setSection(this.getSection())

@@ -103,19 +103,19 @@ export class Pdf implements Product {
         biography.build()
         this.sections.push(biography)
 
-        // Acknowledgements section.
-        const acknowledgements: AcknowledgementsSection = new AcknowledgementsSection()
-        acknowledgements.setBook(this.getBook())
-        acknowledgements.setLanguage(this.getLanguage())
-        acknowledgements.build()
-        this.sections.push(acknowledgements)
-
         // Table of Contents section.
         const contents: TableOfContentsSection = new TableOfContentsSection()
         contents.setBook(this.getBook())
         contents.setLanguage(this.getLanguage())
         contents.build()
         this.sections.push(contents)
+
+        // Acknowledgements section.
+        const acknowledgements: AcknowledgementsSection = new AcknowledgementsSection()
+        acknowledgements.setBook(this.getBook())
+        acknowledgements.setLanguage(this.getLanguage())
+        acknowledgements.build()
+        this.sections.push(acknowledgements)
 
         // Foreword section.
         const foreword: ForewordSection = new ForewordSection()

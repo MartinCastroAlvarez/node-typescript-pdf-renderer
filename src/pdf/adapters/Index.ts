@@ -43,30 +43,30 @@ export class IndexAdapter implements Adapter {
         // Adding index title.
         this.getSection().getDocument()
             .fillColor(Config.pallete.getBlack())
-            .fontSize(Config.dimensions.getSmall())
+            .fontSize(Config.dimensions.getNormal())
             .font(Config.typeface.getItalic())
             .text(
                 this.getString(),
                 {
                     align: 'left',
-                    continue: true,
-                    lineBreak: false,
+                    lineBreak: true,
                 }
             )
 
-        // Adding index page.
+        // Adding the page number.
+        this.getSection().getDocument().moveUp()
         this.getSection().getDocument()
             .fillColor(Config.pallete.getBlack())
-            .fontSize(Config.dimensions.getSmall())
+            .fontSize(Config.dimensions.getNormal())
             .font(Config.typeface.getItalic())
             .text(
                 this.getPage().toString(),
                 {
                     align: 'right',
-                    continue: false,
                     lineBreak: true,
                 }
             )
+
 
         // Adding a space.
         const breaks: Break = new Break()
@@ -83,8 +83,8 @@ export class IndexAdapter implements Adapter {
             case Chapter.name: {
                 let chapter: Chapter = (this.getModel() as Chapter)
                 return [
-                    chapter.title.get(this.getSection().getLanguage()),
                     chapter.getLabel(this.getSection().getLanguage()),
+                    chapter.title.get(this.getSection().getLanguage()),
                 ].join(': ')
             }
             default: {
