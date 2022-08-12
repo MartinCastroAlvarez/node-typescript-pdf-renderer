@@ -36,6 +36,6 @@ export class Break implements Feature {
     }
 
     big(): void {
-        Array(34).fill(0).forEach(i => this.apply())
+        Array(45).fill(0).forEach(i => this.apply())
     }
 }

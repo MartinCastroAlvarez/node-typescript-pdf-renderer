@@ -16,10 +16,11 @@ import { Yaml } from '../../utils/Yaml'
 
 import { AdapterNotSupportedError } from '../../errors/Adapter'
 
-import { SubtitleAdapter } from '../adapters/Subtitle'
+import { TitleAdapter } from '../adapters/Title'
 
 import { PageNumber } from '../features/Page'
 import { Index } from '../features/Index'
+import { Break } from '../features/Break'
 
 export class TableOfContentsSection extends PdfSection {
     private sections: Array<PdfSection> = new Array<PdfSection>()
@@ -41,8 +42,13 @@ export class TableOfContentsSection extends PdfSection {
         super.build()
         Log.info("Building book table of contents", this.getBook())
 
+        // Spaces before the title.
+        const breaks: Break = new Break()
+        breaks.setSection(this)
+        breaks.big()
+
         // Table of contents title.
-        const title: SubtitleAdapter = new SubtitleAdapter()
+        const title: TitleAdapter = new TitleAdapter()
         title.setModel(Yaml.getString('@i18n/TableOfContents.yaml'))
         title.setSection(this)
         title.apply()

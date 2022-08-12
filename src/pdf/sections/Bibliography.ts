@@ -12,10 +12,11 @@ import { Log } from '../../utils/Logging'
 import { Yaml } from '../../utils/Yaml'
 
 import { TextAdapter } from '../adapters/Text'
-import { SubtitleAdapter } from '../adapters/Subtitle'
+import { TitleAdapter } from '../adapters/Title'
 import { SourceAdapter } from '../adapters/Source'
 
 import { Landscape } from '../features/Landscape'
+import { Break } from '../features/Break'
 
 export class BibliographySection extends PdfSection {
     public getTitle(): string { return this.constructor.name }
@@ -35,8 +36,13 @@ export class BibliographySection extends PdfSection {
         super.build()
         Log.info("Building book legal warning", this.getBook())
 
+        // Spaces before the title.
+        const breaks: Break = new Break()
+        breaks.setSection(this)
+        breaks.big()
+
         // Section title.
-        let title: SubtitleAdapter = new SubtitleAdapter()
+        let title: TitleAdapter = new TitleAdapter()
         title.setModel(Yaml.getString('@i18n/Bibliography.yaml'))
         title.setSection(this)
         title.apply()
