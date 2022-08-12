@@ -78,6 +78,10 @@ Chapters:
           - '@i18n/LoremIpsum.yaml'
           - '@i18n/LoremIpsum.yaml'
           - '@i18n/LoremIpsum.yaml'
+          - Type: 'Question'
+            EN: 'Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet?'
+            ES: 'Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet?'
+          - '@i18n/LoremIpsum.yaml'
           - '@i18n/LoremIpsum.yaml'
           - '@i18n/LoremIpsum.yaml'
         Topics:
@@ -89,8 +93,8 @@ Chapters:
               EN: 'https://app.slack.com/'
               ES: 'https://app.slack.com/'
             Title:
-              EN: 'Lorem Ipsum Dolor'
-              ES: 'Lorem Ipsum Dolor'
+              EN: 'Lorem Ipsum Dolor 2'
+              ES: 'Lorem Ipsum Dolor 2'
             Authors:
               - '@person/MartinCastro.yaml'
           - Type: 'Source'
@@ -98,8 +102,8 @@ Chapters:
               EN: 'https://app.slack.com/'
               ES: 'https://app.slack.com/'
             Title:
-              EN: 'Lorem Ipsum Dolor'
-              ES: 'Lorem Ipsum Dolor'
+              EN: 'Lorem Ipsum Dolor 3'
+              ES: 'Lorem Ipsum Dolor 3'
             Authors:
               - '@person/MartinCastro.yaml'
 
@@ -172,6 +176,9 @@ Chapters:
         Blocks:
           - '@i18n/LoremIpsum.yaml'
           - '@i18n/LoremIpsum.yaml'
+          - Type: 'Question'
+            EN: 'Lorem Ipsum Dolor Sit Amet?'
+            ES: 'Lorem Ipsum Dolor Sit Amet?'
           - '@i18n/LoremIpsum.yaml'
           - '@i18n/LoremIpsum.yaml'
           - '@i18n/LoremIpsum.yaml'
@@ -186,14 +193,14 @@ Chapters:
               EN: 'https://app.slack.com/'
               ES: 'https://app.slack.com/'
             Title:
-              EN: 'Lorem Ipsum Dolor'
-              ES: 'Lorem Ipsum Dolor'
+              EN: 'Lorem Ipsum Dolor 4'
+              ES: 'Lorem Ipsum Dolor 4'
             Authors:
               - '@person/MartinCastro.yaml'
           - Type: 'Source'
             Title:
-              EN: 'Lorem Ipsum Dolor'
-              ES: 'Lorem Ipsum Dolor'
+              EN: 'Lorem Ipsum Dolor 5'
+              ES: 'Lorem Ipsum Dolor 5'
             Authors:
               - '@person/MartinCastro.yaml'
 
@@ -206,6 +213,9 @@ Chapters:
       - '@i18n/LoremIpsum.yaml'
       - '@i18n/LoremIpsum.yaml'
       - '@i18n/LoremIpsum.yaml'
+      - Type: 'Question'
+        EN: 'Lorem Ipsum Dolor Sit Amet?'
+        ES: 'Lorem Ipsum Dolor Sit Amet?'
       - '@i18n/LoremIpsum.yaml'
       - '@i18n/LoremIpsum.yaml'
       - '@i18n/LoremIpsum.yaml'
@@ -232,6 +242,15 @@ Chapters:
         Topics:
           - '@topic/Blockchain.yaml'
           - '@topic/Ethereum.yaml'
+        Blocks:
+          - '@i18n/LoremIpsum.yaml'
+          - '@i18n/LoremIpsum.yaml'
+          - '@i18n/LoremIpsum.yaml'
+          - '@i18n/LoremIpsum.yaml'
+          - '@i18n/LoremIpsum.yaml'
+          - '@i18n/LoremIpsum.yaml'
+          - '@i18n/LoremIpsum.yaml'
+          - '@i18n/LoremIpsum.yaml'
 
       # ----------------------------------------------------------------
       # A sample story.
@@ -243,3 +262,11 @@ Chapters:
         Topics:
           - '@topic/Blockchain.yaml'
           - '@topic/Ethereum.yaml'
+        Blocks:
+          - '@i18n/LoremIpsum.yaml'
+          - '@i18n/LoremIpsum.yaml'
+          - '@i18n/LoremIpsum.yaml'
+          - '@i18n/LoremIpsum.yaml'
+          - '@i18n/LoremIpsum.yaml'
+          - '@i18n/LoremIpsum.yaml'
+          - '@i18n/LoremIpsum.yaml'

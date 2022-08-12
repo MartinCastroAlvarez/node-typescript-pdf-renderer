@@ -24,6 +24,8 @@ import { Log } from '../utils/Logging'
 
 import { PdfSection } from './Section'
 
+import { Header } from './features/Header'
+
 import { AcknowledgementsSection } from './sections/Acknowledgements'
 import { AfterwordSection } from './sections/Afterword'
 import { BiographySection } from './sections/Biography'
@@ -158,6 +160,13 @@ export class Pdf implements Product {
         // Index book.
         contents.setSections(this.sections)
         contents.index()
+
+        // Adding header to all pages.
+        this.sections.filter(section => section.getHeader()).forEach(section => {
+            const header: Header = new Header()
+            header.setSection(section)
+            header.apply()
+        })
 
         // End of build.
         Log.info("PDF product built successfully", this.getBook())

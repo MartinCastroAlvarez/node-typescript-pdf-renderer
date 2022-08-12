@@ -6,10 +6,8 @@
 # - https://flatuicolors.com/palette/defo
 # ----------------------------------------------------------------
 Type: 'Pallete'
-Primary: '#337ab7'
-Secondary: '#706fd3'
-Tertiary: '#474787'
+Primary: '#706fd3'
+Secondary: '#474787'
 White: '#EDEDED'
-# Grey: '#dcdde1'
 Grey: '#e5e6ea'
 Black: '#181818'

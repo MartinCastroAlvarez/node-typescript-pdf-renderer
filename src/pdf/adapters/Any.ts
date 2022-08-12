@@ -13,12 +13,14 @@ import { Section } from '../../interfaces/Section'
 import { Log } from '../../utils/Logging'
 
 import { Text } from '../../models/Text'
+import { Question } from '../../models/Question'
 
 import { AdapterNotSupportedError } from '../../errors/Adapter'
 
 import { PdfSection } from '../Section'
 
 import { TextAdapter } from './Text'
+import { HighlightAdapter } from './Highlight'
 
 export class AnyAdapter implements Adapter {
     private model: Model
@@ -33,6 +35,7 @@ export class AnyAdapter implements Adapter {
     private getAdapter(): Adapter {
         switch (this.getModel().constructor.name) {
             case Text.name: return new TextAdapter()
+            case Question.name: return new HighlightAdapter()
             default: throw new AdapterNotSupportedError("Adapter not supported!")
         }
     }

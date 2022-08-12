@@ -10,6 +10,7 @@ import { Adapter } from '../../interfaces/Adapter'
 import { Model } from '../../interfaces/Model'
 
 import { Log } from '../../utils/Logging'
+import { Config } from '../../Config'
 
 import { Image } from '../../models/Image'
 
@@ -20,6 +21,9 @@ import { PdfSection } from '../Section'
 export class AvatarAdapter implements Adapter {
     private model: Image = new Image()
     private section: PdfSection = new PdfSection()
+    private width: number = 100
+
+    private getWidth(): number { return this.width }
 
     public getSection(): PdfSection { return this.section }
     public setSection(section: PdfSection) { this.section = section }
@@ -39,8 +43,22 @@ export class AvatarAdapter implements Adapter {
         breaks.setSection(this.getSection())
         breaks.small()
 
+        // Extracting current position.
+        const left: number = this.getSection().getMarginLeft()
+        const top: number = this.getSection().getCurrentVerticalPosition()
+
         // Updating document.
-        this.getSection().getDocument().text(path)
+        //
+        this.getSection().getDocument()
+            .image(
+                path,
+                {
+                    width: this.getWidth(),
+                }
+            )
+            .rect(left, top, this.getWidth(), this.getWidth())
+            .strokeColor(Config.pallete.getGrey())
+            .stroke()
 
         // Space after the avtar.
         breaks.small()

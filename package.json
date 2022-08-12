@@ -16,6 +16,7 @@
     "js-yaml": "^4.1.0",
     "organize-imports-cli": "^0.10.0",
     "pdfkit": "^0.13.0",
+    "sharp": "^0.30.7",
     "typescript": "^4.7.4"
   }
 }

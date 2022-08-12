@@ -23,6 +23,7 @@ export abstract class Tree {
     public static readonly files: string = path.join(root, 'files')
     public static readonly builds: string = path.join(root, 'builds')
     public static readonly i18n: string = path.join(root, 'i18n')
+    public static readonly cache: string = path.join(root, '.cache')
 
     // Join path strings.
     public static join(directory: string, name: string): string {
@@ -74,3 +75,8 @@ export abstract class Tree {
         return fs.createWriteStream(path)
     }
 }
+
+if (!Tree.exists(Tree.cache))
+    Tree.create(Tree.cache)
+if (!Tree.exists(Tree.builds))
+    Tree.create(Tree.builds)

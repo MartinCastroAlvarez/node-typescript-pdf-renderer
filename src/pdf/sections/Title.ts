@@ -18,6 +18,9 @@ import { Break } from '../features/Break'
 export class TitleSection extends PdfSection {
     public getTitle(): string { return this.constructor.name }
 
+    public getHeader(): string { return '' }
+    public getIndex(): string { return '' }
+
     public build(): void {
         super.build()
         Log.info("Building book title", this.getBook())

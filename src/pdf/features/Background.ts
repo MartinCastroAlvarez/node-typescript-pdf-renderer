@@ -29,8 +29,8 @@ export class Background implements Feature {
 
         // Creating a gradient.
         const gradient: any = this.getSection().getDocument().linearGradient(0, 0, width, height)
-        gradient.stop(0, Config.pallete.getSecondary())
-        gradient.stop(1, Config.pallete.getTertiary())
+        gradient.stop(0, Config.pallete.getPrimary())
+        gradient.stop(1, Config.pallete.getSecondary())
 
         // Updating document.
         this.getSection().getDocument()

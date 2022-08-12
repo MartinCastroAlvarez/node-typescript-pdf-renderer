@@ -3,21 +3,21 @@
 // This class implements the PDF Section class.
 // ----------------------------------------------------------------
 
-const PDFDocument = require('pdfkit');
+const PDFDocument = require('pdfkit')
 
-import { Language } from '../enums/Language';
+import { Language } from '../enums/Language'
 
-import { Section } from '../interfaces/Section';
+import { Section } from '../interfaces/Section'
 
-import { Book } from '../models/Book';
+import { Book } from '../models/Book'
 
-import { Tree } from '../utils/Tree';
+import { Tree } from '../utils/Tree'
 
-import { InvalidLanguageError } from '../errors/Product';
-import { FileAlreadyExistsError } from '../errors/Tree';
+import { InvalidLanguageError } from '../errors/Product'
+import { FileAlreadyExistsError } from '../errors/Tree'
 
-import { Config } from '../Config';
-import { Log } from '../utils/Logging';
+import { Config } from '../Config'
+import { Log } from '../utils/Logging'
 
 export class PdfSection implements Section {
     private language: Language = Language.EN
@@ -35,6 +35,9 @@ export class PdfSection implements Section {
             throw new InvalidLanguageError('Invalid language!')
         this.language = language
     }
+
+    public getHeader(): string { return '' }
+    public getIndex(): string { return '' }
 
     // PDF-Specific getters.
     public getDocument(): any { return this.doc }
@@ -99,12 +102,6 @@ export class PdfSection implements Section {
                 left: Config.dimensions.getMargin(),
                 right: Config.dimensions.getMargin(),
             }
-        })
-        this.doc.on('pageAdded', () => {
-            // FIXME
-            // this.doc 
-            //     .font(Config.typeface.getBold())
-            //     .text(this.getBook().title.get(this.getLanguage()))
         })
         this.doc.info.Title = this.getBook().title.get(this.getLanguage())
         this.doc.info.Author = Config.brand.getTitle()

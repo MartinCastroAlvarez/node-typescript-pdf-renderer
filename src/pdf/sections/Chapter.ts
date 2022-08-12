@@ -31,6 +31,19 @@ export class ChapterSection extends PdfSection {
 
     public getTitle(): string { return this.chapter.title.get(this.getLanguage()) }
 
+    public getHeader(): string {
+        return [
+            this.getBook().title.get(this.getLanguage()),
+            this.getIndex(),
+        ].join(' - ')
+    }
+    public getIndex(): string { 
+        return [
+            this.getChapter().getLabel(this.getLanguage()),
+            this.getChapter().title.get(this.getLanguage()),
+        ].join('. ')
+    }
+
     public build(): void {
         super.build()
         Log.info("Building chapter", this.getChapter())

@@ -19,6 +19,9 @@ import { TextAdapter } from '../adapters/Text'
 export class BiographySection extends PdfSection {
     public getTitle(): string { return this.constructor.name }
 
+    public getHeader(): string { return '' }
+    public getIndex(): string { return '' }
+
     public build(): void {
         super.build()
         Log.info("Building book authors section", this.getBook())

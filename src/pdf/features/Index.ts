@@ -1,13 +1,12 @@
 // ----------------------------------------------------------------
 // Purpose:
-// This class implements the Index adapter.
+// This class implements the Index feature.
 //
 // References:
 // - https://pdfkit.org/
 // ----------------------------------------------------------------
 
-import { Adapter } from '../../interfaces/Adapter'
-import { Model } from '../../interfaces/Model'
+import { Feature } from '../../interfaces/Feature'
 import { Section } from '../../interfaces/Section'
 
 import { Config } from '../../Config'
@@ -22,31 +21,34 @@ import { PdfSection } from '../Section'
 import { Chapter } from '../../models/Chapter'
 import { Text } from '../../models/Text'
 
-export class IndexAdapter implements Adapter {
-    private model: Model
+export class Index implements Feature {
     private section: PdfSection = new PdfSection()
+    private target: PdfSection = new PdfSection()
     private offset: number = 1
+
+    public getTarget(): PdfSection { return this.target }
+    public setTarget(section: PdfSection) { this.target = section }
 
     public getSection(): PdfSection { return this.section }
     public setSection(section: PdfSection) { this.section = section }
 
-    public getModel(): Model { return this.model }
-    public setModel(model: Model ) { this.model = model }
-
     public getOffset(): number { return this.offset }
-    public getPage(): number { return this.getOffset() + 1}
     public setOffset(offset: number) { this.offset = offset }
+    public getPage(): number { return this.getOffset() + 1}
 
     public apply(): void {
-        Log.info("Adapting index to PDF", this.getModel(), this.getSection())
+        Log.info("Adapting index to PDF", this.getTarget(), this.getSection())
 
-        // Adding index title.
+        if (!this.getTarget().getIndex())
+            throw new AdapterNotSupportedError('Section not supported!')
+
+        // Adding index title to the table of contents.
         this.getSection().getDocument()
             .fillColor(Config.pallete.getBlack())
             .fontSize(Config.dimensions.getNormal())
             .font(Config.typeface.getItalic())
             .text(
-                this.getString(),
+                this.getTarget().getIndex(),
                 {
                     align: 'left',
                     lineBreak: true,
@@ -72,24 +74,5 @@ export class IndexAdapter implements Adapter {
         const breaks: Break = new Break()
         breaks.setSection(this.getSection())
         breaks.small()
-    }
-
-    private getString(): string {
-        switch(this.getModel().constructor.name) {
-            case Text.name: {
-                let text: Text = (this.getModel() as Text)
-                return text.get(this.getSection().getLanguage())
-            }
-            case Chapter.name: {
-                let chapter: Chapter = (this.getModel() as Chapter)
-                return [
-                    chapter.getLabel(this.getSection().getLanguage()),
-                    chapter.title.get(this.getSection().getLanguage()),
-                ].join(': ')
-            }
-            default: {
-                throw new AdapterNotSupportedError('Unknown indexed section title')
-            }
-        }
     }
 }

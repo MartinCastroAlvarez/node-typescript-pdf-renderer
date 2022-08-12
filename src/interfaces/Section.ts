@@ -9,6 +9,8 @@ import { Book } from '../models/Book'
 
 export interface Section {
     getTitle(): string
+    getHeader(): string
+    getIndex(): string
     getBook(): Book
     setBook(book: Book): void
     getLanguage(): Language

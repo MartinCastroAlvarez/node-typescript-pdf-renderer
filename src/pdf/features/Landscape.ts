@@ -23,7 +23,7 @@ export class Landscape implements Feature {
     public getSection(): PdfSection { return this.section }
     public setSection(section: PdfSection) { this.section = section }
 
-    public apply(): void {
+    public apply() {
         Log.info("Adding landscape to PDF", this.getSection())
 
         // Detecting page size.
@@ -40,7 +40,15 @@ export class Landscape implements Feature {
 
         // Adding the landscapes.
         this.getSection().getDocument()
-            .image(fullPath, 0, 0, {width: width, height: height})
+            .image(
+                fullPath,
+                0,
+                0,
+                {
+                    width: width,
+                    height: height
+                }
+            )
     }
 
     pad(pages: number = 2) {

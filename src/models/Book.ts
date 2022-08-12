@@ -64,6 +64,7 @@ import { Chapter } from './Chapter'
 import { Person } from './Person'
 import { Text } from './Text'
 import { Topic } from './Topic'
+import { Source } from './Source'
 
 import { Log } from '../utils/Logging'
 import { Yaml } from '../utils/Yaml'
@@ -101,7 +102,7 @@ export class Book implements Model {
             (accumulator, chapter) => accumulator.concat(chapter.getSources()),
             []
         ).filter(
-            topic => !set.has(source.title.get()) && set.add(source.title.get())
+            source => !set.has(source.title.get()) && set.add(source.title.get())
         ) || []
     }
 

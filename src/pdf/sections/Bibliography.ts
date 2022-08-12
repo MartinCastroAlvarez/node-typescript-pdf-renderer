@@ -20,6 +20,17 @@ import { Landscape } from '../features/Landscape'
 export class BibliographySection extends PdfSection {
     public getTitle(): string { return this.constructor.name }
 
+    public getHeader(): string {
+        return [
+            this.getBook().title.get(this.getLanguage()),
+            Yaml.getString('@i18n/Bibliography.yaml').get(this.getLanguage()),
+        ].join(' - ')
+    }
+
+    public getIndex(): string { 
+        return Yaml.getString('@i18n/Bibliography.yaml').get(this.getLanguage())
+    }
+
     public build(): void {
         super.build()
         Log.info("Building book legal warning", this.getBook())

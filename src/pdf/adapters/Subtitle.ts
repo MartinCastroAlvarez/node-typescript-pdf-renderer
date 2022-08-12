@@ -44,7 +44,7 @@ export class SubtitleAdapter implements Adapter {
         // Updating document.
         this.getSection().getDocument()
             .fontSize(Config.dimensions.getSubtitle())
-            .fillColor(Config.pallete.getBlack())
+            .fillColor(Config.pallete.getSecondary())
             .font(Config.typeface.getBold())
             .text(
                 string,

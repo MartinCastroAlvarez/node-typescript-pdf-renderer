@@ -32,12 +32,7 @@ export class Chapter implements Model {
     // Number getter.
     public getNumber(): number { return this.number }
     public setNumber(number: number) { this.number = number }
-    public getLabel(language: Language): string {
-        return [
-            Yaml.getString('@i18n/Chapter.yaml').get(language),
-            this.getNumber().toString(),
-        ].join(' ')
-    }
+    public getLabel(language: Language): string { return this.getNumber().toString() }
 
     // Extracts Topics from Stories.
     public getTopics(): Array<Topic> {

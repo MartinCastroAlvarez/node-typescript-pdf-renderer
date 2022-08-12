@@ -1,6 +1,6 @@
 // ----------------------------------------------------------------
 // Purpose:
-// This class implements the Link adapter.
+// This class implements the Highlight adapter.
 //
 // References:
 // - https://pdfkit.org/
@@ -19,11 +19,11 @@ import { Break } from '../features/Break'
 
 import { PdfSection } from '../Section'
 
-export class LinkAdapter implements Adapter {
+export class HighlightAdapter implements Adapter {
     private model: Text = new Text()
     private section: PdfSection = new PdfSection()
-    private innerPadding: number = 3
-    private outerPadding: number = 1
+    private innerPadding: number = 5
+    private outerPadding: number = 3
 
     private getInnerPadding(): number { return this.innerPadding }
     private getOuterPadding(): number { return this.outerPadding }
@@ -50,9 +50,7 @@ export class LinkAdapter implements Adapter {
         // Defining text options.
         const options: object = {
             align: 'center',
-            link: string,
             lineBreak: true,
-            underline: true,
         }
 
         // Setting font family and size.
@@ -76,7 +74,7 @@ export class LinkAdapter implements Adapter {
 
         // Adding text.
         this.getSection().getDocument()
-            .fillColor(Config.pallete.getPrimary())
+            .fillColor(Config.pallete.getBlack())
             .text(string, options)
 
         // Space after the link.

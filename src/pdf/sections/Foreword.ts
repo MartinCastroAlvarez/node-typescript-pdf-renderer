@@ -20,6 +20,17 @@ import { Break } from '../features/Break'
 export class ForewordSection extends PdfSection {
     public getTitle(): string { return this.constructor.name }
 
+    public getHeader(): string {
+        return [
+            this.getBook().title.get(this.getLanguage()),
+            Yaml.getString('@i18n/Foreword.yaml').get(this.getLanguage()),
+        ].join(' - ')
+    }
+
+    public getIndex(): string { 
+        return Yaml.getString('@i18n/Foreword.yaml').get(this.getLanguage())
+    }
+
     public build(): void {
         super.build()
         Log.info("Building book foreword section", this.getBook())
@@ -34,9 +45,6 @@ export class ForewordSection extends PdfSection {
         title.setModel(Yaml.getString('@i18n/Foreword.yaml'))
         title.setSection(this)
         title.apply()
-
-        // Break after the title.
-        breaks.normal()
 
         // Foreword text.
         for (let model of this.getBook().foreword) {

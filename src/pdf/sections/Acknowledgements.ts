@@ -17,6 +17,9 @@ import { SubtitleAdapter } from '../adapters/Subtitle'
 export class AcknowledgementsSection extends PdfSection {
     public getTitle(): string { return this.constructor.name }
 
+    public getHeader(): string { return this.getBook().title.get(this.getLanguage()) }
+    public getIndex(): string { return '' }
+
     public build(): void {
         super.build()
         Log.info("Building book acknowledgements section", this.getBook())

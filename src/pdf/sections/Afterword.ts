@@ -20,6 +20,17 @@ import { Break } from '../features/Break'
 export class AfterwordSection extends PdfSection {
     public getTitle(): string { return this.constructor.name }
 
+    public getHeader(): string {
+        return [
+            this.getBook().title.get(this.getLanguage()),
+            Yaml.getString('@i18n/Afterword.yaml').get(this.getLanguage()),
+        ].join(' - ')
+    }
+
+    public getIndex(): string { 
+        return Yaml.getString('@i18n/Afterword.yaml').get(this.getLanguage())
+    }
+
     public build(): void {
         super.build()
         Log.info("Building book afterword section", this.getBook())
@@ -34,9 +45,6 @@ export class AfterwordSection extends PdfSection {
         title.setModel(Yaml.getString('@i18n/Afterword.yaml'))
         title.setSection(this)
         title.apply()
-
-        // Break after the title.
-        breaks.normal()
 
         // Afterword text.
         for (let model of this.getBook().afterword) {
