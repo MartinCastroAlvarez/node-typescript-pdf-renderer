@@ -34,11 +34,7 @@ export class ChapterAdapter implements Adapter {
         Log.info("Adapting chapter to PDF", this.getModel(), this.getSection())
 
         // Generating string.
-        const string: string = [
-            Yaml.getString('@i18n/Chapter.yaml')
-                .get(this.getSection().getLanguage()),
-            this.getModel().getNumber().toString()
-        ].join(' ')
+        const string: string = this.getModel().getLabel(this.getSection().getLanguage())
 
         // Space before the title.
         const breaks: Break = new Break()

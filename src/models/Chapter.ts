@@ -5,6 +5,8 @@
 
 import { SerializedChapter } from '../serializers/Chapter'
 
+import { Language } from '../enums/Language'
+
 import { Model } from '../interfaces/Model'
 
 import { Story } from './Story'
@@ -30,6 +32,12 @@ export class Chapter implements Model {
     // Number getter.
     public getNumber(): number { return this.number }
     public setNumber(number: number) { this.number = number }
+    public getLabel(language: Language): string {
+        return [
+            Yaml.getString('@i18n/Chapter.yaml').get(language)
+            this.getNumber().toString()
+        ].join(' ')
+    }
 
     // Extracts Topics from Stories.
     public getTopics(): Array<Topic> {
