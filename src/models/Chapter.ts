@@ -5,6 +5,7 @@
 
 import { SerializedChapter } from '../serializers/Chapter'
 
+import { Model } from '../interfaces/Model'
 
 import { Story } from './Story'
 import { Text } from './Text'
@@ -12,12 +13,12 @@ import { Topic } from './Topic'
 import { Source } from './Source'
 
 import { Log } from '../utils/Logging'
-import { Yaml } from '../Yaml'
+import { Yaml } from '../utils/Yaml'
 
-export class Chapter {
+export class Chapter implements Model {
     public readonly title: Text = new Text()
-    public introduction: Array<Text> = new Array<Text>()
-    public conclusion: Array<Text> = new Array<Text>()
+    public introduction: Array<Model> = new Array<Model>()
+    public conclusion: Array<Model> = new Array<Model>()
     public stories: Array<Story> = new Array<Story>()
 
     // String serializers.

@@ -9,7 +9,7 @@
 import { PdfSection } from '../Section'
 
 import { Log } from '../../utils/Logging'
-import { Yaml } from '../../Yaml'
+import { Yaml } from '../../utils/Yaml'
 
 import { AvatarAdapter } from '../adapters/Avatar'
 import { LinkAdapter } from '../adapters/Link'

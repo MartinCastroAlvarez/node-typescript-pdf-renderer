@@ -11,7 +11,7 @@ import { Feature } from '../../interfaces/Feature'
 import { Random } from '../../utils/Random'
 
 import { Config } from '../../Config'
-import { Yaml } from '../../Yaml'
+import { Yaml } from '../../utils/Yaml'
 import { Tree } from '../../utils/Tree'
 import { Log } from '../../utils/Logging'
 

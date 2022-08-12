@@ -19,7 +19,7 @@ import { Video } from './video/Product'
 
 import { Log } from './utils/Logging'
 import { Tree } from './utils/Tree'
-import { Yaml } from './Yaml'
+import { Yaml } from './utils/Yaml'
 
 import { NotImplementedError } from './errors/Command'
 

@@ -3,7 +3,7 @@
 // This class implements the Config class.
 // ----------------------------------------------------------------
 
-import { Yaml } from './Yaml'
+import { Yaml } from './utils/Yaml'
 
 import { Brand } from './models/Brand'
 import { Dimensions } from './models/Dimensions'

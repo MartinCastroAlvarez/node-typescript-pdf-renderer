@@ -66,13 +66,13 @@ import { Text } from './Text'
 import { Topic } from './Topic'
 
 import { Log } from '../utils/Logging'
-import { Yaml } from '../Yaml'
+import { Yaml } from '../utils/Yaml'
 
 export class Book implements Model {
     public chapters: Array<Chapter> = new Array<Chapter>()
     public authors: Array<Person> = new Array<Person>()
-    public foreword: Array<Text> = new Array<Text>()
-    public afterword: Array<Text> = new Array<Text>()
+    public foreword: Array<Model> = new Array<Model>()
+    public afterword: Array<Model> = new Array<Model>()
     public acknowledgements: Array<Text> = new Array<Text>()
     public legal: Array<Text> = new Array<Text>()
     public readonly title: Text = new Text()

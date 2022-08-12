@@ -72,6 +72,14 @@ Chapters:
         Title:
           EN: 'Lorem Ipsum Dolor'
           ES: 'Lorem Ipsum Dolor'
+        Blocks:
+          - '@i18n/LoremIpsum.yaml'
+          - '@i18n/LoremIpsum.yaml'
+          - '@i18n/LoremIpsum.yaml'
+          - '@i18n/LoremIpsum.yaml'
+          - '@i18n/LoremIpsum.yaml'
+          - '@i18n/LoremIpsum.yaml'
+          - '@i18n/LoremIpsum.yaml'
         Topics:
           - '@topic/Blockchain.yaml'
           - '@topic/Ethereum.yaml'
@@ -102,6 +110,14 @@ Chapters:
         Title:
           EN: 'Lorem Ipsum Dolor'
           ES: 'Lorem Ipsum Dolor'
+        Blocks:
+          - '@i18n/LoremIpsum.yaml'
+          - '@i18n/LoremIpsum.yaml'
+          - '@i18n/LoremIpsum.yaml'
+          - '@i18n/LoremIpsum.yaml'
+          - '@i18n/LoremIpsum.yaml'
+          - '@i18n/LoremIpsum.yaml'
+          - '@i18n/LoremIpsum.yaml'
         Topics:
           - '@topic/Blockchain.yaml'
           - '@topic/Ethereum.yaml'
@@ -134,6 +150,14 @@ Chapters:
         Title:
           EN: 'Lorem Ipsum Dolor'
           ES: 'Lorem Ipsum Dolor'
+        Blocks:
+          - '@i18n/LoremIpsum.yaml'
+          - '@i18n/LoremIpsum.yaml'
+          - '@i18n/LoremIpsum.yaml'
+          - '@i18n/LoremIpsum.yaml'
+          - '@i18n/LoremIpsum.yaml'
+          - '@i18n/LoremIpsum.yaml'
+          - '@i18n/LoremIpsum.yaml'
         Topics:
           - '@topic/Blockchain.yaml'
           - '@topic/Ethereum.yaml'
@@ -145,6 +169,14 @@ Chapters:
         Title:
           EN: 'Lorem Ipsum Dolor'
           ES: 'Lorem Ipsum Dolor'
+        Blocks:
+          - '@i18n/LoremIpsum.yaml'
+          - '@i18n/LoremIpsum.yaml'
+          - '@i18n/LoremIpsum.yaml'
+          - '@i18n/LoremIpsum.yaml'
+          - '@i18n/LoremIpsum.yaml'
+          - '@i18n/LoremIpsum.yaml'
+          - '@i18n/LoremIpsum.yaml'
         Topics:
           - '@topic/Blockchain.yaml'
           - '@topic/Ethereum.yaml'

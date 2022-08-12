@@ -11,9 +11,9 @@ import { Chapter } from '../../models/Chapter'
 import { PdfSection } from '../Section'
 
 import { Log } from '../../utils/Logging'
-import { Yaml } from '../../Yaml'
+import { Yaml } from '../../utils/Yaml'
 
-import { TextAdapter } from '../adapters/Text'
+import { AnyAdapter } from '../adapters/Any'
 import { TitleAdapter } from '../adapters/Title'
 import { SubtitleAdapter } from '../adapters/Subtitle'
 import { StoryAdapter } from '../adapters/Story'
@@ -51,7 +51,7 @@ export class ChapterSection extends PdfSection {
         foreword.setSection(this)
         foreword.apply()
         for (let text of this.getChapter().introduction) {
-            let adapter: TextAdapter = new TextAdapter()
+            let adapter: AnyAdapter = new AnyAdapter()
             adapter.setModel(text)
             adapter.setSection(this)
             adapter.apply()
@@ -71,7 +71,7 @@ export class ChapterSection extends PdfSection {
         afterword.setSection(this)
         afterword.apply()
         for (let text of this.getChapter().conclusion) {
-            let adapter: TextAdapter = new TextAdapter()
+            let adapter: AnyAdapter = new AnyAdapter()
             adapter.setModel(text)
             adapter.setSection(this)
             adapter.apply()

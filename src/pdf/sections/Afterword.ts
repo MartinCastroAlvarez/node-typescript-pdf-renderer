@@ -9,9 +9,9 @@
 import { PdfSection } from '../Section'
 
 import { Log } from '../../utils/Logging'
-import { Yaml } from '../../Yaml'
+import { Yaml } from '../../utils/Yaml'
 
-import { TextAdapter } from '../adapters/Text'
+import { AnyAdapter } from '../adapters/Any'
 import { TitleAdapter } from '../adapters/Title'
 
 import { Landscape } from '../features/Landscape'
@@ -37,8 +37,7 @@ export class AfterwordSection extends PdfSection {
 
         // Afterword text.
         for (let text of this.getBook().afterword) {
-            // FIXME: ANY ADAPTER
-            let adapter: TextAdapter = new TextAdapter()
+            let adapter: AnyAdapter = new AnyAdapter()
             adapter.setModel(text)
             adapter.setSection(this)
             adapter.apply()

@@ -11,8 +11,8 @@ import { SerializedTopic } from './Topic'
 
 export interface SerializedChapter extends Serialized {
     Title?: SerializedText
-    Introduction?: Array<SerializedText>
+    Introduction?: Array<Serialized>
     Stories?: Array<SerializedStory>
-    Conclusion?: Array<SerializedText>
+    Conclusion?: Array<Serialized>
     Topics?: Array<SerializedTopic>
 }

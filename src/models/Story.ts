@@ -9,7 +9,7 @@ import { Model } from '../interfaces/Model'
 
 import { Log } from '../utils/Logging'
 
-import { Yaml } from '../Yaml'
+import { Yaml } from '../utils/Yaml'
 import { Source } from './Source'
 import { Text } from './Text'
 import { Topic } from './Topic'
