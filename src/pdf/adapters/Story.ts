@@ -15,9 +15,9 @@ import { Log } from '../../Logging'
 
 import { Story } from '../../models/Story'
 
-import { Subtitle } from '../Subtitle'
-
 import { PdfSection } from '../Section'
+
+import { SubtitleAdapter } from './Subtitle'
 
 export class StoryAdapter implements Adapter {
     private model: Story = new Story()
