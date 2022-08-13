@@ -51,21 +51,20 @@ export class HighlightAdapter implements Adapter {
         const options: object = {
             align: 'center',
             lineBreak: true,
+            width: this.getSection().getInnerWidth() - 2 * Config.dimensions.getBreak(),
         }
-
-        // Setting font family and size.
-        this.getSection().getDocument()
-            .fontSize(Config.dimensions.getNormal())
-            .font(Config.typeface.getNormal())
 
         // Extracting current position.
         const width: number = this.getSection().getInnerWidth()
         const left: number = this.getSection().getMarginLeft()
-        const padding: number = Config.dimensions.getBreak()
         const top: number = this.getSection()
-            .getCurrentVerticalPosition() - padding * this.getInnerPadding()
+            .getCurrentVerticalPosition() - Config.dimensions.getBreak() * this.getInnerPadding()
+
+        // Estimating rectanble size.
         const height: number = this.getSection().getDocument()
-            .heightOfString(string, options) + 2 * padding * this.getInnerPadding()
+            .fontSize(Config.dimensions.getNormal())
+            .font(Config.typeface.getNormal())
+            .heightOfString(string, options) + 2 * Config.dimensions.getBreak() * this.getInnerPadding()
 
         // Adding grey background.
         this.getSection().getDocument()
@@ -75,7 +74,14 @@ export class HighlightAdapter implements Adapter {
         // Adding text.
         this.getSection().getDocument()
             .fillColor(Config.pallete.getBlack())
-            .text(string, options)
+            .fontSize(Config.dimensions.getNormal())
+            .font(Config.typeface.getNormal())
+            .text(
+                string,
+                this.getSection().getMarginLeft() + Config.dimensions.getBreak(),
+                top + Config.dimensions.getBreak() * this.getInnerPadding(),
+                options,
+            )
 
         // Space after the link.
         Array(this.getTotalPadding()).fill(0).forEach(i => breaks.small())
