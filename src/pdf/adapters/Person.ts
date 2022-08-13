@@ -64,8 +64,8 @@ export class PersonAdapter implements Adapter {
         }
         const bioText: string = this.getModel().bio.get(this.getSection().getLanguage())
         height += this.getSection().getDocument()
-            .fontSize(Config.dimensions.getSubtitle())
-            .font(Config.typeface.getBold())
+            .fontSize(Config.dimensions.getNormal())
+            .font(Config.typeface.getNormal())
             .heightOfString(bioText, bioOptions)
 
         // Estimating the text size.
@@ -76,8 +76,8 @@ export class PersonAdapter implements Adapter {
         }
         const titleText: string = this.getModel().name.get(this.getSection().getLanguage())
         this.getSection().getDocument()
-            .fontSize(Config.dimensions.getNormal())
-            .font(Config.typeface.getNormal())
+            .fontSize(Config.dimensions.getSubtitle())
+            .font(Config.typeface.getBold())
             .heightOfString(titleText, titleOptions)
         height += 1 * Config.dimensions.getBreak()
 
