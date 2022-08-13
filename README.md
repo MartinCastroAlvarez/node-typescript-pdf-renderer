@@ -7,7 +7,7 @@ Book rendering with Node & Typescript
 
 - [http://pdfkit.org/](http://pdfkit.org/)
 
-## Example
+# Example
 
 ### Rendering a book cover
 
@@ -33,15 +33,9 @@ Book rendering with Node & Typescript
 
 ![sample](./screenshots/highlight.png)
 
-## Architecture
+# Architecture
 
-### Overview
-
-TBD
-
-### Struecture
-
-#### Configuration
+### Configuration
 
 |Link|Description|
 |--|--|
@@ -51,7 +45,7 @@ TBD
 |[books](./books)|Directory with YAML files defining books.|
 |[i18n](./i18n)|Directory with YAML files defining translations.|
 
-#### Content
+### Content
 
 |Link|Description|
 |--|--|
@@ -74,8 +68,12 @@ TBD
 |[src/products](./src/products)|Application products.|
 |[src/section](./src/draft)|Application product section.|
 |[src/errors](./src/errors)|Application errors.|
+|[src/pdf](./src/draft)|PDF rendering files.|
+|[src/video](./src/draft)|Video rendering files.|
+|[src/html](./src/draft)|HTML rendering files.|
+|[src/course](./src/draft)|Course rendering files.|
 
-## Instructions
+# Instructions
 
 ### Installation
 
