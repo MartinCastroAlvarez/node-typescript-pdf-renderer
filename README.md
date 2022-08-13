@@ -7,6 +7,32 @@ Book rendering with Node & Typescript
 
 - [http://pdfkit.org/](http://pdfkit.org/)
 
+## Example
+
+### Rendering a book cover
+
+![sample](./screenshots/cover.png)
+
+### Rendering information about the authors
+
+![sample](./screenshots/biography.png)
+
+### Rendering the bibliography
+
+![sample](./screenshots/bibliography.png)
+
+### Rendering the table of contents
+
+![sample](./screenshots/contents.png)
+
+### Rendering chapters
+
+![sample](./screenshots/chapter.png)
+
+### Rendering rich text
+
+![sample](./screenshots/highlight.png)
+
 ## Architecture
 
 ### Overview

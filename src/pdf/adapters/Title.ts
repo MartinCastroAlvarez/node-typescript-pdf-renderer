@@ -17,6 +17,8 @@ import { Text } from '../../models/Text'
 
 import { Break } from '../features/Break'
 
+import { EmptynessError } from '../../errors/Text'
+
 import { PdfSection } from '../Section'
 
 export class TitleAdapter implements Adapter {
@@ -29,12 +31,22 @@ export class TitleAdapter implements Adapter {
     public getModel(): Text { return this.model }
     public setModel(model: Text) { this.model = model }
 
+    private getOptions(): object {
+        return {
+            align: 'left',
+            lineBreak: true,
+        }
+    }
+
+    private getString(): string {
+        const string: string = this.getModel().get(this.getSection().getLanguage())
+        if (!string)
+            throw new EmptynessError('The title is empty!')
+        return string
+    }
+
     public apply(): void {
         Log.info("Adapting title to PDF", this.getModel(), this.getSection())
-
-        // Checking if title is empty.
-        const string: string = this.getModel().get(this.getSection().getLanguage())
-        if (!string) return
 
         // Space before the title.
         const breaks: Break = new Break()
@@ -46,13 +58,7 @@ export class TitleAdapter implements Adapter {
             .fontSize(Config.dimensions.getTitle())
             .fillColor(Config.pallete.getPrimary())
             .font(Config.typeface.getBold())
-            .text(
-                string,
-                {
-                    align: 'left',
-                    lineBreak: true,
-                }
-            )
+            .text(this.getString(), this.getOptions())
 
         // Space after the title.
         breaks.small()

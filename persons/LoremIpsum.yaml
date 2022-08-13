@@ -5,17 +5,17 @@
 Type: 'Person'
 Name:
   Type: 'Text'
-  EN: 'Martin Alejandro Castro Alvarez'
-  ES: 'Martin Alejandro Castro Alvarez'
+  EN: 'Lorem Ipsum Dolor'
+  ES: 'Lorem Ipsum Dolor'
 Website:
   Type: 'Text'
-  EN: 'https://github.com/MartinCastroAlvarez'
-  ES: 'https://github.com/MartinCastroAlvarez'
+  EN: 'https://lorem-ipsum.com'
+  ES: 'https://lorem-ipsum.com.es'
 Email:
   Type: 'Text'
-  EN: 'martincastro.10.5@gmail.com'
-  ES : 'martincastro.10.5@gmail.com'
+  EN: 'loremipsum@gmail.com'
+  ES : 'loremipsum@gmail.com'
 Bio: '@i18n/LoremIpsum.yaml'
 Avatar:
   Type: 'Image'
-  Path: '@image/persons/martincastro.jpeg'
+  Path: '@image/persons/test.jpeg'
