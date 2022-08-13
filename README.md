@@ -86,7 +86,7 @@ yarn install
 yarn run build && yarn run render --title "sample" --language "en" --format "pdf"
 ```
 
-The PDF is available at [./builds/sample/pdf/en/final.pdf]
+The PDF is available at [here](./builds/sample/pdf/en/final.pdf)
 
 ### Rendering a PDF in Spanish
 
@@ -94,7 +94,7 @@ The PDF is available at [./builds/sample/pdf/en/final.pdf]
 yarn run build && yarn run render --title "sample" --language "es" --format "pdf"
 ```
 
-The PDF is available at [./builds/sample/pdf/es/final.pdf]
+The PDF is available at [here](./builds/sample/pdf/es/final.pdf)
 
 ### Rendering a PDF in multiple languages
 
@@ -102,4 +102,4 @@ The PDF is available at [./builds/sample/pdf/es/final.pdf]
 yarn run build && yarn run render --title "sample" --language "en,es" --format "pdf"
 ```
 
-The PDF is available at [./builds/sample/pdf/es/final.pdf] and [./builds/sample/pdf/en/final.pdf]
+The PDF is available [here](./builds/sample/pdf/es/final.pdf) and [here](./builds/sample/pdf/en/final.pdf)
