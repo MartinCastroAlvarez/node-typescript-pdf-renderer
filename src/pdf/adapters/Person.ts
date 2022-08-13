@@ -96,15 +96,13 @@ export class PersonAdapter implements Adapter {
             underline: true,
             width: this.getRightColumnWidth(),
         }
-        if (urlText) {
+        if (urlText)
             this.box.addHeight(
                 this.getSection().getDocument()
                     .fontSize(Config.dimensions.getSmall())
                     .font(Config.typeface.getNormal())
                     .heightOfString(urlText, urlOptions)
             )
-            this.box.addHeight(this.box.getInnerPaddingSize())
-        }
 
         // Estimating the email size.
         const emailOptions: object = {
@@ -114,15 +112,13 @@ export class PersonAdapter implements Adapter {
             width: this.getRightColumnWidth(),
         }
         const emailText: string = this.getModel().email.get(this.getSection().getLanguage())
-        if (emailText) {
+        if (emailText)
             this.box.addHeight(
                 this.getSection().getDocument()
                     .fontSize(Config.dimensions.getSmall())
                     .font(Config.typeface.getNormal())
                     .heightOfString(emailText, emailOptions)
             )
-            this.box.addHeight(this.box.getInnerPaddingSize())
-        }
 
         // Adding content within the grey box.
         this.box.wrap(({x, y}) => {
@@ -155,6 +151,28 @@ export class PersonAdapter implements Adapter {
                     titleOptions,
                 )
 
+            // Adding person website.
+            if (urlText)
+                this.getSection().getDocument()
+                    .fontSize(Config.dimensions.getSmall())
+                    .font(Config.typeface.getNormal())
+                    .fillColor(Config.pallete.getPrimary())
+                    .text(
+                        urlText,
+                        urlOptions,
+                    )
+
+            // Adding person email.
+            if (emailText)
+                this.getSection().getDocument()
+                    .fontSize(Config.dimensions.getSmall())
+                    .font(Config.typeface.getNormal())
+                    .fillColor(Config.pallete.getPrimary())
+                    .text(
+                        emailText,
+                        emailOptions,
+                    )
+
             // Adding text.
             this.getSection().getDocument()
                 .fontSize(Config.dimensions.getNormal())
@@ -162,38 +180,8 @@ export class PersonAdapter implements Adapter {
                 .fillColor(Config.pallete.getBlack())
                 .text(
                     bioText,
-                    this.getRightColumnHorziontalPosition(),
-                    this.getSection().getCurrentVerticalPosition() + this.box.getInnerPaddingSize(),
                     bioOptions,
                 )
-
-            // Adding person website.
-            if (urlText) {
-                this.getSection().getDocument()
-                    .fontSize(Config.dimensions.getSmall())
-                    .font(Config.typeface.getNormal())
-                    .fillColor(Config.pallete.getPrimary())
-                    .text(
-                        urlText,
-                        this.getRightColumnHorziontalPosition(),
-                        this.getSection().getCurrentVerticalPosition() + this.box.getInnerPaddingSize(),
-                        urlOptions,
-                    )
-            }
-
-            // Adding person email.
-            if (emailText) {
-                this.getSection().getDocument()
-                    .fontSize(Config.dimensions.getSmall())
-                    .font(Config.typeface.getNormal())
-                    .fillColor(Config.pallete.getPrimary())
-                    .text(
-                        emailText,
-                        this.getRightColumnHorziontalPosition(),
-                        this.getSection().getCurrentVerticalPosition() + this.box.getInnerPaddingSize(),
-                        emailOptions,
-                    )
-            }
 
         })
     }

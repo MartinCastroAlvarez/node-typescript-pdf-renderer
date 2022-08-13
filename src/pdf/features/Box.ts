@@ -36,6 +36,7 @@ export class Box implements Feature {
     public getOuterPaddingSize(): number { return this.getOuterPaddingSize() * Config.dimensions.getBreak() }
 
     public getTotalPadding(): number { return this.getInnerPadding() + this.getOuterPadding() }
+    public getTotalPaddingSize(): number { return this.getTotalPadding() * Config.dimensions.getBreak() }
 
     public getVerticalPosition(): number {
         if (this.y === null)
@@ -88,6 +89,9 @@ export class Box implements Feature {
     public getRealHeight(): number {
         return this.getHeight() + 2 * this.getInnerPaddingSize()
     }
+    public getTotalHeight(): number {
+        return this.getHeight() + 2 * this.getTotalPaddingSize()
+    }
     public setHeight(value: number): void {
         if (value > this.getSection().getWidth())
             throw new HeightException('Height is larger than the page size!')
@@ -99,15 +103,6 @@ export class Box implements Feature {
         this.setHeight(this.getHeight() + value)
     }
 
-    public getDimensions(): Array<number> {
-        return [
-            this.getHorizontalPosition(),
-            this.getVerticalPosition(),
-            this.getWidth(),
-            this.getHeight(),
-        ]
-    }
-
     public getSection(): PdfSection {
         return this.section
     }
@@ -116,7 +111,7 @@ export class Box implements Feature {
     }
 
     public apply(): void {
-        Log.info("Adding rectangle to PDF", this.getDimensions(), this.getSection())
+        Log.info("Adding rectangle to PDF", this.getSection())
         if (!this.getHeight())
             throw new HeightException('Height is invalid.')
         this.top = this.getVerticalPosition()
@@ -136,7 +131,18 @@ export class Box implements Feature {
         Array(this.getTotalPadding()).fill(0).forEach(i => breaks.small())
     }
 
+    // Functikon responsible for inserting a new page if it looks like
+    // the grey box is going to end too close to the bottom.
+    private break(): void {
+        const estimated: number = this.getSection().getCurrentVerticalPosition() + this.getTotalHeight()
+        const maximum: number = this.getSection().getHeight() - this.getSection().getMarginBottom()
+        Log.info("Checking if the grey box is outside the page", estimated, maximum)
+        if (estimated > maximum)
+            this.getSection().addPage()
+    }
+
     public wrap(callback: any): any {
+        this.break()
         this.pad()
         this.apply()
         callback({

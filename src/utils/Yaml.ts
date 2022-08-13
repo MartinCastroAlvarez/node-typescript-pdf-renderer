@@ -77,6 +77,7 @@ import { Typeface } from '../models/Typeface'
 // import { Research } from './models/code' // FIXME
 // import { Study } from './models/code' // FIXME
 // import { Statistics } from './models/code' // FIXME
+// import { Experiment } from './models/code' // FIXME
 
 import { SerializedAnalogy } from '../serializers/Analogy'
 import { SerializedBook } from '../serializers/Book'
@@ -162,116 +163,39 @@ export abstract class Yaml {
         Log.info('Unserializing', typeof data, data)
         if (!data || !data.Type)
             data.Type = Text.name
-        let instance: Model
-        switch(data.Type) {
-            case Analogy.name: {
-                instance = new Analogy()
-                instance.unserialize(<SerializedAnalogy>data)
-                return instance
-            }
-            case Person.name: {
-                instance = new Person()
-                instance.unserialize(<SerializedPerson>data)
-                return instance
-            }
-            case Brand.name: {
-                instance = new Brand()
-                instance.unserialize(<SerializedBrand>data)
-                return instance
-            }
-            case Book.name: {
-                instance = new Book()
-                instance.unserialize(<SerializedBook>data)
-                return instance
-            }
-            case Chapter.name: {
-                instance = new Chapter()
-                instance.unserialize(<SerializedChapter>data)
-                return instance
-            }
-            case Definition.name: {
-                instance = new Definition()
-                instance.unserialize(<SerializedDefinition>data)
-                return instance
-            }
-            case Dimensions.name: {
-                instance = new Dimensions()
-                instance.unserialize(<SerializedDimensions>data)
-                return instance
-            }
-            case Example.name: {
-                instance = new Example()
-                instance.unserialize(<SerializedExample>data)
-                return instance
-            }
-            case Image.name: {
-                instance = new Image()
-                instance.unserialize(<SerializedImage>data)
-                return instance
-            }
-            case File.name: {
-                instance = new File()
-                instance.unserialize(<SerializedFile>data)
-                return instance
-            }
-            case Joke.name: {
-                instance = new Joke()
-                instance.unserialize(<SerializedJoke>data)
-                return instance
-            }
-            case List.name: {
-                instance = new List()
-                instance.unserialize(<SerializedList>data)
-                return instance
-            }
-            case Pallete.name: {
-                instance = new Pallete()
-                instance.unserialize(<SerializedPallete>data)
-                return instance
-            }
-            case Proverb.name: {
-                instance = new Proverb()
-                instance.unserialize(<SerializedQuote>data)
-                return instance
-            }
-            case Quote.name: {
-                instance = new Quote()
-                instance.unserialize(<SerializedQuote>data)
-                return instance
-            }
-            case Source.name: {
-                instance = new Source()
-                instance.unserialize(<SerializedSource>data)
-                return instance
-            }
-            case Story.name: {
-                instance = new Story()
-                instance.unserialize(<SerializedStory>data)
-                return instance
-            }
-            case Text.name: {
-                instance = new Text()
-                instance.unserialize(<SerializedText>data)
-                return instance
-            }
-            case Topic.name: {
-                instance = new Topic()
-                instance.unserialize(<SerializedTopic>data)
-                return instance
-            }
-            case Typeface.name: {
-                instance = new Typeface()
-                instance.unserialize(<SerializedTypeface>data)
-                return instance
-            }
-            case Question.name: {
-                instance = new Question()
-                instance.unserialize(<SerializedQuestion>data)
-                return instance
-            }
+        const instance: Model = Yaml.getInstance(data.Type)
+        Log.info('Unserialized', typeof instance, instance)
+        instance.unserialize(data)
+        return instance
+    }
+
+    public static getInstance(type: string): Model {
+        switch(type) {
+            case Analogy.name: return new Analogy()
+            case Person.name: return new Person()
+            case Brand.name: return new Brand()
+            case Book.name: return new Book()
+            case Chapter.name: return new Chapter()
+            case Definition.name: return new Definition()
+            case Dimensions.name: return new Dimensions()
+            case Example.name: return new Example()
+            case Image.name: return new Image()
+            case File.name: return new File()
+            case Joke.name: return new Joke()
+            case List.name: return new List()
+            case Pallete.name: return new Pallete()
+            case Proverb.name: return new Proverb()
+            case Quote.name: return new Quote()
+            case Source.name: return new Source()
+            case Story.name: return new Story()
+            case Text.name: return new Text()
+            case Topic.name: return new Topic()
+            case Typeface.name: return new Typeface()
+            case Question.name: return new Question()
             default: {
-                throw new NotImplementedError(`Not implemented ${typeof data}: ${JSON.stringify(data)}`)
+                throw new NotImplementedError(`Not implemented ${type}`)
             }
         }
     }
+
 }

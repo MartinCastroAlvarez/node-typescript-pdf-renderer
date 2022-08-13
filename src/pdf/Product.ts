@@ -64,7 +64,6 @@ export class Pdf implements Product {
         const parts: Array<string> = this.sections.map(section => section.render(path))
         merge(parts, finalPath, error => {
             if (error) {
-                console.log(error) // FIXME
                 Log.error("Failed to merge files", error)
                 throw new RenderingError("Rendering failed!")
             } else

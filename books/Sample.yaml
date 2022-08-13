@@ -75,6 +75,9 @@ Chapters:
         Blocks:
           - '@i18n/LoremIpsum.yaml'
           - '@i18n/LoremIpsum.yaml'
+          - Type: 'Example'
+            EN: 'Lorem Ipsum Dolor Sit Amet'
+            ES: 'Lorem Ipsum Dolor Sit Amet'
           - '@i18n/LoremIpsum.yaml'
           - '@i18n/LoremIpsum.yaml'
           - '@i18n/LoremIpsum.yaml'
@@ -83,6 +86,9 @@ Chapters:
             ES: 'Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet?'
           - '@i18n/LoremIpsum.yaml'
           - '@i18n/LoremIpsum.yaml'
+          - Type: 'Joke'
+            EN: 'Lorem Ipsum Dolor Sit Amet'
+            ES: 'Lorem Ipsum Dolor Sit Amet'
           - '@i18n/LoremIpsum.yaml'
         Topics:
           - '@topic/Blockchain.yaml'
@@ -116,6 +122,9 @@ Chapters:
           ES: 'Lorem Ipsum Dolor'
         Blocks:
           - '@i18n/LoremIpsum.yaml'
+          - Type: 'Proverb'
+            EN: 'Lorem Ipsum Dolor Sit Amet'
+            ES: 'Lorem Ipsum Dolor Sit Amet'
           - '@i18n/LoremIpsum.yaml'
           - '@i18n/LoremIpsum.yaml'
           - '@i18n/LoremIpsum.yaml'
@@ -182,6 +191,9 @@ Chapters:
           - '@i18n/LoremIpsum.yaml'
           - '@i18n/LoremIpsum.yaml'
           - '@i18n/LoremIpsum.yaml'
+          - Type: 'Analogy'
+            EN: 'Lorem Ipsum Dolor Sit Amet'
+            ES: 'Lorem Ipsum Dolor Sit Amet'
           - '@i18n/LoremIpsum.yaml'
           - '@i18n/LoremIpsum.yaml'
         Topics:
@@ -245,6 +257,9 @@ Chapters:
         Blocks:
           - '@i18n/LoremIpsum.yaml'
           - '@i18n/LoremIpsum.yaml'
+          - Type: 'Definition'
+            EN: 'Lorem Ipsum Dolor Sit Amet'
+            ES: 'Lorem Ipsum Dolor Sit Amet'
           - '@i18n/LoremIpsum.yaml'
           - '@i18n/LoremIpsum.yaml'
           - '@i18n/LoremIpsum.yaml'
@@ -265,6 +280,9 @@ Chapters:
         Blocks:
           - '@i18n/LoremIpsum.yaml'
           - '@i18n/LoremIpsum.yaml'
+          - Type: 'Example'
+            EN: 'Lorem Ipsum Dolor Sit Amet'
+            ES: 'Lorem Ipsum Dolor Sit Amet'
           - '@i18n/LoremIpsum.yaml'
           - '@i18n/LoremIpsum.yaml'
           - '@i18n/LoremIpsum.yaml'
