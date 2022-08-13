@@ -1,5 +1,5 @@
 {
-  "name": "val",
+  "name": "vel",
   "version": "1.0.0",
   "description": "Book rending with Node & Typescript",
   "main": "index.js",
