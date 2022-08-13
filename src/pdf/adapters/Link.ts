@@ -22,6 +22,7 @@ import { PdfSection } from '../Section'
 export class LinkAdapter implements Adapter {
     private model: Text = new Text()
     private section: PdfSection = new PdfSection()
+    private box: Box = new Box()
 
     public getSection(): PdfSection { return this.section }
     public setSection(section: PdfSection) { this.section = section }
@@ -37,8 +38,7 @@ export class LinkAdapter implements Adapter {
         if (!string) return
 
         // Creating a rectangle.
-        const box: Box = new Box()
-        box.setSection(this.getSection())
+        this.box.setSection(this.getSection())
 
         // Defining text options.
         const options: object = {
@@ -49,7 +49,7 @@ export class LinkAdapter implements Adapter {
         }
 
         // Estimating rectanble height.
-        box.addHeight(
+        this.box.addHeight(
             this.getSection().getDocument()
                 .fontSize(Config.dimensions.getNormal())
                 .font(Config.typeface.getNormal())
@@ -57,7 +57,7 @@ export class LinkAdapter implements Adapter {
         )
 
         // Adding link withing the grey box.
-        box.wrap(({x, y}) => {
+        this.box.wrap(({x, y}) => {
             this.getSection().getDocument()
                 .fillColor(Config.pallete.getPrimary())
                 .fontSize(Config.dimensions.getNormal())

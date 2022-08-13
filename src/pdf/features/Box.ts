@@ -79,7 +79,7 @@ export class Box implements Feature {
             throw new WidthException('Width is larger than the page size!')
         if (value < 0)
             throw new WidthException('Width can not be negative!')
-        this.width  = value
+        this.width = value
     }
 
     public getHeight(): number {

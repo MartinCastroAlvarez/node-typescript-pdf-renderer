@@ -17,13 +17,35 @@ import { Person } from '../../models/Person'
 import { PdfSection } from '../Section'
 
 import { Box } from '../features/Box'
+import { InvalidImageWidthError } from '../../errors/Image'
 
 export class PersonAdapter implements Adapter {
     private model: Person = new Person()
     private section: PdfSection = new PdfSection()
-    private imageSize: number = 100
+    private imageSize: number = 50
+    private box: Box = new Box()
 
-    private getImageSize(): number { return this.imageSize }
+    public setImageSize(value: number): void {
+        if (value == 0)
+            throw new InvalidImageWidthError('Image size can not be zero!')
+        if (value < 0)
+            throw new InvalidImageWidthError('Image size can not be negative!')
+        if (value > this.getSection().getInnerWidth())
+            throw new InvalidImageWidthError('Image size is larger than the page width!')
+        this.imageSize = value
+    }
+    public getImageSize(): number { return this.imageSize }
+
+    private getRightColumnWidth(): number {
+        return [
+            this.getSection().getInnerWidth(),
+            - this.getImageSize(),
+            - 2 * this.box.getInnerPaddingSize(),
+        ].reduce((acc, cur) => acc + cur, 0)
+    }
+    private getRightColumnHorziontalPosition(): number {
+        return this.getSection().getMarginLeft() + this.getImageSize() + this.box.getInnerPaddingSize()
+    }
 
     public getSection(): PdfSection { return this.section }
     public setSection(section: PdfSection) { this.section = section }
@@ -35,38 +57,34 @@ export class PersonAdapter implements Adapter {
         Log.info("Adapting person to PDF", this.getModel(), this.getSection())
 
         // Creating a rectangle.
-        const box: Box = new Box()
-        box.setSection(this.getSection())
+        this.box.setSection(this.getSection())
 
         // Estimating the text size.
         const bioOptions: object = {
             align: 'left',
             lineBreak: true,
-            width: [
-                this.getSection().getInnerWidth(),
-                - this.getImageSize(),
-                - 3 * Config.dimensions.getBreak() * this.getInnerPadding(),
-            ].reduce((acc, cur) => acc + cur, 0)
+            width: this.getRightColumnWidth(),
         }
         const bioText: string = this.getModel().bio.get(this.getSection().getLanguage())
-        box.addHeight(
+        this.box.addHeight(
             this.getSection().getDocument()
                 .fontSize(Config.dimensions.getNormal())
                 .font(Config.typeface.getNormal())
                 .heightOfString(bioText, bioOptions)
         )
+        this.box.addHeight(this.box.getInnerPaddingSize())
 
         // Estimating the text size.
         const titleOptions: object = {
             align: 'left',
             lineBreak: true,
-            width: this.getSection().getInnerWidth() - 2 * Config.dimensions.getBreak(),
+            width: this.getRightColumnWidth(),
         }
         const titleText: string = this.getModel().name.get(this.getSection().getLanguage())
-        box.addHeight(
+        this.box.addHeight(
             this.getSection().getDocument()
                 .fontSize(Config.dimensions.getSubtitle())
-                .font(Config.typeface.getBold())
+                .font(Config.typeface.getItalic())
                 .heightOfString(titleText, titleOptions)
         )
 
@@ -76,20 +94,16 @@ export class PersonAdapter implements Adapter {
             align: 'left',
             lineBreak: true,
             underline: true,
-            width: [
-                this.getSection().getInnerWidth(),
-                - this.getImageSize(),
-                - 3 * Config.dimensions.getBreak() * this.getInnerPadding(),
-            ].reduce((acc, cur) => acc + cur, 0)
+            width: this.getRightColumnWidth(),
         }
         if (urlText) {
-            box.addHeight(
+            this.box.addHeight(
                 this.getSection().getDocument()
                     .fontSize(Config.dimensions.getSmall())
                     .font(Config.typeface.getNormal())
                     .heightOfString(urlText, urlOptions)
             )
-            // height += 2 * Config.dimensions.getBreak()
+            this.box.addHeight(this.box.getInnerPaddingSize())
         }
 
         // Estimating the email size.
@@ -97,24 +111,37 @@ export class PersonAdapter implements Adapter {
             align: 'left',
             lineBreak: true,
             underline: true,
-            width: [
-                this.getSection().getInnerWidth(),
-                - this.getImageSize(),
-                - 3 * Config.dimensions.getBreak() * this.getInnerPadding(),
-            ].reduce((acc, cur) => acc + cur, 0)
+            width: this.getRightColumnWidth(),
         }
         const emailText: string = this.getModel().email.get(this.getSection().getLanguage())
         if (emailText) {
-            box.addHeight(
+            this.box.addHeight(
                 this.getSection().getDocument()
                     .fontSize(Config.dimensions.getSmall())
                     .font(Config.typeface.getNormal())
                     .heightOfString(emailText, emailOptions)
             )
+            this.box.addHeight(this.box.getInnerPaddingSize())
         }
 
         // Adding content within the grey box.
-        box.wrap(({x, y}) => {
+        this.box.wrap(({x, y}) => {
+
+            // Recording columns position.
+            // breaks.small()
+            // const cols: number = this.getSection()
+            //     .getCurrentVerticalPosition() - Config.dimensions.getBreak() * this.getInnerPadding()
+
+            // Adding image to the document.
+            this.getSection().getDocument()
+                .image(
+                    this.getModel().avatar.getPath(),
+                    x,
+                    y,
+                    {
+                        width: this.getImageSize(),
+                    }
+                )
 
             // Adding title.
             this.getSection().getDocument()
@@ -123,70 +150,50 @@ export class PersonAdapter implements Adapter {
                 .fillColor(Config.pallete.getBlack())
                 .text(
                     titleText,
-                    x,
+                    this.getRightColumnHorziontalPosition(),
                     y,
                     titleOptions,
-                )
-
-            // Recording columns position.
-            // breaks.small()
-            // const cols: number = this.getSection()
-            //     .getCurrentVerticalPosition() - Config.dimensions.getBreak() * this.getInnerPadding()
-
-            // Adding image to the document.
-            /*
-            this.getSection().getDocument()
-                .image(
-                    this.getModel().avatar.getPath(),
-                    this.getSection().getMarginLeft() + this.getInnerPadding(),
-                    cols + Config.dimensions.getBreak() * this.getInnerPadding(),
-                    {
-                        width: this.getImageSize(),
-                    }
                 )
 
             // Adding text.
             this.getSection().getDocument()
                 .fontSize(Config.dimensions.getNormal())
-                .font(Config.typeface.getNormal())
+                .font(Config.typeface.getItalic())
                 .fillColor(Config.pallete.getBlack())
                 .text(
                     bioText,
-                    this.getSection().getMarginLeft() + 2 * this.getInnerPadding() + this.getImageSize(),
-                    cols + Config.dimensions.getBreak() * this.getInnerPadding(),
+                    this.getRightColumnHorziontalPosition(),
+                    this.getSection().getCurrentVerticalPosition() + this.box.getInnerPaddingSize(),
                     bioOptions,
                 )
 
             // Adding person website.
             if (urlText) {
-                breaks.small()
                 this.getSection().getDocument()
                     .fontSize(Config.dimensions.getSmall())
                     .font(Config.typeface.getNormal())
                     .fillColor(Config.pallete.getPrimary())
                     .text(
                         urlText,
-                        this.getSection().getMarginLeft() + 2 * this.getInnerPadding() + this.getImageSize(),
-                        this.getSection().getCurrentVerticalPosition(),
+                        this.getRightColumnHorziontalPosition(),
+                        this.getSection().getCurrentVerticalPosition() + this.box.getInnerPaddingSize(),
                         urlOptions,
                     )
             }
 
             // Adding person email.
             if (emailText) {
-                breaks.small()
                 this.getSection().getDocument()
                     .fontSize(Config.dimensions.getSmall())
                     .font(Config.typeface.getNormal())
                     .fillColor(Config.pallete.getPrimary())
                     .text(
                         emailText,
-                        this.getSection().getMarginLeft() + 2 * this.getInnerPadding() + this.getImageSize(),
-                        this.getSection().getCurrentVerticalPosition(),
+                        this.getRightColumnHorziontalPosition(),
+                        this.getSection().getCurrentVerticalPosition() + this.box.getInnerPaddingSize(),
                         emailOptions,
                     )
             }
-            */
 
         })
     }

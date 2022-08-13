@@ -22,6 +22,7 @@ import { PdfSection } from '../Section'
 export class HighlightAdapter implements Adapter {
     private model: Text = new Text()
     private section: PdfSection = new PdfSection()
+    private box: Box = new Box()
 
     public getSection(): PdfSection { return this.section }
     public setSection(section: PdfSection) { this.section = section }
@@ -37,8 +38,7 @@ export class HighlightAdapter implements Adapter {
         if (!string) return
 
         // Creating a rectangle.
-        const box: Box = new Box()
-        box.setSection(this.getSection())
+        this.box.setSection(this.getSection())
 
         // Defining text options.
         const options: object = {
@@ -47,7 +47,7 @@ export class HighlightAdapter implements Adapter {
         }
 
         // Estimating rectanble size.
-        box.addHeight(
+        this.box.addHeight(
             this.getSection().getDocument()
                 .fontSize(Config.dimensions.getNormal())
                 .font(Config.typeface.getNormal())
@@ -55,7 +55,7 @@ export class HighlightAdapter implements Adapter {
         )
 
         // Adding text withing the grey box.
-        box.wrap(({x, y}) => {
+        this.box.wrap(({x, y}) => {
             this.getSection().getDocument()
                 .fillColor(Config.pallete.getBlack())
                 .fontSize(Config.dimensions.getNormal())
