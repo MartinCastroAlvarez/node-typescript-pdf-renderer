@@ -1,0 +1,38 @@
+# ----------------------------------------------------------------
+# Learning Agile Methodologies.
+# ----------------------------------------------------------------
+Type: 'Chapter'
+
+# ----------------------------------------------------------------
+# Chapter Title
+# ----------------------------------------------------------------
+Title:
+  EN: 'Agile Methodologies'
+  ES: 'Metodologías Ágiles'
+
+# ----------------------------------------------------------------
+# Chapter introduction.
+# ----------------------------------------------------------------
+Introduction:
+  - '@i18n/LoremIpsum.yaml'
+  - '@i18n/LoremIpsum.yaml'
+  - '@i18n/LoremIpsum.yaml'
+  - '@i18n/SitAmet.yaml'
+  - '@i18n/LoremIpsum.yaml'
+  - '@i18n/LoremIpsum.yaml'
+
+# ----------------------------------------------------------------
+# Chapter conclusion.
+# ----------------------------------------------------------------
+Conclusion:
+  - '@i18n/LoremIpsum.yaml'
+  - '@i18n/LoremIpsum.yaml'
+  - '@i18n/LoremIpsum.yaml'
+  - '@i18n/LoremIpsum.yaml'
+  - '@i18n/LoremIpsum.yaml'
+
+# ----------------------------------------------------------------
+# Chapter Stories.
+# ----------------------------------------------------------------
+Stories:
+  - '@stories/Sample.yaml'

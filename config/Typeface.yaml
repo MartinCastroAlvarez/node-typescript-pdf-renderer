@@ -1,0 +1,14 @@
+# ----------------------------------------------------------------
+# PURPOSE:
+# This file defines the fonts used in the renders.
+#
+# References:
+# - https://fonts.google.com/specimen/Montserrat+Alternates?query=montserrat
+# ----------------------------------------------------------------
+Type: 'Typeface'
+Cover: '@fonts/Aclonica-Regular.ttf'
+Title: '@fonts/Roboto-Bold.ttf'
+Normal: '@fonts/Roboto-Regular.ttf'
+Bold: '@fonts/Roboto-Bold.ttf'
+Italic: '@fonts/Roboto-Italic.ttf'
+Console: '@fonts/Roboto-Thin.ttf'

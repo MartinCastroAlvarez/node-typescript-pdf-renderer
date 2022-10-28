@@ -1,0 +1,117 @@
+# ----------------------------------------------------------------
+# Beginner's course for new programmers.
+# ----------------------------------------------------------------
+Type: 'Book'
+
+# ----------------------------------------------------------------
+# Book title and subtitle.
+# ----------------------------------------------------------------
+Title:
+  EN: 'The Software Knight'
+  ES: 'El Caballero del Software'
+Subtitle:
+  EN: 'The definitive guide to becoming a software developer from scratch using Javascript'
+  ES: 'La guía definitiva para aprender a programar desde cero utilizando Javascript'
+
+# ----------------------------------------------------------------
+# Book acknowledgements.
+# ----------------------------------------------------------------
+# Acknowledgements:
+#   - Type: 'Text'
+#     EN: 'To X, for being the most supportive person I know.'
+#     ES: 'A X, por ser la mejor persona que conozco.'
+
+# ----------------------------------------------------------------
+# Book authors & contributors.
+# ----------------------------------------------------------------
+Authors:
+  - '@person/MartinCastro.yaml'
+
+# ----------------------------------------------------------------
+# Book Introduction.
+# ----------------------------------------------------------------
+Foreword:
+
+  # ----------------------------------------------------------------
+  # Relatable description of a problem — ideally through a story.
+  # ----------------------------------------------------------------
+  - Type: 'Example'
+    EN: 'Logan works 40 hours a week as a boring administrative assistant for a low salary. When he gets back at home every night, to be honest, he feels totally unfulfilled. He is not making his dreams come true following this routine.'
+    ES: 'Logan trabaja 40 tediosas horas por semana como asistente administrativo por un sueldo muy pobre. Cuando llega a casa cada noche, para ser honestos, se siente completamente vacío. Sus sueños no se están cumpliendo siguiendo esta rutina.'
+  - Type: 'Important'
+    EN: 'Something has to change.'
+    ES: 'Algo debe cambiar.'
+
+  # ----------------------------------------------------------------
+  # Why you should read this book.
+  # ----------------------------------------------------------------
+  - Type: 'Question'
+    EN: 'Have you ever felt like Logan?'
+    ES: 'Te has sentido alguna vez como Logan?'
+
+  # ----------------------------------------------------------------
+  # Believable and inspiring revelation of a solution — also via storytelling.
+  # ----------------------------------------------------------------
+  - Type: 'Text'
+    EN: 'Logan used to be me. Fortunately, I was able to achieve a more fulfilling lifestyle thanks to learning how to write high quality software: I considerably increased my income and, at the same time, I was able to work remotely from many paradisiacal beaches!'
+    ES: 'Logan solía ser yo. Afortunadamente, he logrado conseguir un estilo de vida gracias a haber aprendido a desarrollar software de alta calidad: he podido mejorar significativamente mis ingresos y, al mismo tiempo, he podido trabajar desde una gran cantidad de playas paradisíacas!'
+
+  # ----------------------------------------------------------------
+  # Just enough mystery to keep your reader wondering (and reading)
+  # ----------------------------------------------------------------
+  - Type: 'Important'
+    EN: 'Luckily, I wrote this book to help people like you do the same.'
+    ES: 'Por suerte, he escrito este libro para ayudarte a lograr lo mismo.'
+
+  # ----------------------------------------------------------------
+  # Outline of the book — highlighting its main selling points
+  # ----------------------------------------------------------------
+  - Type: 'Text'
+    EN: 'This book starts by highlighting those skills you must master in order to work for virtually any company nowadays, such as Agile Methodologies and the secrets of GitHub.'
+    ES: 'Este libro comienza explicando todo aquello que es necesario para a trabajar en cualquier empresa moderna. Por ejemplo, Metodologías Ágiles y los secretos de GitHub.'
+  - Type: 'Text'
+    EN: 'After that, the book focuses on teaching the secrets of writing software. It starts from the most simple concepts and, pregressively, getting into more advanced stuff. Each chapter includes several homework problems with fully worked solutions.'
+    ES: 'Posterioremente, el libro se enfoca en enseñar los secrets para escribir código. Comienza desde los conceptos más básicos y, progresivamente, avanza hacia técnicas más avanzadas. Cada capítulo incluya varios problemas con una solución detallada.'
+
+  # ----------------------------------------------------------------
+  # Just enough mystery to keep your reader wondering (and reading)
+  # ----------------------------------------------------------------
+  - Type: 'Important'
+    EN: 'After reading this book, I am convinced that you will have learned the skills required to introduce a significant change in your lifestyle and unleash your full potential as a software developer!'
+    ES: 'Luego de haber leído este libro, estoy convencido de que habrás aprendido las habilidades necesarias para introducir un cambio significativo en tu estilo de vida y desplegar todo tu potencial como desarrollador de software!'
+
+# ----------------------------------------------------------------
+# Book Conclusion.
+# ----------------------------------------------------------------
+Afterword:
+  - '@i18n/LoremIpsum.yaml'
+  - '@i18n/LoremIpsum.yaml'
+  - '@i18n/LoremIpsum.yaml'
+  - '@i18n/LoremIpsum.yaml'
+  - '@i18n/LoremIpsum.yaml'
+  - '@i18n/LoremIpsum.yaml'
+  - '@i18n/LoremIpsum.yaml'
+  - '@i18n/LoremIpsum.yaml'
+  - '@i18n/LoremIpsum.yaml'
+  - '@i18n/LoremIpsum.yaml'
+
+# ----------------------------------------------------------------
+# About this edition.
+# ----------------------------------------------------------------
+Editions:
+  - Type: 'Edition'
+    Number: 1
+    Year: 2022
+    Description:
+      Type: 'Text'
+      EN: 'Lorem Ipsum Dolor'
+      ES: 'Lorem Ipsum Dolor'
+
+# ----------------------------------------------------------------
+# Book Chapters.
+# ----------------------------------------------------------------
+Chapters:
+  - '@chapters/Agile.yaml'
+  - '@chapters/GitHub.yaml'
+  - '@chapters/LinkedIn.yaml'
+  - '@chapters/VisualStudioCode.yaml'

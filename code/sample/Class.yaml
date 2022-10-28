@@ -1,0 +1,11 @@
+Type: 'Code'
+Syntax: 'Python'
+Code:
+  ALL: |
+    class MyClass:
+        def __init__(self):
+            self.__name: str = ""
+        def get_name() -> str:
+            return self.__name
+        def set_name(value: str) -> None:
+            self.__name = value

@@ -1,0 +1,11 @@
+Type: 'Code'
+Syntax: 'Python'
+Code:
+  ALL: |
+    [!] - 2022-09-03T01:14:33.522Z - Checking if exists: [ '/home/martinalejandrocastroalvarez/vel/builds/sample/pdf/en/BibliographySection.pdf' ]
+    [!] - 2022-09-03T01:14:33.522Z - Writing to: [ '/home/martinalejandrocastroalvarez/vel/builds/sample/pdf/en/BibliographySection.pdf' ]
+    [!] - 2022-09-03T01:14:33.531Z - Rendering product: [ BackSection { book: [Book], doc: [PDFDocument], language: 'en' } ]
+    [!] - 2022-09-03T01:14:33.531Z - Joining path: [ '/home/martinalejandrocastroalvarez/vel/builds/sample/pdf/en', 'BackSection.pdf' ]
+    [!] - 2022-09-03T01:14:33.531Z - Checking if exists: [ '/home/martinalejandrocastroalvarez/vel/builds/sample/pdf/en/BackSection.pdf' ]
+    [!] - 2022-09-03T01:14:33.531Z - Writing to: [ '/home/martinalejandrocastroalvarez/vel/builds/sample/pdf/en/BackSection.pdf' ]
+
