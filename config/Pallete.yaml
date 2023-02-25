@@ -1,0 +1,18 @@
+# ----------------------------------------------------------------
+# PURPOSE:
+# This file defines the color pallete of the content rendered
+#
+# Reference:
+# - https://flatuicolors.com/palette/defo
+# ----------------------------------------------------------------
+Type: 'Pallete'
+# Primary: '#706fd3'
+# Secondary: '#474787'
+Primary: '#337ab7'
+Secondary: '#74b9ff'
+White: '#EDEDED'
+# Grey: '#e5e6ea'
+Grey: '#f1f2f6'
+DarkGrey: '#636e72'
+# Black: '#181818'
+Black: '#2d3436'

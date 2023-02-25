@@ -1,0 +1,6 @@
+# ----------------------------------------------------------------
+# PURPOSE:
+# Defines a Translation that can be referenced using `@i18n/<name>.yaml`
+# ----------------------------------------------------------------
+EN: 'All rights reserved. No print of this publication may be reproduced, distributed or transmitted in any form or by any means, including photocopying, recording, or other electronic or mechanical methods, without the prior written permission of the publisher, except in the case of brief quotations embodied in reviews and certain other non-commercial uses permitted by copyright law.'
+ES: 'Todos los derechos reservados. Ninguna copia de esta publicación puede ser reproducida, distribuida or transmitida a través de cualquier medio posible, incluyendo fotocopias, grabaciones, u otros métodos electrónicos ó mecánicos, sin un previo consentimiento escrito del editor, salvo en caso de breve cita dentro de reseñas y ciertos otros usos no comerciales permitidos por la ley de propiedad intelectual.'

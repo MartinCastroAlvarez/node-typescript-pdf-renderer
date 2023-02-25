@@ -1,0 +1,21 @@
+Type: 'Book'
+Title:
+  Type: 'Text'
+  EN: 'Blockchain Engineering'
+  ES: 'Ingeniería de Blockchain'
+Subtitle:
+  Type: 'Text'
+  EN: 'The complete guide to Web3.0 software development'
+  ES: 'La guía completa de desarrollo de software en Web3.0'
+Acknowledgements:
+  - Type: 'Text'
+    EN: 'To X, for being the most supportive person I know.'
+    ES: 'A X, por ser la mejor persona que conozco.'
+Editions:
+  - Type: 'Edition'
+    Number: 1
+    Year: 2022
+    Description:
+      Type: 'Text'
+      EN: 'Lorem Ipsum Dolor'
+      ES: 'Lorem Ipsum Dolor'

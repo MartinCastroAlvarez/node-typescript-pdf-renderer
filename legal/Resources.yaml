@@ -1,0 +1,6 @@
+# ----------------------------------------------------------------
+# PURPOSE:
+# Defines a Translation that can be referenced using `@i18n/<name>.yaml`
+# ----------------------------------------------------------------
+EN: 'The publisher, the authors and the editors have no responsibility for the persistence or accuracy of URLs for external or third-party internet websites referred to in this publication and does not guarantee that any content on such websites is, or will remain, accurate or appropriate.'
+ES: 'El editor y los autores no tienen ninguna responsabilidad por la persistencia ó validez de los enlaces externos o hacia a sitios web pertenecientes a terceros referidos en esta publicación y no garantizan que el contenido en dichos sitios es, o será, relevante o apropiado.'

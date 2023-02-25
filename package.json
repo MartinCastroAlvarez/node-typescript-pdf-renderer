@@ -1,0 +1,24 @@
+{
+  "name": "vel",
+  "version": "1.0.0",
+  "description": "Book rending with Node & Typescript",
+  "main": "index.js",
+  "scripts": {
+    "render": "npx ts-node vel.ts",
+    "build": "npx tsc vel.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "martincastro.10.5@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^18.0.6",
+    "easy-pdf-merge": "^0.2.6",
+    "image-size": "^1.0.2",
+    "js-yaml": "^4.1.0",
+    "organize-imports-cli": "^0.10.0",
+    "pdfkit": "^0.13.0",
+    "sharp": "^0.30.7",
+    "typescript": "^4.7.4",
+    "vega": "^5.22.1"
+  }
+}

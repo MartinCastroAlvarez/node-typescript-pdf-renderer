@@ -1,0 +1,51 @@
+# ----------------------------------------------------------------
+# A sample book
+# ----------------------------------------------------------------
+Type: 'Book'
+Title:
+  EN: 'Lorem Ipsum Dolor'
+  ES: 'Lorem Ipsum Dolor'
+Subtitle:
+  EN: 'Lorem ipsum dolor sit amet'
+  ES: 'Lorem ipsum dolor sit amet'
+Foreword:
+  - '@i18n/LoremIpsum.yaml'
+  - '@i18n/LoremIpsum.yaml'
+  - '@i18n/LoremIpsum.yaml'
+  - '@i18n/LoremIpsum.yaml'
+  - '@i18n/LoremIpsum.yaml'
+  - '@i18n/LoremIpsum.yaml'
+  - '@i18n/LoremIpsum.yaml'
+  - '@i18n/LoremIpsum.yaml'
+  - '@i18n/LoremIpsum.yaml'
+  - '@i18n/LoremIpsum.yaml'
+Afterword:
+  - '@i18n/LoremIpsum.yaml'
+  - '@i18n/LoremIpsum.yaml'
+  - '@i18n/LoremIpsum.yaml'
+  - '@i18n/LoremIpsum.yaml'
+  - '@i18n/LoremIpsum.yaml'
+  - '@i18n/LoremIpsum.yaml'
+  - '@i18n/LoremIpsum.yaml'
+  - '@i18n/LoremIpsum.yaml'
+  - '@i18n/LoremIpsum.yaml'
+  - '@i18n/LoremIpsum.yaml'
+Acknowledgements:
+  - Type: 'Text'
+    EN: 'To X, for being the most supportive person I know.'
+    ES: 'A X, por ser la mejor persona que conozco.'
+Authors:
+  - '@person/MartinCastro.yaml'
+  - '@person/LoremIpsum.yaml'
+Editions:
+  - Type: 'Edition'
+    Number: 1
+    Year: 2022
+    Description:
+      Type: 'Text'
+      EN: 'Lorem Ipsum Dolor'
+      ES: 'Lorem Ipsum Dolor'
+Chapters:
+  - '@chapters/Sample.yaml'
+  - '@chapters/Sample.yaml'
+  - '@chapters/Sample.yaml'

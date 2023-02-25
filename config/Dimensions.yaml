@@ -1,0 +1,15 @@
+# ----------------------------------------------------------------
+# PURPOSE:
+# This file defines the sizes used in the renders.
+# ----------------------------------------------------------------
+Type: 'Dimensions'
+Small: 8
+Normal: 12
+Title: 80
+Heading1: 28
+Heading2: 22
+Heading3: 16
+Heading4: 12
+Margin: 68
+Padding: 6
+Avatar: 56

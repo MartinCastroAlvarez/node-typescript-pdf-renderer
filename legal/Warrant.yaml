@@ -1,0 +1,6 @@
+# ----------------------------------------------------------------
+# PURPOSE:
+# Defines a Translation that can be referenced using `@i18n/<name>.yaml`
+# ----------------------------------------------------------------
+EN: 'The publisher, the authors and the editors are safe to assume that the advice and information in this book are believed to be true and accurate at the date of publication. Neither the publisher nor the authors or the editors give a warranty, express or implied, with respect to the material contained herein or for any errors or omissions that may have been made.'
+ES: 'El editor y los autores aseguran que la información contenida en este libro se cree cierta y precisa a la fecha de la publicación. Ni el editor ni los autores otorgan garantía alguna, explícita ó implícita, con respecto al material contenido aquí or por cualquier error u omisión que pudiera existir.'
